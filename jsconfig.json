@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "modules/*": ["modules/*"],
+      "hooks/*": ["hooks/*"],
+      "pages/*": ["pages/*"],
+      "redux/*": ["redux/*"],
+      "shared/*": ["shared/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".vite"]
+}

@@ -1,0 +1,32 @@
+@import './breakpoints';
+/*
+screen types: 
+    mobile,
+    to-tablet
+    tablet,
+    to-desktop
+    desktop,
+*/
+@mixin media($_screen) {
+  @if $_screen == to-tablet {
+    @media screen and (max-width: $to-tablet) {
+      @content;
+    }
+  } @else if $_screen == tablet {
+    @media screen and (min-width: $tablet) {
+      @content;
+    }
+  } @else if $_screen == to-desktop {
+    @media screen and (max-width: $to-desktop) {
+      @content;
+    }
+  } @else if $_screen == desktop {
+    @media screen and (min-width: $to-desktop) {
+      @content;
+    }
+  }
+}
+
+@mixin test-bg {
+  background-color: red;
+}

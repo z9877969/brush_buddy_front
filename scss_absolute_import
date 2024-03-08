@@ -1,0 +1,76 @@
+Для виконання абсолютного імпорту в SCSS вам потрібно налаштувати шляхи до вашого node_modules та інших ресурсів у вашому проекті. Ви можете використовувати змінну $module для цього.
+Ось кілька кроків, як це можна зробити:
+
+Крок 1: Налаштування змінних для шляхів
+Створіть файл _variables.scss (або будь-яку назву за вашим вибором) у вашій папці зі стилями. У цьому файлі визначіть змінні для шляхів:
+scss
+$module: "../../node_modules";
+$styles: "../styles";
+
+Крок 2: Використання змінних для імпорту
+Тепер у вашому основному файлі стилів (наприклад, styles.scss), ви можете використовувати ці змінні для абсолютного імпорту:
+scss
+@import "#{$module}/bootstrap/scss/bootstrap";
+@import "#{$styles}/components/buttons";
+Тут #{$module} і #{$styles} розкриваються у відповідні шляхи, які ви визначили у _variables.scss.
+
+Крок 3: Налаштування Vite (необов'язково)
+Якщо ви використовуєте Vite, ви можете використовувати Vite плагін для автоматичного імпорту SCSS. Це допоможе спростити ваш код і використовувати абсолютні шляхи безпосередньо.
+npm install vite-plugin-style-import -D
+Додайте плагін у ваш файл vite.config.js:
+
+javascript
+Copy code
+import { defineConfig } from 'vite';
+import styleImport from 'vite-plugin-style-import';
+
+export default defineConfig({
+  plugins: [
+    styleImport({
+      libs: [
+        {
+          libraryName: 'bootstrap',
+          esModule: true,
+          ensureStyleFile: true,
+          resolveStyle: (name) => `bootstrap/scss/${name}.scss`,
+        },
+      ],
+    }),
+  ],
+});
+Тепер, коли ви використовуєте імпорт в SCSS:
+
+scss
+Copy code
+@import 'bootstrap';
+Плагін Vite автоматично додасть необхідний шлях до node_modules/bootstrap/scss/bootstrap.scss.
+
+Ці кроки допоможуть вам виконати абсолютний імпорт в SCSS і спростять вашу роботу зі стилями.
+
+
+Так, підхід з використанням змінних і абсолютного імпорту також працюватиме в модулях SCSS React. Ось як ви можете це зробити:
+Крок 1: Налаштування змінних для шляхів
+Створіть файл _variables.scss (або будь-яку назву за вашим вибором) у вашій папці зі стилями. У цьому файлі визначіть змінні для шляхів:
+scss
+$module: "~node_modules";
+$styles: "~src/styles";
+
+Крок 2: Використання змінних для імпорту
+Тепер у вашому компоненті або стилевому файлі (наприклад, Button.module.scss), ви можете використовувати ці змінні для абсолютного імпорту:
+scss
+@import "#{$module}/bootstrap/scss/bootstrap";
+@import "#{$styles}/components/buttons";
+Тут #{$module} і #{$styles} розкриваються у відповідні шляхи, які ви визначили у _variables.scss.
+
+Крок 3: Використання в модулях SCSS
+Якщо ви використовуєте модулі SCSS у React, наприклад, якщо ваш стилевий файл називається Button.module.scss, то ви можете використовувати змінні та абсолютний імпорт так само:
+scss
+/* Button.module.scss */
+@import "#{$module}/bootstrap/scss/bootstrap";
+@import "#{$styles}/components/buttons";
+
+.button {
+  background-color: $primary-color;
+  color: $text-color;
+}
+Це працює, оскільки змінні $module та $styles розкриваються у відповідні шляхи під час компіляції SCSS. Коли ви використовуєте цей підхід у модульних SCSS файлах у React, ви можете легко управляти шляхами до зовнішніх бібліотек та вашого власного коду.
