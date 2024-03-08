@@ -1,7 +1,8 @@
-// @import '**/styles/_variables';
-// @import '../../../../shared/styles/mixins';
-
 .footer {
-  //   @include test-bg();
-  background-color: $red;
+  font-size: 40px;
+  color: yellow;
+  font-weight: bold;
+  width: 100vw;
+  text-align: center;
+  padding: 100px 0;
 }
