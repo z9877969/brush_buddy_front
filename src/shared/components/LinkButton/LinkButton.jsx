@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { sprite } from 'shared/icons';
-import s from './LInkButton.module.scss';
+import s from './LinkButton.module.scss';
 
 const LinkButton = ({ title, className, to }) => {
   return (
