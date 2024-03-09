@@ -1,0 +1,27 @@
+.line {
+  border: 1px solid $disabled-border-color;
+  height: 0px;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.rightsListItem {
+  font-size: 16px;
+  line-height: 24px;
+  color: $copyright-color;
+}
+
+.rightsList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  row-gap: 8px;
+  justify-content: center;
+}
+
+.verticalLine {
+  font-size: 16px;
+  line-height: 24px;
+  color: $disabled-bg-color;
+}
