@@ -1,9 +1,11 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import './colors';
 
-  color: rgba(255, 255, 255, 0.87);
+:root {
+  font-family: 'KyivType Sans', sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+
+  color: $primary-text-color;
   background-color: #ffffff;
 
   text-rendering: optimizeLegibility;
@@ -24,10 +26,6 @@ html {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1,

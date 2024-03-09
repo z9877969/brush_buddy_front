@@ -5,7 +5,7 @@
       "modules/*": ["modules/*"],
       "hooks/*": ["hooks/*"],
       "pages/*": ["pages/*"],
-      "redux/*": ["redux/*"],
+      "@redux/*": ["redux/*"],
       "shared/*": ["shared/*"]
     }
   },

@@ -10,7 +10,7 @@ export default defineConfig({
       modules: '/src/modules',
       hooks: '/src/hooks',
       pages: '/src/pages',
-      redux: '/src/redux',
+      '@redux': '/src/redux',
       shared: '/src/shared',
     },
   },

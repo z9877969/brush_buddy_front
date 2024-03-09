@@ -8,7 +8,11 @@ screen types:
     desktop,
 */
 @mixin media($_screen) {
-  @if $_screen == to-tablet {
+  @if $_screen == mobile {
+    @media screen and (min-width: $mobile) {
+      @content;
+    }
+  } @else if $_screen == to-tablet {
     @media screen and (max-width: $to-tablet) {
       @content;
     }
