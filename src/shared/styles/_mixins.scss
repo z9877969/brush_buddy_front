@@ -31,6 +31,7 @@ screen types:
   }
 }
 
-@mixin test-bg {
-  background-color: red;
+@mixin font($_fsz, $_lnh) {
+  font-size: #{$_fsz}px;
+  line-height: calc($_lnh / $_fsz);
 }
