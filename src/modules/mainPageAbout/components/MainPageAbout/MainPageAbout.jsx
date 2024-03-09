@@ -1,17 +1,12 @@
-import { Container, Logo } from 'shared/components';
-import s from './Header.module.scss';
-import LangSwitcher from '../LangSwitcher/LangSwitcher';
+import { Container } from 'shared/components';
+import s from './MainPageAbout.module.scss';
 
-const Header = () => {
+const MainPageAbout = () => {
   return (
-    <header className={s.header}>
-      <Container className={s.flex}>
-        Header
-        <Logo />
-        <LangSwitcher />
-      </Container>
-    </header>
+    <section className={s.section}>
+      <Container>MainPageAbout</Container>
+    </section>
   );
 };
 
-export default Header;
+export default MainPageAbout;
