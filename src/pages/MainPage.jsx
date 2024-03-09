@@ -1,9 +1,10 @@
 import { MainPageAbout } from 'modules/mainPageAbout';
+import { MainPageHero } from 'modules/mainPageHero';
 
 const MainPage = () => {
   return (
     <>
-      <h1>MainPage</h1>
+      <MainPageHero />
       <MainPageAbout />
     </>
   );
