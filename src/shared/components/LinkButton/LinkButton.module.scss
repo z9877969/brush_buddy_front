@@ -1,0 +1,25 @@
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  width: 100%;
+  height: 56px;
+  border: 1px solid #1f1f1f1a;
+  border-radius: 200px;
+  @include font(18, 24);
+  color: $primary-text-color;
+
+  & svg {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include media(tablet) {
+    width: 328px;
+    height: 56px;
+  }
+}

@@ -1,6 +1,7 @@
 import { Container, Logo, MainTitle } from 'shared/components';
 import s from './Footer.module.scss';
 import FooterNav from '../FooterNav/FooterNav';
+import SocialIcons from '../SocialIcons/SocialIcons';
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
         <Logo />
         <FooterNav />
         <MainTitle title={'Some footer title'} />
-        <h2>SocialIcons</h2>
+        <SocialIcons />
         <h2>SaleForm</h2>
         <h2>FooterInfo</h2>
       </Container>
