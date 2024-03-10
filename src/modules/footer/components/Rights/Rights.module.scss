@@ -3,6 +3,11 @@
   height: 0px;
   margin-top: 32px;
   margin-bottom: 24px;
+
+  @include media(tablet) {
+    margin-top: 48px;
+    margin-bottom: 32px;
+  }
 }
 
 .rightsListItem {

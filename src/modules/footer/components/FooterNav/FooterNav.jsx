@@ -1,28 +1,29 @@
 import s from './FooterNav.module.scss';
-
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'shared/constants';
 const FooterNav = () => {
   return (
     <nav className={s.nav}>
       <ul className={s.navList}>
         <li className={s.navListItem}>
-          <a href="#" className={s.navListItemLink}>
+          <Link to="/" className={s.navListItemLink}>
             Головна
-          </a>
+          </Link>
         </li>
         <li className={s.navListItem}>
-          <a href="#" className={s.navListItemLink}>
+          <Link to={ROUTES.ABOUT} className={s.navListItemLink}>
             Про БрашБадді
-          </a>
+          </Link>
         </li>
         <li className={s.navListItem}>
-          <a href="#" className={s.navListItemLink}>
+          <Link to={ROUTES.PRODUCTS} className={s.navListItemLink}>
             Товари
-          </a>
+          </Link>
         </li>
         <li className={s.navListItem}>
-          <a href="#" className={s.navListItemLink}>
+          <Link to={ROUTES.BLOG} className={s.navListItemLink}>
             Блог
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

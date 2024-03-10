@@ -19,9 +19,18 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 310px;
+  row-gap: 8px;
+
+  @include media(tablet) {
+    width: 510px;
+  }
 }
 
 .nav {
   margin-top: 24px;
   margin-bottom: 24px;
+}
+
+.navListItem {
+  height: 40px;
 }

@@ -17,7 +17,7 @@ const Discount = () => {
             name="number"
           />
           <label htmlFor="checkboxField" className={s.checkboxFieldLabel}>
-            <Field
+            <input
               type="checkbox"
               className={s.checkboxField}
               id="checkboxField"

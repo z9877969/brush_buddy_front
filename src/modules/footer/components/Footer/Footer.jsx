@@ -8,11 +8,19 @@ const Footer = () => {
   return (
     <footer className={s.footer}>
       <Container>
-        <Logo />
-        <FooterNav />
-        <MainTitle title={'Брашити зубки - дозвілля для всієї родини'} />
-        <SocialIcons />
-        <Discount />
+        <div className={s.twoBlocks}>
+          <div className={s.leftBlock}>
+            <div className={s.topOfFooter}>
+              <Logo />
+              <FooterNav />
+            </div>
+            <div className={s.middleOfFooter}>
+              <MainTitle title={'Брашити зубки - дозвілля для всієї родини'} />
+              <SocialIcons />
+            </div>
+          </div>
+          <Discount />
+        </div>
         <Rights />
       </Container>
     </footer>
