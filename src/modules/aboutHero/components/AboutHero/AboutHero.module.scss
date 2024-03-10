@@ -1,10 +1,27 @@
+.boxInfo {
+   @include media(desktop) {
+    display: flex;
+    gap: 24px;
+   }
+    picture {
+        @include media(desktop) {
+            min-width: 664px;
+        }
+    }
+}
 .aboutHeroTittle {
     color: $primary-text-color;
-    font-size: 36px;
-    font-style: normal;
     font-weight: 900;
     @include font(36, 44);
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+    @include media(tablet) {
+        @include font(48, 56);
+        margin-bottom: 48px;
+    }
+    @include media(desktop) {
+        @include font(56, 64);
+        margin-bottom: 64px;
+    }
 }
 .textHero {
     padding: 24px;
@@ -17,12 +34,30 @@
     @include font(16, 24);
     background-color: $adult-color;
     border-radius: 24px;
+    @include media(tablet) {
+        padding: 32px;
+        @include font(18,28);
+        margin-bottom: 24px;
+    }
+    @include media(desktop) {
+        padding: 44px;
+        @include font(18, 28);
+        margin-top: 0;
+    }
 }
 .chooseVariantproducts {
     background-color: $secondary-bg-color;
     border-radius: 24px;
     padding: 24px;
     margin-bottom: 48px;
+    @include media(tablet) {
+        padding: 32px;
+        margin-bottom: 68px;
+    }
+    @include media(desktop) {
+        padding: 44px;
+        margin-bottom: 100px;
+    }
 
     p {
         margin-bottom: 16px;
@@ -30,6 +65,10 @@
         font-size: 16px;
         font-weight: 500;
         @include font(16, 24);
+        @include media(tablet) {
+            @include font(18, 28);
+            margin-bottom: 24px;
+        }
     }
     svg {
         margin-bottom: 12px;
@@ -40,6 +79,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        @include media(tablet) {
+            width: 169px;
+        }
     }
 }
 .pet {
@@ -60,9 +102,17 @@
         font-size: 18px;
         margin-bottom: 0;
     }
+    @include media(tablet) {
+        gap: 24px;
+    }
+    @include media(desktop) {
+        flex-wrap: nowrap;
+    }
 }
 @media screen and (max-width: 340px) {
     .aboutHeroTittle {
         font-size: 30px;
     }
 }
+
+

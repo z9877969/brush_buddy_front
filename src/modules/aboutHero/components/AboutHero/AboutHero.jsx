@@ -17,12 +17,14 @@ const AboutHero = () => {
     <section className={s.section}>
       <Container>
         <MainTitle title={"Про БрашБадді"} className={s.aboutHeroTittle} />
+        <div className={s.boxInfo}>
         <picture>
           <source srcSet={`${IMG1xMobile} 1x, ${IMG2xMobile} 2x`} media='(min-width: 320px)'></source>
           <source srcSet={`${IMG1xTablet} 1x, ${IMG2xTablet} 2x`} media='(min-width: 768px)'></source>
           <source srcSet={`${IMG1xDesktop} 1x, ${IMG2xDesktop} 2x`} media='(min-width: 1440px)'></source>
           <img src={IMGDefault} alt='photo Polina' width={343}></img>
         </picture>
+        <div>
         <p className={s.textHero}>BrushBuddy - хаб доглядових товарів за порожниною рота та зубами для дорослих, дітей і тваринок. На чолі з головною прихильницею здорових зубів Поліною, ми зібрали найкраще зубне приладдя на одному сайті.
 Щиро віримо, що заохочувати до брашингу і ділитися зубними ритуалами крутіше, ніж лікувати чи видаляти хворі зуби.
           В BrushBuddy панує атмосфера здорових та чистих зубів: розповідаємо, як використовувати правила профілактики вдома та розповсюджуємо тільки якісні товари.</p>
@@ -48,7 +50,9 @@ const AboutHero = () => {
               <p>для тварин</p>
             </li>
           </ul>
-        </div>
+          </div>
+          </div>
+        </div>  
       </Container>
     </section>
   );
