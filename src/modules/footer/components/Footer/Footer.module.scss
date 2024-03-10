@@ -2,6 +2,35 @@
   font-size: 40px;
   font-weight: bold;
   width: 100vw;
-  text-align: center;
-  padding: 100px 0;
+  text-align: left;
+  padding-top: 48px;
+  padding-bottom: 24px;
+  background-color: $main-bg-color;
+}
+
+.middleOfFooter {
+  width: 343px;
+
+  @include media(tablet) {
+    width: 533px;
+  }
+}
+
+.topOfFooter {
+  display: flex;
+  flex-direction: column;
+
+  @include media(tablet) {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.twoBlocks {
+  @include media(desktop) {
+    display: flex;
+  }
 }

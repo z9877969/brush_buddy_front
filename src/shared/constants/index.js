@@ -20,3 +20,10 @@ export const WATERMARK_TYPES = {
   SALE: 'sale',
   WOW: 'wow',
 };
+
+export const SOCIAL_NETWORKS = {
+  INSTAGRAM: '#',
+  TELEGRAM: '#',
+  VIBER: '#',
+  FACEBOOK: '#',
+};
