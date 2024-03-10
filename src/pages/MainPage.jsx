@@ -1,4 +1,5 @@
 import { MainPageAbout } from 'modules/mainPageAbout';
+import { MainPageHelpers } from 'modules/mainPageHelpers';
 import { MainPageHero } from 'modules/mainPageHero';
 
 const MainPage = () => {
@@ -6,6 +7,7 @@ const MainPage = () => {
     <>
       <MainPageHero />
       <MainPageAbout />
+      <MainPageHelpers />
     </>
   );
 };

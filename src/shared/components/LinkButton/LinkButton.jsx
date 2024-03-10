@@ -14,4 +14,4 @@ const LinkButton = ({ title, className, to }) => {
   );
 };
 
-export default LinkButton;
+export default LinkButton; 
