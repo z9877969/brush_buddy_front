@@ -1,0 +1,11 @@
+.section {
+  padding: 48px 0;
+
+  @include media(tablet) {
+    padding: 68px 0;
+  }
+
+  @include media(desktop) {
+    padding: 100px 0;
+  }
+}
