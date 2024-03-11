@@ -1,0 +1,24 @@
+.dropDownList {
+    position: absolute;
+    top: 132px;
+    right: 230px;
+    margin-top: 5px; 
+    padding: 8px;
+    background-color: $light-color;
+    box-shadow: 0 2px 4px #0000001a;
+    border-radius: 20px;
+    text-align: left;
+
+    li {
+      cursor: pointer;
+      padding: 8px;
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+}
+
+.productTypesLink{
+    color: $primary-text-color;
+    @include font(18, 24);
+}
