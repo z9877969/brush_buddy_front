@@ -5,10 +5,10 @@ import * as images from '../../images';
 const BlogItem = ({ item }) => {
   const { title, imgUrl, id } = item;
   return (
-    <li>
-      <Link to={`/blog/${id}`}>
+    <li className={s.blogItem}>
+      <Link to={`/blog/${id}`} className={s.blogLink}>
         <img src={images[imgUrl]} alt={title} className={s.blogImg} />
-        <p className={s.blogTitle}>{title}</p>
+        <p className={s.blogDescr}>{title}</p>
       </Link>
     </li>
   );

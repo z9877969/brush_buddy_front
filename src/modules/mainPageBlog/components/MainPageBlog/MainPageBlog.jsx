@@ -1,4 +1,4 @@
-import { Container, MainTitle, Section } from 'shared/components';
+import { Container, MainTitle } from 'shared/components';
 import blogData from '../../db/blogData.json';
 import { LinkButton } from 'shared/components';
 import BlogItem from '../BlogItem/BlogItem';
@@ -9,19 +9,17 @@ const MainPaigeBlog = () => {
     <BlogItem item={item} key={item.id} />
   ));
   return (
-    <Section className={s.blogSection}>
-      <Container>
-        <div>
-          <MainTitle title={'Корисний блог'} />
-          <LinkButton
-            title={'Всі статті'}
-            className={s.blogBtn}
-            to={'/blog/1}'}
-          />
-        </div>
+    <section className={s.blogSection}>
+      <Container className={s.blogWrapper}>
+        <MainTitle title={'Корисний блог'} className={s.blogTitle} />
         <ul className={s.blogList}>{elements}</ul>
+        <LinkButton
+          title={'Всі статті'}
+          className={s.blogBtn}
+          to={'/blog/1}'}
+        />
       </Container>
-    </Section>
+    </section>
   );
 };
 

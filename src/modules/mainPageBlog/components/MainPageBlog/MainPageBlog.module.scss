@@ -1,8 +1,74 @@
+.blogWrapper {
+  position: relative;
+}
+
+.blogSection {
+  margin: 48px 0;
+
+  @include media(tablet) {
+    margin: 68px 0;
+  }
+
+  @include media(desktop) {
+    margin: 100px 0;
+  }
+}
+
+.blogTitle {
+  @include font(36, 44);
+  margin-bottom: 32px;
+
+  @include media(tablet) {
+    @include font(48, 56);
+    margin-bottom: 48px;
+  }
+
+  @include media(desktop) {
+    @include font(56, 64);
+    margin-bottom: 64px;
+  }
+}
+
 .blogList {
   display: flex;
   flex-wrap: nowrap;
   column-gap: 24px;
   justify-content: space-between;
   align-items: center;
-  overflow: auto;
+
+  @include media(to-tablet) {
+    margin-bottom: 32px;
+  }
+
+  @include media(to-desktop) {
+    overflow-x: auto;
+  }
+}
+
+.blogBtn {
+  width: 198px;
+
+  @include media(to-tablet) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @include media(tablet) {
+    position: absolute;
+    top: 0;
+    right: 32px;
+  }
+
+  @include media(desktop) {
+    right: 64px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: #f5516f;
+    color: #ffffff;
+    & svg {
+      fill: #ffffff;
+    }
+  }
 }
