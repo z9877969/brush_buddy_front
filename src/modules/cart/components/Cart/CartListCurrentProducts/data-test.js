@@ -1,5 +1,6 @@
 const productsArray = [
   {
+    "id": "yrf44b",
     "type": "toothbrush",
     "image": "https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg",
     "name": "Oral-B Pro 1000",
@@ -9,6 +10,7 @@ const productsArray = [
     "discounted_price": null
   },
   {
+    "id": "fkofok44",
     "type": "toothpaste",
     "image": "https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg",
     "name": "Colgate Total",
@@ -19,6 +21,7 @@ const productsArray = [
     "discounted_price": 45
   },
   {
+    "id": "jfjrr596",
     "type": "toothbrush",
     "image": "https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg",
     "name": "Philips Sonicare DiamondClean Super Total fresh",
@@ -28,6 +31,7 @@ const productsArray = [
     "discounted_price": 180
   },
   {
+    "id": "djdjf79890",
     "type": "toothpaste",
     "image": "https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg",
     "name": "Sensodyne Rapid Relief",
@@ -38,6 +42,7 @@ const productsArray = [
     "discounted_price": null
   },
   {
+    "id": "jfjfjf548",
     "type": "toothbrush",
     "image": "https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg",
     "name": "Colgate 360",

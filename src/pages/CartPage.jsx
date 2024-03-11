@@ -1,8 +1,8 @@
 import { Cart } from "modules/cart";
 const CartPage = () => {
-  return <main>
+  return <>
     <Cart/>
-  </main>;
+  </>;
 };
 
 export default CartPage;

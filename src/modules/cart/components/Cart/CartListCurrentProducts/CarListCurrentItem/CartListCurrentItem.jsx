@@ -1,11 +1,10 @@
 import { sprite } from "shared/icons";
-import { nanoid } from "@reduxjs/toolkit";
 import s from './CartListCurrentItem.module.scss';
 import Counter from "shared/components/Counter/Counter";
 
 const CartListCurrentItem = ({ data }) => {
-      const elements = data.map(({ image, name, color, price, discounted_price, flavor, volume }) => (
-        <li className={s.itemproduct} key={nanoid()} >
+      const elements = data.map(({ id, image, name, color, price, discounted_price, flavor, volume }) => (
+        <li className={s.itemproduct} key={id} id={id}>
           <img className={s.itemImg} src={image} alt={name} />
           <div className={s.itemInfo}>
             <div>
@@ -22,7 +21,7 @@ const CartListCurrentItem = ({ data }) => {
               {discounted_price ? <p className={s.itemPriceDisc}>{price} грн</p> : <p className={s.itemPrice}>{price} грн</p>}
             </div> 
             <div className={s.itemFooter}>
-              <Counter classWrapper={s.counter} /> 
+              <Counter classWrapper={s.counter} classSvg={s.classSvg}/> 
               <button className={s.deleteBtn}>
                 <svg>
                   <use href={sprite + '#icon-delete'}></use>
