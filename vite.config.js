@@ -21,4 +21,5 @@ export default defineConfig({
       },
     },
   },
+  base: '/brush_buddy_front'
 });
