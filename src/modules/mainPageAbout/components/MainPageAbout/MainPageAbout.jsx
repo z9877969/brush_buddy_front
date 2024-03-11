@@ -3,12 +3,8 @@ import s from './MainPageAbout.module.scss';
 import LinkButton from 'shared/components/LinkButton/LinkButton';
 import PolinaImg from '../../images/PeopleImg/PolinaImg.png';
 import PolinaImg2x from '../../images/PeopleImg/PolinaImg2x.png';
-import petImg from '../../images/petImg/pet.png';
-import petImg2x from '../../images/petImg/petImg2x.png';
-import childImg from '../../images/childImg/child.png';
-import childImg2x from '../../images/childImg/childImg2x.png';
-import toothbrushImg from '../../images/toothbrushImg/toothbrush.png';
-import toothbrushImg2x from '../../images/toothbrushImg/toothbrushImg2x.png';
+import { sprite } from 'shared/icons';
+// import toothbrushImg2x from '../../images/toothbrushImg/toothbrushImg2x.png';
 
 const MainPageAbout = () => {
   return (
@@ -35,28 +31,31 @@ const MainPageAbout = () => {
           </div>
           <div className={s.brushBlock}>
             <div className={s.benefits}>
-              <picture>
-                <source srcSet={`${toothbrushImg} 1x, ${toothbrushImg2x} 2x`} />
-                <img
-                  className={s.benefitsImage}
-                  src={toothbrushImg}
-                  alt="toothbrush"
-                />
-              </picture>
+              <div className={s.toothbrush}>
+                <svg className={s.benefitsImage}>
+                  <use
+                    width="32"
+                    height="32"
+                    href={sprite + '#icon-toothbrush'}
+                  ></use>
+                </svg>
+              </div>
               <p className={s.benefitsText}>Профілаkтиkа - це kруто</p>
             </div>
             <div className={s.benefits}>
-              <picture>
-                <source srcSet={`${petImg} 1x, ${petImg2x} 2x`} />
-                <img className={s.benefitsImage} src={petImg} alt="pet" />
-              </picture>
+              <div className={s.child}>
+                <svg width="32" height="32" className={s.benefitsImage}>
+                  <use href={sprite + '#icon-bage-child'}></use>
+                </svg>
+              </div>
               <p className={s.benefitsText}>Щіточkи для твариноk</p>
             </div>
             <div className={s.benefits}>
-              <picture>
-                <source srcSet={`${childImg} 1x, ${childImg2x} 2x`} />
-                <img className={s.benefitsImage} src={childImg} alt="child" />
-              </picture>
+              <div className={s.pets}>
+                <svg width="32" height="32" className={s.benefitsImage}>
+                  <use href={sprite + '#icon-cat'}></use>
+                </svg>
+              </div>
               <p className={s.benefitsText}>Кідс&петс френдлі</p>
             </div>
           </div>
