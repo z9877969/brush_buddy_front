@@ -7,6 +7,6 @@ const MainPageAbout = () => {
       <Container>MainPageAbout</Container>
     </section>
   );
-};
+}; 
 
 export default MainPageAbout;
