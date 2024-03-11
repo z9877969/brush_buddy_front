@@ -1,5 +1,169 @@
 .section {
-  text-align: center;
   padding: 16px 0;
   background-color: $adult-color;
+}
+
+.title {
+  color: $primary-text-color;
+  display: flex;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 122%;
+  margin-bottom: 32px;
+  @include media(tablet) {
+    font-size: 48px;
+    line-height: 117%;
+    margin-bottom: 48px;
+  }
+  @include media(desktop) {
+    font-size: 56px;
+    line-height: 114%;
+    margin-bottom: 64px;
+  }
+}
+
+.container {
+  width: 343px;
+  @include media(tablet) {
+    width: 704px;
+  }
+  @include media(desktop) {
+    width: 667px;
+  }
+}
+
+.paragraphBlock {
+  margin-bottom: 32px;
+  @include media(tablet) {
+    margin-bottom: 48px;
+  }
+  @include media(desktop) {
+    margin-bottom: 64px;
+  }
+}
+
+.text {
+  color: $primary-text-color;
+  font-family: 'KyivType Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  @include media(tablet) {
+    font-size: 18px;
+    line-height: 156%;
+    margin-bottom: 20px;
+  }
+}
+
+.brushBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 343px;
+  margin-bottom: 32px;
+  @include media(tablet) {
+    flex-direction: row;
+    width: 704px;
+    margin-bottom: 48px;
+  }
+  @include media(desktop) {
+    margin-bottom: 64px;
+  }
+}
+
+.benefitsText {
+  color: $primary-text-color;
+  font-family: 'KyivType Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.benefits {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.benefitsImage {
+  fill: $light-color;
+  display: flex;
+  margin: 9px auto;
+}
+
+.toothbrush {
+  background-color: $adult-color;
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+}
+
+.child {
+  background-color: $child-color;
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+}
+
+.pets {
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+  background-color: $pet-color;
+}
+
+.image {
+  border-radius: 24px;
+  width: 343px;
+  height: 236px;
+  margin-bottom: 32px;
+  @include media(tablet) {
+    width: 704px;
+    height: 485px;
+    margin-bottom: 48px;
+  }
+  @include media(desktop) {
+    width: 581px;
+    height: 400px;
+    position: absolute;
+    right: 64px;
+    top: 252px;
+    margin-bottom: 0;
+  }
+}
+
+.button {
+  color: $primary-text-color;
+  width: 165px;
+  height: 48px;
+  text-align: center;
+  @include media(tablet) {
+    width: 208px;
+    height: 56px;
+  }
+  @include media(desktop) {
+    position: absolute;
+    right: 64px;
+    top: 128px;
+  }
+}
+
+.button:hover,
+.button:focus {
+  color: #f5516f;
+}
+
+.buttonBlock {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 48px;
+  @include media(tablet) {
+    justify-content: flex-end;
+  }
+  @include media(desktop) {
+    margin-bottom: 0;
+  }
 }
