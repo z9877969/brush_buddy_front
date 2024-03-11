@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Container, MainTitle } from 'shared/components';
 import blogData from '../../db/blogData.json';
 import { LinkButton } from 'shared/components';
@@ -5,6 +6,12 @@ import BlogItem from '../BlogItem/BlogItem';
 import s from './MainPageBlog.module.scss';
 
 const MainPaigeBlog = () => {
+  const [blogId, setBlogId] = useState(null);
+
+  useEffect(() => {
+    setBlogId('1');
+  }, []);
+
   const elements = blogData.map((item) => (
     <BlogItem item={item} key={item.id} />
   ));
@@ -16,7 +23,7 @@ const MainPaigeBlog = () => {
         <LinkButton
           title={'Всі статті'}
           className={s.blogBtn}
-          to={'/blog/1}'}
+          to={`/blog/${blogId}`}
         />
       </Container>
     </section>
