@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PRODUCT_TYPES } from 'shared/constants';
 import Select from 'react-select'
+import { customStyles } from '../../data/navStyles'
 
+
+// перемістити в data
 const ProductDropDown = () => {
     const options = [
         {value: PRODUCT_TYPES.ADULT, label: 'Для дорослих'},
@@ -12,67 +15,43 @@ const ProductDropDown = () => {
     ];
 
     const navigate = useNavigate();
-    const [selectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(null);
+    const ref = useRef(null);
 
-    const handleChange = (selectedOption) => {
-        if (selectedOption) {
-            switch (selectedOption.value) {
-                case PRODUCT_TYPES.ADULT:
-                    navigate('/products/adult');
-                    break;
-                case PRODUCT_TYPES.CHILD:
-                    navigate('/products/child');
-                    break;
-                case PRODUCT_TYPES.ANIMAL:
-                    navigate('/products/animal');
-                    break;
-                case PRODUCT_TYPES.HELPER:
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+    useEffect(() => {
+        ref.current.inputRef.readOnly = 'true';
+    }, [])
 
-    const customStyles = {
-        control: (styles) => ({
-            ...styles, border: "none", fontSize: "18px",
-            '&:hover': {
-                border: "none"
-            }
-        }),
-        valueContainer: (styles) => ({
-            ...styles, padding: 0
-        }),
-        indicatorSeparator: (styles) => ({
-            ...styles, width: "none"
-        }),
-        placeholder: (styles) => ({
-            ...styles, color: "F1F1F1"
-        }),
-        svg: (styles) => ({
-            ...styles, fill: "#000"
-        }),
-        menu: (styles) => ({
-            ...styles, borderRadius: "20px", textAlign: "left",
-            width: "160px", padding: "16px 32px 16px 12px",
-            boxShadow: "-2px 0px 15px 0px rgba(0, 0, 0, 0.05);"
-        }),
-        option: (styles) => ({
-            ...styles, padding: "none", fontSize: "16px", lineHeight: "28px"
-        }),
-        menuList: (styles) => ({
-            ...styles, display: "flex", flexDirection: "column",
-            gap: "8px",
-        }),
-    }
+    useEffect(() => {
+        if (!selectedOption){
+            return;
+        } 
+        switch (selectedOption.value) {
+            case PRODUCT_TYPES.ADULT:
+                navigate('/products?productType=adult');
+                break;
+            case PRODUCT_TYPES.CHILD:
+                navigate('/products?productType=child');
+                break;
+            case PRODUCT_TYPES.ANIMAL:
+                navigate('/products?productType=animal');
+                break;
+            case PRODUCT_TYPES.HELPER:
+                // функцію добавити
+                break;
+            default:
+                break;
+        } 
+        // eslint-disable-next-line
+    }, [selectedOption]);
     
     
     return (
         <Select
+            ref={ref}
             options={options}
             value={selectedOption}
-            onChange={handleChange}
+            onChange={(option) => {setSelectedOption(option)}}
             placeholder="Товари"
             styles={customStyles}
         />

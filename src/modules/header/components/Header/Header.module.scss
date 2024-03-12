@@ -9,8 +9,13 @@
   justify-content: space-between;
   align-items: center;
   background-color: $light-color;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  
+
+  @include media(desktop){
+    // padding-top: 24px;
+    // padding-bottom: 24px;
+    padding: 24px 64px;
+  }
 }
 
 .rightSideWrap{

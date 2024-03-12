@@ -1,11 +1,12 @@
-import { Container, Logo } from 'shared/components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import s from './Header.module.scss';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import CartButton from '../CartButton/CartButton';
 import DiscountReminder from '../DiscountReminder/DiscountReminder';
 import HeaderNav from '../HeaderNav/HeaderNav';
+import s from './Header.module.scss';
+import { Container, Logo } from 'shared/components';
+
 
 const Header = () => {
   const [isDiscountReminderOpen, setDiscountReminderOpen] = useState(true);

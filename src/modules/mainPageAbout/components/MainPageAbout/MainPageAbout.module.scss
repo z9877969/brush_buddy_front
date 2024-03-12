@@ -3,6 +3,10 @@
   background-color: $adult-color;
 }
 
+.containerAbout {
+  position: relative;
+}
+
 .title {
   color: $primary-text-color;
   display: flex;
@@ -130,7 +134,7 @@
     height: 400px;
     position: absolute;
     right: 64px;
-    top: 252px;
+    top: 130px;
     margin-bottom: 0;
   }
 }
@@ -147,7 +151,7 @@
   @include media(desktop) {
     position: absolute;
     right: 64px;
-    top: 128px;
+    top: 0px;
   }
 }
 
