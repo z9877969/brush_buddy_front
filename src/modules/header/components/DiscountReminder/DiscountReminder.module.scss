@@ -1,0 +1,22 @@
+.discountWrapper{
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    padding: 16px 0;
+    background-color: $secondary-bg-color;
+}
+
+.discountText{
+    @include font(16, 24);
+    flex-grow: 1;
+}
+
+.discountLink{
+    margin-left: 5px;
+    color: $pet-color;
+}
+
+.btnClose{
+    margin-right: 24px;
+}

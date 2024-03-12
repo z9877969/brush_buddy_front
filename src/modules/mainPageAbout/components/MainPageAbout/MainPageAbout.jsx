@@ -74,6 +74,6 @@ const MainPageAbout = () => {
       </Container>
     </section>
   );
-};
+}; 
 
 export default MainPageAbout;

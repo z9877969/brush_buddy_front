@@ -1,0 +1,25 @@
+.input {
+    color:  #49494A;
+    font-weight: 500;
+    @include font(16, 24);
+    padding: 12px 24px;
+    border-radius: 100px;
+    background-color: inherit;
+    border: 1px solid rgba(31, 31, 31, 0.10);
+    width: 100%;
+    box-sizing: border-box;
+}
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.form > div {
+    width: 100%;
+}
+.btn {
+    background-color: $pet-color;
+    padding: 12px 24px;
+    border-radius: 200px;
+    color: $light-color;
+}
