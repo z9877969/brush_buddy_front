@@ -1,0 +1,85 @@
+.section {
+  background-color: $pet-color;
+}
+.brushAccent {
+  color: $pet-color;
+}
+.boyAccent {
+  color: $adult-color;
+}
+.catAccent {
+  color: $child-color;
+}
+
+@keyframes slide1 {
+  0% {
+    right: calc(100% + 300px);
+  }
+  0% {
+    right: calc(100% + 300px);
+  }
+  20% {
+    right: -2%;
+  }
+  100% {
+    right: -2%;
+  }
+}
+
+.slide1 {
+  animation-name: slide1;
+}
+@keyframes slide2 {
+  0% {
+    left: calc(100% + 400px);
+  }
+  20% {
+    left: calc(100% + 400px);
+  }
+  40% {
+    left: calc(100% - 345px);
+  }
+  100% {
+    left: calc(100% - 345px);
+  }
+}
+
+.slide2 {
+  animation-name: slide2;
+}
+@keyframes slide3 {
+  0% {
+    right: calc(100% + 300px);
+  }
+  40% {
+    right: calc(100% + 300px);
+  }
+  60% {
+    right: -2%;
+  }
+  100% {
+    right: -2%;
+  }
+}
+
+.slide3 {
+  animation-name: slide3;
+}
+@keyframes slide4 {
+  0% {
+    left: calc(100% + 400px);
+  }
+  60% {
+    left: calc(100% + 400px);
+  }
+  80% {
+    left: calc(100% - 345px);
+  }
+  100% {
+    left: calc(100% - 345px);
+  }
+}
+
+.slide4 {
+  animation-name: slide4;
+}
