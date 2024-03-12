@@ -24,7 +24,6 @@ const MainPageHelpers = () => {
           </div>
         </div>
       </Container>
-      ;
     </section>
   );
 };
