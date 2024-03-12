@@ -22,15 +22,19 @@
 
   @include media(tablet) {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     margin-bottom: 48px;
     display: flex;
     justify-content: space-between;
+  }
+  @include media(desktop) {
+    width: 715px;
   }
 }
 
 .twoBlocks {
   @include media(desktop) {
     display: flex;
+    justify-content: space-between;
   }
 }
