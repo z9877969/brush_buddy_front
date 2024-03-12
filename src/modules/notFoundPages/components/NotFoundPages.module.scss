@@ -8,14 +8,13 @@
 .image {
   margin-bottom: 32px;
   width: 375px;
-  height: 147px;
   @include media(tablet) {
     width: 577px;
-    height: 227px;
   }
 }
 
 .title {
+  font-family: 'KyivType Sans', sans-serif;
   font-weight: 900;
   font-size: 36px;
   line-height: 122%;
@@ -54,13 +53,15 @@
   width: 328px;
   height: 56px;
   color: $primary-text-color;
+  font-family: 'KyivType Sans', sans-serif;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 133%;
   text-align: center;
   @include media(tablet) {
     padding: 16px 55px;
     width: 235px;
+    font-size: 18px;
   }
 }
 
@@ -75,6 +76,7 @@
   padding: 12px 24px;
   width: 328px;
   height: 56px;
+  font-family: 'KyivType Sans', sans-serif;
   color: $primary-text-color;
   background-color: $pet-color;
   font-weight: 500;
@@ -96,5 +98,6 @@
   @include media(tablet) {
     padding: 16px 55px;
     width: 235px;
+    font-size: 18px;
   }
 }

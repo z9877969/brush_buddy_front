@@ -2,7 +2,7 @@ import { Container } from 'shared/components';
 import s from './NotFoundPages.module.scss';
 import { Link } from 'react-router-dom';
 import { sprite } from 'shared/icons';
-import Anima from '../images/Anima.png';
+import Anima from '../images/Anima.gif';
 
 const NotFoundPages = () => {
   return (
