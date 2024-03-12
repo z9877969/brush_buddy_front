@@ -1,22 +1,28 @@
-import s from './HeaderNav.module.scss'
+import { NavLink, useLocation } from 'react-router-dom';
+import s from './HeaderNav.module.scss';
 import ProductDropDown from '../ProductDropDown/ProductDropDown';
-import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/constants';
 
 const HeaderNav = () => {
-    return(
-        <ul className={s.navList}>
-            <li className={s.navListItem}>
-                <Link className={s.navLink} to="/">Головна</Link>
-            </li>
-            <li className={s.navListItem}>
-                <Link className={s.navLink} to={ROUTES.ABOUT}>Про БрашБаді</Link>
-            </li>
-            <li className={s.navListItem}>
-                <ProductDropDown />
-            </li>
-        </ul>
+    const location = useLocation();
+  
+    return (
+      <ul className={s.navList}>
+        <li className={s.navListItem}>
+            <NavLink to='/' exact="true" className={`${s.navLink} ${location.pathname === ROUTES.MAIN ? s.activeNavLink : ''}`}>
+                Головна
+            </NavLink>
+        </li>
+        <li className={s.navListItem}>
+            <NavLink to={ROUTES.ABOUT} className={`${s.navLink} ${location.pathname === '/about' ? s.activeNavLink : ''}`}>
+                Про БрашБаді
+            </NavLink>
+        </li>
+        <li className={`${s.navListItem} ${s.navLink}`}>
+          <ProductDropDown />
+        </li>
+      </ul>
     );
-}
+  };  
 
 export default HeaderNav;

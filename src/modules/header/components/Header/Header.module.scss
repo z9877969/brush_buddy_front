@@ -8,8 +8,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex: 1 0 0;
   background-color: $light-color;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .rightSideWrap{

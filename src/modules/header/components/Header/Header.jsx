@@ -1,5 +1,6 @@
 import { Container, Logo } from 'shared/components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import s from './Header.module.scss';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import CartButton from '../CartButton/CartButton';
@@ -17,7 +18,10 @@ const Header = () => {
     <header className={s.header}>
       {isDiscountReminderOpen && <DiscountReminder handleClose={handleCloseDiscountReminder} />}
       <Container className={s.flex}>
-        <Logo className={s.logo} />
+        <Link to={'/'}>
+          <Logo className={s.logo}/>
+        </Link>
+        
         <HeaderNav />
         <div className={s.rightSideWrap}>
           <LangSwitcher />

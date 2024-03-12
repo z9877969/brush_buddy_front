@@ -1,0 +1,13 @@
+.listOrederdProducts {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    @include media(tablet) {
+        margin-top: 48px;
+        margin-bottom: 48px;
+    }
+    @include media(desctop) {
+        margin-top: 64px;
+        margin-bottom: 64px;
+    }
+}
+

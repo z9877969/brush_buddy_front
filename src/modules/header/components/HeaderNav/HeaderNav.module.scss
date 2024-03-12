@@ -19,6 +19,11 @@
 .navLink{
     color: $primary-text-color;
     @include font(18, 28);
+    margin: 0 16px;
+}
+
+.activeNavLink{
+    color: $pet-color;
 }
 
 // .activePage{}
