@@ -1,5 +1,11 @@
+import ProductsPageFilter from 'modules/productsPageFilter/components/ProductsPageFilter/ProductsPageFilter';
+
 const ProductsPage = () => {
-  return <h1>ProductsPage</h1>;
+  return (
+    <>
+      <ProductsPageFilter />
+    </>
+  );
 };
 
 export default ProductsPage;

@@ -19,7 +19,14 @@ const MainPageAbout = () => {
           />
         </div>
       </Container>
-      <div className={s.animation}></div>
+      <div className={s.animation}>
+        {/* <video src="/src/modules/mainPageHero/images/heroAnime.mp4"></video> */}
+      </div>
+      {/* <img
+        src="/src/modules/mainPageHero/images/heroAnime.mp4"
+        alt="animation"
+        className={s.animation}
+      /> */}
     </section>
   );
 };
