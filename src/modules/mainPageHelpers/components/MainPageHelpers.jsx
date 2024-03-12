@@ -1,34 +1,9 @@
 import { Container, MainTitle, RoundButton } from 'shared/components';
 
-import s from './MainPageHelpers.module.scss';
-
-import testIMG from '../images/111.jpg';
-
+import { helpersCardData } from '../data/helpersCardData';
 import { HelpersCardList } from '..';
 
-const helpersCardData = [
-  {
-    id: '1',
-    title: 'Календар-трекер для дітей',
-    price: '288.80',
-    text: 'Перед використанням календаря ви домовляєтеся з дитиною, якою буде нагорода за щотижневе постійне чищення зубів.',
-    image: testIMG,
-  },
-  {
-    id: '2',
-    title: 'Календар-трекер для дітей',
-    price: '288.80',
-    text: 'Перед використанням календаря ви домовляєтеся з дитиною, якою буде нагорода за щотижневе постійне чищення зубів.',
-    image: testIMG,
-  },
-  {
-    id: '2',
-    title: 'Календар-трекер для дітей',
-    price: '288.80',
-    text: 'Перед використанням календаря ви домовляєтеся з дитиною, якою буде нагорода за щотижневе постійне чищення зубів.',
-    image: testIMG,
-  },
-];
+import s from './MainPageHelpers.module.scss';
 
 const MainPageHelpers = () => {
   return (
