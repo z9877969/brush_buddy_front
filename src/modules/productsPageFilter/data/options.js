@@ -32,3 +32,9 @@ export const brandsOptions = [
   { value: 'nordics', label: 'Nordics' },
   { value: 'brushbuddy', label: 'BrushBuddy' },
 ];
+export const sortByOptions = [
+  { value: 'new', label: 'Новинки' },
+  { value: 'actions', label: 'Акції' },
+  { value: 'increment', label: 'Ціна за зростанням' },
+  { value: 'decrement', label: 'Ціна за спаданням' },
+];

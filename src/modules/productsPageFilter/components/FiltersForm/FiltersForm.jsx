@@ -1,25 +1,59 @@
-// import { PRODUCT_TYPES } from 'shared/constants';
-// import { useState } from 'react';
 import Select from 'react-select';
-import { ResetFilterBtn } from '../ResetFilterBtn/ResetFilterBtn';
+import { useFormik } from 'formik';
+
 import { PRODUCT_TYPES } from 'shared/constants/index.js';
 
 import s from './FiltersForm.module.scss';
 import {
   ageOptions,
   categoriesOptions,
+  brandsOptions,
+  sortByOptions,
 } from 'modules/productsPageFilter/data/options';
-import { useState } from 'react';
+import { Button } from 'shared/components';
 
-const FiltersForm = () => {
-  const [selectedAge, setSelectedAge] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+const FiltersForm = ({ filterProductsCb }) => {
+  const initialValues = {
+    search: '',
+    age: ageOptions[0],
+    category: categoriesOptions[0],
+    brand: brandsOptions[0],
+    sortBy: sortByOptions[0],
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      const {
+        search,
+        age: { value: ageValue },
+        category: { value: catValue },
+        brand: { value: brandValue },
+        sortBy: { sortBy: sortByValue },
+      } = values;
+      // console.log('run some function to filter products', ` ${values}`);
+      filterProductsCb({
+        age: ageValue,
+        category: catValue,
+        search,
+        brand: brandValue,
+        sortBy: sortByValue,
+      });
+    },
+  });
+  const { values, handleSubmit, handleChange, setFieldValue, resetForm } =
+    formik;
+
   return (
     <div className={s.container}>
-      <form type="submit">
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="search">Пошук</label>
-          <input type="text" id="search" />
+          <input
+            type="text"
+            id="search"
+            name="search"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
 
         <div>
@@ -56,10 +90,11 @@ const FiltersForm = () => {
           <label htmlFor="age">Вік дитини</label>
           <Select
             id="age"
-            placeholder={ageOptions[3].label}
             options={ageOptions}
-            defaultValue={selectedAge}
-            onChange={setSelectedAge}
+            value={values.age}
+            onChange={(option) => {
+              setFieldValue('age', option);
+            }}
           />
         </div>
 
@@ -67,33 +102,50 @@ const FiltersForm = () => {
           <label htmlFor="category">Категорії</label>
           <Select
             id="category"
-            placeholder={'Зубні щітки'}
             options={categoriesOptions}
-            defaultValue={selectedCategory}
-            onChange={setSelectedCategory}
+            value={values.category}
+            onChange={(option) => {
+              setFieldValue('category', option);
+            }}
           />
         </div>
 
         <div>
           <label htmlFor="brand">Бренд</label>
-          <select id="brand">
-            <option value="tello">TELLO</option>
-            <option value="miradent">Miradent</option>
-          </select>
+          <Select
+            id="brand"
+            options={brandsOptions}
+            value={values.brand}
+            onChange={(option) => {
+              setFieldValue('brand', option);
+            }}
+          />
         </div>
 
         <div>
           <label htmlFor="sortBy">Сортувати</label>
-          <select id="sortBy">
-            <option value="new">Новинки</option>
-            <option value="actions">Акції</option>
-            <option value="increment">Ціна за зростанням</option>
-            <option value="decrement">Ціна за спаданням</option>
-          </select>
+          <Select
+            id="sortBy"
+            options={sortByOptions}
+            value={values.sortBy}
+            onChange={(option) => {
+              setFieldValue('sortBy', option);
+            }}
+          />
         </div>
 
-        <ResetFilterBtn />
-        <button type="button">Перейти</button>
+        <Button
+          className={s.resetBtn}
+          title={'Скинути усі фільтри'}
+          border
+          onClick={resetForm}
+        />
+        <Button
+          type="submit"
+          className={s.submitBtn}
+          title={'Показати усі пропозиції'}
+          border
+        />
       </form>
     </div>
   );

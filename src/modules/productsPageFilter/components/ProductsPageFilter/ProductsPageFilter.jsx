@@ -1,10 +1,17 @@
+import { useState } from 'react';
 import { Button } from 'shared/components';
-import s from './ProductsPageFilter.module.scss';
 import { sprite } from 'shared/icons';
 import FiltersForm from '../FiltersForm/FiltersForm';
+import s from './ProductsPageFilter.module.scss';
 
 const ProductsPageFilter = () => {
+  const [showFilters, setShowFilters] = useState(false);
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
   const onFormSubmit = () => {};
+
   return (
     <aside className={s.aside}>
       <Button
@@ -18,17 +25,18 @@ const ProductsPageFilter = () => {
           </>
         }
         border
-      ></Button>
-      <div className={s.filterWindow}>
+        onClick={toggleFilters}
+      />
+      <div className={`${s.filterWindow} ${showFilters ? s.visible : ''}`}>
         <div>
           <h3>Фільтри</h3>
-          <button type="button">
+          <button type="button" className={s.closeBtn} onClick={toggleFilters}>
             <svg width={15}>
               <use href={sprite + '#icon-close-cross'}></use>
             </svg>
           </button>
         </div>
-        <FiltersForm onSubmit={onFormSubmit} />
+        <FiltersForm filterProductsCb={onFormSubmit} />
       </div>
     </aside>
   );
