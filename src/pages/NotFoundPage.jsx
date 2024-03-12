@@ -1,5 +1,7 @@
+import { NotFoundPages } from 'modules/notFoundPages';
+
 const NotFoundPage = () => {
-  return <h1>NotFoundPage</h1>;
+  return <NotFoundPages />;
 };
 
 export default NotFoundPage;
