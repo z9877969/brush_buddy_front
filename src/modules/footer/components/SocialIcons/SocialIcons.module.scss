@@ -1,0 +1,33 @@
+.iconSocial {
+  fill: $pet-color;
+  width: 36px;
+  height: 35px;
+  margin: 2.5px;
+
+  @include media(tablet) {
+    margin: 3px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+.iconsFooter {
+  width: 208px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  margin-top: 24px;
+
+  @include media(tablet) {
+    width: 240px;
+    height: 48px;
+    margin-bottom: 48px;
+    margin-top: 48px;
+  }
+  @include media(desktop) {
+    margin-bottom: 73px;
+    margin-top: 64px;
+  }
+}

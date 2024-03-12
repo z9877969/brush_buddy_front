@@ -1,0 +1,23 @@
+.blogLink {
+  display: block;
+  height: 454px;
+  padding-bottom: 24px;
+}
+
+.blogImg {
+  width: 310px;
+  margin-bottom: 24px;
+
+  @include media(tablet) {
+    width: 340px;
+  }
+
+  @include media(desktop) {
+    width: 421px;
+  }
+}
+
+.blogDescr {
+  @include font(24, 32);
+  color: $primary-text-color;
+}

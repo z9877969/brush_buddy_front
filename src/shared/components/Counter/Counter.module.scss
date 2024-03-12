@@ -1,6 +1,4 @@
-.counterWrapper {
-}
-.btn {
-}
-.table {
+.btn:disabled {
+  fill: #cccccc;
+  cursor: not-allowed;
 }

@@ -1,9 +1,12 @@
+import { sprite } from 'shared/icons';
 import s from './Logo.module.scss';
 
 const Logo = () => {
   return (
     <div className={s.logo}>
-      <h4>Some logo content</h4>
+      <svg>
+        <use href={sprite + '#icon-logo'}></use>
+      </svg>
     </div>
   );
 };
