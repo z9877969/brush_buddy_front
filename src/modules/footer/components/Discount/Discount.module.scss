@@ -1,0 +1,177 @@
+$icon-checkmark: url('../shared/icons/sprite.svg#icon-checkmark');
+
+.discountDiv {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: 24px;
+  gap: 24px;
+  width: 343px;
+  background-color: $light-color;
+  box-shadow: -2px 0px 15px 0px #0000000d;
+
+  @include media(tablet) {
+    padding: 48px 44px;
+    width: 533px;
+  }
+  @include media(desktop) {
+    margin-bottom: 73px;
+    margin-top: 64px;
+  }
+}
+
+.discountTitle {
+  line-height: 32px;
+  font-size: 24px;
+  font-weight: 500;
+
+  @include media(tablet) {
+    font-size: 32px;
+    line-height: 1.125;
+  }
+}
+
+.span {
+  color: $pet-color;
+}
+
+.numberField {
+  border-radius: 8px;
+  border: none;
+  height: 52px;
+  background-color: $secondary-bg-color;
+  outline: none;
+  display: flex;
+  position: relative;
+  font-size: 16px;
+  padding: 14px 16px 0 16px;
+  width: 100%;
+}
+
+.numberField::placeholder {
+  font-size: 16px;
+  line-height: 24px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $disabled-content-color;
+}
+
+.numberFieldDiv {
+  position: relative;
+}
+
+.numberFieldDiv .numberFieldLabel {
+  line-height: 1.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 1rem 1rem;
+  pointer-events: none;
+  transform-origin: 0 0;
+  transition:
+    opacity 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
+}
+
+.numberFieldDiv .numberField::placeholder {
+  color: transparent;
+}
+
+.numberFieldDiv .numberField:focus ~ .numberFieldLabel,
+.numberFieldDiv .numberField:not(:placeholder-shown) ~ .numberFieldLabel {
+  color: $secondary-text-color;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  transform: scale(0.85) translateY(-0.85rem);
+}
+
+.numberFieldLabel {
+  font-size: 16px;
+  line-height: 24px;
+  position: absolute;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $disabled-content-color;
+}
+
+.noCheck {
+  display: none;
+}
+
+.discountAppliedText {
+  font-size: 14px;
+  line-height: 1.28571;
+  color: $error-text-color;
+  margin-top: 6px;
+}
+.checkboxField {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  width: 38px;
+}
+.checkboxField::before {
+  content: url('./checkmark.svg');
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid $disabled-bg-color;
+  background-color: $light-color;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.checkboxField:checked::before {
+  background-color: $pet-color;
+  border: 0;
+}
+
+.checkboxFieldLabel {
+  display: flex;
+  font-size: 14px;
+  line-height: 18px;
+  gap: 12px;
+  align-items: center;
+  color: $copyright-color;
+
+  @include media(tablet) {
+    font-size: 16px;
+    line-height: 1.5;
+    width: 390px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include media(tablet) {
+    gap: 32px;
+  }
+}
+
+.btn {
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  border-radius: 200px;
+  padding: 12px 24px;
+  height: 48px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+.icon-checkmark {
+  width: 0.9169921875em;
+}

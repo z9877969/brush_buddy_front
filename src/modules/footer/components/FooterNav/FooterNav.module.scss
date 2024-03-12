@@ -1,0 +1,36 @@
+.navListItemLink {
+  font-size: 18px;
+  line-height: 1.33333;
+  color: $primary-text-color;
+  margin: 8px 16px;
+}
+
+.navListItem:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  background-color: $disabled-bg-color;
+  border-radius: 10px;
+  height: 16px;
+}
+
+.navList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 310px;
+  row-gap: 8px;
+
+  @include media(tablet) {
+    width: 510px;
+  }
+}
+
+.nav {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.navListItem {
+  height: 40px;
+}

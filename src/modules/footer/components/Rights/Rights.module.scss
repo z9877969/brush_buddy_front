@@ -1,0 +1,36 @@
+.line {
+  border: 1px solid $disabled-border-color;
+  height: 0px;
+  margin-top: 32px;
+  margin-bottom: 24px;
+
+  @include media(tablet) {
+    margin-top: 48px;
+    margin-bottom: 32px;
+  }
+}
+
+.rightsListItem {
+  font-size: 16px;
+  line-height: 24px;
+  color: $copyright-color;
+}
+
+.rightsList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  justify-content: center;
+}
+
+.rightsListItem:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  background-color: $disabled-bg-color;
+  border-radius: 10px;
+  height: 16px;
+  margin-right: 16px;
+  margin-left: 16px;
+}
