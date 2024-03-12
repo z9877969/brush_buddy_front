@@ -15,11 +15,13 @@
     }
 }
 
+.navLink, .activeNavLink{
+    @include font(18, 28);
+    margin: 0 16px;
+}
 
 .navLink{
     color: $primary-text-color;
-    @include font(18, 28);
-    margin: 0 16px;
 }
 
 .activeNavLink{
