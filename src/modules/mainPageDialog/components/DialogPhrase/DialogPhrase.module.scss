@@ -1,0 +1,32 @@
+.dialogBalloonLeft {
+  background-image: url('../../images/dialog-left-mobile.png');
+}
+.dialogBalloonRight {
+  background-image: url('../../images/dialog-right-mobile.png');
+}
+.dialogBalloon {
+  background-repeat: no-repeat;
+  margin-top: 16px;
+  min-width: 247px;
+}
+
+.avatar {
+  height: 80px;
+  width: 80px;
+  margin: 16px;
+}
+.dialogItem {
+  display: flex;
+  position: relative;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;
+  width: 343px;
+}
+.balloonText {
+  text-align: center;
+  @include font(18, 24);
+  //   vertical-align: middle;
+  //   justify-content: center;
+  //   align-items: center;
+}
