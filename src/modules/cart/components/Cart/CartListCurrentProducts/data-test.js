@@ -5,7 +5,8 @@ const productsArray = [
     "image": "https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg",
     "name": "Oral-B Pro 1000",
     "color": "white",
-    "quantity": 100,
+    "quantity": 1,
+    "total_quantity" : 2,
     "price": 150,
     "discounted_price": null
   },
@@ -16,7 +17,8 @@ const productsArray = [
     "name": "Colgate Total",
     "flavor": "mint",
     "volume": "100 ml",
-    "quantity": 50,
+    "quantity": 5,
+    "total_quantity" : 7,
     "price": 50,
     "discounted_price": 45
   },
@@ -26,7 +28,8 @@ const productsArray = [
     "image": "https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg",
     "name": "Philips Sonicare DiamondClean Super Total fresh",
     "color": "black",
-    "quantity": 80,
+    "quantity": 2,
+    "total_quantity" : 3,
     "price": 200,
     "discounted_price": 180
   },
@@ -37,7 +40,8 @@ const productsArray = [
     "name": "Sensodyne Rapid Relief",
     "flavor": "peach",
     "volume": "75 ml",
-    "quantity": 60,
+    "quantity": 6,
+    "total_quantity" : 10,
     "price": 70,
     "discounted_price": null
   },
@@ -47,7 +51,8 @@ const productsArray = [
     "image": "https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg",
     "name": "Colgate 360",
     "color": "blue",
-    "quantity": 120,
+    "quantity": 1,
+    "total_quantity" : 1,
     "price": 120,
     "discounted_price": null
   }
