@@ -1,40 +1,39 @@
 .header {
   text-align: center;
   position: sticky;
-  z-index: 1;
+  z-index: 2;
+  top: 0;
+}
+
+.headerWrap {
+  background-color: $light-color;
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  @include media(desktop) {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
 }
 
 .flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $light-color;
-  
+  // background-color: $light-color;
+  // width: 100%;
 
-  @include media(desktop){
+  @include media(desktop) {
     // padding-top: 24px;
     // padding-bottom: 24px;
     padding: 24px 64px;
   }
 }
 
-.rightSideWrap{
+.rightSideWrap {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 4px;
-}
-
-.btnBurgerMenu{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px;
-  background-color: transparent;
-  border: 1px solid #1F1F1F;
-  border-radius: 200px;
-
-  @include media(desktop){
-    display: none;
-  }
 }
