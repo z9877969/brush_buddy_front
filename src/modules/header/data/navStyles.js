@@ -14,8 +14,8 @@ export const customStyles = {
     placeholder: (styles) => ({
         ...styles, color: "F1F1F1"
     }),
-    svg: (styles) => ({
-        ...styles, fill: "#000"
+    dropdownIndicator: (styles) => ({
+        ...styles, color: "#000", padding: 0
     }),
     menu: (styles) => ({
         ...styles, borderRadius: "20px", textAlign: "left",

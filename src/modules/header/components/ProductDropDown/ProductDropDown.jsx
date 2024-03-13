@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { options } from '../../data/optionsProductNav'
 import { PRODUCT_TYPES } from 'shared/constants';
 import Select from 'react-select'
 import { customStyles } from '../../data/navStyles'
@@ -7,12 +8,6 @@ import { customStyles } from '../../data/navStyles'
 
 // перемістити в data
 const ProductDropDown = () => {
-    const options = [
-        {value: PRODUCT_TYPES.ADULT, label: 'Для дорослих'},
-        {value: PRODUCT_TYPES.CHILD, label: 'Для дітей'},
-        {value: PRODUCT_TYPES.ANIMAL, label: 'Для тварин'},
-        {value: PRODUCT_TYPES.HELPER, label: 'Допомогайки'},
-    ];
 
     const navigate = useNavigate();
     const [selectedOption, setSelectedOption] = useState(null);

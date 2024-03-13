@@ -1,0 +1,12 @@
+.filterWindow {
+  display: none;
+  @include media(desktop) {
+    display: flex;
+  }
+}
+.visible {
+  display: flex;
+  @include media(desktop) {
+    display: none;
+  }
+}
