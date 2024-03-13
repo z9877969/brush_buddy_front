@@ -1,0 +1,13 @@
+.btnBurgerMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  background-color: transparent;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  border-radius: 200px;
+
+  @include media(desktop) {
+    display: none;
+  }
+}
