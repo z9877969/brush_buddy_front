@@ -12,7 +12,7 @@ const RoundButton = ({
   return (
     <button
       type={type}
-      onClick={onClick}
+      onClick={onClick} 
       className={clsx(s.roundButton, className && className)}
     >
       {iconId ? (
