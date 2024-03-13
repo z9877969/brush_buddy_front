@@ -1,0 +1,31 @@
+.navList{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 575px;
+
+    &Item:not(:last-child)::after {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        background-color: $disabled-bg-color;
+        border-radius: 10px;
+        height: 16px;
+        margin: 0 8px;
+    }
+}
+
+.navLink, .activeNavLink{
+    @include font(18, 28);
+    margin: 0 16px;
+}
+
+.navLink{
+    color: $primary-text-color;
+}
+
+.activeNavLink{
+    color: $pet-color;
+}
+
+// .activePage{}

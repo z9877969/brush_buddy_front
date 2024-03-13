@@ -1,6 +1,4 @@
 .section {
-  // text-align: center;
-  // padding: 16px 0;
   background-color: $adult-color;
 
   display: flex;
@@ -13,13 +11,16 @@
   width: 100%;
   height: auto;
 
+  margin: 0 auto;
+
   @include media(tablet) {
-    padding: 60px 0px 24px 0px;
+    padding: 60px 64px 24px 64px;
     gap: -210px;
   }
   @include media(desktop) {
+    flex-direction: row;
     height: 720px;
-    padding: 32px 0px;
+    padding: 32px 64px;
     justify-content: center;
     align-items: flex-end;
     gap: 120px;
@@ -30,7 +31,7 @@
     width: 100%;
     height: auto;
     display: flex;
-    padding: 0px 64px;
+    padding: 0px;
     align-items: center;
     gap: 120px;
     align-self: stretch;
@@ -119,16 +120,12 @@
   display: flex;
   width: 343px;
   height: 344px;
-  background-color: $light-color;
-  @include media(tablet) {
-    display: flex;
 
+  @include media(tablet) {
     width: 653px;
     height: 653px;
   }
   @include media(desktop) {
-    display: flex;
-
     width: 653px;
     height: 653px;
   }
