@@ -1,4 +1,5 @@
 import { sprite } from 'shared/icons';
+import { Link } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -7,6 +8,7 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 
 import s from './MainPageHelpers.module.scss';
+import { ROUTES } from 'shared/constants';
 
 const HelpersCardList = ({
   helpersCardData,
@@ -54,21 +56,23 @@ const HelpersCardList = ({
     >
       {helpersCardData.map(({ id, title, price, text, image }) => (
         <SwiperSlide key={id}>
-          <div className={s.mainHelpersBox}>
-            <div className={s.boxTitleText}>
-              <div className={s.helpersBoxTitle}>
-                <h3>{title}</h3>
-                <button type="button">
-                  <svg>
-                    <use href={sprite + '#icon-cart'}></use>
-                  </svg>
-                </button>
+          <Link to={ROUTES.PRODUCTS}>
+            <div className={s.mainHelpersBox}>
+              <div className={s.boxTitleText}>
+                <div className={s.helpersBoxTitle}>
+                  <h3>{title}</h3>
+                  <button type="button">
+                    <svg>
+                      <use href={sprite + '#icon-cart'}></use>
+                    </svg>
+                  </button>
+                </div>
+                <p className={s.helpersBoxPrice}>{`${price} грн`}</p>
+                <p className={s.helpersBoxText}>{text}</p>
               </div>
-              <p className={s.helpersBoxPrice}>{`${price} грн`}</p>
-              <p className={s.helpersBoxText}>{text}</p>
+              <img src={image} alt="photo" />
             </div>
-            <img src={image} alt="photo" />
-          </div>
+          </Link>
         </SwiperSlide>
       ))}
     </Swiper>
