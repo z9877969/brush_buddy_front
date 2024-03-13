@@ -4,7 +4,7 @@ import s from './OrderPromoCode.module.scss';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 
-const OrderPromoCode = () => {
+const OrderPromoCode = ({ priceDisc }) => {
   const [isPromoUsed, setIsPromoUsed] = useState(false);
 
   const formik = useFormik({
@@ -28,6 +28,7 @@ const OrderPromoCode = () => {
   const handleClickDeactivePromo = () => {
     setIsPromoUsed(false);
   };
+  
 
   return (
     <section className={s.sectionPromo}>
@@ -50,7 +51,12 @@ const OrderPromoCode = () => {
           disabled={!formik.isValid || formik.values.promoCode.trim() === ''}
         ></Button>
       </form>
-      {isPromoUsed && <OrderPromoCodeUsed onClick={handleClickDeactivePromo} />}
+      {isPromoUsed && (
+        <OrderPromoCodeUsed
+          priceDisc={priceDisc}
+          onClick={handleClickDeactivePromo}
+        />
+      )}
     </section>
   );
 };

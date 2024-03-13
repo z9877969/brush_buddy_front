@@ -1,17 +1,17 @@
 import { Button } from 'shared/components';
 import s from './OrderSummary.module.scss';
 
-const OrederSummary = () => {
+const OrederSummary = ({ totalPrice, priceDisc }) => {
   return (
     <section className={s.boxSummary}>
       <div className={s.boxSum}>
         <div>
           <p className={s.tittle}>Сума замовлення</p>
-          <p className={s.price}>235 грн</p>
+          <p className={s.price}>{totalPrice} грн</p>
         </div>
         <div>
           <p className={s.tittleDisc}>Ваша знижка</p>
-          <p className={s.priceDisc}>78.25 грн</p>
+          <p className={s.priceDisc}>{priceDisc} грн</p>
         </div>
         <div>
           <p className={s.tittle}>Вартість доставки</p>
@@ -20,7 +20,7 @@ const OrederSummary = () => {
       </div>
       <div className={s.total}>
         <p>Загальна сума</p>
-        <p>254 грн</p>
+        <p>{totalPrice} грн</p>
       </div>
       <Button type="submit" title={'Оформити замовлення'} className={s.btn} />
       <p className={s.accept}>

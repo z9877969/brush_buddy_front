@@ -1,35 +1,34 @@
 import CartListCurrentItem from './CarListCurrentItem/CartListCurrentItem';
-import productsArray from './data-test';
 import s from './CartListCurrentProducts.module.scss';
 import { MainTitle } from 'shared/components';
-import { useState } from 'react';
-import totalPrice from './cartListProductsFunc';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProd } from '@redux/cart/selectorsCart';
+import {
+  addProduct,
+  removeProduct,
+  changeProductQuantity,
+  addTotalPrice,
+} from '@redux/cart/cartSlice';
+import { useEffect } from 'react';
 
 const CartListCurrentProducts = () => {
-  const [products, setProducts] = useState(productsArray);
+  const products = useSelector(getProd);
+  const dispatch = useDispatch();
 
   const changeCount = (id, newCount) => {
-    setProducts((prevProducts) => {
-      return prevProducts.map((product) => {
-        if (product.id === id) {
-          const isDisabledIncrement = newCount === product.total_quantity;
-          return {
-            ...product,
-            quantity: newCount,
-            isDisabledIncrement: isDisabledIncrement,
-          };
-        }
-        return product;
-      });
-    });
+    dispatch(changeProductQuantity(id, newCount));
   };
+  useEffect(() => {
+    dispatch(addTotalPrice());
+  }, [dispatch]);
 
   const onClickDelete = (id) => {
-    const newProducts = products.filter((product) => product.id !== id);
-    setProducts(newProducts);
+    dispatch(removeProduct({ id }));
   };
 
-  totalPrice(products);
+  const onClickAdd = (product) => {
+    dispatch(addProduct(product));
+  };
 
   return (
     <section>
@@ -39,6 +38,7 @@ const CartListCurrentProducts = () => {
           data={products}
           changeCount={changeCount}
           onClickDelete={onClickDelete}
+          onClickAdd={onClickAdd}
         />
       </ul>
     </section>
