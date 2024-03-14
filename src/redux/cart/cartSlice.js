@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { totalPrice } from 'modules/cart/components/Cart/CartListCurrentProducts/cartListProductsFunc';
+import {
+  totalPrice,
+  totalPriceDiscount,
+} from 'modules/cart/components/Cart/CartListCurrentProducts/cartListProductsFunc';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -59,6 +62,22 @@ const cartSlice = createSlice({
     addTotalPrice(state) {
       state.totalPrice = totalPrice(state.products);
     },
+    usedPromoCode(state, action) {
+      console.log(action.payload);
+      const { values, total } = action.payload;
+      const { promoCode } = values;
+      console.log(promoCode);
+      console.log(total);
+      // Збереження промокоду у стані
+      state.promoCode = promoCode;
+      state.discount = totalPriceDiscount(total);
+      // Виклик функції для обчислення знижки
+      // state.totalPrice = totalPriceDiscount(state.totalPrice, state.promoCode);
+    },
+    notUsedPromoCode(state) {
+      state.promoCode = null;
+      state.discount = 0;
+    },
   },
   extraReducers: (builder) => builder,
 });
@@ -68,6 +87,8 @@ export const {
   removeProduct,
   changeProductQuantity,
   addTotalPrice,
+  usedPromoCode,
+  notUsedPromoCode,
 } = cartSlice.actions;
 
 const cartPersistConfig = {

@@ -1,6 +1,9 @@
+import { useSelector } from 'react-redux';
 import s from './OrderPromoCodeUsed.module.scss';
+import { getDiscount } from '@redux/cart/selectorsCart';
 
-const OrderPromoCodeUsed = ({ onClick, priceDisc }) => {
+const OrderPromoCodeUsed = ({ onClick }) => {
+  const priceDisc = useSelector(getDiscount);
   return (
     <div className={s.boxUsedPromo}>
       <div>
