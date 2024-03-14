@@ -29,11 +29,7 @@ const ProductDropDown = () => {
         navigate('/products?productType=animal');
         break;
       case PRODUCT_TYPES.HELPER:
-        // eslint-disable-next-line
-        const helperSection = document.getElementById('helper-section');
-        if (helperSection) {
-          helperSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        navigate('/products?productType=helper');
         break;
       default:
         break;

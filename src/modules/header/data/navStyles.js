@@ -11,9 +11,11 @@ export const customStyles = {
     fontSize: '18px',
     '&:hover': {
       border: 'none',
+      color: '#1f1f1f',
     },
     '&:focus': {
       border: 'none',
+      color: '#1f1f1f',
     },
     '@media (max-width:1439px)': {
       borderBottom: '1px solid rgba(31, 31, 31, 0.10)',
@@ -27,9 +29,9 @@ export const customStyles = {
     ...styles,
     display: 'none',
   }),
-  placeholder: (styles, { isFocused }) => ({
+  placeholder: (styles) => ({
     ...styles,
-    color: isFocused ? '#f5516f' : '#000',
+    color: '#000',
     transition: 'color 0.3s ease-in-out',
     '@media (max-width: 1439px)': {
       textAlign: 'left',
@@ -54,12 +56,16 @@ export const customStyles = {
       padding: 0,
       borderRadius: 'none',
     },
+    '&:hover': {
+      color: '#1f1f1f',
+    },
   }),
   option: (styles) => ({
     ...styles,
     padding: 'none',
     fontSize: '16px',
     lineHeight: '28px',
+    color: '#f1f1f',
     '@media (max-width: 1439px)': {
       fontSize: '18px',
       lineHeight: '24px',
