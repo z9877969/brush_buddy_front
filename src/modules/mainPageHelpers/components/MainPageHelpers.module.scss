@@ -3,8 +3,6 @@
 }
 
 .helpersBoxAll {
-  display: flex;
-  flex-direction: column;
   position: relative;
 }
 
@@ -31,7 +29,8 @@
 }
 
 .mainHelpersBox {
-  width: 100%;
+  // width: 100%;
+  box-sizing: border-box;
   padding: 24px;
   margin-bottom: 32px;
   border-radius: 24px;
@@ -39,10 +38,6 @@
 
   @include media(tablet) {
     padding: 32px;
-  }
-
-  @include media(desktop) {
-    min-width: 755px;
   }
 
   .boxTitleText {
@@ -104,6 +99,14 @@
 
   .helpersSliderButton {
     border: 1px solid #ffffff80;
+  }
+
+  .helpersSliderButtonDisabled {
+    border: 1px solid #ffffff33;
+
+    & svg {
+      fill: #ffffff33;
+    }
   }
 
   @include media(tablet) {
