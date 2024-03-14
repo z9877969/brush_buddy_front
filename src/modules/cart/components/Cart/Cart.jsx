@@ -1,15 +1,21 @@
-import { Container } from "shared/components";
-import CartListCurrentProducts from "./CartListCurrentProducts/CartListCurrentProducts";
-import OrderPromoCode from "./CartOrder/OrderPromoCode/OrderPromoCode";
+import { Container } from 'shared/components';
+import s from './Cart.module.scss';
+import CartListCurrentProducts from './CartListCurrentProducts/CartListCurrentProducts';
+import CartOrder from './CartOrder/CartOrder';
+
 const Cart = () => {
-  return <section>
-    <Container>
-      <CartListCurrentProducts />
-      <p>component forms</p>
-      <p>component delivery</p>
-      <OrderPromoCode/>
-    </Container>  
-  </section>;
+  return (
+    <section>
+      <Container className={s.cartBlock}>
+        <section>
+          <CartListCurrentProducts />
+          <p>component forms</p>
+          <p>component delivery</p>
+        </section>
+        <CartOrder />
+      </Container>
+    </section>
+  );
 };
 
 export default Cart;

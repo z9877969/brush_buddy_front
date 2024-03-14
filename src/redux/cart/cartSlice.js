@@ -1,15 +1,74 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { totalPrice } from 'modules/cart/components/Cart/CartListCurrentProducts/cartListProductsFunc';
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    products: [],
+    products: [
+      {
+        id: 'yrf44b',
+        type: 'toothbrush',
+        image:
+          'https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg',
+        name: 'Oral-B Pro 1000',
+        color: 'white',
+        quantity: 1,
+        total_quantity: 2,
+        price: 150,
+        discounted_price: null,
+      },
+      {
+        id: 'fkofok44',
+        type: 'toothpaste',
+        image:
+          'https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg',
+        name: 'Colgate Total',
+        flavor: 'mint',
+        volume: '100 ml',
+        quantity: 5,
+        total_quantity: 7,
+        price: 50,
+        discounted_price: 45,
+      },
+    ],
   },
-  reducers: {},
+  reducers: {
+    addProduct(state, action) {
+      state.products.push(action.payload);
+    },
+    removeProduct(state, action) {
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload.id
+      );
+      state.totalPrice = totalPrice(state.products);
+    },
+    changeProductQuantity(state, action) {
+      const { id, newCount } = action.payload;
+      const productIndex = state.products.findIndex(
+        (product) => product.id === id
+      );
+      if (productIndex !== -1) {
+        state.products[productIndex].quantity = newCount;
+        state.products[productIndex].isDisabledIncrement =
+          newCount === state.products[productIndex].total_quantity;
+      }
+      state.totalPrice = totalPrice(state.products);
+    },
+    addTotalPrice(state) {
+      state.totalPrice = totalPrice(state.products);
+    },
+  },
   extraReducers: (builder) => builder,
 });
+
+export const {
+  addProduct,
+  removeProduct,
+  changeProductQuantity,
+  addTotalPrice,
+} = cartSlice.actions;
 
 const cartPersistConfig = {
   key: 'cart',

@@ -1,0 +1,91 @@
+.dialogBalloonLeft1 {
+  background-image: url('../../images/mobile/Dialog-left-mobile.svg');
+
+  min-height: 80px;
+  min-width: 247px;
+  padding-top: 16px;
+  padding-left: 60px;
+  @include media(tablet) {
+    background-image: url('../../images/desktop/Dialog-desktop-left1.svg');
+    min-height: 128px;
+    min-width: 282px;
+    margin-top: -4px;
+    padding-top: 32px;
+    padding-left: 60px;
+  }
+}
+.dialogBalloonRight1 {
+  background-image: url('../../images/mobile/Dialog-right-mobile.svg');
+  min-height: 80px;
+  min-width: 247px;
+  padding-top: 16px;
+  padding-left: 44px;
+  @include media(tablet) {
+    background-image: url('../../images/desktop/Dialog-desktop-right1.svg');
+    padding-top: 32px;
+    padding-left: 32px;
+    margin-top: -4px;
+    min-height: 128px;
+    min-width: 245px;
+  }
+}
+
+.dialogBalloonLeft2 {
+  background-image: url('../../images/mobile/Dialog-left-mobile.svg');
+  min-height: 80px;
+  min-width: 247px;
+  padding-top: 28px;
+  padding-left: 44px;
+  @include media(tablet) {
+    background-image: url('../../images/desktop/Dialog-desktop-left2.svg');
+    padding-top: 32px;
+    padding-left: 51px;
+    margin-top: 12px;
+    max-height: 96px;
+    min-width: 282px;
+  }
+}
+.dialogBalloonRight2 {
+  background-image: url('../../images/mobile/Dialog-right-mobile.svg');
+  min-height: 80px;
+  min-width: 247px;
+  padding-top: 28px;
+  padding-left: 44px;
+  @include media(tablet) {
+    background-image: url('../../images/desktop/Dialog-desktop-right2.svg');
+    padding-top: 32px;
+    padding-left: 37px;
+    margin-top: 12px;
+    min-height: 96px;
+    min-width: 282px;
+  }
+}
+.dialogBalloon {
+  background-repeat: no-repeat;
+}
+
+.avatar {
+  height: 80px;
+  width: 80px;
+  margin: 0 16px;
+  @include media(tablet) {
+    height: 120px;
+    width: 120px;
+  }
+}
+.dialogItem {
+  display: flex;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;
+}
+.balloonText {
+  font-weight: 500;
+  @include font(18, 24);
+  @include media(tablet) {
+    @include font(24, 32);
+  }
+  @include media(desktop) {
+    @include font(24, 32);
+  }
+}

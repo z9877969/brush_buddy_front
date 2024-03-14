@@ -1,0 +1,78 @@
+.boxSummary {
+  padding: 24px;
+  border-radius: 24px;
+  background-color: $main-bg-color;
+  margin-top: 16px;
+  margin-bottom: 48px;
+  text-align: center;
+  @include media(desktop) {
+    padding: 32px;
+  }
+}
+.boxSum {
+  border-bottom: 1px solid rgba(31, 31, 31, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.lastP {
+  max-width: 100px;
+}
+.boxSum div:last-child {
+  margin-bottom: 24px;
+  @include media(desktop) {
+    margin-bottom: 32px;
+  }
+}
+.boxSum div p {
+  @include font(16, 24);
+  font-weight: 500;
+}
+.tittle {
+  color: $disabled-content-color;
+}
+.tittleDisc,
+.priceDisc {
+  color: $pet-color;
+}
+.price,
+.lastP {
+  color: $primary-text-color;
+}
+.total {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: $primary-text-color;
+  @include font(18, 24);
+  font-weight: 500;
+  @include media(desktop) {
+    @include font(24, 32);
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+}
+.btn {
+  margin-bottom: 8px;
+  background-color: $pet-color;
+  padding: 16px 40px;
+  border-radius: 200px;
+  color: $light-color;
+  @include font(18, 24);
+}
+.accept {
+  color: $secondary-text-color;
+  @include font(14, 18);
+  font-weight: 500;
+  @include media(tablet) {
+    @include font(16, 24);
+  }
+}
