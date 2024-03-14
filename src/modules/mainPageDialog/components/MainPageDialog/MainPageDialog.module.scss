@@ -1,5 +1,14 @@
 .section {
   background-color: $pet-color;
+  overflow: hidden;
+  position: relative;
+  height: 640px;
+  @include media(tablet) {
+    height: 696px;
+  }
+  @include media(desktop) {
+    height: 578px;
+  }
 }
 .brushAccent {
   color: $pet-color;
@@ -10,76 +19,266 @@
 .catAccent {
   color: $child-color;
 }
-
-@keyframes slide1 {
+@keyframes slide1mobile {
   0% {
-    right: calc(100% + 300px);
+    left: -100%;
   }
   0% {
-    right: calc(100% + 300px);
+    left: -100%;
   }
   20% {
-    right: -2%;
+    left: 0;
   }
   100% {
-    right: -2%;
+    left: 0;
+  }
+}
+@keyframes slide1tablet {
+  0% {
+    left: -100%;
+  }
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 32px;
+  }
+  100% {
+    left: 32px;
+  }
+}
+@keyframes slide1desktop {
+  0% {
+    left: -100%;
+  }
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 175px;
+  }
+  100% {
+    left: 175px;
   }
 }
 
 .slide1 {
-  animation-name: slide1;
+  animation-name: slide1mobile;
+  position: absolute;
+  z-index: 999;
+  top: 48px;
+  @include media(tablet) {
+    animation-name: slide1tablet;
+    top: 64px;
+  }
+  @include media(desktop) {
+    animation-name: slide1desktop;
+  }
 }
-@keyframes slide2 {
+@keyframes slide2mobile {
   0% {
-    left: calc(100% + 400px);
+    right: -100%;
   }
   20% {
-    left: calc(100% + 400px);
+    right: -100%;
   }
   40% {
-    left: calc(100% - 345px);
+    right: 0;
   }
   100% {
-    left: calc(100% - 345px);
+    right: 0;
+  }
+}
+@keyframes slide2tablet {
+  0% {
+    right: -100%;
+  }
+  20% {
+    right: -100%;
+  }
+  40% {
+    right: 44px;
+  }
+  100% {
+    right: 44px;
+  }
+}
+@keyframes slide2desktop {
+  0% {
+    right: -100%;
+  }
+  20% {
+    right: -100%;
+  }
+  40% {
+    right: 175px;
+  }
+  100% {
+    right: 175px;
   }
 }
 
 .slide2 {
-  animation-name: slide2;
+  animation-name: slide2mobile;
+  position: absolute;
+  z-index: 999;
+  top: 216px;
+  @include media(tablet) {
+    animation-name: slide2tablet;
+    top: 216px;
+  }
+  @include media(desktop) {
+    animation-name: slide2desktop;
+    top: 164px;
+  }
 }
-@keyframes slide3 {
+@keyframes slide3mobile {
   0% {
-    right: calc(100% + 300px);
+    left: -100%;
   }
   40% {
-    right: calc(100% + 300px);
+    left: -100%;
   }
   60% {
-    right: -2%;
+    left: 0;
   }
   100% {
-    right: -2%;
+    left: 0;
+  }
+}
+@keyframes slide3tablet {
+  0% {
+    left: -100%;
+  }
+  40% {
+    left: -100%;
+  }
+  60% {
+    left: 32px;
+  }
+  100% {
+    left: 32px;
+  }
+}
+@keyframes slide3desktop {
+  0% {
+    left: -100%;
+  }
+  40% {
+    left: -100%;
+  }
+  60% {
+    left: 175px;
+  }
+  100% {
+    left: 175px;
   }
 }
 
 .slide3 {
-  animation-name: slide3;
+  animation-name: slide3mobile;
+  position: absolute;
+  z-index: 999;
+  top: 320px;
+  @include media(tablet) {
+    animation-name: slide3tablet;
+    top: 368px;
+  }
+  @include media(desktop) {
+    animation-name: slide3desktop;
+    top: 292px;
+  }
 }
-@keyframes slide4 {
+@keyframes slide4mobile {
   0% {
-    left: calc(100% + 400px);
+    right: -100%;
   }
   60% {
-    left: calc(100% + 400px);
+    right: -100%;
   }
   80% {
-    left: calc(100% - 345px);
+    right: 0;
   }
   100% {
-    left: calc(100% - 345px);
+    right: 0;
   }
 }
-
+@keyframes slide4tablet {
+  0% {
+    right: -100%;
+  }
+  60% {
+    right: -100%;
+  }
+  80% {
+    right: 204px;
+  }
+  100% {
+    right: 204px;
+  }
+}
+@keyframes slide4desktop {
+  0% {
+    right: -100%;
+  }
+  60% {
+    right: -100%;
+  }
+  80% {
+    right: 335px;
+  }
+  100% {
+    right: 335px;
+  }
+}
 .slide4 {
-  animation-name: slide4;
+  animation-name: slide4mobile;
+  position: absolute;
+  z-index: 999;
+  top: 515px;
+  @include media(tablet) {
+    animation-name: slide4tablet;
+    top: 512px;
+  }
+  @include media(desktop) {
+    animation-name: slide4desktop;
+    top: 394px;
+  }
+}
+.iconWow {
+  width: 104px;
+  height: 64px;
+  position: absolute;
+  right: 64px;
+  top: 139px;
+  @include media(tablet) {
+    width: 132px;
+    height: 83px;
+    left: 50%;
+    right: 112px;
+    top: 96px;
+  }
+  @include media(desktop) {
+    left: calc(50% - 65px);
+    top: 96px;
+  }
+}
+.iconHello {
+  position: absolute;
+  width: 104px;
+  height: 77px;
+  right: 235px;
+  top: 415px;
+  @include media(tablet) {
+    width: 132px;
+    height: 83px;
+    right: 41px;
+    top: 363px;
+  }
+  @include media(desktop) {
+    width: 132px;
+    height: 83px;
+    left: 80%;
+    top: 363px;
+  }
 }
