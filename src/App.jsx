@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import { Footer } from 'modules/footer';
 import { ROUTES } from 'shared/constants';
 import {
   AboutPage,
@@ -26,7 +25,6 @@ function App() {
           <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
         </Route>
       </Routes>
-      <Footer />
     </>
   );
 }

@@ -6,3 +6,4 @@ export { default as Button } from './Button/Button';
 export { default as RoundButton } from './RoundButton/RoundButton';
 export { default as ProductCardItem } from './ProductCardItem/ProductCardItem';
 export { default as LinkButton } from './LinkButton/LinkButton';
+export { default as Loader } from './Loader/Loader';
