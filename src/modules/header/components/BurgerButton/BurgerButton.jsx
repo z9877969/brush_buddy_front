@@ -1,3 +1,4 @@
+import { sprite } from 'shared/icons';
 import s from './BurgerButton.module.scss';
 
 const BurgerButton = ({ onClick, isOpen }) => {
@@ -6,7 +7,7 @@ const BurgerButton = ({ onClick, isOpen }) => {
       <button className={s.btnBurgerMenu} onClick={onClick}>
         <svg width="24" height="24">
           <use
-            href={`/src/shared/icons/sprite.svg#${isOpen ? 'icon-close-cross' : 'icon-burger'}`}
+            href={`${sprite}#${isOpen ? 'icon-close-cross' : 'icon-burger'}`}
           ></use>
         </svg>
       </button>
