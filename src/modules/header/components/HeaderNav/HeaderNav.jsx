@@ -8,11 +8,6 @@ const HeaderNav = () => {
 
   return (
     <ul className={s.navList}>
-      {/* <li className={s.navListItem}>
-            <NavLink to='/' exact="true" className={`${s.navLink} ${location.pathname === ROUTES.MAIN ? s.activeNavLink : ''}`}>
-                Головна
-            </NavLink>
-        </li> */}
       <li className={s.navListItem}>
         <NavLink
           to={'/'}
@@ -22,11 +17,6 @@ const HeaderNav = () => {
           Головна
         </NavLink>
       </li>
-      {/* <li className={s.navListItem}>
-            <NavLink to={ROUTES.ABOUT} className={`${s.navLink} ${location.pathname === '/about' ? s.activeNavLink : ''}`}>
-                Про БрашБаді
-            </NavLink>
-        </li> */}
       <li className={s.navListItem}>
         <NavLink
           to={ROUTES.ABOUT}
