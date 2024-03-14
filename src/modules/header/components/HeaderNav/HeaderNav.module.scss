@@ -27,6 +27,11 @@
 
 .navLink {
   color: $primary-text-color;
+
+  &:hover,
+  &:focus {
+    color: $pet-color;
+  }
 }
 
 .activeNavLink {

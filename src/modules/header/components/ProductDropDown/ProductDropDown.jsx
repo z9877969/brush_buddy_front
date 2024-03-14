@@ -29,7 +29,11 @@ const ProductDropDown = () => {
         navigate('/products?productType=animal');
         break;
       case PRODUCT_TYPES.HELPER:
-        // функцію добавити
+        // eslint-disable-next-line
+        const helperSection = document.getElementById('helper-section');
+        if (helperSection) {
+          helperSection.scrollIntoView({ behavior: 'smooth' });
+        }
         break;
       default:
         break;
@@ -38,16 +42,18 @@ const ProductDropDown = () => {
   }, [selectedOption]);
 
   return (
-    <Select
-      ref={ref}
-      options={options}
-      value={selectedOption}
-      onChange={(option) => {
-        setSelectedOption(option);
-      }}
-      placeholder="Товари"
-      styles={customStyles}
-    />
+    <>
+      <Select
+        ref={ref}
+        options={options}
+        value={selectedOption}
+        onChange={(option) => {
+          setSelectedOption(option);
+        }}
+        placeholder="Товари"
+        styles={customStyles}
+      />
+    </>
   );
 };
 

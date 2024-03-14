@@ -31,4 +31,9 @@
   @include media(desktop) {
     margin-right: 24px;
   }
+
+  &:hover,
+  &:focus {
+    fill: $primary-text-color;
+  }
 }

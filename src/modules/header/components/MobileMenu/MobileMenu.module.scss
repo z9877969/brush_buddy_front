@@ -18,6 +18,9 @@
   @include media(to-desktop) {
     max-height: 388px;
   }
+  @include media(desktop) {
+    display: none;
+  }
 }
 
 .mobileMenuWrap {
@@ -31,7 +34,6 @@
   }
 
   @include media(desktop) {
-    width: $desktop;
-    padding: 0 64px;
+    display: none;
   }
 }
