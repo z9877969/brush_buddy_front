@@ -1,1 +1,1 @@
-export { default as heroGif } from './anmation.gif';
+export { default as animation } from './animation.gif';

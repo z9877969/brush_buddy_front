@@ -1,7 +1,7 @@
 import { Container, LinkButton, MainTitle } from 'shared/components';
 import s from './MainPageHero.module.scss';
 import { ROUTES } from 'shared/constants';
-import { heroGif } from 'modules/mainPageHero/images';
+import { animation } from 'modules/mainPageHero/images';
 
 const MainPageAbout = () => {
   return (
@@ -20,7 +20,7 @@ const MainPageAbout = () => {
           />
         </div>
       </Container>
-      <img src={heroGif} alt="animation" className={s.animation} />
+      <img src={animation} alt="animation" className={s.animation} />
     </section>
   );
 };
