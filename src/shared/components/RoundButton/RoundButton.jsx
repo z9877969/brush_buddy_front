@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { sprite } from 'shared/icons';
 import s from './RoundButton.module.scss';
 
-const RoundButton = ({
+const RoundButton = ({ 
   onClick = null,
   type = 'button',
   iconId,
