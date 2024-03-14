@@ -8,27 +8,35 @@ const AboutBlog = () => {
     <section className={css.section}>
       <Container>
         <div className="blogContent">
-          <div className="textBox">
-            <p></p>
+          <div className={css.textBox}>
+            <p>
+              У нас ви можете знайти цікаві статті від професіоналів різних
+              галузей стоматології (навіть від ветеринарного стоматолога). У нас
+              ви можете знайти цікаві статті від професіоналів різних галузей
+              стоматології (навіть від ветеринарного стоматолога).
+            </p>
           </div>
 
           <ul>
             <li>
               <a href="">
                 <img src="" alt="" />
-                <p></p>
+                <p>Зубна паста без фтора або з фтором: яку краще обрати</p>
               </a>
             </li>
 
             <li>
               <a href="">
                 <img src="" alt="" />
-                <p></p>
+                <p>Як вибрати зубну щітку для домашнього улюбленця</p>
               </a>
             </li>
           </ul>
         </div>
-        <a href="#"></a>
+
+        <a className={css.button} href="#">
+          Статті корисного блогу
+        </a>
       </Container>
     </section>
   );
