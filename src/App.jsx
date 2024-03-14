@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTES } from 'shared/constants';
 import {
   AboutPage,
@@ -23,6 +23,7 @@ function App() {
           <Route path={ROUTES.PRODUCT_CARD} element={<ProductCardPage />} />
           <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
           <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to={ROUTES.MAIN} />} />
         </Route>
       </Routes>
     </>
