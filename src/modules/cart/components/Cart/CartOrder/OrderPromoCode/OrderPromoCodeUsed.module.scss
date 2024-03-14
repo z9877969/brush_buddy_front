@@ -1,0 +1,30 @@
+.boxUsedPromo {
+  margin-top: 8px;
+  padding: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: space-between;
+  @include font(16, 24);
+  font-weight: 500;
+  border-radius: 24px;
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  @include media(tablet) {
+    padding: 16px 24px;
+  }
+}
+.boxInfo {
+  color: #49494a;
+  max-width: 200px;
+  margin-bottom: 8px;
+  @include media(tablet) {
+    max-width: 100%;
+  }
+}
+.infoPrice {
+  color: $secondary-text-color;
+}
+.infoPriceFigure,
+.deactivatedPromoBtn {
+  color: $pet-color;
+}

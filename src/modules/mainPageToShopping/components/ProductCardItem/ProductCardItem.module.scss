@@ -1,0 +1,86 @@
+.productItem {
+  width: 343px;
+  padding-bottom: 32px;
+  position: relative;
+
+  @include media(tablet) {
+    width: 340px;
+  }
+
+  @include media(desktop) {
+    width: 300px;
+  }
+}
+
+.productImg {
+  width: 343px;
+  height: 343px;
+  margin-bottom: 24px;
+
+  @include media(tablet) {
+    width: 340px;
+    height: 340px;
+  }
+
+  @include media(desktop) {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.productName {
+  margin-bottom: 20px;
+  margin-left: 19px;
+  color: $primary-text-color;
+  @include font(20, 28);
+
+  @include media(tablet) {
+    @include font(24, 32);
+  }
+}
+
+.productFooter {
+  padding: 0 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.priceWrapper {
+  display: flex;
+  column-gap: 12px;
+}
+
+.price {
+  color: #49494a;
+  @include font(16, 24);
+}
+
+.sale {
+  color: $pet-color;
+}
+
+.oldPrice {
+  color: $disabled-content-color;
+}
+
+.cartBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary-text-color;
+
+  & svg {
+    width: 20px;
+    height: 20px;
+    fill: $light-color;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: rgba(31, 31, 31, 0.8);
+  }
+}

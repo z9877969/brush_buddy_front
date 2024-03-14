@@ -6,34 +6,42 @@ import DiscountReminder from '../DiscountReminder/DiscountReminder';
 import HeaderNav from '../HeaderNav/HeaderNav';
 import s from './Header.module.scss';
 import { Container, Logo } from 'shared/components';
-
+import BurgerButton from '../BurgerButton/BurgerButton'; // Додавання компоненту кнопки бургера
+import MobileMenu from '../MobileMenu/MobileMenu';
 
 const Header = () => {
   const [isDiscountReminderOpen, setDiscountReminderOpen] = useState(true);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const handleCloseDiscountReminder = () => {
-    setDiscountReminderOpen(false)
-  }
+    setDiscountReminderOpen(false);
+  };
+
+  const handleMenuToggle = () => {
+    setMenuOpen(!isMenuOpen);
+  };
 
   return (
     <header className={s.header}>
-      {isDiscountReminderOpen && <DiscountReminder handleClose={handleCloseDiscountReminder} />}
-      <Container className={s.flex}>
-        <Link to={'/'}>
-          <Logo className={s.logo}/>
-        </Link>
-        
-        <HeaderNav />
-        <div className={s.rightSideWrap}>
-          <LangSwitcher />
-          <CartButton />
-          <button className={s.btnBurgerMenu}>
-            <svg width="24" height="24">
-              <use href="/src/shared/icons/sprite.svg#icon-burger"></use>
-            </svg>
-          </button>
-        </div>    
-      </Container>
+      {isDiscountReminderOpen && (
+        <DiscountReminder handleClose={handleCloseDiscountReminder} />
+      )}
+      <div className={s.headerWrap}>
+        <Container className={s.flex}>
+          <Link to={'/'}>
+            <Logo className={s.logo} />
+          </Link>
+
+          <HeaderNav />
+          <div className={s.rightSideWrap}>
+            <LangSwitcher />
+            <CartButton />
+            <BurgerButton isOpen={isMenuOpen} onClick={handleMenuToggle} />
+          </div>
+        </Container>
+      </div>
+
+      <MobileMenu isOpen={isMenuOpen} onClose={handleMenuToggle} />
     </header>
   );
 };
