@@ -1,11 +1,39 @@
 .header {
   text-align: center;
-  padding: 16px 0;
-  background-color: $adult-color;
+  position: sticky;
+  z-index: 2;
+  top: 0;
+}
+
+.headerWrap {
+  background-color: $light-color;
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  @include media(desktop) {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
 }
 
 .flex {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  // background-color: $light-color;
+  // width: 100%;
+
+  @include media(desktop) {
+    // padding-top: 24px;
+    // padding-bottom: 24px;
+    padding: 24px 64px;
+  }
+}
+
+.rightSideWrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
 }

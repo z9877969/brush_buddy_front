@@ -1,0 +1,39 @@
+.discountWrapper {
+  display: flex;
+  align-items: center;
+
+  @include media(mobile) {
+    padding: 16px;
+    justify-content: space-between;
+  }
+
+  width: 100%;
+  padding: 16px 0;
+  background-color: $secondary-bg-color;
+}
+
+.discountText {
+  @include font(14, 18);
+
+  @include media(tablet) {
+    @include font(16, 24);
+    flex-grow: 1;
+  }
+}
+
+.discountLink {
+  margin-left: 5px;
+  color: $pet-color;
+}
+
+.btnClose {
+  fill: #a5a5a5;
+  @include media(desktop) {
+    margin-right: 24px;
+  }
+
+  &:hover,
+  &:focus {
+    fill: $primary-text-color;
+  }
+}

@@ -1,0 +1,35 @@
+.input {
+  color: #49494a;
+  font-weight: 500;
+  @include font(16, 24);
+  padding: 12px 24px;
+  border-radius: 100px;
+  background-color: inherit;
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+.sectionPromo .form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  @include media(tablet) {
+    position: relative;
+  }
+}
+.form > div {
+  width: 100%;
+}
+.btn {
+  background-color: $pet-color;
+  padding: 12px 24px;
+  border-radius: 200px;
+  color: $light-color;
+  @include media(tablet) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 154px;
+    padding: 14px 24px;
+  }
+}

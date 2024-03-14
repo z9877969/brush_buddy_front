@@ -1,0 +1,30 @@
+.btnCartWrap {
+  position: relative;
+}
+
+.btnCart {
+  max-width: 50px;
+  max-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  background-color: transparent;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  border-radius: 200px;
+}
+
+.cartCount {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  background-color: $pet-color;
+  padding: 0 5px;
+  box-sizing: border-box;
+  border-radius: 100px;
+  color: $light-color;
+}
+
+// .btnCart:hover,
+// .btnCart:focus{
+// }

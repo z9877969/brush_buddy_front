@@ -1,17 +1,20 @@
 import clsx from 'clsx';
 import { sprite } from 'shared/icons';
+import s from './RoundButton.module.scss';
 
-const RoundButton = ({
+const RoundButton = ({ 
+  onClick = null,
+  type = 'button',
   iconId,
   title,
   className,
-  onClick = null,
   disabled = false,
 }) => {
   return (
     <button
-      className={clsx('button', className && className)}
-      onClick={onClick}
+      type={type}
+      onClick={onClick} 
+      className={clsx(s.roundButton, className && className)}
       disabled={disabled}
     >
       {iconId ? (

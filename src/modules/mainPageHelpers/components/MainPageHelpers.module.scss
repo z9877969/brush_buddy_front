@@ -1,0 +1,141 @@
+.section {
+  background-color: $child-color;
+}
+
+.helpersBoxAll {
+  position: relative;
+
+  @include media(desktop) {
+    padding-bottom: 100px;
+  }
+}
+
+.mainHelpersTitle {
+  color: $light-color;
+  padding-top: 48px;
+  padding-bottom: 32px;
+
+  @include media(tablet) {
+    padding-top: 68px;
+    @include font(48, 56);
+    padding-bottom: 64px;
+  }
+
+  @include media(desktop) {
+    @include font(56, 64);
+    padding-top: 100px;
+  }
+}
+
+.helpersCardUL {
+  display: flex;
+  gap: 24px;
+}
+
+.mainHelpersBox {
+  box-sizing: border-box;
+  padding: 24px;
+  margin-bottom: 32px;
+  border-radius: 24px;
+  background-color: $light-color;
+
+  @include media(tablet) {
+    padding: 32px;
+    margin-bottom: 64px;
+  }
+  @include media(desktop) {
+    margin-bottom: 0;
+  }
+
+  .boxTitleText {
+    margin-bottom: 24px;
+  }
+  h3 {
+    @include font(24, 32);
+
+    @include media(tablet) {
+      @include font(32, 36);
+      font-weight: 500;
+    }
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 200px;
+    background-color: $child-color;
+  }
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: $light-color;
+  }
+
+  .helpersBoxTitle {
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 16px;
+
+    @include media(tablet) {
+      margin-bottom: 20px;
+    }
+  }
+  .helpersBoxPrice {
+    @include font(16, 24);
+    margin-bottom: 16px;
+  }
+  .helpersBoxText {
+    @include font(18, 28);
+  }
+}
+
+.mainHelpersSlider {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding-bottom: 48px;
+
+  @include media(tablet) {
+    position: absolute;
+    top: 68px;
+    right: 0;
+    padding-bottom: 0;
+    gap: 16px;
+  }
+
+  @include media(desktop) {
+    top: 100px;
+  }
+
+  .helpersSliderButton {
+    border: 1px solid #ffffff80;
+
+    &:hover {
+      background: #ffffff1a;
+      border: 1px solid #ffffff80;
+    }
+  }
+
+  .helpersSliderButtonDisabled {
+    border: 1px solid #ffffff33;
+
+    & svg {
+      fill: #ffffff33;
+    }
+  }
+}
+
+@include media(tablet) {
+  .mainHelpersBox {
+    order: 2;
+  }
+
+  .mainHelpersSlider {
+    order: 1;
+  }
+}

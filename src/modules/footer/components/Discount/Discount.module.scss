@@ -23,6 +23,7 @@ $icon-checkmark: url('../shared/icons/sprite.svg#icon-checkmark');
 .discountTitle {
   line-height: 32px;
   font-size: 24px;
+  font-weight: 500;
 
   @include media(tablet) {
     font-size: 32px;
@@ -37,13 +38,14 @@ $icon-checkmark: url('../shared/icons/sprite.svg#icon-checkmark');
 .numberField {
   border-radius: 8px;
   border: none;
-  padding: 14px 16px;
   height: 52px;
   background-color: $secondary-bg-color;
   outline: none;
   display: flex;
   position: relative;
   font-size: 16px;
+  padding: 14px 16px 0 16px;
+  width: 100%;
 }
 
 .numberField::placeholder {
@@ -55,6 +57,56 @@ $icon-checkmark: url('../shared/icons/sprite.svg#icon-checkmark');
   color: $disabled-content-color;
 }
 
+.numberFieldDiv {
+  position: relative;
+}
+
+.numberFieldDiv .numberFieldLabel {
+  line-height: 1.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 1rem 1rem;
+  pointer-events: none;
+  transform-origin: 0 0;
+  transition:
+    opacity 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
+}
+
+.numberFieldDiv .numberField::placeholder {
+  color: transparent;
+}
+
+.numberFieldDiv .numberField:focus ~ .numberFieldLabel,
+.numberFieldDiv .numberField:not(:placeholder-shown) ~ .numberFieldLabel {
+  color: $secondary-text-color;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  transform: scale(0.85) translateY(-0.85rem);
+}
+
+.numberFieldLabel {
+  font-size: 16px;
+  line-height: 24px;
+  position: absolute;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $disabled-content-color;
+}
+
+.noCheck {
+  display: none;
+}
+
+.discountAppliedText {
+  font-size: 14px;
+  line-height: 1.28571;
+  color: $error-text-color;
+  margin-top: 6px;
+}
 .checkboxField {
   display: inline-flex;
   align-items: center;
@@ -67,10 +119,9 @@ $icon-checkmark: url('../shared/icons/sprite.svg#icon-checkmark');
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  border: 1px solid rgba(31, 31, 31, 0.2);
-  background-color: white;
-
-  align-content: center;
+  border: 1px solid $disabled-bg-color;
+  background-color: $light-color;
+  align-items: center;
   flex-wrap: wrap;
   justify-content: center;
 }

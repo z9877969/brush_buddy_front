@@ -1,0 +1,26 @@
+.roundButton {
+  padding: 8px;
+  border: 1px solid #1f1f1f1a;
+  border-radius: 100px;
+
+  & svg {
+    width: 24px;
+    height: 24px;
+    fill: $light-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @include media(tablet) {
+    padding: 12px;
+  }
+
+  @include media(desktop) {
+    & svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

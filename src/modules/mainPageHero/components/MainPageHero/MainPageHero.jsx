@@ -19,7 +19,12 @@ const MainPageAbout = () => {
           />
         </div>
       </Container>
-      <div className={s.animation}></div>
+      <img
+        src="/src/modules/mainPageHero/images/anmation.gif"
+        alt="animation"
+        className={s.animation}
+      />
+
     </section>
   );
 };

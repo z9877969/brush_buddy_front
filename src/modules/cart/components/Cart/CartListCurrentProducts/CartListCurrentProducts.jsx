@@ -1,14 +1,48 @@
 import CartListCurrentItem from './CarListCurrentItem/CartListCurrentItem';
-import productsArray from './data-test';
 import s from './CartListCurrentProducts.module.scss';
 import { MainTitle } from 'shared/components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProd } from '@redux/cart/selectorsCart';
+import {
+  addProduct,
+  removeProduct,
+  changeProductQuantity,
+  addTotalPrice,
+} from '@redux/cart/cartSlice';
+import { useEffect } from 'react';
 
 const CartListCurrentProducts = () => {
-    return (
-        <>
-            <MainTitle title={"Мій кошик"} />
-            <ul className={s.listOrederdProducts}><CartListCurrentItem data={productsArray} /></ul>
-        </>
-    )
-}
+  const products = useSelector(getProd);
+  const dispatch = useDispatch();
+
+  const changeCount = (id, newCount) => {
+    dispatch(changeProductQuantity(id, newCount));
+  };
+  useEffect(() => {
+    dispatch(addTotalPrice());
+  }, [dispatch]);
+
+  const onClickDelete = (id) => {
+    dispatch(removeProduct({ id }));
+  };
+
+  const onClickAdd = (product) => {
+    dispatch(addProduct(product));
+  };
+
+  return (
+    <section>
+      <MainTitle title={'Мій кошик'} />
+      <ul className={s.listOrederdProducts}>
+        <CartListCurrentItem
+          data={products}
+          changeCount={changeCount}
+          onClickDelete={onClickDelete}
+          onClickAdd={onClickAdd}
+        />
+      </ul>
+    </section>
+  );
+};
+
 export default CartListCurrentProducts;

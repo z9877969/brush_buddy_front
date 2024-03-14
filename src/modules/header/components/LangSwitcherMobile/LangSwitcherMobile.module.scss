@@ -1,0 +1,21 @@
+.btnLangWrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+
+  padding: 16px 16px 0;
+}
+
+.btnSwitch {
+  padding: 16px 21px;
+  background-color: transparent;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  border-radius: 200px;
+  box-sizing: border-box;
+  @include font(16, 24);
+
+  //   &:hover,
+  //   &:focus {
+  //   }
+}
