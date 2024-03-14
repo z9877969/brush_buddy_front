@@ -1,0 +1,82 @@
+[
+  {
+    "id": "01",
+    "name": "Зубна щітка СS 5440 Ultra Soft",
+    "price": "288.80 грн",
+    "old_price": null,
+    "category": "pet",
+    "age_range": null,
+    "status": "novently",
+    "imgUrl": "product_1"
+  },
+  {
+    "id": "02",
+    "name": "Зубна щітка СS 5460 Ultra Soft",
+    "price": "288.80 грн",
+    "old_price": null,
+    "category": "adult",
+    "age_range": null,
+    "status": "novently",
+    "imgUrl": "product_8"
+  },
+  {
+    "id": "03",
+    "name": "Зубна щітка СS 5460 Ultra Kids",
+    "price": "288.80 грн",
+    "old_price": null,
+    "category": "child",
+    "age_range": null,
+    "status": "novently",
+    "imgUrl": "product_2"
+  },
+  {
+    "id": "04",
+    "name": "Зубна щітка СS 5460 Ultra Kids",
+    "price": "288.80 грн",
+    "old_price": null,
+    "category": "child",
+    "age_range": null,
+    "status": "novently",
+    "imgUrl": "product_3"
+  },
+  {
+    "id": "05",
+    "name": "Зубна щітка СS 5460 Ultra Kids",
+    "price": "188.80 грн",
+    "old_price": "288.80",
+    "category": "child",
+    "age_range": null,
+    "status": "sale",
+    "imgUrl": "product_4"
+  },
+  {
+    "id": "06",
+    "name": "Зубна щітка СS 5460 Ultra Soft",
+    "price": "188.80 грн",
+    "old_price": "288.80",
+    "category": "adult",
+    "age_range": null,
+    "status": "sale",
+    "imgUrl": "product_5"
+  },
+  {
+    "id": "07",
+    "name": "Зубна щітка СS 5460 Ultra Soft",
+    "price": "188.80 грн",
+    "old_price": "288.80",
+    "category": "adult",
+    "age_range": null,
+    "status": "sale",
+    "imgUrl": "product_6"
+  },
+  {
+    "id": "08",
+    "name": "Зубна щітка СS 5460 Ultra Soft",
+    "price": "188.80 грн",
+    "old_price": "288.80",
+    "category": "child",
+    "age_range": "12+",
+    "status": "sale",
+    "imgUrl": "product_7"
+  }
+]

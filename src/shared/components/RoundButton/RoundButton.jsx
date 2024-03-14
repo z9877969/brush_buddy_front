@@ -8,12 +8,14 @@ const RoundButton = ({
   iconId,
   title,
   className,
+  disabled = false,
 }) => {
   return (
     <button
       type={type}
       onClick={onClick} 
       className={clsx(s.roundButton, className && className)}
+      disabled={disabled}
     >
       {iconId ? (
         <svg>
