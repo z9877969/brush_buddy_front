@@ -63,16 +63,10 @@ const cartSlice = createSlice({
       state.totalPrice = totalPrice(state.products);
     },
     usedPromoCode(state, action) {
-      console.log(action.payload);
       const { values, total } = action.payload;
       const { promoCode } = values;
-      console.log(promoCode);
-      console.log(total);
-      // Збереження промокоду у стані
       state.promoCode = promoCode;
       state.discount = totalPriceDiscount(total);
-      // Виклик функції для обчислення знижки
-      // state.totalPrice = totalPriceDiscount(state.totalPrice, state.promoCode);
     },
     notUsedPromoCode(state) {
       state.promoCode = null;
