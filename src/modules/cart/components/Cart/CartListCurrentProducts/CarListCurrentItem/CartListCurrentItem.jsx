@@ -2,7 +2,12 @@ import { sprite } from 'shared/icons';
 import s from './CartListCurrentItem.module.scss';
 import Counter from 'shared/components/Counter/Counter';
 
-const CartListCurrentItem = ({ data, changeCount, onClickDelete }) => {
+const CartListCurrentItem = ({
+  data,
+  changeCount,
+  onClickDelete,
+  onClickAdd,
+}) => {
   const elements = data.map(
     ({
       id,
@@ -42,7 +47,7 @@ const CartListCurrentItem = ({ data, changeCount, onClickDelete }) => {
               classWrapper={s.counter}
               classSvg={s.classSvg}
               value={quantity}
-              changeCount={(newCount) => changeCount(id, newCount)}
+              changeCount={(newCount) => changeCount({ id, newCount })}
               disabledIncrem={isDisabledIncrement}
             />
             <button
@@ -53,6 +58,24 @@ const CartListCurrentItem = ({ data, changeCount, onClickDelete }) => {
               <svg>
                 <use href={sprite + '#icon-delete'}></use>
               </svg>
+            </button>
+            <button className={s.btnTest}
+              type="submit"
+              onClick={() =>
+                onClickAdd({
+                  id,
+                  image,
+                  quantity,
+                  name,
+                  color,
+                  price,
+                  discounted_price,
+                  flavor,
+                  volume,
+                })
+              }
+            >
+              Test btn
             </button>
           </div>
         </div>
