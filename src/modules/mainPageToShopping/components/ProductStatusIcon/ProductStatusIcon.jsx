@@ -1,21 +1,21 @@
+import { useMemo } from 'react';
 import clsx from 'clsx';
 import s from './ProductStatusIcon.module.scss';
 
 const ProductStatusIcon = ({ status, sprite }) => {
-  let statusIcon = null;
+  // let statusIcon = null;
 
-  switch (status) {
-    case 'novently':
-      statusIcon = 'icon-wow';
-      break;
-    case 'sale':
-      statusIcon = 'icon-sale';
-      break;
+  const statusIcon = useMemo(() => {
+    switch (status) {
+      case 'novently':
+        return 'icon-wow';
+      case 'sale':
+        return 'icon-sale';
 
-    default:
-      statusIcon = null;
-      break;
-  }
+      default:
+        return null;
+    }
+  }, [status]);
 
   return statusIcon ? (
     <svg

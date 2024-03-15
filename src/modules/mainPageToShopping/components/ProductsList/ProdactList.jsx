@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { RoundButton } from 'shared/components';
 import ProductCardItem from '../ProductCardItem/ProductCardItem';
 import s from './ProductsList.module.scss';
-const ProductsList2 = ({ title, products, batchSize }) => {
+
+const ProductsList = ({ title, products, batchSize }) => {
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(batchSize);
@@ -50,9 +51,21 @@ const ProductsList2 = ({ title, products, batchSize }) => {
     }
   };
 
-  const elements = visibleProducts.map((product) => (
-    <ProductCardItem product={product} key={product.id} />
-  ));
+  const elements = useMemo(() => {
+    return visibleProducts.map((product) => (
+      <ProductCardItem
+        id={product.id}
+        name={product.name}
+        price={product.price}
+        old_price={product.old_price}
+        category={product.category}
+        age_range={product.age_range}
+        status={product.status}
+        imgUrl={product.imgUrl}
+        key={product.id}
+      />
+    ));
+  }, [visibleProducts]);
 
   return (
     <>
@@ -78,4 +91,4 @@ const ProductsList2 = ({ title, products, batchSize }) => {
   );
 };
 
-export default ProductsList2;
+export default ProductsList;
