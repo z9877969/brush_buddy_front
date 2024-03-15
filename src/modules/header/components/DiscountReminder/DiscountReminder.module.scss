@@ -14,6 +14,7 @@
 
 .discountText {
   @include font(14, 18);
+  color: $secondary-text-color;
 
   @include media(tablet) {
     @include font(16, 24);
@@ -24,6 +25,12 @@
 .discountLink {
   margin-left: 5px;
   color: $pet-color;
+
+  &:hover,
+  &:focus {
+    color: $pet-color;
+    cursor: pointer;
+  }
 }
 
 .btnClose {
