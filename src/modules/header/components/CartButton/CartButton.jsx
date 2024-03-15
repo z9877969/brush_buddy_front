@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/constants';
 import s from './CartButton.module.scss';
 import { selectCartProductsCount } from 'modules/header/data/selectCartProductsCount';
+import { sprite } from 'shared/icons/index';
 
 const CartButton = () => {
   const cartProductsCount = useSelector(selectCartProductsCount);
@@ -14,7 +15,7 @@ const CartButton = () => {
       <div className={s.btnCart}>
         <Link to={ROUTES.CART}>
           <svg width="24" height="24">
-            <use href="/src/shared/icons/sprite.svg#icon-cart"></use>
+            <use href={`${sprite}#icon-cart`}></use>
           </svg>
         </Link>
       </div>

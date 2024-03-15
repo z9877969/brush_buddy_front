@@ -36,6 +36,7 @@ const cartSlice = createSlice({
         discounted_price: 45,
       },
     ],
+    totalPrice: 0,
   },
   reducers: {
     addProduct(state, action) {
@@ -88,6 +89,7 @@ export const {
 const cartPersistConfig = {
   key: 'cart',
   storage,
+  // blacklist: ['products'],
   whitelist: ['products'],
 };
 

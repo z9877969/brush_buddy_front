@@ -30,12 +30,18 @@
 
   &:hover,
   &:focus {
-    color: $pet-color;
+    cursor: pointer;
   }
 }
 
 .activeNavLink {
   color: $pet-color;
+
+  &:hover,
+  &:focus {
+    color: $pet-color;
+    cursor: pointer;
+  }
 }
 
 // .activePage{}
