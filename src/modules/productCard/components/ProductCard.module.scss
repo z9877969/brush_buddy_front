@@ -1,0 +1,143 @@
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 24px;
+  @include media(tablet) {
+    font-size: 32px;
+    line-height: 112%;
+  }
+  @include media(desktop) {
+    margin-bottom: 32px;
+  }
+}
+
+.paragraph {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 24px;
+  @include media(desktop) {
+    margin-bottom: 32px;
+  }
+}
+
+.price {
+  //   width: 137px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 24px;
+  @include media(tablet) {
+    font-size: 28px;
+    line-height: 129%;
+  }
+  @include media(desktop) {
+    font-size: 32px;
+    line-height: 112%;
+    margin-bottom: 32px;
+  }
+}
+
+.itemHave {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 16px;
+  @include media(tablet) {
+    font-size: 28px;
+    line-height: 129%;
+  }
+  @include media(desktop) {
+    font-size: 24px;
+    line-height: 133%;
+    margin-bottom: 24px;
+  }
+}
+
+.info {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 24px;
+}
+
+.recomendation {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 16px;
+  @include media(tablet) {
+    font-size: 28px;
+    line-height: 129%;
+  }
+  @include media(desktop) {
+    font-size: 24px;
+    line-height: 133%;
+    margin-bottom: 24px;
+  }
+}
+
+.recomendationInfo {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 48px;
+  @include media(tablet) {
+    margin-bottom: 68px;
+  }
+  @include media(desktop) {
+    margin-bottom: 100px;
+  }
+}
+
+.containerList {
+  display: flex;
+
+  flex-direction: column;
+  @include media(desktop) {
+    flex-direction: row;
+  }
+}
+
+.informationBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  border-radius: 200px;
+  padding: 12px 24px;
+  width: 120px;
+  height: 48px;
+  margin-bottom: 24px;
+  svg {
+    display: flex;
+  }
+  @include media(tablet) {
+    padding: 12px 20px;
+    width: 123px;
+    height: 56px;
+  }
+  @include media(tablet) {
+    margin-bottom: 32px;
+  }
+}
+
+.quantityText {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 133%;
+  margin: 0 16px;
+}

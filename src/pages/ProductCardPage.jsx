@@ -1,5 +1,7 @@
+import ProductCard from 'modules/productCard/components/ProductCard';
+
 const ProductCartPage = () => {
-  return <h1>ProductCartPage</h1>;
+  return <ProductCard />;
 };
 
 export default ProductCartPage;
