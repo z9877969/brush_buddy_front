@@ -1,11 +1,16 @@
 import { Button } from 'shared/components';
-import OrderPromoCodeUsed from './OrderPromoCodeUsed';
+import OrderPromoCodeUsed from '../OrderPromoCodeUsed/OrderPromoCodeUsed';
 import s from './OrderPromoCode.module.scss';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { usedPromoCode, notUsedPromoCode } from '@redux/cart/cartSlice';
+import { getTotalPrice } from '@redux/cart/selectorsCart';
 
 const OrderPromoCode = ({ priceDisc }) => {
   const [isPromoUsed, setIsPromoUsed] = useState(false);
+  const total = useSelector(getTotalPrice);
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -20,6 +25,7 @@ const OrderPromoCode = ({ priceDisc }) => {
     },
     onSubmit: (values) => {
       setIsPromoUsed(true);
+      dispatch(usedPromoCode({ values, total }));
       return values;
       //console.log('Введений промокод:', values.promoCode);
     },
@@ -27,8 +33,8 @@ const OrderPromoCode = ({ priceDisc }) => {
 
   const handleClickDeactivePromo = () => {
     setIsPromoUsed(false);
+    dispatch(notUsedPromoCode());
   };
-  
 
   return (
     <section className={s.sectionPromo}>
