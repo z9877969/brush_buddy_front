@@ -1,29 +1,18 @@
 import clsx from 'clsx';
 import s from './ProductCategoryIcon.module.scss';
+import { PRODUCT_TYPES } from 'shared/constants';
 
 const ProductCategoryIcon = ({ category, age_range, sprite }) => {
-  let categoryIcon = null;
-  let subCatClass = null;
+  const categoryIcons = {
+    [PRODUCT_TYPES.ADULT]: { icon: 'icon-bage-adult', className: 'adult' },
+    [PRODUCT_TYPES.CHILD]: { icon: 'icon-bage-child', className: 'child' },
+    [PRODUCT_TYPES.ANIMAL]: { icon: 'icon-bage-animal', className: 'animal' },
+  };
+
+  const { icon: categoryIcon, className: subCatClass } = categoryIcons[
+    category
+  ] || { icon: null, className: null };
   const ageRangeIcon = 'icon-bage-adult';
-
-  switch (category) {
-    case 'adult':
-      categoryIcon = 'icon-bage-adult';
-      subCatClass = 'adult';
-      break;
-    case 'child':
-      categoryIcon = 'icon-bage-child';
-      subCatClass = 'child';
-      break;
-    case 'pet':
-      categoryIcon = 'icon-bage-animal';
-      subCatClass = 'pet';
-      break;
-
-    default:
-      categoryIcon = 'not-found';
-      break;
-  }
 
   return (
     <div className={s.catIconWrapper}>

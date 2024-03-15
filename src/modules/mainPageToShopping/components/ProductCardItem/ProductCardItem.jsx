@@ -8,10 +8,16 @@ import { sprite } from 'shared/icons';
 
 import s from './ProductCardItem.module.scss';
 
-const ProductCardItem = ({ product }) => {
-  const { id, name, price, old_price, category, age_range, status, imgUrl } =
-    product;
-
+const ProductCardItem = ({
+  id,
+  name,
+  price,
+  old_price,
+  category,
+  age_range,
+  status,
+  imgUrl,
+}) => {
   return (
     <li className={s.productItem}>
       <Link to={`/products/${id}`}>
@@ -23,7 +29,7 @@ const ProductCardItem = ({ product }) => {
         />
         <ProductStatusIcon status={status} sprite={sprite} />
       </Link>
-      <h5 className={s.productName}>{name}</h5>
+      <p className={s.productName}>{name}</p>
       <div className={s.productFooter}>
         <div className={s.priceWrapper}>
           <p className={clsx(s.price, status === 'sale' && s.sale)}>{price}</p>
