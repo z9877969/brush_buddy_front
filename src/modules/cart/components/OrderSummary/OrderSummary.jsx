@@ -12,7 +12,7 @@ const OrederSummary = () => {
       <div className={s.boxSum}>
         <div>
           <p className={s.tittle}>Сума замовлення</p>
-          <p className={s.price}>{totalPrice} грн</p>
+          <p className={s.price}>{totalPriceWithoutDisc} грн</p>
         </div>
         <div>
           <p className={s.tittleDisc}>Ваша знижка</p>

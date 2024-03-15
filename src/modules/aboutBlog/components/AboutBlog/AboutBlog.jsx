@@ -1,6 +1,6 @@
 import { Container, LinkButton } from 'shared/components';
 import css from './AboutBlog.module.scss';
-import { BlogPage } from 'pages/index';
+//import { BlogPage } from 'pages/index';
 import { ROUTES } from 'shared/constants';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
