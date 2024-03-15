@@ -1,7 +1,7 @@
 import { Container } from 'shared/components';
 import s from './Cart.module.scss';
-import CartListCurrentProducts from './CartListCurrentProducts/CartListCurrentProducts';
-import CartOrder from './CartOrder/CartOrder';
+import CartListCurrentProducts from '../CartListCurrentProducts/CartListCurrentProducts';
+import CartOrder from '../CartOrder/CartOrder';
 import { notUsedPromoCode } from '@redux/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';

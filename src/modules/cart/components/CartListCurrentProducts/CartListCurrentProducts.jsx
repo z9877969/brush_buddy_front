@@ -1,4 +1,4 @@
-import CartListCurrentItem from './CarListCurrentItem/CartListCurrentItem';
+import CartListCurrentItem from '../CarListCurrentItem/CartListCurrentItem';
 import s from './CartListCurrentProducts.module.scss';
 import { MainTitle } from 'shared/components';
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {
-  totalPrice,
-  totalPriceDiscount,
-} from 'modules/cart/components/Cart/CartListCurrentProducts/cartListProductsFunc';
+import { totalPrice, totalPriceDiscount } from 'modules/cart';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -37,6 +34,8 @@ const cartSlice = createSlice({
       },
     ],
     totalPrice: 0,
+    promoCode: null,
+    discount: 0,
   },
   reducers: {
     addProduct(state, action) {

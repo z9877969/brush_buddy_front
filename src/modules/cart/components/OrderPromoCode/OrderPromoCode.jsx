@@ -1,5 +1,5 @@
 import { Button } from 'shared/components';
-import OrderPromoCodeUsed from './OrderPromoCodeUsed';
+import OrderPromoCodeUsed from '../OrderPromoCodeUsed/OrderPromoCodeUsed';
 import s from './OrderPromoCode.module.scss';
 import { useFormik } from 'formik';
 import { useState } from 'react';

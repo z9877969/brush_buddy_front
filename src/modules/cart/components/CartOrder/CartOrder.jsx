@@ -1,5 +1,5 @@
-import OrderPromoCode from './OrderPromoCode/OrderPromoCode';
-import OrderSummary from './OrderSummary/OrderSummary';
+import OrderPromoCode from '../OrderPromoCode/OrderPromoCode';
+import OrderSummary from '../OrderSummary/OrderSummary';
 import s from './CartOrder.module.scss';
 
 const CartOrder = () => {
