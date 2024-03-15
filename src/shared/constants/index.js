@@ -7,6 +7,7 @@ export const ROUTES = {
   NOT_FOUND: 'not-found',
   PRODUCT_CARD: 'products/:productId',
   PRODUCTS: 'products',
+  GET_BLOG_ID: (blogId) => `/blog/${blogId}`,
 };
 
 export const PRODUCT_TYPES = {
