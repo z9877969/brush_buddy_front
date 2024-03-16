@@ -1,12 +1,12 @@
 // import { useParams } from 'react-router-dom';
 import { Container } from 'shared/components';
 import productCard from '../data/products.json';
-import { MyImage } from './Myimage/Myimage';
+import { MyImage } from './MyImage/MyImage';
 import s from './ProductCard.module.scss';
 import { useState } from 'react';
 import { Volume } from './Volume/Volume';
 import { Color } from './Color/Color';
-import { Flavor } from './ Flavor/Flavor';
+import { Flavor } from './Flavor/Flavor';
 import { sprite } from 'shared/icons';
 
 const ProductCard = () => {
@@ -24,7 +24,14 @@ const ProductCard = () => {
                 <div className={s.informationBlock}>
                   <h2 className={s.title}>{product.title}</h2>
                   <p className={s.paragraph}>{product.text}</p>
-                  <p className={s.price}>{product.price}</p>
+                  {product.salePrice.length > 0 ? (
+                    <div className={s.saleBlock}>
+                      <p className={s.salePrice}>{product.salePrice}</p>
+                      <p className={s.notSalePrice}>{product.price}</p>
+                    </div>
+                  ) : (
+                    <p className={s.price}>{product.price}</p>
+                  )}
                   {/* <p>Виберіть колір:</p> */}
                   {/* <p>Виберіть колір: {product.colors.map((color) => {
                               return <p>{color}</p>

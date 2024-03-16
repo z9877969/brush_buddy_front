@@ -1,4 +1,4 @@
-import ProductCard from 'modules/productCard/components/ProductCard';
+import ProductCard from 'modules/productPage/components/ProductCard';
 
 const ProductCartPage = () => {
   return <ProductCard />;

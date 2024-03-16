@@ -18,17 +18,18 @@
     "title": "Зубна щітка СS 5460 Ultra Soft",
     "text": "У більшості випадків, пацієнти не звертають уваги на розмір головки щітки, кількість і товщину щетинок на ній — купують або красиві, або бюджетні, які не шкода міняти через два-три місяці. ",
     "price": "288.80 грн",
+    "salePrice": "188.80 грн",
     "colors": [
       { "color": "green" },
       { "color": "blue" },
-      { "color": "yelow" },
+      { "color": "yellow" },
       { "color": "pink" }
     ],
     "flavors": [
-      { "flavor": "Apple", "color": "#green" },
-      { "flavor": "Mango", "color": "#orange" },
-      { "flavor": "Cherry", "color": "#red" },
-      { "flavor": "Watermelon", "color": "#pink" }
+      { "flavor": "Apple", "color": "green" },
+      { "flavor": "Mango", "color": "orange" },
+      { "flavor": "Cherry", "color": "red" },
+      { "flavor": "Watermelon", "color": "pink" }
     ],
     "litter": [{ "ml": 50 }, { "ml": 100 }, { "ml": 200 }],
     "itme": true,

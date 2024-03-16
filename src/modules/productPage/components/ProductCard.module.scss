@@ -1,4 +1,5 @@
 .title {
+  font-family: $main-font-family;
   font-weight: 500;
   font-size: 24px;
   line-height: 133%;
@@ -13,6 +14,7 @@
 }
 
 .paragraph {
+  font-family: $main-font-family;
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
@@ -24,6 +26,7 @@
 
 .price {
   //   width: 137px;
+  font-family: $main-font-family;
   font-weight: 500;
   font-size: 24px;
   line-height: 133%;
@@ -47,6 +50,8 @@
 }
 
 .description {
+  font-family: $main-font-family;
+
   font-weight: 500;
   font-size: 24px;
   line-height: 133%;
@@ -63,6 +68,8 @@
 }
 
 .info {
+  font-family: $main-font-family;
+
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
@@ -70,6 +77,8 @@
 }
 
 .recomendation {
+  font-family: $main-font-family;
+
   font-weight: 500;
   font-size: 24px;
   line-height: 133%;
@@ -86,6 +95,8 @@
 }
 
 .recomendationInfo {
+  font-family: $main-font-family;
+
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
@@ -140,4 +151,32 @@
   font-size: 18px;
   line-height: 133%;
   margin: 0 16px;
+}
+
+.saleBlock {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-bottom: 24px;
+  @include media(desktop) {
+    margin-bottom: 32px;
+  }
+}
+
+.salePrice {
+  font-family: $main-font-family;
+  color: $pet-color;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 112%;
+}
+
+.notSalePrice {
+  font-family: $main-font-family;
+
+  color: $secondary-text-color;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  opacity: 0.3;
 }
