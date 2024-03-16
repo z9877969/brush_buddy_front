@@ -43,7 +43,7 @@
     "id": "05",
     "name": "Зубна щітка СS 5460 Ultra Kids",
     "price": "188.80 грн",
-    "old_price": "288.80",
+    "old_price": "288.80 грн",
     "category": "child",
     "age_range": null,
     "status": "sale",
@@ -53,7 +53,7 @@
     "id": "06",
     "name": "Зубна щітка СS 5460 Ultra Soft",
     "price": "188.80 грн",
-    "old_price": "288.80",
+    "old_price": "288.80 грн",
     "category": "adult",
     "age_range": null,
     "status": "sale",
@@ -63,7 +63,7 @@
     "id": "07",
     "name": "Зубна щітка СS 5460 Ultra Soft",
     "price": "188.80 грн",
-    "old_price": "288.80",
+    "old_price": "288.80 грн",
     "category": "adult",
     "age_range": null,
     "status": "sale",
@@ -73,10 +73,60 @@
     "id": "08",
     "name": "Зубна щітка СS 5460 Ultra Soft",
     "price": "188.80 грн",
-    "old_price": "288.80",
+    "old_price": "288.80 грн",
     "category": "child",
     "age_range": "12+",
     "status": "sale",
     "imgUrl": "product_7"
+  },
+  {
+    "id": "09",
+    "name": "Зубна щітка СS 5440 DUBLICATE",
+    "price": "288.80 грн",
+    "old_price": null,
+    "category": "animal",
+    "age_range": null,
+    "status": "novently",
+    "imgUrl": "product_1"
+  },
+  {
+    "id": "10",
+    "name": "Зубна щітка СS Ultra DUBLICATE",
+    "price": "288.80 грн",
+    "old_price": null,
+    "category": "adult",
+    "age_range": null,
+    "status": "novently",
+    "imgUrl": "product_8"
+  },
+  {
+    "id": "11",
+    "name": "Зубна щітка СS DUBLICATE Ultra Kids",
+    "price": "288.80 грн",
+    "old_price": null,
+    "category": "child",
+    "age_range": null,
+    "status": "sale",
+    "imgUrl": "product_2"
+  },
+  {
+    "id": "12",
+    "name": "Зубна щітка DUBLICATE Ultra",
+    "price": "188.80 грн",
+    "old_price": "288.80 грн",
+    "category": "adult",
+    "age_range": null,
+    "status": "sale",
+    "imgUrl": "product_5"
+  },
+  {
+    "id": "13",
+    "name": "Зубна щітка СS 5460 DUBLICATE",
+    "price": "188.80 грн",
+    "old_price": "288.80 грн",
+    "category": "adult",
+    "age_range": null,
+    "status": "sale",
+    "imgUrl": "product_6"
   }
 ]
