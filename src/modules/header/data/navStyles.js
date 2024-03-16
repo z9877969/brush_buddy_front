@@ -9,6 +9,8 @@ export const customStyles = {
     ...styles,
     border: 'none',
     fontSize: '18px',
+    maxWidth: '123px',
+    overflowX: 'auto',
     '&:hover': {
       border: 'none',
       color: '#1f1f1f',
@@ -19,6 +21,7 @@ export const customStyles = {
     },
     '@media (max-width:1439px)': {
       borderBottom: '1px solid rgba(31, 31, 31, 0.10)',
+      maxWidth: 'none',
     },
   }),
   valueContainer: (styles) => ({

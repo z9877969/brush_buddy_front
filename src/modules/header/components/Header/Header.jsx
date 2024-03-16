@@ -32,7 +32,7 @@ const Header = () => {
             <Logo className={s.logo} />
           </Link>
 
-          <HeaderNav />
+          <HeaderNav handleMenuToggle={handleMenuToggle} />
           <div className={s.rightSideWrap}>
             <LangSwitcher />
             <CartButton />
