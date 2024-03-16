@@ -3,9 +3,7 @@ import s from './HeaderNav.module.scss';
 import ProductDropDown from '../ProductDropDown/ProductDropDown';
 import { ROUTES } from 'shared/constants';
 
-const HeaderNav = () => {
-  // const location = useLocation();
-
+const HeaderNav = ({ handleMenuToggle }) => {
   return (
     <ul className={s.navList}>
       <li className={s.navListItem}>
@@ -13,6 +11,7 @@ const HeaderNav = () => {
           to={'/'}
           exact="true"
           className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
+          onClick={handleMenuToggle}
         >
           Головна
         </NavLink>
@@ -21,6 +20,7 @@ const HeaderNav = () => {
         <NavLink
           to={ROUTES.ABOUT}
           className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
+          onClick={handleMenuToggle}
         >
           Про БрашБаді
         </NavLink>
