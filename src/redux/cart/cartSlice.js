@@ -58,6 +58,9 @@ const cartSlice = createSlice({
           newCount === state.products[productIndex].total_quantity;
       }
       state.totalPrice = totalPrice(state.products);
+      if (state.promoCode !== null) {
+        state.discount = totalPriceDiscount(state.totalPrice);
+      }
     },
     addTotalPrice(state) {
       state.totalPrice = totalPrice(state.products);
