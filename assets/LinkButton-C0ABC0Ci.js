@@ -1,1 +1,0 @@
-import{j as s,L as t,c as a,d as e,a as o}from"./index-BfGnCNUG.js";const c=({title:i,className:r,to:n})=>s.jsxs(t,{to:n,className:a(e.link,r&&r),children:[i,s.jsx("svg",{children:s.jsx("use",{href:o+"#icon-arrow-right"})})]});export{c as L};
