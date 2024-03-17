@@ -1,7 +1,7 @@
 import { Container, MainTitle, RoundButton } from 'shared/components';
 
-import { reviewsCardData } from '../data/reviewsCardData';
-import { ReviewsCardList } from '..';
+import { reviewsCardData } from '../../data/reviewsCardData';
+import { ReviewsCardList } from '../..';
 
 import s from './MainPageReviews.module.scss';
 import { useState } from 'react';

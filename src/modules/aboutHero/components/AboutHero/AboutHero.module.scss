@@ -1,118 +1,116 @@
 .boxInfo {
-   @include media(desktop) {
+  @include media(desktop) {
     display: flex;
     gap: 24px;
-   }
-    picture {
-        @include media(desktop) {
-            min-width: 664px;
-        }
+  }
+  picture {
+    @include media(desktop) {
+      min-width: 644px;
     }
+  }
 }
 .aboutHeroTittle {
-    color: $primary-text-color;
-    font-weight: 900;
-    @include font(36, 44);
-    margin-bottom: 32px;
-    @include media(tablet) {
-        @include font(48, 56);
-        margin-bottom: 48px;
-    }
-    @include media(desktop) {
-        @include font(56, 64);
-        margin-bottom: 64px;
-    }
+  color: $primary-text-color;
+  font-weight: 900;
+  @include font(36, 44);
+  margin-bottom: 32px;
+  @include media(tablet) {
+    @include font(48, 56);
+    margin-bottom: 48px;
+  }
+  @include media(desktop) {
+    @include font(56, 64);
+    margin-bottom: 64px;
+  }
 }
 .textHero {
-    padding: 24px;
-    margin-top: 24px;
-    margin-bottom: 16px;
-    color: $light-color;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    @include font(16, 24);
-    background-color: $adult-color;
-    border-radius: 24px;
-    @include media(tablet) {
-        padding: 32px;
-        @include font(18,28);
-        margin-bottom: 24px;
-    }
-    @include media(desktop) {
-        padding: 44px;
-        @include font(18, 28);
-        margin-top: 0;
-    }
+  padding: 24px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  color: $light-color;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  @include font(16, 24);
+  background-color: $adult-color;
+  border-radius: 24px;
+  @include media(tablet) {
+    padding: 32px;
+    @include font(18, 28);
+    margin-bottom: 24px;
+  }
+  @include media(desktop) {
+    padding: 44px;
+    @include font(18, 28);
+    margin-top: 0;
+  }
 }
 .chooseVariantproducts {
-    background-color: $secondary-bg-color;
-    border-radius: 24px;
-    padding: 24px;
-    margin-bottom: 48px;
-    @include media(tablet) {
-        padding: 32px;
-        margin-bottom: 68px;
-    }
-    @include media(desktop) {
-        padding: 44px;
-        margin-bottom: 100px;
-    }
+  background-color: $secondary-bg-color;
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 48px;
+  @include media(tablet) {
+    padding: 32px;
+    margin-bottom: 68px;
+  }
+  @include media(desktop) {
+    padding: 44px;
+    margin-bottom: 100px;
+  }
 
-    p {
-        margin-bottom: 16px;
-        color: #49494A;
-        font-size: 16px;
-        font-weight: 500;
-        @include font(16, 24);
-        @include media(tablet) {
-            @include font(18, 28);
-            margin-bottom: 24px;
-        }
+  p {
+    margin-bottom: 16px;
+    color: #49494a;
+    font-size: 16px;
+    font-weight: 500;
+    @include font(16, 24);
+    @include media(tablet) {
+      @include font(18, 28);
+      margin-bottom: 24px;
     }
-    svg {
-        margin-bottom: 12px;
+  }
+  svg {
+    margin-bottom: 12px;
+  }
+  li {
+    width: 128px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include media(tablet) {
+      width: 169px;
     }
-    li {
-        width: 128px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        @include media(tablet) {
-            width: 169px;
-        }
-    }
+  }
 }
 .pet {
-    fill: $pet-color;
+  fill: $pet-color;
 }
 .adult {
-    fill: $adult-color;
+  fill: $adult-color;
 }
 .child {
-    fill:$child-color;
+  fill: $child-color;
 }
 .listChoose {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    p {
-        font-size: 18px;
-        margin-bottom: 0;
-    }
-    @include media(tablet) {
-        gap: 24px;
-    }
-    @include media(desktop) {
-        flex-wrap: nowrap;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  p {
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+  @include media(tablet) {
+    gap: 24px;
+  }
+  @include media(desktop) {
+    flex-wrap: nowrap;
+  }
 }
 @media screen and (max-width: 340px) {
-    .aboutHeroTittle {
-        font-size: 30px;
-    }
+  .aboutHeroTittle {
+    font-size: 30px;
+  }
 }
-
-
