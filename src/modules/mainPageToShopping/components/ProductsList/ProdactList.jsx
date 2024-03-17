@@ -18,7 +18,7 @@ const ProductsList = ({ title, products, batchSize }) => {
         category={product.category}
         age_range={product.age_range}
         status={product.status}
-        imgUrl={product.imgUrl}
+        image={product.image}
         key={product.id}
       />
     ));

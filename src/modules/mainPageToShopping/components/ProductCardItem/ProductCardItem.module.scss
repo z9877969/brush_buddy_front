@@ -83,4 +83,12 @@
   &:focus {
     background-color: rgba(31, 31, 31, 0.8);
   }
+
+  &[disabled] {
+    background: rgba(31, 31, 31, 0.1);
+    border: none;
+    & svg {
+      fill: $disabled-content-color;
+    }
+  }
 }
