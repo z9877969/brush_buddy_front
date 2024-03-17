@@ -7,6 +7,7 @@ import * as images from '../../images';
 import { sprite } from 'shared/icons';
 import { addProduct } from '@redux/cart/cartSlice';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import s from './ProductCardItem.module.scss';
 
@@ -20,6 +21,7 @@ const ProductCardItem = ({
   status,
   image,
 }) => {
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const dispatch = useDispatch();
   const hanleClick = () => {
     dispatch(
@@ -34,6 +36,7 @@ const ProductCardItem = ({
         image,
       })
     );
+    setIsAddedToCart(true);
   };
   return (
     <li className={s.productItem}>
@@ -58,6 +61,7 @@ const ProductCardItem = ({
           iconId={'icon-cart'}
           className={s.cartBtn}
           onClick={hanleClick}
+          disabled={isAddedToCart}
         />
       </div>
     </li>
