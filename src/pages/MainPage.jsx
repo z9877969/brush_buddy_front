@@ -12,8 +12,8 @@ const MainPage = () => {
       <MainPageAbout />
       <MainPageDialog />
       <MainPageToShopping />
-      <MainPageBlog />
       <MainPageHelpers />
+      <MainPageBlog />
       <MainPageReviews />
     </>
   );
