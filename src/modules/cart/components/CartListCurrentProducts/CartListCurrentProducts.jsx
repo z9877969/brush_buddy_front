@@ -2,7 +2,7 @@ import CartListCurrentItem from '../CarListCurrentItem/CartListCurrentItem';
 import s from './CartListCurrentProducts.module.scss';
 import { MainTitle } from 'shared/components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProd } from '@redux/cart/selectorsCart';
+import { selectProd } from '@redux/cart/selectorsCart';
 import {
   addProduct,
   removeProduct,
@@ -12,7 +12,7 @@ import {
 import { useEffect } from 'react';
 
 const CartListCurrentProducts = () => {
-  const products = useSelector(getProd);
+  const products = useSelector(selectProd);
   const dispatch = useDispatch();
 
   const changeCount = (id, newCount) => {
