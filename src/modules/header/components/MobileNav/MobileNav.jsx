@@ -2,8 +2,9 @@ import { NavLink } from 'react-router-dom';
 import s from './MobileNav.module.scss';
 import ProductDropDown from '../ProductDropDown/ProductDropDown';
 import { ROUTES } from 'shared/constants';
+import ScrollToTop from 'shared/components/ScrollToTop/ScrollToTop';
 
-const MobileNav = ({ handleMenuToggle }) => {
+const MobileNav = () => {
   return (
     <ul className={s.mobileNavList}>
       <li className={s.mobileNavListItem}>
@@ -11,7 +12,7 @@ const MobileNav = ({ handleMenuToggle }) => {
           to={'/'}
           exact="true"
           className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
-          onClick={handleMenuToggle}
+          onClick={ScrollToTop}
         >
           Головна
         </NavLink>
@@ -22,7 +23,7 @@ const MobileNav = ({ handleMenuToggle }) => {
           className={({ isActive }) =>
             isActive ? s.activeNavLink : s.mobileNavLink
           }
-          onClick={handleMenuToggle}
+          onClick={ScrollToTop}
         >
           Про БрашБадді
         </NavLink>

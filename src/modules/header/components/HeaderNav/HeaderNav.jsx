@@ -2,8 +2,9 @@ import { NavLink } from 'react-router-dom';
 import s from './HeaderNav.module.scss';
 import ProductDropDown from '../ProductDropDown/ProductDropDown';
 import { ROUTES } from 'shared/constants';
+import ScrollToTop from 'shared/components/ScrollToTop/ScrollToTop';
 
-const HeaderNav = ({ handleMenuToggle }) => {
+const HeaderNav = () => {
   return (
     <ul className={s.navList}>
       <li className={s.navListItem}>
@@ -11,7 +12,7 @@ const HeaderNav = ({ handleMenuToggle }) => {
           to={'/'}
           exact="true"
           className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
-          onClick={handleMenuToggle}
+          onClick={ScrollToTop}
         >
           Головна
         </NavLink>
@@ -20,7 +21,7 @@ const HeaderNav = ({ handleMenuToggle }) => {
         <NavLink
           to={ROUTES.ABOUT}
           className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
-          onClick={handleMenuToggle}
+          onClick={ScrollToTop}
         >
           Про БрашБадді
         </NavLink>
