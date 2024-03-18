@@ -10,10 +10,12 @@ import {
   ProductsPage,
 } from './pages';
 import { SharedLayout } from 'shared/components';
+import ScrollToTop from 'shared/components/ScrollToTop/ScrollToTop';
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path={ROUTES.MAIN} element={<SharedLayout />}>
           <Route index element={<MainPage />} />

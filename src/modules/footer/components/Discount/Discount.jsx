@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import s from './Discount.module.scss';
 import { Field, Form, Formik } from 'formik';
-
+import Modal from '../ModalConditions/ModalConditions';
 const Discount = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [discountApplied, setDiscountApplied] = useState(false);
@@ -82,73 +82,87 @@ const Discount = () => {
     resetForm();
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    document.body.style.overflow = 'hidden';
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    document.body.style.overflow = '';
+    setIsModalOpen(false);
+  };
   return (
-    <div className={s.discountDiv}>
-      <h2 className={s.discountTitle}>
-        Знижка <span className={s.span}>- 10%</span> на перше замовлення
-        сховалася тут
-      </h2>
+    <>
+      <div className={s.discountDiv}>
+        <h2 className={s.discountTitle}>
+          Знижка <span className={s.span}>- 10%</span> на перше замовлення
+          сховалася тут
+        </h2>
 
-      <Formik initialValues={{ number: '' }} onSubmit={handleSubmit}>
-        <Form className={s.form} onSubmit={handleFormSubmit}>
-          <div className={s.numberFieldDiv}>
-            <Field
-              type="tel"
-              className={s.numberField}
-              placeholder="Номер телефону"
-              name="number"
-              value={formattedPhoneNumber}
-              onChange={handlePhoneNumberChange}
-              onFocus={handlePhoneNumberFocus}
-              id="numberField"
-              maxLength="15"
-              required
-            />
-            <label className={s.numberFieldLabel} htmlFor="numberField">
-              Номер телефону
-            </label>
-
-            {shortNumberError && (
-              <p className={s.discountAppliedText}>
-                Номер телефону занадто короткий
-              </p>
-            )}
-
-            {discountApplied && (
-              <p className={s.discountAppliedText}>
-                На цей номер знижка вже використана
-              </p>
-            )}
-          </div>
-          <div>
-            <label
-              htmlFor="checkboxField"
-              className={s.checkboxFieldLabel}
-              required
-            >
+        <Formik initialValues={{ number: '' }} onSubmit={handleSubmit}>
+          <Form className={s.form} onSubmit={handleFormSubmit}>
+            <div className={s.numberFieldDiv}>
               <Field
-                type="checkbox"
-                className={s.checkboxField}
-                id="checkboxField"
-                name="checkboxField"
-                checked={checkboxChecked}
-                onChange={handleCheckboxChange}
+                type="tel"
+                className={s.numberField}
+                placeholder="Номер телефону"
+                name="number"
+                value={formattedPhoneNumber}
+                onChange={handlePhoneNumberChange}
+                onFocus={handlePhoneNumberFocus}
+                id="numberField"
+                maxLength="15"
+                required
               />
-              <p>
-                Я погоджуюся з умовами обробки{' '}
-                <span className={s.span}>персональних даних</span>
-              </p>
-            </label>
-            {submitClicked && !checkboxChecked && (
-              <p className={s.discountAppliedText}>Доступ обмежено без згоди</p>
-            )}
-          </div>
-          <button className={s.btn} type="submit">
-            Отримати
-          </button>
-        </Form>
-      </Formik>
-    </div>
+              <label className={s.numberFieldLabel} htmlFor="numberField">
+                Номер телефону
+              </label>
+
+              {shortNumberError && (
+                <p className={s.discountAppliedText}>
+                  Номер телефону занадто короткий
+                </p>
+              )}
+
+              {discountApplied && (
+                <p className={s.discountAppliedText}>
+                  На цей номер знижка вже використана
+                </p>
+              )}
+            </div>
+            <div>
+              <div className={s.checkboxFieldLabel}>
+                <Field
+                  type="checkbox"
+                  className={s.checkboxField}
+                  id="checkboxField"
+                  name="checkboxField"
+                  checked={checkboxChecked}
+                  onChange={handleCheckboxChange}
+                />
+                <p>
+                  Я погоджуюся з умовами обробки{' '}
+                  <span className={s.spanConditions} onClick={openModal}>
+                    персональних даних
+                  </span>
+                </p>
+              </div>
+              {submitClicked && !checkboxChecked && (
+                <p className={s.discountAppliedText}>
+                  Доступ обмежено без згоди
+                </p>
+              )}
+            </div>
+            <button className={s.btn} type="submit">
+              Отримати
+            </button>
+          </Form>
+        </Formik>
+      </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal} />
+    </>
   );
 };
 
