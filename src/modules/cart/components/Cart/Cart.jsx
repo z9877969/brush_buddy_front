@@ -2,6 +2,7 @@ import { Container } from 'shared/components';
 import s from './Cart.module.scss';
 import CartListCurrentProducts from './CartListCurrentProducts/CartListCurrentProducts';
 import CartOrder from './CartOrder/CartOrder';
+import CartForms from './CartForms/CartForms';
 
 const Cart = () => {
   return (
@@ -9,7 +10,7 @@ const Cart = () => {
       <Container className={s.cartBlock}>
         <section>
           <CartListCurrentProducts />
-          <p>component forms</p>
+          <CartForms />
           <p>component delivery</p>
         </section>
         <CartOrder />
