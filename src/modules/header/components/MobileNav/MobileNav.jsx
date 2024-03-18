@@ -29,7 +29,7 @@ const MobileNav = ({ handleMenuToggle }) => {
           }
           onClick={handleMenuToggle}
         >
-          Про БрашБаді
+          Про БрашБадді
         </NavLink>
       </li>
 
