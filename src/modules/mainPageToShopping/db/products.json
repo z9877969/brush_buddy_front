@@ -7,7 +7,8 @@
     "category": "animal",
     "age_range": null,
     "status": "novently",
-    "imgUrl": "product_1"
+    "image": "product_1",
+    "quantity": "1"
   },
   {
     "id": "02",
@@ -17,7 +18,8 @@
     "category": "adult",
     "age_range": null,
     "status": "novently",
-    "imgUrl": "product_8"
+    "image": "product_8",
+    "quantity": "1"
   },
   {
     "id": "03",
@@ -27,7 +29,8 @@
     "category": "child",
     "age_range": null,
     "status": "novently",
-    "imgUrl": "product_2"
+    "image": "product_2",
+    "quantity": "1"
   },
   {
     "id": "04",
@@ -37,7 +40,8 @@
     "category": "child",
     "age_range": null,
     "status": "novently",
-    "imgUrl": "product_3"
+    "image": "product_3",
+    "quantity": "1"
   },
   {
     "id": "05",
@@ -47,7 +51,8 @@
     "category": "child",
     "age_range": null,
     "status": "sale",
-    "imgUrl": "product_4"
+    "image": "product_4",
+    "quantity": "1"
   },
   {
     "id": "06",
@@ -57,7 +62,8 @@
     "category": "adult",
     "age_range": null,
     "status": "sale",
-    "imgUrl": "product_5"
+    "image": "product_5",
+    "quantity": "1"
   },
   {
     "id": "07",
@@ -67,7 +73,8 @@
     "category": "adult",
     "age_range": null,
     "status": "sale",
-    "imgUrl": "product_6"
+    "image": "product_6",
+    "quantity": "1"
   },
   {
     "id": "08",
@@ -77,7 +84,8 @@
     "category": "child",
     "age_range": "12+",
     "status": "sale",
-    "imgUrl": "product_7"
+    "image": "product_7",
+    "quantity": "1"
   },
   {
     "id": "09",
@@ -87,7 +95,8 @@
     "category": "animal",
     "age_range": null,
     "status": "novently",
-    "imgUrl": "product_1"
+    "image": "product_1",
+    "quantity": "1"
   },
   {
     "id": "10",
@@ -97,7 +106,8 @@
     "category": "adult",
     "age_range": null,
     "status": "novently",
-    "imgUrl": "product_8"
+    "image": "product_8",
+    "quantity": "1"
   },
   {
     "id": "11",
@@ -107,7 +117,8 @@
     "category": "child",
     "age_range": null,
     "status": "sale",
-    "imgUrl": "product_2"
+    "image": "product_2",
+    "quantity": "1"
   },
   {
     "id": "12",
@@ -117,7 +128,8 @@
     "category": "adult",
     "age_range": null,
     "status": "sale",
-    "imgUrl": "product_5"
+    "image": "product_5",
+    "quantity": "1"
   },
   {
     "id": "13",
@@ -127,6 +139,7 @@
     "category": "adult",
     "age_range": null,
     "status": "sale",
-    "imgUrl": "product_6"
+    "image": "product_6",
+    "quantity": "1"
   }
 ]

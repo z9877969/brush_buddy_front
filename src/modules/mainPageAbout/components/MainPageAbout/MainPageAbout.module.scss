@@ -1,6 +1,6 @@
 .section {
   padding: 16px 0;
-  background-color: $adult-color;
+  background-color: white;
 }
 
 .containerAbout {
@@ -81,6 +81,9 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
+  @include media(tablet) {
+    width: 150px;
+  }
 }
 
 .benefits {
@@ -101,6 +104,7 @@
   width: 48px;
   height: 48px;
   margin-right: 16px;
+  padding: 0px 8px;
 }
 
 .child {
@@ -157,7 +161,11 @@
 
 .button:hover,
 .button:focus {
-  color: #f5516f;
+  color: $pet-color;
+  border: 1px solid $pet-color;
+  svg {
+    fill: $pet-color;
+  }
 }
 
 .buttonBlock {

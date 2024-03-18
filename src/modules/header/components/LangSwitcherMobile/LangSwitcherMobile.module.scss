@@ -5,6 +5,10 @@
   gap: 16px;
 
   padding: 16px 16px 0;
+
+  @include media(tablet) {
+    display: none;
+  }
 }
 
 .btnSwitch {
@@ -18,4 +22,9 @@
   //   &:hover,
   //   &:focus {
   //   }
+}
+
+.btnDisable {
+  color: rgba(31, 31, 31, 0.2);
+  cursor: not-allowed;
 }

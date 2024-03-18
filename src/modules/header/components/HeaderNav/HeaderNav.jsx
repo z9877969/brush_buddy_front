@@ -22,7 +22,7 @@ const HeaderNav = ({ handleMenuToggle }) => {
           className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
           onClick={handleMenuToggle}
         >
-          Про БрашБаді
+          Про БрашБадді
         </NavLink>
       </li>
       <li className={`${s.navListItem} ${s.navLink}`}>

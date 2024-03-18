@@ -9,21 +9,18 @@
 }
 
 .mainReviewsTitle {
-  padding-top: 48px;
   padding-bottom: 32px;
   display: flex;
   justify-content: center;
 
   @include media(tablet) {
     justify-content: left;
-    padding-top: 68px;
     @include font(48, 56);
     padding-bottom: 64px;
   }
 
   @include media(desktop) {
     @include font(56, 64);
-    padding-top: 100px;
   }
 }
 
@@ -103,7 +100,7 @@
 
   @include media(tablet) {
     position: absolute;
-    top: 68px;
+    top: 0;
     right: 0;
     padding-bottom: 0;
     gap: 16px;
@@ -111,7 +108,6 @@
   }
 
   @include media(desktop) {
-    top: 100px;
     padding: 4px 0;
   }
 
