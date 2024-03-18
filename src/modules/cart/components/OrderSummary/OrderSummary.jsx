@@ -1,11 +1,11 @@
 import { Button } from 'shared/components';
 import s from './OrderSummary.module.scss';
-import { getDiscount, getTotalPrice } from '@redux/cart/selectorsCart';
+import { selectDiscount, selectTotalPrice } from '@redux/cart/selectorsCart';
 import { useSelector } from 'react-redux';
 
 const OrederSummary = () => {
-  const priceDisc = useSelector(getDiscount);
-  const totalPriceWithoutDisc = useSelector(getTotalPrice);
+  const priceDisc = useSelector(selectDiscount);
+  const totalPriceWithoutDisc = useSelector(selectTotalPrice);
   const totalPrice = totalPriceWithoutDisc - priceDisc;
   return (
     <section className={s.boxSummary}>

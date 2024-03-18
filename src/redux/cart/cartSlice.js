@@ -6,33 +6,7 @@ import { totalPrice, totalPriceDiscount } from 'modules/cart';
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    products: [
-      {
-        id: 'yrf44b',
-        type: 'toothbrush',
-        image:
-          'https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg',
-        name: 'Oral-B Pro 1000',
-        color: 'white',
-        quantity: 1,
-        total_quantity: 2,
-        price: 150,
-        discounted_price: null,
-      },
-      {
-        id: 'fkofok44',
-        type: 'toothpaste',
-        image:
-          'https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg',
-        name: 'Colgate Total',
-        flavor: 'mint',
-        volume: '100 ml',
-        quantity: 5,
-        total_quantity: 7,
-        price: 50,
-        discounted_price: 45,
-      },
-    ],
+    products: [],
     totalPrice: 0,
     promoCode: null,
     discount: 0,
