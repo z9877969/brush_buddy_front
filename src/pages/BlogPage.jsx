@@ -1,5 +1,7 @@
+import BlogView from '../modules/blogView/components/BlogView/BlogView';
+
 const BlogPage = () => {
-  return <h1>BlogPage</h1>;
+  return <BlogView />;
 };
 
 export default BlogPage;
