@@ -1,0 +1,1 @@
+import{j as s,L as t,c as e,e as a,a as o}from"./index-CcJ4aui5.js";const c=({title:i,className:r,to:n})=>s.jsxs(t,{to:n,className:e(a.link,r&&r),children:[i,s.jsx("svg",{children:s.jsx("use",{href:o+"#icon-arrow-right"})})]});export{c as L};
