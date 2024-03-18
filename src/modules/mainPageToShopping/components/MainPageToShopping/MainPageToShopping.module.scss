@@ -1,0 +1,59 @@
+.shoppingSection {
+  margin: 48px 0;
+
+  @include media(tablet) {
+    margin: 68px 0;
+  }
+
+  @include media(desktop) {
+    margin: 100px 0;
+  }
+}
+
+.shoppingTitle {
+  @include font(36, 44);
+  margin-bottom: 32px;
+
+  @include media(tablet) {
+    @include font(48, 56);
+    margin-bottom: 48px;
+  }
+
+  @include media(desktop) {
+    @include font(56, 64);
+    margin-bottom: 64px;
+  }
+}
+
+.productsBtn {
+  width: 202px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px;
+  background: $pet-color;
+  color: $light-color;
+
+  & svg {
+    fill: $light-color;
+  }
+
+  @include media(tablet) {
+    width: 249px;
+    margin-top: 48px;
+  }
+
+  @include media(desktop) {
+    margin-top: 64px;
+  }
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(
+        0deg,
+        rgba(31, 31, 31, 0.1) 0%,
+        rgba(31, 31, 31, 0.1) 100%
+      ),
+      #f5516f;
+    color: $light-color;
+  }
+}

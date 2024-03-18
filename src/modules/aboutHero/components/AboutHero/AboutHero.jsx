@@ -21,11 +21,11 @@ const AboutHero = () => {
           <picture>
             <source
               srcSet={`${IMG1xMobile} 1x, ${IMG2xMobile} 2x`}
-              media="(min-width: 320px)"
+              media="(max-width: 767px)"
             ></source>
             <source
               srcSet={`${IMG1xTablet} 1x, ${IMG2xTablet} 2x`}
-              media="(min-width: 768px)"
+              media="(min-width: 768px) and (max-width: 1439px)"
             ></source>
             <source
               srcSet={`${IMG1xDesktop} 1x, ${IMG2xDesktop} 2x`}

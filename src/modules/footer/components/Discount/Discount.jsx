@@ -9,6 +9,7 @@ const Discount = () => {
   const [formattedPhoneNumber, setFormattedPhoneNumber] = useState('');
   const [submitClicked, setSubmitClicked] = useState(false);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [shortNumberError, setShortNumberError] = useState(false);
 
   useEffect(() => {
     const storedNumbers = localStorage.getItem('phoneNumbers');
@@ -32,6 +33,11 @@ const Discount = () => {
     const { value } = e.target;
     setPhoneNumber(value);
     setFormattedPhoneNumber(formatPhoneNumber(value));
+    if (value.length < 15) {
+      setShortNumberError(true);
+    } else {
+      setShortNumberError(false);
+    }
   };
 
   const handlePhoneNumberFocus = () => {
@@ -44,9 +50,17 @@ const Discount = () => {
     setCheckboxChecked(e.target.checked);
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     setSubmitClicked(true);
+
     if (!checkboxChecked) {
+      setCheckboxChecked(true);
+      return;
+    }
+
+    if (phoneNumber.length < 15) {
+      setShortNumberError(true);
       return;
     }
 
@@ -59,6 +73,7 @@ const Discount = () => {
       setPhoneNumber('');
       setFormattedPhoneNumber('');
       setDiscountApplied(false);
+      setShortNumberError(false);
       // console.log('Масив номерів:', updatedNumbers);
     }
   };
@@ -75,7 +90,7 @@ const Discount = () => {
       </h2>
 
       <Formik initialValues={{ number: '' }} onSubmit={handleSubmit}>
-        <Form className={s.form}>
+        <Form className={s.form} onSubmit={handleFormSubmit}>
           <div className={s.numberFieldDiv}>
             <Field
               type="tel"
@@ -87,10 +102,17 @@ const Discount = () => {
               onFocus={handlePhoneNumberFocus}
               id="numberField"
               maxLength="15"
+              required
             />
             <label className={s.numberFieldLabel} htmlFor="numberField">
               Номер телефону
             </label>
+
+            {shortNumberError && (
+              <p className={s.discountAppliedText}>
+                Номер телефону занадто короткий
+              </p>
+            )}
 
             {discountApplied && (
               <p className={s.discountAppliedText}>
@@ -113,7 +135,7 @@ const Discount = () => {
                 onChange={handleCheckboxChange}
               />
               <p>
-                Я погоджуюсь з умовами обробки{' '}
+                Я погоджуюся з умовами обробки{' '}
                 <span className={s.span}>персональних даних</span>
               </p>
             </label>
@@ -121,7 +143,7 @@ const Discount = () => {
               <p className={s.discountAppliedText}>Доступ обмежено без згоди</p>
             )}
           </div>
-          <button className={s.btn} type="submit" onClick={handleFormSubmit}>
+          <button className={s.btn} type="submit">
             Отримати
           </button>
         </Form>

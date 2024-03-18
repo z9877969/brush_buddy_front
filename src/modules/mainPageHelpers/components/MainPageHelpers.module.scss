@@ -4,6 +4,10 @@
 
 .helpersBoxAll {
   position: relative;
+
+  @include media(desktop) {
+    padding-bottom: 100px;
+  }
 }
 
 .mainHelpersTitle {
@@ -29,7 +33,6 @@
 }
 
 .mainHelpersBox {
-  // width: 100%;
   box-sizing: border-box;
   padding: 24px;
   margin-bottom: 32px;
@@ -38,14 +41,14 @@
 
   @include media(tablet) {
     padding: 32px;
+    margin-bottom: 64px;
+  }
+  @include media(desktop) {
+    margin-bottom: 0;
   }
 
   .boxTitleText {
     margin-bottom: 24px;
-
-    @include media(tablet) {
-      margin-bottom: 20px;
-    }
   }
   h3 {
     @include font(24, 32);
@@ -95,10 +98,27 @@
   display: flex;
   justify-content: center;
   gap: 4px;
-  margin-bottom: 48px;
+  padding-bottom: 48px;
+
+  @include media(tablet) {
+    position: absolute;
+    top: 68px;
+    right: 0;
+    padding-bottom: 0;
+    gap: 16px;
+  }
+
+  @include media(desktop) {
+    top: 100px;
+  }
 
   .helpersSliderButton {
     border: 1px solid #ffffff80;
+
+    &:hover {
+      background: #ffffff1a;
+      border: 1px solid #ffffff80;
+    }
   }
 
   .helpersSliderButtonDisabled {
@@ -107,18 +127,6 @@
     & svg {
       fill: #ffffff33;
     }
-  }
-
-  @include media(tablet) {
-    position: absolute;
-    top: 68px;
-    right: 0;
-    margin-bottom: 0;
-    gap: 16px;
-  }
-
-  @include media(desktop) {
-    top: 100px;
   }
 }
 

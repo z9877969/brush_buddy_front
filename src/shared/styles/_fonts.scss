@@ -1,0 +1,27 @@
+@import './variables';
+
+$fontPath: '../fonts';
+
+@font-face {
+  font-family: $main-font-family;
+  src:
+    url('../fonts/KyivTypeSans-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/KyivTypeSans-Medium.woff2') format('woff2'),
+    url('../fonts/KyivTypeSans-Medium.woff') format('woff'),
+    url('../fonts/KyivTypeSans-Medium.ttf') format('truetype'),
+    url('../fonts/KyivTypeSans-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: $main-font-family;
+  src:
+    url('../fonts/KyivTypeSans-Black.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/KyivTypeSans-Black.woff2') format('woff2'),
+    url('../fonts/KyivTypeSans-Black.woff') format('woff'),
+    url('../fonts/KyivTypeSans-Black.ttf') format('truetype'),
+    url('../fonts/KyivTypeSans-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}

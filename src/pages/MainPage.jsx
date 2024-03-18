@@ -3,15 +3,18 @@ import { MainPageHelpers } from 'modules/mainPageHelpers';
 import { MainPageHero } from 'modules/mainPageHero';
 import { MainPageDialog } from 'modules/mainPageDialog';
 import { MainPageBlog } from 'modules/mainPageBlog';
-
+import { MainPageToShopping } from 'modules/mainPageToShopping';
+import { MainPageReviews } from 'modules/mainPageReviews';
 const MainPage = () => {
   return (
     <>
       <MainPageHero />
       <MainPageAbout />
       <MainPageDialog />
-      <MainPageBlog />
+      <MainPageToShopping />
       <MainPageHelpers />
+      <MainPageBlog />
+      <MainPageReviews />
     </>
   );
 };
