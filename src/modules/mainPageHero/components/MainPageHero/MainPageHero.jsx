@@ -18,13 +18,12 @@ const MainPageAbout = () => {
             to={ROUTES.PRODUCTS}
           />
         </div>
+        <img
+          src="/src/modules/mainPageHero/images/anmation.gif"
+          alt="animation"
+          className={s.animation}
+        />
       </Container>
-      <img
-        src="/src/modules/mainPageHero/images/anmation.gif"
-        alt="animation"
-        className={s.animation}
-      />
-
     </section>
   );
 };
