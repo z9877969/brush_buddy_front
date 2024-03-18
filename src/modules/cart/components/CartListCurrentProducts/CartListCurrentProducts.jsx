@@ -4,7 +4,7 @@ import { MainTitle } from 'shared/components';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProd } from '@redux/cart/selectorsCart';
 import {
-  addProduct,
+  //addProduct,
   removeProduct,
   changeProductQuantity,
   addTotalPrice,
@@ -26,9 +26,9 @@ const CartListCurrentProducts = () => {
     dispatch(removeProduct({ id }));
   };
 
-  const onClickAdd = (product) => {
-    dispatch(addProduct(product));
-  };
+  // const onClickAdd = (product) => {
+  //   dispatch(addProduct(product));
+  // };
 
   return (
     <section>
@@ -38,7 +38,7 @@ const CartListCurrentProducts = () => {
           data={products}
           changeCount={changeCount}
           onClickDelete={onClickDelete}
-          onClickAdd={onClickAdd}
+          //onClickAdd={onClickAdd}
         />
       </ul>
     </section>
