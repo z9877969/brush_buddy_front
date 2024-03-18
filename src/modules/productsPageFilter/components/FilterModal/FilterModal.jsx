@@ -13,9 +13,7 @@ export const FilterModal = ({ onClose, onFormSubmit, isOpen }) => {
 
   return (
     <div
-      className={`${s.filterModal} 
-			${isOpen ? s.visible : ''}
-		`}
+      className={`${s.filterModal} ${isOpen ? s.visible : ''}`}
     >
       <div className={s.modalContent}>
         <div className={s.modalHeader}>
