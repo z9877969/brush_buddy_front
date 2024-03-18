@@ -1,0 +1,51 @@
+.filterBlock {
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+  padding: 4px 12px;
+  border-radius: 24px;
+  background-color: $secondary-bg-color;
+  @include font(16, 24);
+  color: #636363;
+
+  & svg {
+    width: 20px;
+    height: 20px;
+    fill: #636363;
+  }
+}
+
+.adult {
+  background: $adult-color;
+  color: $light-color;
+
+  & svg {
+    fill: $light-color;
+  }
+}
+
+.child {
+  background: $child-color;
+  color: $light-color;
+
+  & svg {
+    fill: $light-color;
+  }
+}
+
+.animal {
+  background: $pet-color;
+  color: $light-color;
+
+  & svg {
+    fill: $light-color;
+  }
+}
+
+.deleteBtn {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
