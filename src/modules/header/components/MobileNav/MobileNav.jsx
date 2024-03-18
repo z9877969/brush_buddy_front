@@ -4,19 +4,14 @@ import ProductDropDown from '../ProductDropDown/ProductDropDown';
 import { ROUTES } from 'shared/constants';
 
 const MobileNav = ({ handleMenuToggle }) => {
-  const handleNavLinkClick = () => {
-    handleMenuToggle(); // Викликаємо обробник події з батьківського компонента
-  };
   return (
     <ul className={s.mobileNavList}>
       <li className={s.mobileNavListItem}>
         <NavLink
           to={'/'}
           exact="true"
-          className={({ isActive }) =>
-            isActive ? s.activeNavLink : s.mobileNavLink
-          }
-          onClick={handleNavLinkClick}
+          className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
+          onClick={handleMenuToggle}
         >
           Головна
         </NavLink>
