@@ -25,3 +25,6 @@ dist-ssr
 
 # bash scriipts
 .deploy.sh
+
+# notes
+_productsList/
