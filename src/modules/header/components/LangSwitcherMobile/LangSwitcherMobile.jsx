@@ -9,15 +9,11 @@ const LangSwitcherMobile = ({ selectedLang, onSelect }) => {
 
   return (
     <div className={s.btnLangWrap}>
-      <button
-        className={s.btnSwitch}
-        onClick={() => handleLangSelect('ua')}
-        disabled={selectedLang === 'ua'}
-      >
+      <button className={s.btnSwitch} onClick={() => handleLangSelect('ua')}>
         UA
       </button>
       <button
-        className={s.btnSwitch}
+        className={`${s.btnDisable} ${s.btnSwitch}`}
         onClick={() => handleLangSelect('en')}
         disabled={selectedLang === 'en'}
       >

@@ -1,7 +1,10 @@
 @import './colors';
+@import './variables';
 
 :root {
-  font-family: 'KyivType Sans', sans-serif;
+  font-family:
+    #{$main-font-family},
+    sans-serif;
   font-weight: 500;
 
   color: $primary-text-color;
@@ -51,11 +54,6 @@ button {
   background: none;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 2px auto -webkit-focus-ring-color;
 }
 
 img {

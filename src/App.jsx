@@ -1,5 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
-import { Footer } from 'modules/footer';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTES } from 'shared/constants';
 import {
   AboutPage,
@@ -9,12 +8,15 @@ import {
   NotFoundPage,
   ProductCardPage,
   ProductsPage,
+  ThankPage,
 } from './pages';
 import { SharedLayout } from 'shared/components';
+import ScrollToTop from 'shared/components/ScrollToTop/ScrollToTop';
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path={ROUTES.MAIN} element={<SharedLayout />}>
           <Route index element={<MainPage />} />
@@ -24,9 +26,10 @@ function App() {
           <Route path={ROUTES.PRODUCT_CARD} element={<ProductCardPage />} />
           <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
           <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
+          <Route path={ROUTES.THANK} element={<ThankPage />} />
+          <Route path="*" element={<Navigate to={ROUTES.MAIN} />} />
         </Route>
       </Routes>
-      <Footer />
     </>
   );
 }

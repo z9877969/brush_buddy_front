@@ -1,12 +1,13 @@
+import { AboutBlog } from 'modules/aboutBlog';
 import { AboutHero } from 'modules/aboutHero';
 import { Button, MainTitle, ProductCardItem } from 'shared/components';
 
 const AboutPage = () => {
   return (
     <>
-      <h1>AboutPage</h1>
       <MainTitle title={'some title'} className={'some-class'} light />
       <AboutHero />
+      <AboutBlog />
       <Button title={'Button title'} border />
       <ProductCardItem />
     </>

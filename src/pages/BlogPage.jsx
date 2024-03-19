@@ -1,5 +1,12 @@
+import { BlogView } from 'modules/blogView';
+import { Container } from 'shared/components';
+
 const BlogPage = () => {
-  return <h1>BlogPage</h1>;
+  return (
+    <Container>
+      <BlogView />
+    </Container>
+  );
 };
 
 export default BlogPage;

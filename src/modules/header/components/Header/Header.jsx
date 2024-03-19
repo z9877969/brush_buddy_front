@@ -6,7 +6,7 @@ import DiscountReminder from '../DiscountReminder/DiscountReminder';
 import HeaderNav from '../HeaderNav/HeaderNav';
 import s from './Header.module.scss';
 import { Container, Logo } from 'shared/components';
-import BurgerButton from '../BurgerButton/BurgerButton'; // Додавання компоненту кнопки бургера
+import BurgerButton from '../BurgerButton/BurgerButton';
 import MobileMenu from '../MobileMenu/MobileMenu';
 
 const Header = () => {
@@ -32,7 +32,7 @@ const Header = () => {
             <Logo className={s.logo} />
           </Link>
 
-          <HeaderNav />
+          <HeaderNav handleMenuToggle={handleMenuToggle} />
           <div className={s.rightSideWrap}>
             <LangSwitcher />
             <CartButton />
