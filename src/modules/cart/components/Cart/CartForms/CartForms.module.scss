@@ -1,0 +1,175 @@
+.cartForm {
+  margin-bottom: 32px;
+
+  @include media(tablet) {
+    margin-bottom: 49px;
+  }
+}
+
+.cartFormsTitle {
+  @include font(28, 36);
+  font-weight: 500;
+  margin-bottom: 8px;
+
+  @include media(tablet) {
+    @include font(32, 36);
+    margin-bottom: 12px;
+  }
+}
+
+.cartFormText {
+  @include font(18, 28);
+  color: #49494a;
+  margin-bottom: 24px;
+
+  @include media(tablet) {
+    margin-bottom: 24px;
+  }
+}
+
+.cartformData {
+  width: 100%;
+
+  .cartFormLabel {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    @include font(16, 24);
+    font-weight: 500;
+    color: $secondary-text-color;
+    margin-bottom: 16px;
+
+    @include media(tablet) {
+      margin-bottom: 24px;
+    }
+  }
+
+  .cartFormSpan {
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    height: 48px;
+    font-weight: 500;
+    @include font(16, 24);
+    padding: 12px;
+    border-radius: 16px;
+    background-color: transparent;
+    color: $primary-text-color;
+    border: 1px solid $disabled-bg-color;
+    box-sizing: border-box;
+    outline: transparent;
+  }
+
+  input::placeholder {
+    color: $primary-text-color;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: $pet-color;
+  }
+
+  .cartFormError {
+    margin-top: 4px;
+    color: #ba1a1a;
+    @include font(12, 18);
+    font-weight: 500;
+  }
+
+  .error input {
+    border-color: #ba1a1a;
+  }
+
+  .cartFormInput2 {
+    @include media(tablet) {
+      display: flex;
+      gap: 16px;
+    }
+  }
+
+  .cartFormTextarea {
+    margin-bottom: 4px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 242px;
+    color: $primary-text-color;
+    font-weight: 500;
+    @include font(16, 24);
+    border-radius: 16px;
+    padding: 12px;
+    border: 1px solid $disabled-bg-color;
+    resize: none;
+    &:focus {
+      outline: none;
+      border-color: $pet-color;
+    }
+
+    @include media(tablet) {
+      height: 242px;
+    }
+
+    @include media(desktop) {
+      height: 176px;
+    }
+  }
+
+  .cartFormTextareaSum {
+    @include font(12, 18);
+    font-weight: 500;
+    color: $secondary-text-color;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.checkText {
+  display: flex;
+  align-items: center;
+  color: #49494a;
+  @include font(12, 18);
+  font-weight: 500;
+}
+
+.cartFormInputCheckbox:checked ~ .checkText .cartFormCheckboxBG {
+  background-color: $pet-color;
+  border: none;
+  fill: $light-color;
+}
+
+.cartFormInputCheckbox:focus ~ .checkText .cartFormCheckboxBG {
+  border-color: $pet-color;
+}
+
+.cartFormCheckboxBG {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid $disabled-content-color;
+  margin-right: 12px;
+  fill: transparent;
+
+  .cartFormSVG {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
