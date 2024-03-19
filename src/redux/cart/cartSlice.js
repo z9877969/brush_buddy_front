@@ -6,7 +6,19 @@ import { totalPrice, totalPriceDiscount } from 'modules/cart';
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    products: [],
+    products: [
+      {
+        id: 'yrf44b',
+        type: 'toothbrush',
+        image:
+          'https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg',
+        name: 'Oral-B Pro 1000',
+        color: 'white',
+        quantity: 100,
+        price: 150,
+        discounted_price: null,
+      },
+    ],
     totalPrice: 0,
     promoCode: null,
     discount: 0,

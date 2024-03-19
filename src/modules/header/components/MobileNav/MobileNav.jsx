@@ -3,7 +3,7 @@ import s from './MobileNav.module.scss';
 import ProductDropDown from '../ProductDropDown/ProductDropDown';
 import { ROUTES } from 'shared/constants';
 
-const MobileNav = ({ handleMenuToggle }) => {
+const MobileNav = () => {
   return (
     <ul className={s.mobileNavList}>
       <li className={s.mobileNavListItem}>
@@ -11,7 +11,6 @@ const MobileNav = ({ handleMenuToggle }) => {
           to={'/'}
           exact="true"
           className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
-          onClick={handleMenuToggle}
         >
           Головна
         </NavLink>
@@ -22,7 +21,6 @@ const MobileNav = ({ handleMenuToggle }) => {
           className={({ isActive }) =>
             isActive ? s.activeNavLink : s.mobileNavLink
           }
-          onClick={handleMenuToggle}
         >
           Про БрашБадді
         </NavLink>
