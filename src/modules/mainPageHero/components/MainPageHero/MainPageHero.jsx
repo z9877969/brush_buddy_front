@@ -19,8 +19,8 @@ const MainPageAbout = () => {
             to={ROUTES.PRODUCTS}
           />
         </div>
+        <img src={animation} alt="animation" className={s.animation} />
       </Container>
-      <img src={animation} alt="animation" className={s.animation} />
     </section>
   );
 };
