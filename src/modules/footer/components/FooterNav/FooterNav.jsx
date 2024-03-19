@@ -1,13 +1,9 @@
 import s from './FooterNav.module.scss';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/constants';
+import { scrollToTop } from '../../../../helper/ScrollToTop';
+
 const FooterNav = () => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
   return (
     <nav className={s.nav}>
       <ul className={s.navList}>
