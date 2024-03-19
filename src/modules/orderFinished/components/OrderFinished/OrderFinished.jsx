@@ -2,6 +2,7 @@ import { Container, Logo } from 'shared/components';
 import css from './OrderFinished.scss';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { ROUTES } from 'shared/constants';
 
 const OrderFinished = () => {
   const [order] = useState({ number: 375 });
@@ -15,7 +16,7 @@ const OrderFinished = () => {
         інформацію на вказану електронну адресу. Наші співробітники вже дбайливо
         збирають посилочку для Вас.
       </p>
-      <Link className={css.linkButton} to="#">
+      <Link className={css.linkButton} to={ROUTES.PRODUCTS}>
         І вам дякуємо
       </Link>
     </Container>
