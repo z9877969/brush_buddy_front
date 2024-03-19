@@ -27,5 +27,5 @@ export const SOCIAL_NETWORKS = {
     'https://www.instagram.com/brushbuddy.ua?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr',
   TELEGRAM: 'https://web.telegram.org/k/#@BrushBuddy',
   VIBER: '#',
-  FACEBOOK: '#',
+  FACEBOOK: 'https://www.facebook.com/profile.php?id=61557426364064',
 };
