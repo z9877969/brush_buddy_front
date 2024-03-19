@@ -46,7 +46,7 @@ const HelpersCardList = ({
           spaceBetween: 24,
         },
         1440: {
-          slidesPerView: 1.7,
+          slidesPerView: 2,
           spaceBetween: 24,
         },
       }}
