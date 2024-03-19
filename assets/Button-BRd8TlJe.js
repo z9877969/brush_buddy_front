@@ -1,0 +1,1 @@
+import{j as e,c as x,F as o}from"./index-Ciq39SVs.js";const b=({type:s="button",title:r,className:t,border:n,...u})=>e.jsx("button",{type:s,className:x(o.button,t&&t,n&&o.border),...u,children:r});export{b as B};
