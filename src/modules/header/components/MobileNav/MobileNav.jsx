@@ -3,20 +3,14 @@ import s from './MobileNav.module.scss';
 import ProductDropDown from '../ProductDropDown/ProductDropDown';
 import { ROUTES } from 'shared/constants';
 
-const MobileNav = ({ handleMenuToggle }) => {
-  const handleNavLinkClick = () => {
-    handleMenuToggle(); // Викликаємо обробник події з батьківського компонента
-  };
+const MobileNav = () => {
   return (
     <ul className={s.mobileNavList}>
       <li className={s.mobileNavListItem}>
         <NavLink
           to={'/'}
           exact="true"
-          className={({ isActive }) =>
-            isActive ? s.activeNavLink : s.mobileNavLink
-          }
-          onClick={handleNavLinkClick}
+          className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
         >
           Головна
         </NavLink>
@@ -27,7 +21,6 @@ const MobileNav = ({ handleMenuToggle }) => {
           className={({ isActive }) =>
             isActive ? s.activeNavLink : s.mobileNavLink
           }
-          onClick={handleMenuToggle}
         >
           Про БрашБадді
         </NavLink>

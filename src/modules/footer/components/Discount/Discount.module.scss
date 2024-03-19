@@ -138,6 +138,10 @@ $icon-checkmark: url('../shared/icons/sprite.svg#icon-checkmark');
   align-items: center;
   color: $copyright-color;
 
+  .spanConditions {
+    cursor: pointer;
+    color: $pet-color;
+  }
   @include media(tablet) {
     font-size: 16px;
     line-height: 1.5;

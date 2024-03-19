@@ -1,0 +1,116 @@
+.boxpagination {
+  display: flex;
+  padding: 32px 16px 48px 16px;
+  align-items: center;
+  color: $primary-text-color;
+  justify-content: space-between;
+  @include font(18, 24);
+  svg {
+    fill: $primary-text-color;
+  }
+  @include media(tablet) {
+    @include font(24, 32);
+    padding: 48px 128px 68px 128px;
+  }
+  @include media(desktop) {
+    padding: 64px 250px 100px 250px;
+  }
+}
+.boxpagination .pageNum:not(:last-child):hover,
+.boxpagination .previous:hover,
+.boxpagination .next:hover,
+.boxpagination .active {
+  color: $light-color;
+  background-color: $pet-color;
+  .paginationIcon {
+    fill: $light-color;
+  }
+}
+.boxpagination li.pageNum:not(:last-child) {
+  margin-right: 8px;
+  @include media(tablet) {
+    margin-right: 16px;
+  }
+}
+.boxpagination .pageNum:not(:last-child) {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  @include media(tablet) {
+    width: 56px;
+    height: 56px;
+  }
+}
+.boxpagination .previous,
+.boxpagination .next {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 100px;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  @include media(tablet) {
+    width: 56px;
+    height: 56px;
+    align-items: end;
+    padding: 0;
+    padding-bottom: 5px;
+  }
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: $primary-text-color;
+    @include media(tablet) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+.boxpagination .previous.disabled,
+.boxpagination .next.disabled {
+  .pageNum {
+    cursor: not-allowed;
+  }
+  svg {
+    fill: $disabled-content-color;
+  }
+}
+.boxpagination .previous.disabled:hover,
+.boxpagination .next.disabled:hover {
+  background-color: $light-color;
+  svg {
+    fill: $disabled-content-color;
+  }
+}
+.previous {
+  margin-right: 24px;
+  @include media(tablet) {
+    margin-right: 32px;
+  }
+}
+.next {
+  margin-left: 24px;
+  @include media(tablet) {
+    margin-left: 32px;
+  }
+}
+.pageNum {
+  cursor: pointer;
+  .disabled {
+    cursor: not-allowed;
+  }
+}
+.blockPagination {
+  @include media(desktop) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

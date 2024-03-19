@@ -17,17 +17,29 @@ const FooterNav = () => {
           </Link>
         </li>
         <li className={s.navListItem}>
-          <Link to={ROUTES.ABOUT} className={s.navListItemLink}>
+          <Link
+            to={ROUTES.ABOUT}
+            className={s.navListItemLink}
+            onClick={scrollToTop}
+          >
             Про БрашБадді
           </Link>
         </li>
         <li className={s.navListItem}>
-          <Link to={ROUTES.PRODUCTS} className={s.navListItemLink}>
+          <Link
+            to={ROUTES.PRODUCTS}
+            className={s.navListItemLink}
+            onClick={scrollToTop}
+          >
             Товари
           </Link>
         </li>
         <li className={s.navListItem}>
-          <Link to={ROUTES.BLOG} className={s.navListItemLink}>
+          <Link
+            to={ROUTES.BLOG}
+            className={s.navListItemLink}
+            onClick={scrollToTop}
+          >
             Блог
           </Link>
         </li>
