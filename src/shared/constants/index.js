@@ -7,6 +7,7 @@ export const ROUTES = {
   NOT_FOUND: 'not-found',
   PRODUCT_CARD: 'products/:productId',
   PRODUCTS: 'products',
+  THANK: 'thank',
   GET_BLOG_ID: (blogId) => `/blog/${blogId}`,
 };
 

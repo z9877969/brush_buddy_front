@@ -1,3 +1,38 @@
+.aside {
+  // margin: 0 auto;
+  // padding: 0 16px;
+  // width: $mobile;
+}
+.filterOpenBtn {
+  display: flex;
+  height: 48px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  margin-top: 32px;
+  margin-bottom: 16px;
+  @include media(desktop) {
+    display: none;
+  }
+}
+.openBtnText {
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  @include font(16, 24);
+  color: $primary-text-color;
+}
+.openBtnIcon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  padding: 1.667px 2.5px;
+  justify-content: center;
+  align-items: center;
+}
 .filterWindow {
   display: none;
   @include media(desktop) {

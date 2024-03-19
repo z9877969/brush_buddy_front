@@ -6,7 +6,7 @@ const CartListCurrentItem = ({
   data,
   changeCount,
   onClickDelete,
-  onClickAdd,
+  //onClickAdd,
 }) => {
   const elements = data.map(
     ({
@@ -59,7 +59,7 @@ const CartListCurrentItem = ({
                 <use href={sprite + '#icon-delete'}></use>
               </svg>
             </button>
-            <button className={s.btnTest}
+            {/* <button className={s.btnTest}
               type="submit"
               onClick={() =>
                 onClickAdd({
@@ -76,7 +76,7 @@ const CartListCurrentItem = ({
               }
             >
               Test btn
-            </button>
+            </button> */}
           </div>
         </div>
       </li>
