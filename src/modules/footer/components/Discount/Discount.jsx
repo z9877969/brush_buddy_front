@@ -20,7 +20,7 @@ const Discount = () => {
 
   const formatPhoneNumber = (value) => {
     const cleaned = ('' + value).replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{0,3})(\d{0,2})(\d{0,3})$/);
+    const match = cleaned.match(/^(\d{0,3})(\d{0,2})(\d{0,7})$/);
     if (match) {
       return (
         '+38 0' + (match[2] ? +match[2] : '') + (match[3] ? ' ' + match[3] : '')
@@ -31,6 +31,12 @@ const Discount = () => {
 
   const handlePhoneNumberChange = (e) => {
     const { value } = e.target;
+
+    const lastChar = value.charAt(value.length - 1);
+    if (isNaN(lastChar)) {
+      return;
+    }
+
     setPhoneNumber(value);
     setFormattedPhoneNumber(formatPhoneNumber(value));
     if (value.length < 15) {
