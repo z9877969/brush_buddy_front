@@ -42,7 +42,7 @@ const OrderPromoCode = ({ priceDisc }) => {
         <div>
           <input
             className={s.input}
-            type="text"
+            type="text" 
             name="promoCode"
             placeholder="Промокод"
             onChange={formik.handleChange}
