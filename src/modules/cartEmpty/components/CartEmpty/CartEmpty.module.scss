@@ -6,6 +6,10 @@
     margin-top: 269px;
     margin-bottom: 269px;
   }
+  @include media(desktop) {
+    margin-top: 199px;
+    margin-bottom: 199px;
+  }
 }
 .title {
   margin-top: 32px;
@@ -32,5 +36,12 @@
   @include media(tablet) {
     @include font(18, 24);
     width: 216px;
+  }
+}
+
+.animation {
+  margin: 0 auto;
+  @include media(tablet) {
+    width: 577px;
   }
 }
