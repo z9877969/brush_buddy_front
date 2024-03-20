@@ -142,6 +142,7 @@
   content: url('./checkmark.svg');
   @include media(desktop) {
     border: none;
+    background-color: $light-color;
   }
 }
 
@@ -234,8 +235,9 @@
   border: none;
   background-color: $pet-color;
   color: $light-color;
+  @include font(16, 24);
 
   @include media(desktop) {
-    width: 250px;
+    width: auto;
   }
 }
