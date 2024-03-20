@@ -14,8 +14,15 @@ import {
 import { Button } from 'shared/components';
 import { customStyles } from './customStyles';
 import { sprite } from 'shared/icons';
+import { useEffect, useRef } from 'react';
 
 const FiltersForm = ({ filterProductsCb }) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.inputRef.readOnly = 'true';
+  }, []);
+
   const initialValues = {
     search: '',
     age: ageOptions[0],
@@ -33,7 +40,7 @@ const FiltersForm = ({ filterProductsCb }) => {
         brand: { value: brandValue },
         sortBy: { sortBy: sortByValue },
       } = values;
-      // console.log('run some function to filter products', ` ${values}`);
+
       filterProductsCb({
         age: ageValue,
         category: catValue,
@@ -49,7 +56,7 @@ const FiltersForm = ({ filterProductsCb }) => {
   return (
     <form onSubmit={handleSubmit} className={s.form}>
       <div className={s.inputs}>
-        <div className={clsx(s.inputContainer)}>
+        <div className={s.inputContainer}>
           <label htmlFor="search" className={s.label}>
             Пошук
           </label>
@@ -60,7 +67,7 @@ const FiltersForm = ({ filterProductsCb }) => {
               name="search"
               placeholder="Знайти товар"
               onChange={(e) => handleChange(e)}
-              className={clsx(s.input)}
+              className={s.input}
             />
             <svg width={20} className={s.searchIcon}>
               <use href={sprite + '#icon-search'}></use>
@@ -113,6 +120,7 @@ const FiltersForm = ({ filterProductsCb }) => {
             Вік дитини
           </label>
           <Select
+            ref={ref}
             id="age"
             options={ageOptions}
             value={values.age}
@@ -120,7 +128,6 @@ const FiltersForm = ({ filterProductsCb }) => {
               setFieldValue('age', option);
             }}
             styles={customStyles}
-            // className={s.input}
           />
         </div>
 
@@ -136,7 +143,7 @@ const FiltersForm = ({ filterProductsCb }) => {
               setFieldValue('category', option);
             }}
             styles={customStyles}
-            // className={s.input}
+            ref={ref}
           />
         </div>
 
@@ -152,7 +159,7 @@ const FiltersForm = ({ filterProductsCb }) => {
               setFieldValue('brand', option);
             }}
             styles={customStyles}
-            // className={s.input}
+            ref={ref}
           />
         </div>
 
@@ -168,7 +175,7 @@ const FiltersForm = ({ filterProductsCb }) => {
               setFieldValue('sortBy', option);
             }}
             styles={customStyles}
-            // className={s.input}
+            ref={ref}
           />
         </div>
       </div>
