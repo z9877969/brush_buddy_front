@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Container, LinkButton, MainTitle } from 'shared/components';
 import s from './MainPageToShopping.module.scss';
-import products from '../../db/products.json';
+import products from '../../../products/db/products.json';
 import ProductsList from '../ProductsList/ProdactList';
 
 const MainPageToShopping = () => {
@@ -29,11 +29,23 @@ const MainPageToShopping = () => {
     }
   }, [screenWidth]);
 
-  const noventlyProducts = products.filter(
-    (product) => product.status === 'novently'
+  const availableProducts = products.filter(
+    (product) => product.total_quantity > 0
   );
 
-  const saleProducts = products.filter((product) => product.status === 'sale');
+  const noventlyProducts = useMemo(() => {
+    return availableProducts.filter((product) => product.status === 'novently');
+  }, [availableProducts]);
+
+  const saleProducts = useMemo(() => {
+    return availableProducts.filter((product) => product.status === 'sale');
+  }, [availableProducts]);
+
+  // const noventlyProducts = products.filter(
+  //   (product) => product.status === 'novently'
+  // );
+
+  // const saleProducts = products.filter((product) => product.status === 'sale');
 
   return (
     <section className={s.shoppingSection}>
