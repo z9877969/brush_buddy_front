@@ -16,7 +16,7 @@ import { customStyles } from './customStyles';
 import { sprite } from 'shared/icons';
 import { useEffect, useRef } from 'react';
 
-const FiltersForm = ({ filterProductsCb }) => {
+const FiltersForm = ({ filterProductsCb, onClose }) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -191,6 +191,7 @@ const FiltersForm = ({ filterProductsCb }) => {
           className={s.submitBtn}
           title={'Показати усі пропозиції'}
           border
+          onClick={onClose}
         />
       </div>
     </form>
