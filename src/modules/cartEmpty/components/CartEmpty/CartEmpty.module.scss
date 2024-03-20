@@ -1,0 +1,22 @@
+.section {
+  margin-top: 255px;
+  margin-bottom: 255px;
+  text-align: center;
+}
+.title {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-weight: 900;
+  color: $primary-text-color;
+  @include font(36, 44);
+}
+.linkButton {
+  padding: 12px 24px;
+  font-weight: 500;
+  color: $light-color;
+  background: $pet-color;
+  @include font(16, 24);
+  & svg {
+    fill: $light-color;
+  }
+}
