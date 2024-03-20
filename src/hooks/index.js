@@ -1,2 +1,2 @@
 export { default as useProductListState } from './useProductListState';
-export { default as useMedia } from './useMedia';
+export { useMedia } from './useMedia';
