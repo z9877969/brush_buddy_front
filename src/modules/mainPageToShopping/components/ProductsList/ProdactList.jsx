@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { RoundButton } from 'shared/components';
-import ProductCardItem from '../ProductCardItem/ProductCardItem';
+import { ProductCardItem } from 'shared/components';
 import { useProductListState } from 'hooks';
 import s from './ProductsList.module.scss';
 
@@ -20,6 +20,7 @@ const ProductsList = ({ title, products, batchSize }) => {
         status={product.status}
         image={product.image}
         key={product.id}
+        total_quantity={product.total_quantity}
       />
     ));
   }, [visibleProducts]);

@@ -1,20 +1,12 @@
 import { sprite } from 'shared/icons';
 import FiltersForm from '../FiltersForm/FiltersForm';
 import s from './FilterModal.module.scss';
-// import { useState } from 'react';
 
 export const FilterModal = ({ onClose, onFormSubmit, isOpen }) => {
-  // const [showFilters, setShowFilters] = useState(false);
-
-  // const toggleFilters = () => {
-  //   setShowFilters(!showFilters);
-  // };
   // const onFormSubmit = () => {};
 
   return (
-    <div
-      className={`${s.filterModal} ${isOpen ? s.visible : ''}`}
-    >
+    <div className={`${s.filterModal} ${isOpen ? s.visible : ''}`}>
       <div className={s.modalContent}>
         <div className={s.modalHeader}>
           <h5 className={s.headerText}>Фільтри</h5>
@@ -24,7 +16,7 @@ export const FilterModal = ({ onClose, onFormSubmit, isOpen }) => {
             </svg>
           </button>
         </div>
-        <FiltersForm filterProductsCb={onFormSubmit} />
+        <FiltersForm filterProductsCb={onFormSubmit} onClose={onClose} />
       </div>
     </div>
   );
