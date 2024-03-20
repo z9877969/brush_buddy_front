@@ -1,1 +1,1 @@
-export { default as PaginateProdList } from './components/PaginateProdList/PaginateProdList';
+export { default as PaginateProdList } from './components/PaginateProductsList/PaginateProductsList';
