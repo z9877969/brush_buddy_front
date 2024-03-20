@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import ProdList from '../ProdList/ProdList';
 import Paginator from '../Paginator/Paginator';
+import s from './PaginateProductsList.module.scss';
 
 const PaginateProdList = ({ products }) => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 12;
+  const itemsPerPage = 4;
   const displayedPages = 3;
 
   useEffect(() => {
@@ -20,14 +21,14 @@ const PaginateProdList = ({ products }) => {
     setItemOffset(newOffset);
   };
   return (
-    <>
+    <div className={s.blockPaginateProductsList}>
       <ProdList products={currentItems} />
       <Paginator
         handlePageClick={handlePageClick}
         displayedPages={displayedPages}
         pageCount={pageCount}
       />
-    </>
+    </div>
   );
 };
 

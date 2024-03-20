@@ -25,10 +25,11 @@ const Paginator = ({ handlePageClick, displayedPages, pageCount }) => {
         }
         renderOnZeroPageCount={null}
         containerClassName={s.boxpagination}
-        pageClassName={s.pageNum}
+        pageLinkClassName={s.pageNum}
+        pageClassName={s.pageFigure}
         previousLinkClassName={s.pageNum}
         nextLinkClassName={s.pageNum}
-        activeClassName={s.active}
+        activeLinkClassName={s.active}
         previousClassName={s.previous}
         nextClassName={s.next}
         disabledClassName={s.disabled}
