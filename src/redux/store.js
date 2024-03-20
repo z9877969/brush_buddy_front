@@ -9,10 +9,12 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { persistedCartReducer } from './cart/cartSlice';
+import { novaPoshtaReducer } from './novaPoshta/novaPoshtaSlice';
 
 export const store = configureStore({
   reducer: {
     cart: persistedCartReducer,
+    novaPoshta: novaPoshtaReducer,
   },
   middleware: (gdm) =>
     gdm({

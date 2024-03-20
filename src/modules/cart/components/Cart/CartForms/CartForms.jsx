@@ -1,5 +1,6 @@
 import Select from 'react-select';
 import { selectStyles } from './SelectStyles';
+import { useDebounceValue } from 'usehooks-ts';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -9,6 +10,9 @@ import { sprite } from 'shared/icons';
 import { clsx } from 'clsx';
 
 import s from './CartForms.module.scss';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { apiGetCity } from '@redux/novaPoshta/novaPoshtaSlice';
 
 const options = [
   { label: 'one', value: 1, className: 'custom-class' },
@@ -16,7 +20,14 @@ const options = [
 ];
 
 const CartForms = () => {
+  const dispatch = useDispatch();
+  // const postOffice = useSelector(selectPostOffice);
+  const [debouncedValue, setValue] = useDebounceValue('', 1000);
   const maxLength = 300;
+
+  useEffect(() => {
+    dispatch(apiGetCity(debouncedValue));
+  }, [dispatch, debouncedValue]);
 
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -42,7 +53,7 @@ const CartForms = () => {
     initialValues: {
       name: '',
       email: '',
-      phone: '+380',
+      phone: '+380 ',
       city: '',
       department: '',
       comments: '',
@@ -53,6 +64,11 @@ const CartForms = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+  // const handleCityName = () => {
+  //   const value = formik.values.name;
+  //   dispatch(value);
+  // };
 
   return (
     <div className={s.cartForm}>
@@ -66,7 +82,6 @@ const CartForms = () => {
         >
           <span className={s.cartFormSpan}>ПІБ</span>
           <input
-            type="text"
             name="name"
             placeholder="Приходько Анжеліка Миколаївна"
             onChange={formik.handleChange}
@@ -82,7 +97,6 @@ const CartForms = () => {
           >
             <span className={s.cartFormSpan}>Електронна пошта</span>
             <input
-              type="email"
               name="email"
               onChange={formik.handleChange}
               value={formik.values.email}
@@ -96,7 +110,6 @@ const CartForms = () => {
           >
             <span className={s.cartFormSpan}>Телефон</span>
             <input
-              type="tel"
               name="phone"
               onChange={formik.handleChange}
               value={formik.values.phone}
@@ -111,9 +124,11 @@ const CartForms = () => {
         >
           <span className={s.cartFormSpan}>Місто</span>
           <input
-            type="text"
             name="city"
-            onChange={formik.handleChange}
+            onChange={(event) => {
+              formik.handleChange(event);
+              setValue(event.target.value);
+            }}
             value={formik.values.city}
           />
           {formik.touched.name && formik.errors.city && (
