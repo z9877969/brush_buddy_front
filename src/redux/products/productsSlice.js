@@ -12,7 +12,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const { reducer } = productsSlice;
 export const { addProductsList } = productsSlice.actions;
+export default productsSlice.reducer;
 
 // id + color || colorMarker + volume -> iuyqiuwyiuyuiyui_red_150
