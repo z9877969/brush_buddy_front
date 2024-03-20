@@ -2,6 +2,10 @@
   margin-top: 255px;
   margin-bottom: 255px;
   text-align: center;
+  @include media(tablet) {
+    margin-top: 269px;
+    margin-bottom: 269px;
+  }
 }
 .title {
   margin-top: 32px;
@@ -9,8 +13,14 @@
   font-weight: 900;
   color: $primary-text-color;
   @include font(36, 44);
+  @include media(tablet) {
+    @include font(48, 56);
+  }
 }
 .linkButton {
+  width: 173px;
+  margin-right: auto;
+  margin-left: auto;
   padding: 12px 24px;
   font-weight: 500;
   color: $light-color;
@@ -18,5 +28,9 @@
   @include font(16, 24);
   & svg {
     fill: $light-color;
+  }
+  @include media(tablet) {
+    @include font(18, 24);
+    width: 216px;
   }
 }
