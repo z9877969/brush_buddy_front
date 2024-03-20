@@ -10,7 +10,9 @@ const MobileNav = () => {
         <NavLink
           to={'/'}
           exact="true"
-          className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
+          className={({ isActive }) =>
+            isActive ? s.activeNavLink : s.mobileNavLink
+          }
         >
           Головна
         </NavLink>
