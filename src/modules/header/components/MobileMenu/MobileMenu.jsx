@@ -1,33 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import LangSwitcherMobile from '../LangSwitcherMobile/LangSwitcherMobile';
 import MobileNav from '../MobileNav/MobileNav';
 import s from './MobileMenu.module.scss';
+import { useMedia } from 'hooks/useMedia';
 
-const MobileMenu = ({ isOpen }) => {
-  const [isMenuOpen, setMenuOpen] = useState(isOpen);
+const MobileMenu = ({ isOpen, onClose }) => {
   const location = useLocation();
+  const { pathname } = location;
+  const media = useMedia();
 
   useEffect(() => {
-    setMenuOpen(isOpen);
-  }, [isOpen]);
+    onClose();
+  }, [onClose]);
 
   useEffect(() => {
-    if (isMenuOpen) {
-      setMenuOpen(false);
+    if (isOpen) {
+      onClose();
     }
     // eslint-disable-next-line
-  }, [location.pathname]);
-
-  const handleMenuToggle = () => {
-    setMenuOpen(!isMenuOpen);
-  };
+  }, [location, pathname]);
 
   return (
-    <div className={`${s.mobileMenuContainer} ${isMenuOpen ? s.open : ''}`}>
+    <div className={`${s.mobileMenuContainer} ${isOpen ? s.open : ''}`}>
       <div className={s.mobileMenuWrap}>
         <MobileNav />
-        <LangSwitcherMobile handleMenuToggle={handleMenuToggle} />
+        {media.isMobile && <LangSwitcherMobile />}
       </div>
     </div>
   );
