@@ -1,7 +1,7 @@
 import { CartEmpty } from 'modules/cartEmpty';
 
-const Empty = () => {
+const CartEmptyPage = () => {
   return <CartEmpty />;
 };
 
-export default Empty;
+export default CartEmptyPage;
