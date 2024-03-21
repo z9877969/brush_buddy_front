@@ -12,8 +12,15 @@ import {
 } from './pages';
 import { SharedLayout } from 'shared/components';
 import ScrollToTop from 'shared/components/ScrollToTop/ScrollToTop';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getProducts } from '@redux/products/productsOperations';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
   return (
     <>
       <ScrollToTop />

@@ -4,7 +4,6 @@ import { sprite } from 'shared/icons';
 // import FiltersForm from '../FiltersForm/FiltersForm';
 import s from './ProductsPageFilter.module.scss';
 import { FilterModal } from '../FilterModal/FilterModal';
-import { Container } from 'shared/components';
 
 const ProductsPageFilter = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,28 +15,26 @@ const ProductsPageFilter = () => {
   const onFormSubmit = () => {};
 
   return (
-    <Container>
-      <aside className={s.aside}>
-        <Button
-          className={s.filterOpenBtn}
-          title={
-            <>
-              <p className={s.openBtnText}>Фільтри та сортування</p>
-              <svg width={20} className={s.openBtnIcon}>
-                <use href={sprite + '#icon-filter'}></use>
-              </svg>
-            </>
-          }
-          border
-          onClick={toggleModal}
-        />
-        <FilterModal
-          isOpen={isModalOpen}
-          onClose={toggleModal}
-          onFormSubmit={onFormSubmit}
-        />
-      </aside>
-    </Container>
+    <aside className={s.aside}>
+      <Button
+        className={s.filterOpenBtn}
+        title={
+          <>
+            <p className={s.openBtnText}>Фільтри та сортування</p>
+            <svg width={20} className={s.openBtnIcon}>
+              <use href={sprite + '#icon-filter'}></use>
+            </svg>
+          </>
+        }
+        border
+        onClick={toggleModal}
+      />
+      <FilterModal
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+        onFormSubmit={onFormSubmit}
+      />
+    </aside>
   );
 };
 

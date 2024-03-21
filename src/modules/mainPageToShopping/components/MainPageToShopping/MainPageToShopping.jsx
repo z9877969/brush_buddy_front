@@ -2,21 +2,17 @@ import { useState, useEffect, useMemo } from 'react';
 import { Container, LinkButton, MainTitle } from 'shared/components';
 import s from './MainPageToShopping.module.scss';
 import ProductsList from '../ProductsList/ProdactList';
-import { useDispatch, useSelector } from 'react-redux';
-import { addProductsList } from '@redux/products/productsSlice';
-import data from '../../../paginateProdList/data/products.json';
+import { useSelector } from 'react-redux';
 
 const MainPageToShopping = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [prodToRender, setProdToRender] = useState(null);
-  const dispatch = useDispatch();
 
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
   };
 
   useEffect(() => {
-    dispatch(addProductsList(data));
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);

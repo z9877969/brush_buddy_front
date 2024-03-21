@@ -15,15 +15,27 @@ const ProductsPage = () => {
 
   return (
     <Container>
-      <MainTitle title={'У нас Ви можете замовити'} />
       <div
         style={{
           display: 'flex',
+          flexWrap: 'wrap',
+          rowGap: '64px',
           columnGap: '32px',
         }}
       >
+        <MainTitle
+          title={'У нас Ви можете замовити'}
+          style={{ width: '100%' }}
+        />
         <ProductsPageFilter />
-        <PaginateProdList products={products} />
+        <div
+          style={{
+            width: '948px',
+          }}
+        >
+          <h2>Selected Filters</h2>
+          <PaginateProdList products={products} />
+        </div>
       </div>
     </Container>
   );
