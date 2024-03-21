@@ -1,8 +1,8 @@
 export function totalPrice(products) {
   let total = products.reduce((acc, product) => {
     const price = parseFloat(product.price);
-    const quantity = parseInt(product.quantity);
-    const discountedPrice = parseFloat(product.discounted_price);
+    const quantity = parseInt(product.amount);
+    const discountedPrice = parseFloat(product.salePrice);
 
     const productPrice = discountedPrice ? discountedPrice : price;
 
