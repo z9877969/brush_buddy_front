@@ -17,6 +17,5 @@ const getBody = (cityName) => ({
 
 export const requestCity = async (cityName) => {
   const response = await instance.post('', getBody(cityName));
-  console.log(response);
   return response.data;
 };
