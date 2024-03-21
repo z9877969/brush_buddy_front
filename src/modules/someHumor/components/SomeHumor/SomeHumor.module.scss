@@ -1,0 +1,95 @@
+.section {
+  padding: 48px 0;
+
+  @include media(tablet) {
+    padding: 68px 0;
+  }
+
+  @include media(desktop) {
+    padding: 100px 0;
+  }
+}
+
+.someHumorWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  color: $light-color;
+
+  background-color: $pet-color;
+  padding: 24px;
+  border-radius: 24px;
+
+  @include media(tablet) {
+    flex-direction: row;
+    gap: 48px;
+    padding: 32px;
+  }
+
+  @include media(desktop) {
+    gap: 64px;
+    padding: 44px;
+  }
+}
+
+.iconSomeHumorContainer {
+  max-width: 44px;
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: $light-color;
+
+    @include media(tablet) {
+      width: 44px;
+      height: 44px;
+    }
+  }
+}
+
+.someHumorText {
+  @include font(20, 28);
+
+  @include media(tablet) {
+    @include font(32, 36);
+  }
+}
+
+.yourBrushWrap {
+  display: flex;
+  gap: 24px;
+  padding-top: 32px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.iconLogoContainer {
+  max-width: 48px;
+  max-height: 48px;
+  background-color: $light-color;
+  padding: 12px;
+  border-radius: 100px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: $primary-text-color;
+
+    @include media(talbet) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  p {
+    @include font(16, 24);
+
+    @include media(tablet) {
+      @include font(18, 24);
+    }
+  }
+
+  @include media(talbet) {
+    max-width: 60px;
+    max-height: 60px;
+  }
+}

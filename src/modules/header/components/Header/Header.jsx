@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import CartButton from '../CartButton/CartButton';
@@ -8,18 +8,24 @@ import s from './Header.module.scss';
 import { Container, Logo } from 'shared/components';
 import BurgerButton from '../BurgerButton/BurgerButton';
 import MobileMenu from '../MobileMenu/MobileMenu';
+import { useMedia } from 'hooks/useMedia';
 
 const Header = () => {
   const [isDiscountReminderOpen, setDiscountReminderOpen] = useState(true);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const media = useMedia();
 
   const handleCloseDiscountReminder = () => {
     setDiscountReminderOpen(false);
   };
 
-  const handleMenuToggle = () => {
-    setMenuOpen(!isMenuOpen);
-  };
+  const handleMenuToggle = useCallback(() => {
+    setMenuOpen((p) => !p);
+  }, []);
+
+  const handleMenuClose = useCallback(() => {
+    setMenuOpen(false);
+  }, []);
 
   return (
     <header className={s.header}>
@@ -41,7 +47,9 @@ const Header = () => {
         </Container>
       </div>
 
-      <MobileMenu isOpen={isMenuOpen} onClose={handleMenuToggle} />
+      {!media.isDesktop && (
+        <MobileMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
+      )}
     </header>
   );
 };

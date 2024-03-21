@@ -1,0 +1,27 @@
+.typeIconWrapper {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  justify-content: end;
+
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.typeIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.animal {
+  fill: $pet-color;
+}
+
+.child {
+  fill: $child-color;
+}
+
+.adult {
+  fill: $adult-color;
+}

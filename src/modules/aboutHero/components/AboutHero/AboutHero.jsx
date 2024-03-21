@@ -57,13 +57,13 @@ const AboutHero = () => {
                   <svg className={s.adult} width={56} height={56}>
                     <use href={sprite + '#icon-bage-adult'}></use>
                   </svg>
-                  <p>для тварин</p>
+                  <p>для дорослих</p>
                 </li>
                 <li>
                   <svg className={s.child} width={56} height={56}>
                     <use href={sprite + '#icon-bage-child'}></use>
                   </svg>
-                  <p>для тварин</p>
+                  <p>для дітей</p>
                 </li>
               </ul>
             </div>

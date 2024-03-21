@@ -1,0 +1,43 @@
+.section {
+  margin-top: 178px;
+  margin-bottom: 178px;
+  text-align: center;
+  @include media(tablet) {
+    margin-top: 249px;
+    margin-bottom: 249px;
+  }
+}
+.title {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-weight: 900;
+  color: $primary-text-color;
+  @include font(36, 44);
+  @include media(tablet) {
+    @include font(48, 56);
+  }
+}
+.text {
+  margin-bottom: 32px;
+  font-weight: 500;
+  color: #49494a;
+  @include font(16, 24);
+}
+.linkButton {
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  border-radius: 200px;
+  padding: 12px 24px;
+  background: $pet-color;
+  font-weight: 500;
+  color: $light-color;
+  @include font(16, 24);
+  @include media(tablet) {
+    padding: 16px 40px;
+  }
+}
+.animation {
+  margin: 0 auto;
+  @include media(tablet) {
+    width: 577px;
+  }
+}
