@@ -9,7 +9,6 @@ const CartListCurrentItem = ({
   onClickDelete,
   //onClickAdd,
 }) => {
-  console.log(data);
   const elements = data.map(
     ({
       id,
