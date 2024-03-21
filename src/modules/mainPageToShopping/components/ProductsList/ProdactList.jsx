@@ -10,18 +10,7 @@ const ProductsList = ({ title, products, batchSize }) => {
 
   const elements = useMemo(() => {
     return visibleProducts.map((product) => (
-      <ProductCardItem
-        id={product.id}
-        name={product.name}
-        price={product.price}
-        old_price={product.old_price}
-        category={product.category}
-        age_range={product.age_range}
-        status={product.status}
-        image={product.image}
-        key={product.id}
-        total_quantity={product.total_quantity}
-      />
+      <ProductCardItem {...product} key={product.title} />
     ));
   }, [visibleProducts]);
 

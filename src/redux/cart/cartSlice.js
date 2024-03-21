@@ -6,19 +6,7 @@ import { totalPrice, totalPriceDiscount } from 'modules/cart';
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    products: [
-      {
-        id: 'yrf44b',
-        type: 'toothbrush',
-        image:
-          'https://pro-white.ru/wp-content/uploads/2016/10/VITIS-SOFT-2.jpg',
-        name: 'Oral-B Pro 1000',
-        color: 'white',
-        quantity: 100,
-        price: 150,
-        discounted_price: null,
-      },
-    ],
+    products: [],
     totalPrice: 0,
     promoCode: null,
     discount: 0,
@@ -33,15 +21,30 @@ const cartSlice = createSlice({
       );
       state.totalPrice = totalPrice(state.products);
     },
-    changeProductQuantity(state, action) {
-      const { id, newCount } = action.payload;
-      const productIndex = state.products.findIndex(
-        (product) => product.id === id
-      );
+    changeProductAmount(state, action) {
+      const { id, quantity, flavor, volume, color, newCount } = action.payload;
+
+      const productIndex = state.products.findIndex((product) => {
+        if (product.id === id) {
+          if (
+            product.flavors &&
+            product.flavors.flavor === flavor &&
+            product.volume === volume
+          ) {
+            return true;
+          }
+          if (product.colors && product.colors.color === color) {
+            return true;
+          }
+        }
+
+        return false;
+      });
+
       if (productIndex !== -1) {
-        state.products[productIndex].quantity = newCount;
+        state.products[productIndex].amount = newCount;
         state.products[productIndex].isDisabledIncrement =
-          newCount === state.products[productIndex].total_quantity;
+          newCount === quantity;
       }
       state.totalPrice = totalPrice(state.products);
       if (state.promoCode !== null) {
@@ -68,7 +71,7 @@ const cartSlice = createSlice({
 export const {
   addProduct,
   removeProduct,
-  changeProductQuantity,
+  changeProductAmount,
   addTotalPrice,
   usedPromoCode,
   notUsedPromoCode,

@@ -1,12 +1,12 @@
-const ProdList = ({ currentItems = [] }) => {
+import { ProductCardItem } from 'shared/components';
+import s from './ProdList.module.scss';
+const ProdList = ({ products }) => {
   return (
-    <div>
-      {currentItems.map(({ image, title }, index) => (
-        <div key={index}>
-          <img src={image} alt={title} />
-        </div>
+    <ul className={s.prodList}>
+      {products.map((item) => (
+        <ProductCardItem {...item} key={item.title} />
       ))}
-    </div>
+    </ul>
   );
 };
 
