@@ -35,3 +35,9 @@
     padding: 16px 40px;
   }
 }
+.animation {
+  margin: 0 auto;
+  @include media(tablet) {
+    width: 577px;
+  }
+}

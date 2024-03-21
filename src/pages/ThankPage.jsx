@@ -1,9 +1,7 @@
+import { OrderFinished } from 'modules/orderFinished';
+
 const ThankPage = () => {
-  return (
-    <>
-      <h1>ThankPage</h1>
-    </>
-  );
+  return <OrderFinished />;
 };
 
 export default ThankPage;
