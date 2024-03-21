@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getProducts } from './productsOperations';
 
 const productsSlice = createSlice({
   name: 'products',
@@ -9,6 +10,11 @@ const productsSlice = createSlice({
     addProductsList(state, { payload }) {
       state.list = payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getProducts.fulfilled, (state, { payload }) => {
+      state.list = payload;
+    });
   },
 });
 
