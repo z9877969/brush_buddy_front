@@ -8,4 +8,4 @@ export const NotFoundPage = lazy(() => import('./NotFoundPage'));
 export const ProductCardPage = lazy(() => import('./ProductCardPage'));
 export const ProductsPage = lazy(() => import('./ProductsPage'));
 export const ThankPage = lazy(() => import('./ThankPage'));
-export const Empty = lazy(() => import('./Empty'));
+export const CartEmptyPage = lazy(() => import('./CartEmptyPage'));

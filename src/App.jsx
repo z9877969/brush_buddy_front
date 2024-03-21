@@ -9,7 +9,7 @@ import {
   ProductCardPage,
   ProductsPage,
   ThankPage,
-  Empty,
+  CartEmptyPage,
 } from './pages';
 import { SharedLayout } from 'shared/components';
 import ScrollToTop from 'shared/components/ScrollToTop/ScrollToTop';
@@ -35,7 +35,7 @@ function App() {
           <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
           <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
           <Route path={ROUTES.THANK} element={<ThankPage />} />
-          <Route path={ROUTES.EMPTY} element={<Empty />} />
+          <Route path={ROUTES.CART_EMPTY} element={<CartEmptyPage />} />
           <Route path="*" element={<Navigate to={ROUTES.MAIN} />} />
         </Route>
       </Routes>
