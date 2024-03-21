@@ -21,10 +21,29 @@ const initialState = {
   status: 'idle',
 };
 
+const initialStateUser = {
+  userNames: '',
+  userEmail: '',
+  userPhone: '',
+  city: null, // обєкт конкретного міста
+  department: null, //те відділення яке юзер вибере зі списка
+};
+
 const novaPoshtaSlice = createSlice({
   name: 'novaPoshta',
-  initialState,
-  reducers: {},
+  initialState: { ...initialState, ...initialStateUser },
+  reducers: {
+    setOrderNames(state, { payload }) {
+      state.userNames = payload;
+      //   return { ...state, ...payload };
+    },
+    setOrderEmail(state, { payload }) {
+      state.userEmail = payload;
+    },
+    setOrderPhone(state, { payload }) {
+      state.userPhone = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(apiGetCity.pending, (state) => {
@@ -33,7 +52,6 @@ const novaPoshtaSlice = createSlice({
       })
       .addCase(apiGetCity.fulfilled, (state, action) => {
         state.status = 'success';
-        console.log(action.payload);
         state.cityData = action.payload;
       })
       .addCase(apiGetCity.rejected, (state, action) => {
@@ -42,5 +60,8 @@ const novaPoshtaSlice = createSlice({
       });
   },
 });
+
+export const { setOrderNames, setOrderEmail, setOrderPhone } =
+  novaPoshtaSlice.actions;
 
 export const novaPoshtaReducer = novaPoshtaSlice.reducer;

@@ -4,18 +4,19 @@ const instance = axios.create({
   baseURL: 'https://api.novaposhta.ua/v2.0/json/',
 });
 
+const getBody = (cityName) => ({
+  apiKey: 'fd98607b38c9aafeba92696d45e45cb5',
+  modelName: 'Address',
+  calledMethod: 'searchSettlements',
+  methodProperties: {
+    CityName: cityName,
+    Limit: '50',
+    Page: '2',
+  },
+});
+
 export const requestCity = async (cityName) => {
-  const encodedCityName = encodeURIComponent(cityName);
-  const { data } = await instance.get('', {
-    params: {
-      modelName: 'Address',
-      calledMethod: 'searchSettlements',
-      methodProperties: {
-        CityName: encodedCityName,
-        Limit: 50,
-        Page: 2,
-      },
-    },
-  });
-  return data;
+  const response = await instance.post('', getBody(cityName));
+  console.log(response);
+  return response.data;
 };
