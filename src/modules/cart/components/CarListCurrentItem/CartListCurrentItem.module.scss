@@ -1,17 +1,24 @@
-.itemproduct {
+.itemBox {
   border-bottom: 1px solid rgba(31, 31, 31, 0.1);
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
+  flex-direction: column;
   gap: 16px;
-  align-self: stretch;
+  width: 100%;
 
   &:not(:first-child) {
     margin-top: 24px;
   }
   @include media(tablet) {
     position: relative;
-    gap: 24px;
+    gap: 0;
+    align-items: flex-start;
   }
+}
+
+.itemproduct {
+  display: flex;
+  gap: 16px;
 }
 .itemInfo {
   width: 100%;
@@ -35,6 +42,7 @@
   @include media(tablet) {
     position: absolute;
     bottom: 0;
+    left: 19%;
   }
 }
 .classSvg {
@@ -65,7 +73,12 @@
     overflow: hidden;
   }
 }
+.itemColor {
+  text-transform: capitalize;
+}
 .itemDetails {
+  display: flex;
+  gap: 4px;
   color: $secondary-text-color;
   font-weight: 500;
   @include font(16, 24);
@@ -120,6 +133,7 @@
 }
 .itemFooter {
   display: flex;
+  width: 75%;
   justify-content: space-between;
 }
 .btnTest {
