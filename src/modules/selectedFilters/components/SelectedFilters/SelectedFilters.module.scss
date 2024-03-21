@@ -1,0 +1,24 @@
+.filtersWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.filtersBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.resetBtn {
+  width: 220px;
+  height: 48px;
+  border-radius: 200px;
+  border: 1px solid rgba(31, 31, 31, 0.1);
+
+  &:hover,
+  &:focus {
+    background-color: #f5516f;
+    color: #ffffff;
+  }
+}

@@ -1,62 +1,42 @@
 .section {
   background-color: $adult-color;
-
+  width: 100%;
+  margin: 0 auto;
+}
+.container {
   display: flex;
   padding: 52px 0px 16px 0px;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  gap: -16px;
   align-self: stretch;
-  width: 100%;
-  height: auto;
-
-  margin: 0 auto;
+  width: $mobile;
 
   @include media(tablet) {
     padding: 60px 64px 24px 64px;
-    gap: -210px;
+    width: $tablet;
+    height: 871px;
   }
   @include media(desktop) {
+    width: $desktop;
     flex-direction: row;
     height: 720px;
-    padding: 32px 64px;
+    padding: 32px 0px;
     justify-content: center;
     align-items: flex-end;
     gap: 120px;
   }
 }
-.container {
-  @include media(tablet) {
-    width: 100%;
-    height: auto;
-    display: flex;
-    padding: 0px;
-    align-items: center;
-    gap: 120px;
-    align-self: stretch;
-  }
-  @include media(desktop) {
-    width: auto;
-    height: 100%;
-    display: flex;
-    padding: 0px 64px;
-    align-items: center;
-    gap: 120px;
-    align-self: stretch;
-  }
-}
 .titleContainer {
   display: flex;
+  height: 280px;
   padding: 0px 16px;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
   align-self: stretch;
   border-radius: 24px;
-
   width: 100%;
-  height: 280px;
 
   @include media(tablet) {
     gap: 48px;
@@ -67,6 +47,9 @@
     width: auto;
     height: auto;
     gap: 64px;
+    padding: 0 64px;
+    justify-content: center;
+    align-items: flex-start;
   }
 }
 .mainHeroTitle {
@@ -76,7 +59,6 @@
 
   width: 100%;
   height: auto;
-
   @include font(64, 64);
 
   @include media(tablet) {
@@ -97,9 +79,12 @@
   background-color: $pet-color;
   color: $light-color;
   width: auto;
+  height: 56px;
+  border: none;
   & svg {
     display: none;
   }
+
   @include media(tablet) {
     width: auto;
     height: auto;
@@ -117,15 +102,19 @@
   color: $light-color;
 }
 .animation {
-  display: flex;
+  margin-top: -16px;
+  // display: flex;
   width: 343px;
   height: 344px;
 
   @include media(tablet) {
+    margin-top: -210px;
+
     width: 653px;
     height: 653px;
   }
   @include media(desktop) {
+    margin-top: 0;
     width: 653px;
     height: 653px;
   }

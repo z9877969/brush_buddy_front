@@ -48,7 +48,7 @@ const HelpersCardList = ({
           spaceBetween: 24,
         },
         1440: {
-          slidesPerView: 1.7,
+          slidesPerView: 2,
           spaceBetween: 24,
         },
       }}
@@ -56,7 +56,7 @@ const HelpersCardList = ({
     >
       {helpersCardData.map(({ id, title, price, text, image }) => (
         <SwiperSlide key={id}>
-          <Link to={ROUTES.PRODUCTS}>
+          <Link className={s.link} to={ROUTES.PRODUCTS}>
             <div className={s.mainHelpersBox}>
               <div className={s.boxTitleText}>
                 <div className={s.helpersBoxTitle}>

@@ -56,11 +56,6 @@ button {
   transition: border-color 0.25s;
 }
 
-button:focus,
-button:focus-visible {
-  outline: 2px auto -webkit-focus-ring-color;
-}
-
 img {
   display: block;
   width: 100%;

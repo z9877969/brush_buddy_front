@@ -1,6 +1,13 @@
 .section {
   padding: 16px 0;
-  background-color: $adult-color;
+  background-color: white;
+  margin-top: 48px;
+  @include media(tablet) {
+    margin-top: 68px;
+  }
+  @include media(desktop) {
+    margin-top: 100px;
+  }
 }
 
 .containerAbout {
@@ -81,6 +88,9 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
+  @include media(tablet) {
+    width: 150px;
+  }
 }
 
 .benefits {
@@ -92,7 +102,7 @@
 .benefitsImage {
   fill: $light-color;
   display: flex;
-  margin: 9px auto;
+  margin: 9px 8px;
 }
 
 .toothbrush {
@@ -157,7 +167,11 @@
 
 .button:hover,
 .button:focus {
-  color: #f5516f;
+  color: $light-color;
+  background-color: $pet-color;
+  svg {
+    fill: $light-color;
+  }
 }
 
 .buttonBlock {

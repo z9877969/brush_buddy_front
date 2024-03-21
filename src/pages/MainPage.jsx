@@ -4,7 +4,7 @@ import { MainPageHero } from 'modules/mainPageHero';
 import { MainPageDialog } from 'modules/mainPageDialog';
 import { MainPageBlog } from 'modules/mainPageBlog';
 import { MainPageToShopping } from 'modules/mainPageToShopping';
-
+import { MainPageReviews } from 'modules/mainPageReviews';
 const MainPage = () => {
   return (
     <>
@@ -12,8 +12,9 @@ const MainPage = () => {
       <MainPageAbout />
       <MainPageDialog />
       <MainPageToShopping />
-      <MainPageBlog />
       <MainPageHelpers />
+      <MainPageBlog />
+      <MainPageReviews />
     </>
   );
 };

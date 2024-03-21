@@ -40,6 +40,7 @@
   & svg {
     width: 24px;
     height: 24px;
+    fill: $primary-text-color;
   }
 
   &:hover,
@@ -67,8 +68,14 @@
   align-items: center;
   justify-content: space-between;
 
-  // @include media(to-tablet) {
-  //   overflow: auto;
-  //   column-gap: 24px;
-  // }
+  @include media(tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    column-gap: 24px;
+  }
+
+  @include media(desktop) {
+    column-gap: 37px;
+  }
 }

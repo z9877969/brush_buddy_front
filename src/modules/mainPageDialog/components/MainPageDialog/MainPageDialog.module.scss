@@ -65,7 +65,7 @@
 .slide1 {
   animation-name: slide1mobile;
   position: absolute;
-  z-index: 999;
+  z-index: 1;
   top: 48px;
   @include media(tablet) {
     animation-name: slide1tablet;
@@ -121,7 +121,7 @@
 .slide2 {
   animation-name: slide2mobile;
   position: absolute;
-  z-index: 999;
+  z-index: 1;
   top: 216px;
   @include media(tablet) {
     animation-name: slide2tablet;
@@ -178,7 +178,7 @@
 .slide3 {
   animation-name: slide3mobile;
   position: absolute;
-  z-index: 999;
+  z-index: 1;
   top: 320px;
   @include media(tablet) {
     animation-name: slide3tablet;
@@ -234,7 +234,7 @@
 .slide4 {
   animation-name: slide4mobile;
   position: absolute;
-  z-index: 999;
+  z-index: 1;
   top: 515px;
   @include media(tablet) {
     animation-name: slide4tablet;
@@ -254,8 +254,7 @@
   @include media(tablet) {
     width: 132px;
     height: 83px;
-    left: 50%;
-    right: 112px;
+    left: 520px;
     top: 96px;
   }
   @include media(desktop) {

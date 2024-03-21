@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import s from './MobileNav.module.scss';
 import ProductDropDown from '../ProductDropDown/ProductDropDown';
 import { ROUTES } from 'shared/constants';
+import { scrollToTop } from '../../../../helper/ScrollToTop';
 
 const MobileNav = () => {
   return (
@@ -10,7 +11,10 @@ const MobileNav = () => {
         <NavLink
           to={'/'}
           exact="true"
-          className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
+          className={({ isActive }) =>
+            isActive ? s.activeNavLink : s.mobileNavLink
+          }
+          onClick={scrollToTop}
         >
           Головна
         </NavLink>
@@ -21,8 +25,9 @@ const MobileNav = () => {
           className={({ isActive }) =>
             isActive ? s.activeNavLink : s.mobileNavLink
           }
+          onClick={scrollToTop}
         >
-          Про БрашБаді
+          Про БрашБадді
         </NavLink>
       </li>
 

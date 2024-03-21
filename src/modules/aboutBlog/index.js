@@ -1,0 +1,1 @@
+export { default as AboutBlog } from "./components/AboutBlog/AboutBlog"

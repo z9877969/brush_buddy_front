@@ -1,0 +1,160 @@
+.reviewsBoxAll {
+  position: relative;
+  @include media(tablet) {
+    padding-bottom: 68px;
+  }
+  @include media(desktop) {
+    padding-bottom: 100px;
+  }
+}
+
+.mainReviewsTitle {
+  padding-bottom: 32px;
+  display: flex;
+  justify-content: center;
+
+  @include media(tablet) {
+    justify-content: left;
+    @include font(48, 56);
+    padding-bottom: 64px;
+  }
+
+  @include media(desktop) {
+    @include font(56, 64);
+  }
+}
+
+.reviewsCardUL {
+  display: flex;
+  gap: 24px;
+}
+
+.mainReviewsBox {
+  box-sizing: border-box;
+  padding: 24px;
+  margin-bottom: 32px;
+  border-radius: 24px;
+  background-color: $light-color;
+
+  @include media(tablet) {
+    padding: 32px;
+    margin-bottom: 64px;
+  }
+  @include media(desktop) {
+    margin-bottom: 0;
+  }
+
+  .boxTitleText {
+    margin-bottom: 24px;
+  }
+  h3 {
+    @include font(24, 32);
+
+    @include media(tablet) {
+      @include font(32, 36);
+      font-weight: 500;
+    }
+  }
+
+  .reviewsBoxTitle {
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 16px;
+
+    @include media(tablet) {
+      margin-bottom: 20px;
+    }
+  }
+  .reviewsBoxPrice {
+    @include font(16, 24);
+    margin-bottom: 16px;
+  }
+  .reviewsBoxText {
+    @include font(18, 28);
+  }
+}
+
+.imageDiv {
+  border: 1px solid $card-border-color;
+  border-radius: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageDiv > img {
+  width: 310px;
+  height: 190px;
+}
+.mainReviewsSlider {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding-bottom: 48px;
+  margin-top: 32px;
+
+  @include media(tablet) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-bottom: 0;
+    gap: 16px;
+    margin-top: 0px;
+  }
+
+  @include media(desktop) {
+    padding: 4px 0;
+  }
+
+  .reviewsSliderButton {
+    border: 1px solid $disabled-bg-color;
+    & svg {
+      fill: $primary-text-color;
+      width: 25px;
+      height: 25px;
+
+      @include media(tablet) {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $disabled-border-color;
+    }
+  }
+
+  .reviewsSliderButtonDisabled {
+    border: 1px solid $disabled-border-color;
+
+    & svg {
+      fill: $disabled-content-color;
+
+      @include media(tablet) {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}
+
+.mainReviewsSlider > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  padding: 0;
+
+  @include media(tablet) {
+    height: 56px;
+    width: 56px;
+  }
+}

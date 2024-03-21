@@ -1,12 +1,16 @@
 import { sprite } from 'shared/icons';
 import s from './Logo.module.scss';
+import { Link } from 'react-router-dom';
+import { scrollToTop } from '../../../helper/ScrollToTop';
 
 const Logo = () => {
   return (
     <div className={s.logo}>
-      <svg>
-        <use href={sprite + '#icon-logo'}></use>
-      </svg>
+      <Link to="/" className={s.logoLink} onClick={scrollToTop}>
+        <svg>
+          <use href={sprite + '#icon-logo'}></use>
+        </svg>
+      </Link>
     </div>
   );
 };

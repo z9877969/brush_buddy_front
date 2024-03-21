@@ -1,5 +1,6 @@
 import { Container } from 'shared/components';
 import { MainTitle } from 'shared/components';
+import { Picture } from 'shared/components';
 import s from './AboutHero.module.scss';
 import { sprite } from 'shared/icons';
 
@@ -18,21 +19,17 @@ const AboutHero = () => {
       <Container>
         <MainTitle title={'Про БрашБадді'} className={s.aboutHeroTittle} />
         <div className={s.boxInfo}>
-          <picture>
-            <source
-              srcSet={`${IMG1xMobile} 1x, ${IMG2xMobile} 2x`}
-              media="(min-width: 320px)"
-            ></source>
-            <source
-              srcSet={`${IMG1xTablet} 1x, ${IMG2xTablet} 2x`}
-              media="(min-width: 768px)"
-            ></source>
-            <source
-              srcSet={`${IMG1xDesktop} 1x, ${IMG2xDesktop} 2x`}
-              media="(min-width: 1440px)"
-            ></source>
-            <img src={IMGDefault} alt="photo Polina" width={343}></img>
-          </picture>
+          <Picture
+            mob1x={IMG1xMobile}
+            mob2x={IMG2xMobile}
+            tab1x={IMG1xTablet}
+            tab2x={IMG2xTablet}
+            desk1x={IMG1xDesktop}
+            desk2x={IMG2xDesktop}
+            defaultImg={IMGDefault}
+            width={343}
+            alt="photo"
+          />
           <div>
             <p className={s.textHero}>
               BrushBuddy - хаб доглядових товарів за порожниною рота та зубами
@@ -60,13 +57,13 @@ const AboutHero = () => {
                   <svg className={s.adult} width={56} height={56}>
                     <use href={sprite + '#icon-bage-adult'}></use>
                   </svg>
-                  <p>для тварин</p>
+                  <p>для дорослих</p>
                 </li>
                 <li>
                   <svg className={s.child} width={56} height={56}>
                     <use href={sprite + '#icon-bage-child'}></use>
                   </svg>
-                  <p>для тварин</p>
+                  <p>для дітей</p>
                 </li>
               </ul>
             </div>

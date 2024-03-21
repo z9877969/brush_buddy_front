@@ -1,0 +1,91 @@
+[
+  {
+    "id": "1",
+    "imgs": [
+      {
+        "url": "https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on"
+      },
+      {
+        "url": "https://i5.walmartimages.com/seo/Colgate-Gum-Health-Adult-Toothbrush-Ultra-Soft-Bristles-2-Count_4f6680d6-97b3-4753-a261-9d0d2596bcdf.228c2323b3bbe0c903ee5edec820d917.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF"
+      },
+      {
+        "url": "https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on"
+      },
+      {
+        "url": "https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on"
+      }
+    ],
+    "title": "Зубна щітка СS 5460 Ultra Soft",
+    "descr": "У більшості випадків, пацієнти не звертають уваги на розмір головки щітки, кількість і товщину щетинок на ній — купують або красиві, або бюджетні, які не шкода міняти через два-три місяці. ",
+    "price": "288.80 грн",
+    "salePrice": "188.80 грн",
+    "colors": [
+      {
+        "color": "green"
+      },
+      {
+        "color": "blue"
+      },
+      {
+        "color": "yellow"
+      },
+      {
+        "color": "pink"
+      }
+    ],
+    "flavors": [
+      {
+        "flavor": "Apple",
+        "color": "green"
+      },
+      {
+        "flavor": "Mango",
+        "color": "orange"
+      },
+      {
+        "flavor": "Cherry",
+        "color": "red"
+      },
+      {
+        "flavor": "Watermelon",
+        "color": "pink"
+      }
+    ],
+    "litter": [
+      {
+        "ml": 50
+      },
+      {
+        "ml": 100
+      },
+      {
+        "ml": 200
+      }
+    ],
+    "itme": true,
+    "quantit": 1,
+    "quantity": 10,
+    "subtitle": "g",
+    "recomendation": "Щітки з м’якими щетинками підходять пацієнтам з хворобами і кровоточивістю ясен. Ще такі щітки рекомендуються тим, у кого занадто тонка емаль."
+  },
+  {
+    "id": "2",
+    "imgs": [],
+    "title": "Ортодонтична зубна щітка Nordics 6580 Ortho",
+    "text": "У більшості випадків, пацієнти не звертають уваги на розмір головки щітки, кількість і товщину щетинок на ній — купують або красиві, або бюджетні, які не шкода міняти через два-три місяці. ",
+    "price": 288.80,
+    "salePrice": 0,
+    "colors": [
+      {
+        "color": "lightviolet"
+      }
+    ],
+    "flavors": [],
+    "litter": [],
+    "itme": true,
+    "quantit": 1,
+    "quantity": 10,
+    "subtitle": "g",
+    "recomendation": "Щітки з м’якими щетинками підходять пацієнтам з хворобами і кровоточивістю ясен. Ще такі щітки рекомендуються тим, у кого занадто тонка емаль."
+  }
+]

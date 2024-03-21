@@ -6,7 +6,7 @@ import Discount from '../Discount/Discount';
 import Rights from '../Rights/Rights';
 const Footer = () => {
   return (
-    <footer className={s.footer}>
+    <footer className={s.footer} id="footer">
       <Container>
         <div className={s.twoBlocks}>
           <div className={s.leftBlock}>

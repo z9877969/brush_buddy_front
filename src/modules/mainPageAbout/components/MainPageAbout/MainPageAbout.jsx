@@ -43,17 +43,17 @@ const MainPageAbout = () => {
               <p className={s.benefitsText}>Профілаkтиkа - це kруто</p>
             </div>
             <div className={s.benefits}>
-              <div className={s.child}>
+              <div className={s.pets}>
                 <svg width="32" height="32" className={s.benefitsImage}>
-                  <use href={sprite + '#icon-bage-child'}></use>
+                  <use href={sprite + '#icon-cat'}></use>
                 </svg>
               </div>
               <p className={s.benefitsText}>Щіточkи для твариноk</p>
             </div>
             <div className={s.benefits}>
-              <div className={s.pets}>
+              <div className={s.child}>
                 <svg width="32" height="32" className={s.benefitsImage}>
-                  <use href={sprite + '#icon-cat'}></use>
+                  <use href={sprite + '#icon-bage-child'}></use>
                 </svg>
               </div>
               <p className={s.benefitsText}>Кідс&петс френдлі</p>
@@ -64,16 +64,12 @@ const MainPageAbout = () => {
             <img className={s.image} src={PolinaImg} alt="Polina" />
           </picture>
           <div className={s.buttonBlock}>
-            <LinkButton
-              className={s.button}
-              title={'Читати ще'}
-              to={'/AboutPage'}
-            />
+            <LinkButton className={s.button} title={'Читати ще'} to={'about'} />
           </div>
         </div>
       </Container>
     </section>
   );
-}; 
+};
 
 export default MainPageAbout;
