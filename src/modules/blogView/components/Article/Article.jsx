@@ -6,21 +6,27 @@ import ArticlePrimaryTitle from '../ArticlePrimaryTitle/ArticlePrimaryTitle';
 import ArticleSecondaryTitle from '../ArticleSecondaryTitle/ArticleSecondaryTitle';
 
 const Article = ({ article }) => {
-  const blocks = article.map((part) => {
+  const blocks = article.map((part, index) => {
     // console.log('block' + part.block);
     switch (part.block) {
       case 'primaryTitle':
-        return <ArticlePrimaryTitle content={part.content} />;
+        return <ArticlePrimaryTitle key={index} content={part.content} />;
       case 'secondaryTitle':
-        return <ArticleSecondaryTitle content={part.content} />;
+        return <ArticleSecondaryTitle key={index} content={part.content} />;
       case 'about':
-        return <ArticleAbout content={part.content} />;
+        return <ArticleAbout key={index} content={part.content} />;
       case 'paragraph':
-        return <ArticleParagraph content={part.content} accent={part.accent} />;
+        return (
+          <ArticleParagraph
+            key={index}
+            content={part.content}
+            accent={part.accent}
+          />
+        );
       case 'list':
-        return <ArticleList content={part.content} />;
+        return <ArticleList key={index} content={part.content} />;
       default:
-        return <p>Section unsupported</p>;
+        return <p key={index}>Section unsupported</p>;
     }
   });
   return <div className={css.section}> {blocks}</div>;
