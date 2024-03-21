@@ -8,6 +8,7 @@ export const ROUTES = {
   PRODUCT_CARD: 'products/:productId',
   PRODUCTS: 'products',
   THANK: 'thank',
+  EMPTY: 'empty',
   GET_BLOG_ID: (blogId) => `/blog/${blogId}`,
 };
 
