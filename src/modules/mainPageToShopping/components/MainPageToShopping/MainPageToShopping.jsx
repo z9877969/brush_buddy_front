@@ -1,51 +1,47 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Container, LinkButton, MainTitle } from 'shared/components';
 import s from './MainPageToShopping.module.scss';
-import products from '../../../products/db/products.json';
 import ProductsList from '../ProductsList/ProdactList';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProductsList } from '@redux/products/productsSlice';
+import data from '../../../paginateProdList/data/products.json';
 
 const MainPageToShopping = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [prodToRender, setProdToRender] = useState(null);
+  const dispatch = useDispatch();
 
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
   };
 
   useEffect(() => {
+    dispatch(addProductsList(data));
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  });
 
   useEffect(() => {
     if (screenWidth < 768) {
       setProdToRender(1);
-    } else if (screenWidth >= 768 && screenWidth < 1024) {
+    } else if (screenWidth >= 768 && screenWidth < 1199) {
       setProdToRender(2);
     } else {
       setProdToRender(4);
     }
   }, [screenWidth]);
 
-  const availableProducts = products.filter(
-    (product) => product.total_quantity > 0
-  );
+  const products = useSelector((s) => s.products.list);
 
-  const noventlyProducts = useMemo(() => {
-    return availableProducts.filter((product) => product.status === 'novently');
-  }, [availableProducts]);
+  const wowProducts = useMemo(() => {
+    return products.filter((product) => product.watermark[0] === 'wow');
+  }, [products]);
 
   const saleProducts = useMemo(() => {
-    return availableProducts.filter((product) => product.status === 'sale');
-  }, [availableProducts]);
-
-  // const noventlyProducts = products.filter(
-  //   (product) => product.status === 'novently'
-  // );
-
-  // const saleProducts = products.filter((product) => product.status === 'sale');
+    return products.filter((product) => product.watermark[0] === 'sale');
+  }, [products]);
 
   return (
     <section className={s.shoppingSection}>
@@ -53,7 +49,7 @@ const MainPageToShopping = () => {
         <MainTitle title={'До покупок'} className={s.shoppingTitle} />
         <ProductsList
           title={'Новинки'}
-          products={noventlyProducts}
+          products={wowProducts}
           batchSize={prodToRender}
         />
         <ProductsList

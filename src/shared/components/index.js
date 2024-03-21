@@ -8,5 +8,5 @@ export { default as ProductCardItem } from './ProductCardItem/ProductCardItem';
 export { default as LinkButton } from './LinkButton/LinkButton';
 export { default as Loader } from './Loader/Loader';
 export { default as Picture } from './Picture/Picture';
-export { default as ProductCategoryIcon } from './ProductCardItem/ProductCategoryIcon/ProductCategoryIcon';
-export { default as ProductStatusIcon } from './ProductCardItem/ProductStatusIcon/ProductStatusIcon';
+export { default as ProductTypeIcon } from './ProductCardItem/ProductTypeIcon/ProductTypeIcon';
+export { default as ProductWatermark } from './ProductCardItem/ProductWatermark/ProductWatermark';
