@@ -30,11 +30,11 @@ const CartListCurrentProducts = () => {
     );
   };
   useEffect(() => {
-    dispatch(addTotalPrice());
-  }, [dispatch]);
+    dispatch(addTotalPrice(products));
+  }, [dispatch, products]);
 
-  const onClickDelete = (id) => {
-    dispatch(removeProduct({ id }));
+  const onClickDelete = (id, flavor, color, volume) => {
+    dispatch(removeProduct(id, flavor?.flavor, volume?.volume, color?.color));
   };
 
   return (

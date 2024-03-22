@@ -82,11 +82,3 @@
     margin-left: 32px;
   }
 }
-.blockPagination {
-  @include media(desktop) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-}

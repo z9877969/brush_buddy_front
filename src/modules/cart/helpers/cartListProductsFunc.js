@@ -18,5 +18,5 @@ export function totalPrice(products) {
 export function totalPriceDiscount(totalPriceDisc) {
   const discount = 0.1;
   const discountedPrice = totalPriceDisc * discount;
-  return discountedPrice;
+  return discountedPrice.toFixed(2);
 }

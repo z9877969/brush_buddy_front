@@ -7,6 +7,7 @@ const OrederSummary = () => {
   const priceDisc = useSelector(selectDiscount);
   const totalPriceWithoutDisc = useSelector(selectTotalPrice);
   const totalPrice = totalPriceWithoutDisc - priceDisc;
+  const fixTotalprice = totalPrice.toFixed(2);
   return (
     <section className={s.boxSummary}>
       <div className={s.boxSum}>
@@ -25,7 +26,7 @@ const OrederSummary = () => {
       </div>
       <div className={s.total}>
         <p>Загальна сума</p>
-        <p>{totalPrice} грн</p>
+        <p>{fixTotalprice} грн</p>
       </div>
       <Button type="submit" title={'Оформити замовлення'} className={s.btn} />
       <p className={s.accept}>
