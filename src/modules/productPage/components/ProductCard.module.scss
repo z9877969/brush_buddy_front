@@ -132,7 +132,6 @@
   padding: 12px 24px;
   width: 120px;
   height: 48px;
-  margin-bottom: 24px;
   svg {
     display: flex;
   }
@@ -140,9 +139,6 @@
     padding: 12px 20px;
     width: 123px;
     height: 56px;
-  }
-  @include media(tablet) {
-    margin-bottom: 32px;
   }
 }
 
@@ -179,4 +175,62 @@
   font-size: 16px;
   line-height: 150%;
   opacity: 0.3;
+}
+
+.grn {
+  margin-left: 2px;
+}
+
+.haveItem {
+  font-family: $main-font-family;
+  color: $primary-text-color;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.notHaveItem {
+  font-family: $main-font-family;
+  color: $pet-color;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.cartBlock {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  @include media(desktop) {
+    margin-bottom: 32px;
+  }
+}
+
+.addCart {
+  border-radius: 200px;
+  padding: 12px 24px;
+  width: 145px;
+  height: 48px;
+  background-color: $pet-color;
+  @include media(tablet) {
+    padding: 16px 40px;
+    width: 186px;
+    height: 56px;
+  }
+}
+
+.btnTest {
+  display: flex;
+  text-align: center;
+  font-family: $main-font-family;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #ffffff;
+  align-items: center;
+  gap: 2px;
+
+  svg {
+    fill: $light-color;
+  }
 }
