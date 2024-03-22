@@ -1,0 +1,15 @@
+.cityNameList {
+  position: absolute;
+  left: 0;
+  top: 56px;
+  width: 100%;
+  padding: 12px;
+  height: 200px;
+  @include font(16, 24);
+  font-weight: 500;
+  background-color: $light-color;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  border-radius: 16px;
+  z-index: 10;
+  overflow-y: auto;
+}

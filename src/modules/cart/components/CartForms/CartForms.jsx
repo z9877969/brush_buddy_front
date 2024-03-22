@@ -13,8 +13,9 @@ import s from './CartForms.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { apiGetCity } from '@redux/novaPoshta/novaPoshtaSlice';
-import { selectSubmitForm } from '@redux/cart/selectorsCart';
 import { submitForm } from '@redux/cart/cartSlice';
+import { selectSubmitForm } from '@redux/cart/selectorsCart';
+import CityNameItem from './CityNameItem';
 
 const options = [
   { label: 'one', value: 1, className: 'custom-class' },
@@ -23,9 +24,8 @@ const options = [
 
 const CartForms = () => {
   const dispatch = useDispatch();
-  // const postOffice = useSelector(selectPostOffice);
   const [debouncedValue, setValue] = useDebounceValue('', 1000);
-  const selector = useSelector(selectSubmitForm);
+  const SubmitForm = useSelector(selectSubmitForm);
   const maxLength = 300;
 
   useEffect(() => {
@@ -69,11 +69,11 @@ const CartForms = () => {
   });
 
   useEffect(() => {
-    if (selector) {
+    if (SubmitForm) {
       formik.submitForm();
       dispatch(submitForm(false));
     }
-  }, [selector, dispatch, formik]);
+  }, [SubmitForm, dispatch, formik]);
 
   return (
     <div className={s.cartForm}>
@@ -128,22 +128,17 @@ const CartForms = () => {
           className={`${s.cartFormLabel} ${formik.touched.city && formik.errors.city ? s.error : ''}`}
         >
           <span className={s.cartFormSpan}>Місто</span>
-          <input
-            name="city"
-            onChange={(event) => {
-              formik.handleChange(event);
-              setValue(event.target.value);
-            }}
-            value={formik.values.city}
-          />
-          <ul>
-            <li>city-1</li>
-            <li>city-2</li>
-            <li>city-3</li>
-            <li>city-4</li>
-            <li>city-5</li>
-            <li>city-6</li>
-          </ul>
+          <div className={s.inputCityName}>
+            <input
+              name="city"
+              onChange={(event) => {
+                formik.handleChange(event);
+                setValue(event.target.value);
+              }}
+              value={formik.values.city}
+            />
+            <CityNameItem />
+          </div>
 
           {formik.touched.name && formik.errors.city && (
             <div className={s.cartFormError}>{formik.errors.city}</div>
@@ -198,7 +193,6 @@ const CartForms = () => {
             Зберегти цю інформацію для наступного разу
           </label>
         </div>
-        <button type="submit">Submit</button>
       </form>
     </div>
   );
