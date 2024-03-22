@@ -10,14 +10,11 @@ import { sprite } from 'shared/icons';
 import { clsx } from 'clsx';
 
 import s from './CartForms.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import {
-  apiGetCity,
-  setOrderEmail,
-  setOrderNames,
-  setOrderPhone,
-} from '@redux/novaPoshta/novaPoshtaSlice';
+import { apiGetCity } from '@redux/novaPoshta/novaPoshtaSlice';
+import { selectSubmitForm } from '@redux/cart/selectorsCart';
+import { submitForm } from '@redux/cart/cartSlice';
 
 const options = [
   { label: 'one', value: 1, className: 'custom-class' },
@@ -28,6 +25,7 @@ const CartForms = () => {
   const dispatch = useDispatch();
   // const postOffice = useSelector(selectPostOffice);
   const [debouncedValue, setValue] = useDebounceValue('', 1000);
+  const selector = useSelector(selectSubmitForm);
   const maxLength = 300;
 
   useEffect(() => {
@@ -70,10 +68,12 @@ const CartForms = () => {
     },
   });
 
-  // const handleCityName = () => {
-  //   const value = formik.values.name;
-  //   dispatch(value);
-  // };
+  useEffect(() => {
+    if (selector) {
+      formik.submitForm();
+      dispatch(submitForm(false));
+    }
+  }, [selector, dispatch, formik]);
 
   return (
     <div className={s.cartForm}>
@@ -91,10 +91,6 @@ const CartForms = () => {
             placeholder="Приходько Анжеліка Миколаївна"
             onChange={formik.handleChange}
             value={formik.values.name}
-            onBlur={(event) => {
-              const value = event.target.value;
-              dispatch(setOrderNames(value));
-            }}
           />
           {formik.touched.name && formik.errors.name && (
             <div className={s.cartFormError}>{formik.errors.name}</div>
@@ -107,10 +103,6 @@ const CartForms = () => {
             <span className={s.cartFormSpan}>Електронна пошта</span>
             <input
               name="email"
-              onBlur={(event) => {
-                const value = event.target.value;
-                dispatch(setOrderEmail(value));
-              }}
               onChange={formik.handleChange}
               value={formik.values.email}
             />
@@ -126,10 +118,6 @@ const CartForms = () => {
               name="phone"
               onChange={formik.handleChange}
               value={formik.values.phone}
-              onBlur={(event) => {
-                const value = event.target.value;
-                dispatch(setOrderPhone(value));
-              }}
             />
             {formik.touched.name && formik.errors.phone && (
               <div className={s.cartFormError}>{formik.errors.phone}</div>

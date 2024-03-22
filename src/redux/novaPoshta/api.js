@@ -11,7 +11,7 @@ const getBody = (cityName) => ({
   methodProperties: {
     CityName: cityName,
     Limit: '50',
-    Page: '2',
+    Page: '1',
   },
 });
 

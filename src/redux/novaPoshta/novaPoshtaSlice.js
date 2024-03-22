@@ -15,35 +15,16 @@ export const apiGetCity = createAsyncThunk(
 
 const initialState = {
   cityName: '',
-  cityData: [],
+  cityData: null,
   postOffice: [],
   error: null,
   status: 'idle',
 };
 
-const initialStateUser = {
-  userNames: '',
-  userEmail: '',
-  userPhone: '',
-  city: null, // обєкт конкретного міста
-  department: null, //те відділення яке юзер вибере зі списка
-};
-
 const novaPoshtaSlice = createSlice({
   name: 'novaPoshta',
-  initialState: { ...initialState, ...initialStateUser },
-  reducers: {
-    setOrderNames(state, { payload }) {
-      state.userNames = payload;
-      //   return { ...state, ...payload };
-    },
-    setOrderEmail(state, { payload }) {
-      state.userEmail = payload;
-    },
-    setOrderPhone(state, { payload }) {
-      state.userPhone = payload;
-    },
-  },
+  initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(apiGetCity.pending, (state) => {
@@ -52,11 +33,11 @@ const novaPoshtaSlice = createSlice({
       })
       .addCase(apiGetCity.fulfilled, (state, action) => {
         state.status = 'success';
-        state.cityData = action.payload;
+        state.cityData = action.payload.data[0].Addresses;
       })
       .addCase(apiGetCity.rejected, (state, action) => {
         state.status = 'error';
-        state.error = action.payload;
+        state.error = action.error;
       });
   },
 });
