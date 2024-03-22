@@ -8,7 +8,7 @@ const useAddProduct = () => {
 
   const onClickAdd = (product) => {
     //product об'єкт який хочемо додати
-    const { id, colors, colorMarker, volume } = product; //деструктуризація даних з продукту який додається
+    const { id, category, title, colors, colorMarker, volume } = product; //деструктуризація даних з продукту який додається
     //products всі продукти зі стейту редаксу
     const existProduct = products.filter((prod) => {
       //перевірка якщо прийшов colors
@@ -21,6 +21,14 @@ const useAddProduct = () => {
         prod.flavors &&
         prod.flavors.colorMarker === colorMarker &&
         prod.volume === volume
+      ) {
+        return true;
+      }
+      //перевірка якщо прийшли допомогайки
+      if (
+        prod.id === id &&
+        prod.category === category &&
+        prod.title === title
       ) {
         return true;
       }
