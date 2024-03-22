@@ -8,7 +8,7 @@ import { Volume } from './Volume/Volume';
 import { Color } from './Color/Color';
 import { Flavor } from './Flavor/Flavor';
 import { sprite } from 'shared/icons';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 // import { addProduct } from '@redux/cart/cartSlice';
 // import productCard from '../data/products.json';
 import products from '../../paginateProdList/data/products.json';
@@ -23,14 +23,14 @@ const ProductCard = () => {
   const [flavor, setFlavor] = useState(flavors[0]);
   const colors = products.map((item) => item.colors);
   const [color, setColor] = useState(colors[0]);
-  const dispatch = useDispatch();
-  const onClickAdd = (product) => {
-    dispatch(addProduct(product));
-  };
+  // const dispatch = useDispatch();
+  // const onClickAdd = (product) => {
+  //   dispatch(addProduct(product));
+  // };
   let productes = products[1];
   // console.log(productes);
   // console.log(color.quantity);
-  const [productess, setProductess] = useState([productes]);
+  const [productess] = useState([productes]);
   return (
     <Container>
       <h2>Product card</h2>
@@ -127,16 +127,16 @@ const ProductCard = () => {
                       <button
                         className={s.btnTest}
                         type="submit"
-                        onClick={() =>
-                          console.log({
-                            id: product.id,
-                            volume: product.volume.length === 0 ? null : mls,
-                            flavor:
-                              product.flavors.length === 0 ? null : flavor,
-                            color: product.colors.length === 0 ? null : color,
-                            quantity: quantity,
-                          })
-                        }
+                        // onClick={() =>
+                        // console.log({
+                        //   id: product.id,
+                        //   volume: product.volume.length === 0 ? null : mls,
+                        //   flavor:
+                        //     product.flavors.length === 0 ? null : flavor,
+                        //   color: product.colors.length === 0 ? null : color,
+                        //   quantity: quantity,
+                        // })
+                        // }
                         disabled={flavor.quantity === 0 || color.quantity === 0}
                       >
                         В кошик
