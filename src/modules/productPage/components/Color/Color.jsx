@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import s from './Color.module.scss';
 
-export const Color = ({ products, arr }) => {
-  const colors = arr.map((item) => item.colors);
-  const [color, setColor] = useState(colors[0]);
+export const Color = ({ products, value, setColor }) => {
   return (
     <>
       <p className={s.colorText}>
-        Виберіть колір: <span className={s.selectColorText}>{color.color}</span>
+        Виберіть колір: <span className={s.selectColorText}>{value.color}</span>
       </p>
       <ul className={s.colorBlock}>
         {products.colors.map((item) => {
