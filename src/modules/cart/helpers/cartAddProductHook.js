@@ -36,7 +36,7 @@ const useAddProduct = () => {
     });
 
     if (existProduct.length > 0) {
-      //console.log('Product already exists:', existProduct[0].title);
+      // console.log('Product already exists:', existProduct[0].title);
     } else {
       dispatch(addProduct(product));
     }

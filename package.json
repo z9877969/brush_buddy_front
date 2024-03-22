@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
+    "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "formik": "^2.4.5",
     "modern-normalize": "^2.0.0",
@@ -27,6 +28,7 @@
     "redux-persist": "^6.0.0",
     "sass": "^1.71.1",
     "swiper": "^11.0.7",
+    "usehooks-ts": "^3.0.1",
     "vite-plugin-style-import": "^2.0.0",
     "yup": "^1.4.0"
   },

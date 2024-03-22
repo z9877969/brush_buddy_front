@@ -52,6 +52,7 @@ const cartSlice = createSlice({
     totalPrice: 0,
     promoCode: null,
     discount: 0,
+    isSubmitForm: false,
   },
   reducers: {
     addProduct(state, action) {
@@ -114,7 +115,11 @@ const cartSlice = createSlice({
       state.promoCode = null;
       state.discount = 0;
     },
+    submitForm(state, action) {
+      state.isSubmitForm = action.payload;
+    },
   },
+
   extraReducers: (builder) => builder,
 });
 
@@ -125,6 +130,7 @@ export const {
   addTotalPrice,
   usedPromoCode,
   notUsedPromoCode,
+  submitForm,
 } = cartSlice.actions;
 
 const cartPersistConfig = {

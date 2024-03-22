@@ -7,6 +7,8 @@ import 'swiper/css/navigation';
 
 import { Navigation } from 'swiper/modules';
 
+import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
+
 import s from './MainPageHelpers.module.scss';
 import { ROUTES } from 'shared/constants';
 
@@ -17,6 +19,8 @@ const HelpersCardList = ({
   reachStartButton,
 }) => {
   const lengthCards = helpersCardData.length;
+
+  const onClickAdd = useAddProduct();
 
   return (
     <Swiper
@@ -54,27 +58,42 @@ const HelpersCardList = ({
       }}
       modules={[Navigation]}
     >
-      {helpersCardData.map(({ id, title, price, text, image }) => (
-        <SwiperSlide key={id}>
-          <Link className={s.link} to={ROUTES.PRODUCTS}>
-            <div className={s.mainHelpersBox}>
-              <div className={s.boxTitleText}>
-                <div className={s.helpersBoxTitle}>
-                  <h3>{title}</h3>
-                  <button type="button">
-                    <svg>
-                      <use href={sprite + '#icon-cart'}></use>
-                    </svg>
-                  </button>
+      {helpersCardData.map(
+        ({ id, title, price, text, images, quantity, category }) => (
+          <SwiperSlide key={id}>
+            <Link className={s.link} to={ROUTES.PRODUCTS}>
+              <div className={s.mainHelpersBox}>
+                <div className={s.boxTitleText}>
+                  <div className={s.helpersBoxTitle}>
+                    <h3>{title}</h3>
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.preventDefault(),
+                          onClickAdd({
+                            id,
+                            title,
+                            price,
+                            images,
+                            quantity,
+                            category,
+                          });
+                      }}
+                    >
+                      <svg>
+                        <use href={sprite + '#icon-cart'}></use>
+                      </svg>
+                    </button>
+                  </div>
+                  <p className={s.helpersBoxPrice}>{`${price} грн`}</p>
+                  <p className={s.helpersBoxText}>{text}</p>
                 </div>
-                <p className={s.helpersBoxPrice}>{`${price} грн`}</p>
-                <p className={s.helpersBoxText}>{text}</p>
+                <img src={images} alt="photo" />
               </div>
-              <img src={image} alt="photo" />
-            </div>
-          </Link>
-        </SwiperSlide>
-      ))}
+            </Link>
+          </SwiperSlide>
+        )
+      )}
     </Swiper>
   );
 };
