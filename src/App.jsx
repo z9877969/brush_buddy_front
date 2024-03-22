@@ -16,6 +16,7 @@ import ScrollToTop from 'shared/components/ScrollToTop/ScrollToTop';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getProducts } from '@redux/products/productsOperations';
+import { Toastify } from 'shared/components';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      <Toastify />
       <Routes>
         <Route path={ROUTES.MAIN} element={<SharedLayout />}>
           <Route index element={<MainPage />} />
