@@ -1,6 +1,9 @@
-.picture {
-  padding-bottom: 24px;
+.title {
+  font-weight: 500;
+  padding-bottom: 16px;
+  @include font(24, 32);
   @include media(tablet) {
+    @include font(32, 36);
     padding-bottom: 24px;
   }
   @include media(desktop) {

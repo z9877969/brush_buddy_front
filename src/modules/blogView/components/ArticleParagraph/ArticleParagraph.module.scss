@@ -1,0 +1,11 @@
+.accent {
+  color: $pet-color;
+}
+.paragraph {
+  color: #49494a;
+  font-weight: 500;
+  @include font(16, 24);
+  @include media(tablet) {
+    @include font(18, 28);
+  }
+}
