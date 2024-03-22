@@ -4,7 +4,6 @@ import { MainTitle } from 'shared/components';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProd } from '@redux/cart/selectorsCart';
 import {
-  //addProduct,
   removeProduct,
   changeProductAmount,
   addTotalPrice,
@@ -17,10 +16,19 @@ const CartListCurrentProducts = () => {
   const dispatch = useDispatch();
   //const onClickAdd = useAddProduct();
 
-  const changeCount = (id, flavor, volume, color, quantity, newCount) => {
+  const changeCount = (
+    id,
+    category,
+    flavor,
+    volume,
+    color,
+    quantity,
+    newCount
+  ) => {
     dispatch(
       changeProductAmount(
         id,
+        category?.category,
         quantity,
         flavor?.flavor,
         volume?.volume,
@@ -30,11 +38,19 @@ const CartListCurrentProducts = () => {
     );
   };
   useEffect(() => {
-    dispatch(addTotalPrice());
-  }, [dispatch]);
+    dispatch(addTotalPrice(products));
+  }, [dispatch, products]);
 
-  const onClickDelete = (id) => {
-    dispatch(removeProduct({ id }));
+  const onClickDelete = (id, category, flavor, color, volume) => {
+    dispatch(
+      removeProduct(
+        id,
+        category?.category,
+        flavor?.flavor,
+        volume?.volume,
+        color?.color
+      )
+    );
   };
 
   return (

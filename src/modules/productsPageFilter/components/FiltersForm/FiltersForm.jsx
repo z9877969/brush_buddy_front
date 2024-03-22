@@ -87,7 +87,11 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.adult)}
               />
-              <span className={s.check_box}></span>
+              <span className={s.check_box}>
+                <svg className={s.checkIcon}>
+                  <use href={sprite + `#icon-checkmark1`}></use>
+                </svg>
+              </span>
               Дорослих
             </label>
 
@@ -98,7 +102,11 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.child)}
               />
-              <span className={s.check_box}></span>
+              <span className={s.check_box}>
+                <svg className={s.checkIcon}>
+                  <use href={sprite + `#icon-checkmark1`}></use>
+                </svg>
+              </span>
               Дітей
             </label>
 
@@ -109,7 +117,11 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.animal)}
               />
-              <span className={s.check_box}></span>
+              <span className={s.check_box}>
+                <svg className={s.checkIcon}>
+                  <use href={sprite + `#icon-checkmark1`}></use>
+                </svg>
+              </span>
               Тварин
             </label>
           </div>

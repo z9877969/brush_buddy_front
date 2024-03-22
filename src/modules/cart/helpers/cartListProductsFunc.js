@@ -1,7 +1,7 @@
 export function totalPrice(products) {
   let total = products.reduce((acc, product) => {
     const price = parseFloat(product.price);
-    const quantity = parseInt(product.amount);
+    const quantity = parseInt(product.amount ? product.amount : 1);
     const discountedPrice = parseFloat(product.salePrice);
 
     const productPrice = discountedPrice ? discountedPrice : price;
@@ -18,5 +18,5 @@ export function totalPrice(products) {
 export function totalPriceDiscount(totalPriceDisc) {
   const discount = 0.1;
   const discountedPrice = totalPriceDisc * discount;
-  return discountedPrice;
+  return discountedPrice.toFixed(2);
 }

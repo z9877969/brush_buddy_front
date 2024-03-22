@@ -123,7 +123,6 @@
 }
 .checkboxLabel {
   display: flex;
-  // margin-bottom: 12px;
   padding-left: 28px;
 }
 .check_input {
@@ -139,7 +138,9 @@
   height: 20px;
   border-radius: 6px;
   border: 1px solid $disabled-content-color;
-  content: url('./checkmark.svg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
   @include media(desktop) {
     border: none;
     background-color: $light-color;
@@ -148,7 +149,6 @@
 
 .check_input:checked + .check_box {
   border: none;
-  content: url('./checkmark.svg');
 }
 .check_input.adult:checked + .check_box {
   background-color: $adult-color;
@@ -159,39 +159,12 @@
 .check_input.animal:checked + .check_box {
   background-color: $pet-color;
 }
+.checkIcon {
+  width: 10px;
+  height: 9.52px;
+  fill: $light-color;
+}
 
-// .checkboxContainer {
-//   // position: relative;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: flex-start;
-//   align-items: center;
-//   gap: 8px;
-// }
-// .checkboxContainer input {
-//   // position: absolute;
-//   display: flex;
-//   width: 20px;
-//   height: 20px;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   border-radius: 6px;
-
-//   @include media(desktop) {
-//     border: none;
-//   }
-// }
-
-// .adult {
-//   background-color: $adult-color;
-// }
-// .child {
-//   background-color: $child-color;
-// }
-// .animal {
-//   background-color: $pet-color;
-// }
 .checkboxLabel {
   display: flex;
   align-items: center;

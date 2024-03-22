@@ -1,15 +1,25 @@
 .section {
   background-color: $pet-color;
   overflow: hidden;
+  margin: 0 auto;
+  padding: 0 16px;
   position: relative;
   height: 640px;
+  @include media(mobile) {
+    width: $mobile;
+  }
   @include media(tablet) {
     height: 696px;
+    width: $tablet;
+    padding: 0 32px;
   }
   @include media(desktop) {
     height: 578px;
+    width: $desktop;
+    padding: 0 64px;
   }
 }
+
 .brushAccent {
   color: $pet-color;
 }

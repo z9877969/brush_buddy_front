@@ -1,0 +1,14 @@
+.title {
+  font-weight: 900;
+  padding-top: 32px;
+  padding-bottom: 16px;
+  @include font(36, 44);
+  @include media(tablet) {
+    @include font(48, 56);
+    padding-top: 48px;
+    padding-bottom: 24px;
+  }
+  @include media(desktop) {
+    padding-top: 64px;
+  }
+}

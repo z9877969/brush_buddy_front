@@ -1,5 +1,5 @@
 export const selectStyles = {
-  container: (styles) => ({
+  container: (styles, state) => ({
     ...styles,
     width: '100%',
     display: 'flex',
@@ -9,10 +9,10 @@ export const selectStyles = {
     alignItems: 'center',
     borderRadius: '16px',
     border: '1px solid rgba(31, 31, 31, 0.2)',
+    borderColor: state.isFocused ? 'red' : 'rgba(31, 31, 31, 0.2)',
 
     '@media (min-width: 1440px)': {
       backgroundColor: '#fff',
-      border: 'none',
     },
   }),
   control: (styles) => ({
@@ -23,19 +23,12 @@ export const selectStyles = {
     justifyContent: 'space-between',
     outline: 'none',
     border: 'none',
-
-    // borderColor: isSelected ? 'red' : 'none',
-    '&:hover': {
-      border: 'none',
-    },
-    '&:focus': {
-      border: 'none',
-    },
+    borderColor: 'none',
+    borderWidth: 'none',
+    borderStyle: 'none',
+    boxShadow: 'none',
   }),
-  // : (styles { isFocused }) => ({
-  //   ...styles,
-  //   borderColor: isFocused ?"red":"green"
-  // }),
+
   valueContainer: (styles) => ({
     ...styles,
     padding: 0,
