@@ -71,7 +71,14 @@ const CartListCurrentItem = ({
             <button
               type="button"
               className={s.deleteBtn}
-              onClick={() => onClickDelete(id)}
+              onClick={() =>
+                onClickDelete({
+                  id,
+                  flavor: flavors?.flavor,
+                  volume: flavors?.flavor,
+                  color: colors?.color,
+                })
+              }
             >
               <svg>
                 <use href={sprite + '#icon-delete'}></use>

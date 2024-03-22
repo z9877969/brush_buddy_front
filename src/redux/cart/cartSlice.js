@@ -49,8 +49,13 @@ const cartSlice = createSlice({
       state.products.push(action.payload);
     },
     removeProduct(state, action) {
+      const { id, flavor, volume, color } = action.payload;
       state.products = state.products.filter(
-        (product) => product.id !== action.payload.id
+        (product) =>
+          (product.id === id &&
+            product.flavors?.flavor === flavor &&
+            product.flavors?.volume === volume) ||
+          product.colors?.color === color
       );
       state.totalPrice = totalPrice(state.products);
     },
