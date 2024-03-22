@@ -22,7 +22,6 @@ const cartSlice = createSlice({
           quantity: 5,
         },
         volume: '50',
-        amount: 1,
       },
       {
         id: '45dd',
@@ -37,7 +36,17 @@ const cartSlice = createSlice({
           color: 'seagreen',
           quantity: 6,
         },
-        amount: 1,
+        amount: 4,
+      },
+      {
+        id: '45dd5',
+        category: 'helpers',
+        images: {
+          url: 'https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw5d82384a/product-images/dw_021-23-TAW0121-10001_01.jpg?sw=1550&sh=2067&sm=fit',
+        },
+        title: 'Класна футболка',
+        price: 200,
+        quantity: 10,
       },
     ],
     totalPrice: 0,
@@ -49,26 +58,38 @@ const cartSlice = createSlice({
       state.products.push(action.payload);
     },
     removeProduct(state, action) {
-      const { id, flavor, volume, color } = action.payload;
+      const { id, category, flavor, volume, color } = action.payload;
       state.products = state.products.filter(
         (product) =>
-          (product.id === id &&
-            product.flavors?.flavor === flavor &&
-            product.flavors?.volume === volume) ||
-          product.colors?.color === color
+          (product.id !== id &&
+            product.flavors?.flavor !== flavor &&
+            product.flavors?.volume !== volume) ||
+          product.colors?.color !== color ||
+          product.category !== category
       );
       state.totalPrice = totalPrice(state.products);
     },
     changeProductAmount(state, action) {
-      const { id, quantity, flavor, volume, color, newCount } = action.payload;
-
-      const productIndex = state.products.findIndex(
-        (product) =>
-          (product.id === id &&
+      const { id, category, quantity, flavor, volume, color, newCount } =
+        action.payload;
+      const productIndex = state.products.findIndex((product) => {
+        if (flavor && volume) {
+          // Якщо є flavors
+          return (
+            product.id === id &&
             product.flavors?.flavor === flavor &&
-            product.flavors?.volume === volume) ||
-          product.colors?.color === color
-      );
+            product.flavors?.volume === volume
+          );
+        } else if (color) {
+          // Якщо є colors
+          return product.id === id && product.colors?.color === color;
+        } else if (category) {
+          //якщо є категорія
+          return product.id === id && product.category === category;
+        } else {
+          return product.id === id;
+        }
+      });
 
       if (productIndex !== -1) {
         state.products[productIndex].amount = newCount;
