@@ -50,7 +50,7 @@ export const testArticle = [
   },
   {
     block: 'image',
-    content: 'http://some.cloude.com/path/to/image.jpg',
+    content: 'IMG1',
   },
   {
     block: 'secondaryTitle',
@@ -100,6 +100,6 @@ export const testArticle = [
   },
   {
     block: 'image',
-    content: 'http://some.cloude.com/path/to/image.jpg',
+    content: 'IMG2',
   },
 ];

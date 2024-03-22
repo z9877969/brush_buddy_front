@@ -1,7 +1,8 @@
+import css from './ArticleSecondaryTitle.module.scss';
 const ArticleSecondaryTitle = ({ content }) => {
   return (
     <>
-      <h2>{content}</h2>
+      <h2 className={css.title}>{content}</h2>
     </>
   );
 };

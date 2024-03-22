@@ -1,9 +1,10 @@
 .about {
   color: $secondary-text-color;
   display: flex;
+  @include font(16, 24);
 }
 
-.date::after {
+.name::after {
   content: '';
   display: inline-block;
   width: 1px;

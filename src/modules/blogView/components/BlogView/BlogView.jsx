@@ -1,3 +1,4 @@
+import { Container } from 'shared/components';
 import Article from '../Article/Article';
 import ArticlesList from '../ArticlesList/ArticlesList';
 import { testArticle } from '../data/testArticle';
@@ -5,8 +6,10 @@ import { testArticle } from '../data/testArticle';
 const BlogView = () => {
   return (
     <div>
-      <ArticlesList />
-      <Article article={testArticle} />
+      <Container>
+        <ArticlesList />
+        <Article article={testArticle} />
+      </Container>
     </div>
   );
 };

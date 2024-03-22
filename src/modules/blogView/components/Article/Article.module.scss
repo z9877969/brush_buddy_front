@@ -1,2 +1,9 @@
-.section {
+.picture {
+  padding-bottom: 24px;
+  @include media(tablet) {
+    padding-bottom: 24px;
+  }
+  @include media(desktop) {
+    padding-bottom: 32px;
+  }
 }

@@ -1,0 +1,12 @@
+export { default as IMG1mob } from './IMG1mob.png';
+export { default as IMG1mob2x } from './IMG1mob@2x.png';
+export { default as IMG1tab } from './IMG1tab.png';
+export { default as IMG1tab2x } from './IMG1tab@2x.png';
+export { default as IMG1desk } from './IMG1desk.png';
+export { default as IMG1desk2x } from './IMG1desk@2x.png';
+export { default as IMG2mob } from './IMG2mob.png';
+export { default as IMG2mob2x } from './IMG2mob@2x.png';
+export { default as IMG2tab } from './IMG2tab.png';
+export { default as IMG2tab2x } from './IMG2tab@2x.png';
+export { default as IMG2desk } from './IMG2desk.png';
+export { default as IMG2desk2x } from './IMG2desk@2x.png';

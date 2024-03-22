@@ -4,6 +4,8 @@ import ArticleList from '../ArticleList/ArticleList';
 import ArticleParagraph from '../ArticleParagraph/ArticleParagraph';
 import ArticlePrimaryTitle from '../ArticlePrimaryTitle/ArticlePrimaryTitle';
 import ArticleSecondaryTitle from '../ArticleSecondaryTitle/ArticleSecondaryTitle';
+import { Picture } from 'shared/components';
+import * as images from '../../images';
 
 const Article = ({ article }) => {
   const blocks = article.map((part, index) => {
@@ -25,10 +27,23 @@ const Article = ({ article }) => {
         );
       case 'list':
         return <ArticleList key={index} content={part.content} />;
+      case 'image':
+        return (
+          <Picture
+            key={index}
+            mob1x={images[`${part.content}mob`]}
+            mob2x={images[`${part.content}mob2x`]}
+            tab1x={images[`${part.content}tab`]}
+            tab2x={images[`${part.content}tab2x`]}
+            desk1x={images[`${part.content}desk`]}
+            desk2x={images[`${part.content}desk2x`]}
+            className={css.picture}
+          />
+        );
       default:
         return <p key={index}>Section unsupported</p>;
     }
   });
-  return <div className={css.section}> {blocks}</div>;
+  return <div> {blocks}</div>;
 };
 export default Article;
