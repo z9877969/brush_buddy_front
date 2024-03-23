@@ -1,24 +1,27 @@
-import { useState } from 'react';
+import clsx from 'clsx';
 import s from './Volume.module.scss';
 
-export const Volume = ({ products, arr }) => {
-  const ml = arr.map((item) => item.litter);
-  const [mls, setMl] = useState(ml[0]);
-
+export const Volume = ({ products, value, setMls }) => {
   return (
     <>
-      <p className={s.mlText}>Об’єм: {mls.ml}</p>
+      <p className={s.mlText}>Об’єм: {value.ml}</p>
       <div className={s.mlBlock}>
-        {products.litter.map((item) => {
+        {products.volume.map((item) => {
           return (
-            <label className={s.labels} key={item.ml}>
-              <span className={s.ml}>{item.ml}мл</span>
+            <label
+              className={clsx(
+                s.labels,
+                item === value ? s.labelsFocus : s.labels
+              )}
+              key={item}
+            >
+              <span className={s.ml}>{item}мл</span>
               <input
                 className={s.radioBtn}
                 type="radio"
                 name="ml"
                 value={item.ml}
-                onChange={() => setMl(item)}
+                onChange={() => setMls(item)}
               />
             </label>
           );

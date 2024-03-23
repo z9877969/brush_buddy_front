@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { RoundButton } from 'shared/components';
 import { ProductTypeIcon } from 'shared/components';
 import { ProductWatermark } from 'shared/components';
-import * as img from './images';
+import * as img from 'shared/images/productItem';
 import { sprite } from 'shared/icons';
 
 import s from './ProductCardItem.module.scss';
@@ -14,12 +14,12 @@ const ProductCardItem = ({
   salePrice,
   type,
   watermark,
-  // images,
+  images,
 }) => {
   const [watermarkValue] = watermark;
   const navigate = useNavigate();
   const isAvalible = true;
-  // const { url } = images?.[0] || { url: '' };
+  const { url } = images?.[0] || { url: null };
 
   const hanleClick = () => {
     navigate(`/products/${title}`);
@@ -27,7 +27,11 @@ const ProductCardItem = ({
   return (
     <li className={clsx(s.productItem, !isAvalible && s.unavailable)}>
       <Link to={`/products/${title}`}>
-        <img src={img['product_1']} alt={title} className={s.productImg} />
+        <img
+          src={url ?? img['product_1']}
+          alt={title}
+          className={s.productImg}
+        />
         <ProductTypeIcon type={type} sprite={sprite} />
         <ProductWatermark watermark={watermarkValue} sprite={sprite} />
         <p className={s.productName}>{title}</p>

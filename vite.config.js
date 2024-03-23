@@ -12,6 +12,7 @@ export default defineConfig({
       pages: '/src/pages',
       '@redux': '/src/redux',
       shared: '/src/shared',
+      helpers: '/src/helpers',
     },
   },
   css: {

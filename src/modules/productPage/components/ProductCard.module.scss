@@ -132,7 +132,6 @@
   padding: 12px 24px;
   width: 120px;
   height: 48px;
-  margin-bottom: 24px;
   svg {
     display: flex;
   }
@@ -140,9 +139,6 @@
     padding: 12px 20px;
     width: 123px;
     height: 56px;
-  }
-  @include media(tablet) {
-    margin-bottom: 32px;
   }
 }
 
@@ -179,4 +175,82 @@
   font-size: 16px;
   line-height: 150%;
   opacity: 0.3;
+}
+
+.grn {
+  margin-left: 2px;
+}
+
+.notHaveItemPrice {
+  font-family: $main-font-family;
+  color: $disabled-content-color;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 112%;
+  @include media(tablet) {
+    font-size: 28px;
+  }
+  @include media(desktop) {
+    font-size: 32px;
+  }
+}
+
+.haveItem {
+  font-family: $main-font-family;
+  color: $primary-text-color;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.notHaveItem {
+  font-family: $main-font-family;
+  color: $pet-color;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.cartBlock {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  @include media(desktop) {
+    margin-bottom: 32px;
+  }
+}
+
+.btnTest {
+  border-radius: 200px;
+  padding: 12px 24px;
+  width: 145px;
+  height: 48px;
+  background-color: $pet-color;
+  @include media(tablet) {
+    padding: 16px 40px;
+    width: 186px;
+    height: 56px;
+  }
+  display: flex;
+  text-align: center;
+  font-family: $main-font-family;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #ffffff;
+  align-items: center;
+  gap: 2px;
+
+  svg {
+    fill: $light-color;
+  }
+}
+
+.btnDontWorking {
+  color: rgba(31, 31, 31, 0.2);
+  background: rgba(31, 31, 31, 0.1);
+  svg {
+    fill: #1f1f1f;
+    fill-opacity: 0.2;
+  }
 }
