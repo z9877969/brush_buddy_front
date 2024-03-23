@@ -75,6 +75,10 @@ const CartForms = () => {
     }
   }, [SubmitForm, dispatch, formik]);
 
+  const handleCityName = (cityName) => {
+    formik.setFieldValue('city', cityName);
+  };
+
   return (
     <div className={s.cartForm}>
       <h4 className={s.cartFormsTitle}>Оформлення замовлення</h4>
@@ -137,7 +141,7 @@ const CartForms = () => {
               }}
               value={formik.values.city}
             />
-            <CityNameItem />
+            <CityNameItem handleCityName={handleCityName} />
           </div>
 
           {formik.touched.name && formik.errors.city && (
