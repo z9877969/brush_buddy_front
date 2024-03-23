@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import s from './Discount.module.scss';
 import { Field, Form, Formik } from 'formik';
 import Modal from '../ModalConditions/ModalConditions';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Discount = () => {
@@ -188,22 +188,6 @@ const Discount = () => {
         </Formik>
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-        style={{
-          fontSize: '16px',
-          top: '30px',
-        }}
-      />
     </>
   );
 };
