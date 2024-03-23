@@ -38,16 +38,6 @@ const cartSlice = createSlice({
         },
         amount: 4,
       },
-      {
-        id: '45dd5',
-        category: 'helpers',
-        images: {
-          url: 'https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw5d82384a/product-images/dw_021-23-TAW0121-10001_01.jpg?sw=1550&sh=2067&sm=fit',
-        },
-        title: 'Класна футболка',
-        price: 200,
-        quantity: 10,
-      },
     ],
     totalPrice: 0,
     promoCode: null,
@@ -56,7 +46,40 @@ const cartSlice = createSlice({
   },
   reducers: {
     addProduct(state, action) {
-      state.products.push(action.payload);
+      //state.products.push(action.payload); старий стейт
+      const { id, category, flavor, volume, color } = action.payload;
+      const existingProductIndex = state.products.findIndex((product) => {
+        if (flavor && volume) {
+          return (
+            product.id === id &&
+            product.flavors?.flavor === flavor &&
+            product.flavors?.volume === volume
+          );
+        } else if (color) {
+          return product.id === id && product.colors?.color === color;
+        } else if (category) {
+          return product.id === id && product.category === category;
+        } else {
+          return product.id === id;
+        }
+      });
+
+      if (existingProductIndex !== -1) {
+        // Якщо товар вже існує, викликаємо changeProductAmount
+        const existingProduct = state.products[existingProductIndex];
+        const newCount = existingProduct.amount + 1;
+        state.products[existingProductIndex].amount = newCount;
+        state.products[existingProductIndex].isDisabledIncrement =
+          newCount === existingProduct.quantity;
+      } else {
+        // Якщо товару ще немає, додаємо його
+        state.products.push({
+          ...action.payload,
+          amount: 1,
+        });
+      }
+
+      state.totalPrice = totalPrice(state.products);
     },
     removeProduct(state, action) {
       const { id, category, flavor, volume, color } = action.payload;
