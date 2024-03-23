@@ -48,6 +48,7 @@ const cartSlice = createSlice({
     addProduct(state, action) {
       //state.products.push(action.payload); старий стейт
       const { id, category, flavor, volume, color } = action.payload;
+
       const existingProductIndex = state.products.findIndex((product) => {
         if (flavor && volume) {
           return (
@@ -58,7 +59,7 @@ const cartSlice = createSlice({
         } else if (color) {
           return product.id === id && product.colors?.color === color;
         } else if (category) {
-          return product.id === id && product.category === category;
+          return product.id === id;
         } else {
           return product.id === id;
         }
@@ -85,8 +86,8 @@ const cartSlice = createSlice({
       const { id, category, flavor, volume, color } = action.payload;
       state.products = state.products.filter(
         (product) =>
-          (product.id !== id &&
-            product.flavors?.flavor !== flavor &&
+          product.id !== id ||
+          (product.flavors?.flavor !== flavor &&
             product.flavors?.volume !== volume) ||
           product.colors?.color !== color ||
           product.category !== category
