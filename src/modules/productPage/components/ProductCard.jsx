@@ -36,7 +36,7 @@ const ProductCard = () => {
   // };
   let productes = products[0];
 
-  console.log(productes);
+  // console.log(productes);
   // console.log(color.quantity);
   const [productess] = useState([productes]);
 
@@ -49,7 +49,7 @@ const ProductCard = () => {
       default:
         return 'icon';
     }
-  });
+  }, [productes]);
   return (
     <Container>
       <h2>Product card</h2>
