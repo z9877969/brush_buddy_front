@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import s from './Flavor.module.scss';
 
 export const Flavor = ({ products, value, setFlavor }) => {
@@ -10,7 +11,13 @@ export const Flavor = ({ products, value, setFlavor }) => {
       <ul className={s.mlBlock}>
         {products.flavors.map((item) => {
           return (
-            <li key={item.flavor} className={s.item}>
+            <li
+              key={item.flavor}
+              className={clsx(
+                s.item,
+                item.flavor === value.flavor ? s.itemFocus : s.item
+              )}
+            >
               <label
                 style={{ backgroundColor: item.colorMarker }}
                 className={s.labels}

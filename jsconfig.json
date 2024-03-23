@@ -6,7 +6,8 @@
       "hooks/*": ["hooks/*"],
       "pages/*": ["pages/*"],
       "@redux/*": ["redux/*"],
-      "shared/*": ["shared/*"]
+      "shared/*": ["shared/*"],
+      "helpers/*": ["helpers/*"]
     }
   },
   "exclude": ["node_modules", "dist", ".vite"]

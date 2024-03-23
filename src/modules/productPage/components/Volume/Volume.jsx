@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import s from './Volume.module.scss';
 
 export const Volume = ({ products, value, setMls }) => {
@@ -7,7 +8,13 @@ export const Volume = ({ products, value, setMls }) => {
       <div className={s.mlBlock}>
         {products.volume.map((item) => {
           return (
-            <label className={s.labels} key={item}>
+            <label
+              className={clsx(
+                s.labels,
+                item === value ? s.labelsFocus : s.labels
+              )}
+              key={item}
+            >
               <span className={s.ml}>{item}мл</span>
               <input
                 className={s.radioBtn}
