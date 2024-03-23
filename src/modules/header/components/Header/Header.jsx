@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import CartButton from '../CartButton/CartButton';
 import DiscountReminder from '../DiscountReminder/DiscountReminder';
@@ -34,9 +34,9 @@ const Header = () => {
       )}
       <div className={s.headerWrap}>
         <Container className={s.flex}>
-          <Link to={'/'}>
-            <Logo className={s.logo} />
-          </Link>
+          {/* <Link to={'/'}> */}
+          <Logo className={s.logo} />
+          {/* </Link> */}
 
           <HeaderNav handleMenuToggle={handleMenuToggle} />
           <div className={s.rightSideWrap}>
