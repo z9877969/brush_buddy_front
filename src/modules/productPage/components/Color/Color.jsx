@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import s from './Color.module.scss';
 
 export const Color = ({ products, value, setColor }) => {
@@ -9,7 +10,13 @@ export const Color = ({ products, value, setColor }) => {
       <ul className={s.colorBlock}>
         {products.colors.map((item) => {
           return (
-            <li key={item.flavor} className={s.item}>
+            <li
+              key={item.flavor}
+              className={clsx(
+                s.item,
+                item.color === value.color ? s.itemFocus : s.item
+              )}
+            >
               <label
                 style={{ backgroundColor: item.color }}
                 className={s.labels}

@@ -1,11 +1,14 @@
 .item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
   border-radius: 100px;
-  border: 4px solid rgba(31, 31, 31, 0.2);
+  border: 4px solid rgba(31, 31, 31, 0.1);
 }
 
-.radioBtn[type='radio']:checked .item {
+.itemFocus {
   border: 0.5px solid rgba(31, 31, 31, 0.7);
 }
 
