@@ -1,7 +1,13 @@
+import { BlogPageCards } from 'modules/blogPageCards';
 import { BlogView } from 'modules/blogView';
 
 const BlogPage = () => {
-  return <BlogView />;
+  return (
+    <>
+      <BlogPageCards />
+      <BlogView />
+    </>
+  );
 };
 
 export default BlogPage;
