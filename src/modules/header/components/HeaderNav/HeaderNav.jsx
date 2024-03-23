@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import s from './HeaderNav.module.scss';
 import ProductDropDown from '../ProductDropDown/ProductDropDown';
 import { ROUTES } from 'shared/constants';
-import { scrollToTop } from '../../../../helper/ScrollToTop';
+import { scrollToTop } from 'helpers';
 
 const HeaderNav = () => {
   return (

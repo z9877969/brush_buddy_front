@@ -1,7 +1,7 @@
 import s from './FooterNav.module.scss';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/constants';
-import { scrollToTop } from '../../../../helper/ScrollToTop';
+import { scrollToTop } from 'helpers';
 
 const FooterNav = () => {
   return (

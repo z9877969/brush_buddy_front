@@ -12,5 +12,6 @@ export const toastContainerProps = {
   style: {
     fontSize: '16px',
     top: '30px',
+    fontFamily: 'KyivType Sans, sans-serif',
   },
 };
