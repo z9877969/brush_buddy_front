@@ -1,56 +1,76 @@
 import Select from 'react-select';
 import { selectStyles } from './SelectStyles';
 import { useDebounceValue } from 'usehooks-ts';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+
+import {
+  apiGetCity,
+  apiGetDepartment,
+} from '@redux/novaPoshta/novaPoshtaSlice';
+import { submitForm } from '@redux/cart/cartSlice';
+import { selectSubmitForm } from '@redux/cart/selectorsCart';
+import {
+  selectCityData,
+  selectPostOffice,
+} from '@redux/novaPoshta/selectorsNovaPoshta';
+import CityNameItem from './CityNameItem';
+import { SignupSchema } from './SignupSchemaYup';
 
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 
 import { sprite } from 'shared/icons';
 
 import { clsx } from 'clsx';
 
 import s from './CartForms.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { apiGetCity } from '@redux/novaPoshta/novaPoshtaSlice';
-import { submitForm } from '@redux/cart/cartSlice';
-import { selectSubmitForm } from '@redux/cart/selectorsCart';
-import CityNameItem from './CityNameItem';
-
-const options = [
-  { label: 'one', value: 1, className: 'custom-class' },
-  { label: 'two', value: 2, className: 'awesome-class' },
-];
 
 const CartForms = () => {
   const dispatch = useDispatch();
-  const [debouncedValue, setValue] = useDebounceValue('', 1000);
+  const [debouncedValue, setValue] = useDebounceValue('', 500);
+  const [open, setOpen] = useState(false);
+  const [fullCityName, setFullCityName] = useState('');
+  const listRef = useRef();
+
   const SubmitForm = useSelector(selectSubmitForm);
+  const cityData = useSelector(selectCityData);
+  const PostOffice = useSelector(selectPostOffice);
+
   const maxLength = 300;
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!listRef.current?.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     dispatch(apiGetCity(debouncedValue));
   }, [dispatch, debouncedValue]);
 
-  const SignupSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(5, 'Введіть повністю ПІБ')
-      .max(50, 'Занадто довге ПІБ')
-      .required('Поле обов`язкове для заповнення'),
-    email: Yup.string()
-      .email('Введіть дійсну адресу ел. пошти')
-      .required('Поле обов`язкове для заповнення'),
-    phone: Yup.string()
-      .matches(/^\+?3?8?(0\d{9})$/, 'Введіть коректний номер телефону')
-      .required('Поле обов`язкове для заповнення'),
-    city: Yup.string().required('Поле обов`язкове для заповнення'),
-    department: Yup.string().required('Поле обов`язкове для заповнення'),
-    comments: Yup.string().max(
-      300,
-      'Коментар може містити максимум 300 символів'
-    ),
-    show: Yup.boolean(),
-  });
+  useEffect(() => {
+    dispatch(apiGetDepartment(fullCityName.substring(3)));
+  }, [dispatch, fullCityName]);
+
+  const setListDepartments = () => {
+    if (PostOffice?.length > 0) {
+      const options = PostOffice.map(({ SiteKey, Description }) => ({
+        label: Description,
+        className: SiteKey,
+      }));
+      return options;
+    } else {
+      return;
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -77,6 +97,7 @@ const CartForms = () => {
 
   const handleCityName = (cityName) => {
     formik.setFieldValue('city', cityName);
+    setFullCityName(cityName);
   };
 
   return (
@@ -134,6 +155,10 @@ const CartForms = () => {
           <span className={s.cartFormSpan}>Місто</span>
           <div className={s.inputCityName}>
             <input
+              onClick={() => {
+                setOpen(true);
+              }}
+              ref={listRef}
               name="city"
               onChange={(event) => {
                 formik.handleChange(event);
@@ -141,7 +166,9 @@ const CartForms = () => {
               }}
               value={formik.values.city}
             />
-            <CityNameItem handleCityName={handleCityName} />
+            {open && cityData.length > 0 && (
+              <CityNameItem handleCityName={handleCityName} />
+            )}
           </div>
 
           {formik.touched.name && formik.errors.city && (
@@ -154,7 +181,7 @@ const CartForms = () => {
           <span className={s.cartFormSpan}>Відділення Нової пошти</span>
           <Select
             name="department"
-            options={options}
+            options={setListDepartments()}
             placeholder={'Обрати відділення...'}
             styles={selectStyles}
             onChange={(newValue) =>

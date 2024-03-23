@@ -18,4 +18,7 @@
   cursor: pointer;
   color: $primary-text-color;
   padding: 12px;
+  &:hover {
+    background-color: $main-bg-color;
+  }
 }
