@@ -1,13 +1,15 @@
 import { Button } from 'shared/components';
 import s from './OrderSummary.module.scss';
 import { selectDiscount, selectTotalPrice } from '@redux/cart/selectorsCart';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { submitForm } from '@redux/cart/cartSlice';
 
 const OrederSummary = () => {
   const priceDisc = useSelector(selectDiscount);
   const totalPriceWithoutDisc = useSelector(selectTotalPrice);
   const totalPrice = totalPriceWithoutDisc - priceDisc;
   const fixTotalprice = totalPrice.toFixed(2);
+  const dispatch = useDispatch();
   return (
     <section className={s.boxSummary}>
       <div className={s.boxSum}>
@@ -28,7 +30,12 @@ const OrederSummary = () => {
         <p>Загальна сума</p>
         <p>{fixTotalprice} грн</p>
       </div>
-      <Button type="submit" title={'Оформити замовлення'} className={s.btn} />
+      <Button
+        type="submit"
+        title={'Оформити замовлення'}
+        className={s.btn}
+        onClick={() => dispatch(submitForm(true))}
+      />
       <p className={s.accept}>
         * Натискаючи на кнопку, я погоджуюсь з умовами обробки персональних
         даних

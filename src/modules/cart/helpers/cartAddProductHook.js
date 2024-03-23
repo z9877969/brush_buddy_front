@@ -8,7 +8,7 @@ const useAddProduct = () => {
 
   const onClickAdd = (product) => {
     //product об'єкт який хочемо додати
-    const { id, colors, colorMarker, volume } = product; //деструктуризація даних з продукту який додається
+    const { id, category, title, colors, colorMarker, volume } = product; //деструктуризація даних з продукту який додається
     //products всі продукти зі стейту редаксу
     const existProduct = products.filter((prod) => {
       //перевірка якщо прийшов colors
@@ -24,11 +24,19 @@ const useAddProduct = () => {
       ) {
         return true;
       }
+      //перевірка якщо прийшли допомогайки
+      if (
+        prod.id === id &&
+        prod.category === category &&
+        prod.title === title
+      ) {
+        return true;
+      }
       return false;
     });
 
     if (existProduct.length > 0) {
-      //console.log('Product already exists:', existProduct[0].title);
+      // console.log('Product already exists:', existProduct[0].title);
     } else {
       dispatch(addProduct(product));
     }

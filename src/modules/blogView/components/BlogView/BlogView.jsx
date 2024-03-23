@@ -1,57 +1,16 @@
+import { Container } from 'shared/components';
 import Article from '../Article/Article';
-import ArticleList from '../ArticleList/ArticleList';
-import s from './BlogView.module.scss';
+import ArticlesList from '../ArticlesList/ArticlesList';
+import { testArticle } from '../data/testArticle';
 
 const BlogView = () => {
-  const testArticle = {
-    title: 'Яку вибрати зубну щітку?',
-    author: 'Лікар: Поліна Притуляк',
-    date: '12.10.2024',
-    text: (
-      <div>
-        <p className={s.paragraph}>
-          У більшості випадків, пацієнти не звертають уваги на розмір головки
-          щітки, кількість і товщину щетинок на ній — купують або красиві, або
-          бюджетні, які не шкода міняти через два-три місяці. Зазвичай щітки
-          поділяють на мануальні і електричні (ультразвукові / с обертовою
-          голівкою). Крім цих типів, бувають щітки для пацієнтів з брекетами і
-          інтердентальні.
-        </p>
-        <br /> <br />
-        <p className={s.paragraph}>
-          <span className={s.accent}>Мануальні щітки</span>, вони ж механічні,
-          вибирають 70% населення. Такі щітки добре очищають порожнину рота від
-          м&apos;яких відкладень, але тільки за умови, що пацієнт відповідально
-          підходить до процесу чищення зубів. Часто буває так: прокинувся
-          вранці, протер очі, пішов у ванну, взяв зубну щітку і якось там
-          почистив зуби (добре, якщо не заснув під час процесу).Залежно від типу
-          щетинок, щітки бувають:
-        </p>
-        <ul className={s.list}>
-          <li className={s.item}>дуже м&apos;які;</li>
-          <li className={s.item}>м&apos;які;</li>
-          <li className={s.item}>середньої жорсткості;</li>
-          <li className={s.item}>дуже жорсткі;</li>
-          <li className={s.item}>
-            комбіновані (використовуються щетинки з різних матеріалів);
-          </li>
-          <li className={s.item}>
-            загальні (використовуються щетинки різної твердості).
-          </li>
-        </ul>
-        <p className={s.paragraph}>
-          <span className={s.accent}>Щітки з м&apos;якими щетинками</span>{' '}
-          підходять пацієнтам з хворобами і кровоточивістю ясен. Ще такі щітки
-          рекомендуються тим, у кого занадто тонка емаль.
-        </p>
-      </div>
-    ),
-  };
   return (
-    <>
-      <ArticleList />
-      <Article article={testArticle} />
-    </>
+    <div>
+      <Container>
+        <ArticlesList />
+        <Article article={testArticle} />
+      </Container>
+    </div>
   );
 };
 export default BlogView;
