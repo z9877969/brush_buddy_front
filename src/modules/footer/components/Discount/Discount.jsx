@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import s from './Discount.module.scss';
 import { Field, Form, Formik } from 'formik';
 import Modal from '../ModalConditions/ModalConditions';
+import { toastify } from 'helpers';
+
 const Discount = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [discountApplied, setDiscountApplied] = useState(false);
@@ -56,33 +58,39 @@ const Discount = () => {
     setCheckboxChecked(e.target.checked);
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setSubmitClicked(true);
+  const handleFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setSubmitClicked(true);
 
-    if (!checkboxChecked) {
-      setCheckboxChecked(true);
-      return;
-    }
+      if (!checkboxChecked) {
+        setCheckboxChecked(true);
+        return;
+      }
 
-    if (phoneNumber.length < 15) {
-      setShortNumberError(true);
-      return;
-    }
+      if (phoneNumber.length < 15) {
+        setShortNumberError(true);
+        return;
+      }
 
-    if (phoneNumbers.includes(phoneNumber)) {
-      setDiscountApplied(true);
-    } else {
-      const updatedNumbers = [...phoneNumbers, phoneNumber];
-      setPhoneNumbers(updatedNumbers);
-      localStorage.setItem('phoneNumbers', JSON.stringify(updatedNumbers));
-      setPhoneNumber('');
-      setFormattedPhoneNumber('');
-      setDiscountApplied(false);
-      setShortNumberError(false);
-      // console.log('Масив номерів:', updatedNumbers);
-    }
-  };
+      if (phoneNumbers.includes(phoneNumber)) {
+        setDiscountApplied(true);
+      } else {
+        const updatedNumbers = [...phoneNumbers, phoneNumber];
+        setPhoneNumbers(updatedNumbers);
+        localStorage.setItem('phoneNumbers', JSON.stringify(updatedNumbers));
+        setPhoneNumber('');
+        setFormattedPhoneNumber('');
+        setDiscountApplied(false);
+        setShortNumberError(false);
+        toastify.success(
+          'Номер телефону успішно зареєстровано для отрмання знижки!'
+        );
+        // console.log('Масив номерів:', updatedNumbers);
+      }
+    },
+    [checkboxChecked, phoneNumber, phoneNumbers]
+  );
 
   const handleSubmit = (values, { resetForm }) => {
     resetForm();

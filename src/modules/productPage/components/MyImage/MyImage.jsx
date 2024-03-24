@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import s from './MyImage.module.scss';
+import clsx from 'clsx';
 
 export const MyImage = ({ imges = [{ url: ' ' }] }) => {
   const [mainImage, setMainImage] = useState(imges[0]);
@@ -11,7 +12,10 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
           return (
             <figure className={s.imgListBlock} key={Math.random()}>
               <img
-                className={s.image}
+                className={clsx(
+                  s.image,
+                  img.url === mainImage.url ? s.imageFocus : s.image
+                )}
                 src={img.url}
                 onClick={() => setMainImage(img)}
               />

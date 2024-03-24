@@ -1,7 +1,7 @@
 import { sprite } from 'shared/icons';
 import s from './Logo.module.scss';
 import { Link } from 'react-router-dom';
-import { scrollToTop } from '../../../helper/ScrollToTop';
+import { scrollToTop } from 'helpers';
 
 const Logo = () => {
   return (
