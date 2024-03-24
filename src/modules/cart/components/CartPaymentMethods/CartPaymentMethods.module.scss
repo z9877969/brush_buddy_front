@@ -1,0 +1,32 @@
+.cartPaymentsTitle {
+  color: $primary-text-color;
+  @include font(28, 36);
+  font-weight: 500;
+  margin-bottom: 32px;
+
+  @include media(tablet) {
+    @include font(32, 36);
+  }
+}
+
+.listPayments {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 48px;
+
+  @include media(tablet) {
+    gap: 48px;
+  }
+
+  @include media(desktop) {
+    margin-bottom: 110px;
+  }
+
+  span {
+    @include font(16, 24);
+    font-weight: 500;
+    color: $primary-text-color;
+    margin-left: 12px;
+  }
+}

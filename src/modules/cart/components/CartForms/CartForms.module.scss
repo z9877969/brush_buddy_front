@@ -4,6 +4,10 @@
   @include media(tablet) {
     margin-bottom: 49px;
   }
+
+  @include media(desktop) {
+    margin-bottom: 64px;
+  }
 }
 
 .cartFormsTitle {
