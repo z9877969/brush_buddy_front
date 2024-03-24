@@ -1,0 +1,20 @@
+.prodPageWrapper {
+  @include media(desktop) {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 64px;
+    column-gap: 32px;
+  }
+}
+
+.prodPageTitle {
+  width: 100%;
+
+  @include media(to-tablet) {
+    margin-bottom: 32px;
+  }
+
+  @include media(to-desktop) {
+    margin-bottom: 48px;
+  }
+}

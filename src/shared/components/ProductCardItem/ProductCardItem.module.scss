@@ -15,6 +15,8 @@
 .productImg {
   width: 343px;
   height: 343px;
+  border-radius: 24px;
+  border: 1px solid rgba(31, 31, 31, 0.15);
   margin-bottom: 24px;
 
   @include media(tablet) {
@@ -87,13 +89,14 @@
     background-color: rgba(31, 31, 31, 0.8);
   }
 
-  // &[disabled] {
-  //   background: rgba(31, 31, 31, 0.1);
-  //   border: none;
-  //   & svg {
-  //     fill: $disabled-content-color;
-  //   }
-  // }
+  &[disabled] {
+    background: rgba(31, 31, 31, 0.1);
+    border: none;
+    cursor: default;
+    & svg {
+      fill: $disabled-content-color;
+    }
+  }
 }
 
 .unavailable {

@@ -1,0 +1,10 @@
+export { default as img1x_1 } from './IMG1x-1.jpg';
+export { default as img2x_1 } from './IMG2x-1.jpg';
+export { default as img1x_2 } from './IMG1x-2.jpg';
+export { default as img2x_2 } from './IMG2x-2.jpg';
+export { default as img1x_3 } from './IMG1x-3.jpg';
+export { default as img2x_3 } from './IMG2x-3.jpg';
+export { default as img1x_4 } from './IMG1x-4.jpg';
+export { default as img2x_4 } from './IMG2x-4.jpg';
+export { default as img1x_5 } from './IMG1x-5.jpg';
+export { default as img2x_5 } from './IMG2x-5.jpg';
