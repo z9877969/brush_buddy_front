@@ -31,29 +31,36 @@ const MainPageToShopping = () => {
 
   const products = useSelector((s) => s.products.list);
 
-  const productsInStok = useMemo(() => {
-    const filteredProducts = products.filter((product) => {
-      const allColorsInStock =
-        product.colors.length === 0 ||
-        product.colors.every((color) => color.inStock !== false);
-
-      const allFlavorsInStock =
-        product.flavors.length === 0 ||
-        product.flavors.every((flavor) => flavor.inStock !== false);
-
-      return { allFlavorsInStock, allColorsInStock };
+  const productsInStock = useMemo(() => {
+    const productsWithColorsInStock = products.filter((product) => {
+      return (
+        product.colors?.length &&
+        product.colors.some((color) => color.inStock === true)
+      );
     });
 
-    return filteredProducts;
+    const productsWithFlavorsInStock = products.filter((product) => {
+      return (
+        product.flavors?.length &&
+        product.flavors.some((flavor) => flavor.inStock === true)
+      );
+    });
+
+    const allProductsInStock = [
+      ...productsWithColorsInStock,
+      ...productsWithFlavorsInStock,
+    ];
+
+    return allProductsInStock;
   }, [products]);
 
   const wowProducts = useMemo(() => {
-    return productsInStok.filter((product) => product.watermark[0] === 'wow');
-  }, [productsInStok]);
+    return productsInStock.filter((product) => product.watermark[0] === 'wow');
+  }, [productsInStock]);
 
   const saleProducts = useMemo(() => {
-    return productsInStok.filter((product) => product.watermark[0] === 'sale');
-  }, [productsInStok]);
+    return productsInStock.filter((product) => product.watermark[0] === 'sale');
+  }, [productsInStock]);
 
   return (
     <section className={s.shoppingSection}>
