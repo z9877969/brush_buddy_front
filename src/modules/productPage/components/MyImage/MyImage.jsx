@@ -24,7 +24,11 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
         })}
       </div>
       {/* <div className={s.imgContainer}> */}
-      <img className={s.largeImage} src={mainImage.url} alt="" />
+      <img
+        className={s.largeImage}
+        src={imges.length === 0 ? null : mainImage.url}
+        alt=""
+      />
       {/* </div> */}
     </div>
   );
