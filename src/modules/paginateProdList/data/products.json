@@ -41,8 +41,8 @@
       {
         "flavor": "Ананас",
         "colorMarker": "yellow",
-        "quantity": 0,
-        "inStock": false
+        "quantity": 10,
+        "inStock": true
       }
     ],
     "volume": [50, 75, 100],

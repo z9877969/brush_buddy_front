@@ -1,7 +1,7 @@
 import { Container, MainTitle } from 'shared/components';
 import s from './productsPageWrapper.module.scss';
 
-const ProductsPageContainer = (children) => {
+const ProductsPageWrapper = ({ children }) => {
   return (
     <Container className={s.prodPageWrapper}>
       <MainTitle
@@ -13,4 +13,4 @@ const ProductsPageContainer = (children) => {
   );
 };
 
-export default ProductsPageContainer;
+export default ProductsPageWrapper;

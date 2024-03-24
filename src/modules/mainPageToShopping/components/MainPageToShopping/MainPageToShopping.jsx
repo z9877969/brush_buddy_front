@@ -31,13 +31,29 @@ const MainPageToShopping = () => {
 
   const products = useSelector((s) => s.products.list);
 
-  const wowProducts = useMemo(() => {
-    return products.filter((product) => product.watermark[0] === 'wow');
+  const productsInStok = useMemo(() => {
+    const filteredProducts = products.filter((product) => {
+      const allColorsInStock =
+        product.colors.length === 0 ||
+        product.colors.every((color) => color.inStock !== false);
+
+      const allFlavorsInStock =
+        product.flavors.length === 0 ||
+        product.flavors.every((flavor) => flavor.inStock !== false);
+
+      return { allFlavorsInStock, allColorsInStock };
+    });
+
+    return filteredProducts;
   }, [products]);
 
+  const wowProducts = useMemo(() => {
+    return productsInStok.filter((product) => product.watermark[0] === 'wow');
+  }, [productsInStok]);
+
   const saleProducts = useMemo(() => {
-    return products.filter((product) => product.watermark[0] === 'sale');
-  }, [products]);
+    return productsInStok.filter((product) => product.watermark[0] === 'sale');
+  }, [productsInStok]);
 
   return (
     <section className={s.shoppingSection}>
