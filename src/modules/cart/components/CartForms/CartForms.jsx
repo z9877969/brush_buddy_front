@@ -53,10 +53,12 @@ const CartForms = () => {
   }, []);
 
   useEffect(() => {
+    if (!debouncedValue) return;
     dispatch(apiGetCity(debouncedValue));
   }, [dispatch, debouncedValue]);
 
   useEffect(() => {
+    if (!fullCityName) return;
     dispatch(apiGetDepartment(fullCityName.substring(3)));
   }, [dispatch, fullCityName]);
 
@@ -64,7 +66,7 @@ const CartForms = () => {
     if (PostOffice?.length > 0) {
       const options = PostOffice.map(({ SiteKey, Description }) => ({
         label: Description,
-        className: SiteKey,
+        value: SiteKey,
       }));
       return options;
     } else {
@@ -98,6 +100,8 @@ const CartForms = () => {
   const handleCityName = (cityName) => {
     formik.setFieldValue('city', cityName);
     setFullCityName(cityName);
+    setOpen(false);
+    formik.setFieldValue('department', '');
   };
 
   return (
@@ -149,11 +153,14 @@ const CartForms = () => {
             )}
           </label>
         </div>
-        <label
-          className={`${s.cartFormLabel} ${formik.touched.city && formik.errors.city ? s.error : ''}`}
-        >
-          <span className={s.cartFormSpan}>Місто</span>
-          <div className={s.inputCityName}>
+        <div className={s.cityWrapper}>
+          {open && cityData.length > 0 && (
+            <CityNameItem handleCityName={handleCityName} />
+          )}
+          <label
+            className={`${s.cartFormLabel} ${formik.touched.city && formik.errors.city ? s.error : ''}`}
+          >
+            <span className={s.cartFormSpan}>Місто</span>
             <input
               onClick={() => {
                 setOpen(true);
@@ -166,15 +173,11 @@ const CartForms = () => {
               }}
               value={formik.values.city}
             />
-            {open && cityData.length > 0 && (
-              <CityNameItem handleCityName={handleCityName} />
+            {formik.touched.name && formik.errors.city && (
+              <div className={s.cartFormError}>{formik.errors.city}</div>
             )}
-          </div>
-
-          {formik.touched.name && formik.errors.city && (
-            <div className={s.cartFormError}>{formik.errors.city}</div>
-          )}
-        </label>
+          </label>
+        </div>
         <label
           className={`${s.cartFormLabel} ${formik.touched.department && formik.errors.department ? s.error : ''}`}
         >
@@ -185,8 +188,9 @@ const CartForms = () => {
             placeholder={'Обрати відділення...'}
             styles={selectStyles}
             onChange={(newValue) =>
-              formik.setFieldValue('department', newValue.label)
+              formik.setFieldValue('department', newValue)
             }
+            value={formik.values.department}
           />
           {formik.touched.name && formik.errors.department && (
             <div className={s.cartFormError}>{formik.errors.department}</div>

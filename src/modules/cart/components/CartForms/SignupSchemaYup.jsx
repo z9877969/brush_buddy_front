@@ -12,7 +12,7 @@ export const SignupSchema = Yup.object().shape({
     .matches(/^\+?3?8?(0\d{9})$/, 'Введіть коректний номер телефону')
     .required('Поле обов`язкове для заповнення'),
   city: Yup.string().required('Поле обов`язкове для заповнення'),
-  department: Yup.string().required('Поле обов`язкове для заповнення'),
+  department: Yup.object().required('Поле обов`язкове для заповнення'),
   comments: Yup.string().max(
     300,
     'Коментар може містити максимум 300 символів'

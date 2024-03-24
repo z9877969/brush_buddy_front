@@ -1,7 +1,7 @@
 .cityNameList {
   position: absolute;
   left: 0;
-  top: 56px;
+  top: 108%;
   width: 100%;
   padding: 12px;
   max-height: 200px;
@@ -16,9 +16,9 @@
 
 .cityNameItem {
   cursor: pointer;
-  color: $primary-text-color;
+  color: $secondary-text-color;
   padding: 12px;
   &:hover {
-    background-color: $main-bg-color;
+    color: $primary-text-color;
   }
 }
