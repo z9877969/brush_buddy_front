@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { totalPrice, totalPriceDiscount } from 'modules/cart';
+//import { fetchSendPromoCode } from './operations.js';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -43,6 +44,7 @@ const cartSlice = createSlice({
     promoCode: null,
     discount: 0,
     isSubmitForm: false,
+    isLoading: false,
   },
   reducers: {
     addProduct(state, action) {
@@ -145,6 +147,14 @@ const cartSlice = createSlice({
   },
 
   extraReducers: (builder) => builder,
+  // .addCase(fetchSendPromoCode.pending, (state) => state.isLoading === true)
+  // .addCase(fetchSendPromoCode.fulfilled, (state, { payload }) => {
+  //   state.promocodeDiscount === payload,
+  //     (state.discount = totalPriceDiscount(total, promocodeDiscount));
+  // })
+  // .addCase(fetchSendPromoCode.rejected, (state, { payload }) => {
+  //   state.isLoading = false;
+  // }),
 });
 
 export const {
