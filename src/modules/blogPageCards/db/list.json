@@ -1,38 +1,38 @@
 [
   {
     "id": "1",
-    "img1x": "../../images/IMG1x-1.jpg",
-    "img2x": "../../images/IMG2x-1.jpg",
+    "img1x": "../images/IMG1x-1.jpg",
+    "img2x": "../images/IMG2x-1.jpg",
     "title": "Яку вибрати зубну щітку?"
   },
   {
     "id": "2",
-    "img1x": "../../images/IMG1x-2.jpg",
-    "img2x": "../../images/IMG2x-2.jpg",
+    "img1x": "../images/IMG1x-2.jpg",
+    "img2x": "../images/IMG2x-2.jpg",
     "title": "Як вибрати зубну щітку для домашнього улюбленця?"
   },
   {
     "id": "3",
-    "img1x": "../../images/IMG1x-3.jpg",
-    "img2x": "../../images/IMG2x-3.jpg",
+    "img1x": "../images/IMG1x-3.jpg",
+    "img2x": "../images/IMG2x-3.jpg",
     "title": "Як вибрати зубну щітку для дитини?"
   },
   {
     "id": "4",
-    "img1x": "../../images/IMG1x-4.jpg",
-    "img2x": "../../images/IMG2x-4.jpg",
+    "img1x": "../images/IMG1x-4.jpg",
+    "img2x": "../images/IMG2x-4.jpg",
     "title": "Як вибрати зубну щітку?"
   },
   {
     "id": "5",
-    "img1x": "../../images/IMG1x-5.jpg",
-    "img2x": "../../images/IMG2x-5.jpg",
+    "img1x": "../images/IMG1x-5.jpg",
+    "img2x": "../images/IMG2x-5.jpg",
     "title": "Як вибрати зубну щітку?"
   },
   {
     "id": "6",
-    "img1x": "../../images/IMG1x-6.jpg",
-    "img2x": "../../images/IMG2x-6.jpg",
+    "img1x": "../images/IMG1x-6.jpg",
+    "img2x": "../images/IMG2x-6.jpg",
     "title": "Як вибрати зубну щітку?"
   }
 ]

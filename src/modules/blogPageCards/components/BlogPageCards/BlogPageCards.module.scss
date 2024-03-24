@@ -1,0 +1,43 @@
+.div {
+  max-width: 343px;
+  margin-top: 32px;
+  overflow: auto;
+  margin-bottom: 32px;
+  scrollbar-width: auto;
+
+  @include media(tablet) {
+    max-width: 704px;
+  }
+  @include media(desktop) {
+    max-width: unset;
+  }
+}
+.list {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 28px;
+
+  @include media(desktop) {
+    flex-direction: column;
+    gap: 48px;
+  }
+}
+.title {
+  margin-bottom: 32px;
+  font-weight: 500;
+  color: #1f1f1f;
+  @include font(32, 36);
+}
+.picture {
+  width: 302px;
+}
+.itemTitle {
+  max-width: 302px;
+  margin-top: 16px;
+  font-weight: 500;
+  color: #1f1f1f;
+  @include font(20, 28);
+  @include media(tablet) {
+    @include font(24, 32);
+  }
+}

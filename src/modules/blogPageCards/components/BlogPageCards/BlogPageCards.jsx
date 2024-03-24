@@ -5,51 +5,125 @@ import list from 'modules/blogPageCards/db/list.json';
 import { useState } from 'react';
 import { Picture } from 'shared/components';
 
+//images
+import { img1x_1 } from '../../images/index';
+import { img2x_1 } from '../../images/index';
+import { img1x_2 } from '../../images/index';
+import { img2x_2 } from '../../images/index';
+import { img1x_3 } from '../../images/index';
+import { img2x_3 } from '../../images/index';
+import { img1x_4 } from '../../images/index';
+import { img2x_4 } from '../../images/index';
+import { img1x_5 } from '../../images/index';
+import { img2x_5 } from '../../images/index';
+
 const BlogPageCards = () => {
   const [blogList] = useState(list);
 
   return (
-    <div>
-      <ul>
+    <div className={s.div}>
+      <h2 className={s.title}>Статті блогу</h2>
+      <ul className={s.list}>
         <li>
           <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[0].id)}>
             <Picture
-              mob1x={blogList[0].img1x}
-              mob2x={blogList[1].img2x}
-              tab1x={blogList[2].img1x}
-              tab2x={blogList[3].img2x}
-              desk1x={blogList[4].img1x}
-              desk2x={blogList[5].img2x}
-              defaultImg={blogList[6].img1x}
-              width={343}
+              className={s.picture}
+              mob1x={img1x_1}
+              mob2x={img2x_1}
+              tab1x={img1x_1}
+              tab2x={img2x_1}
+              desk1x={img1x_1}
+              desk2x={img2x_1}
+              defaultImg={img1x_1}
+              width={302}
               alt="photo"
             />
-            {blogList[0].title}
+            <h3 className={s.itemTitle}>{blogList[0].title}</h3>
           </Link>
         </li>
         <li>
           <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[1].id)}>
-            {blogList[1].title}
+            <Picture
+              className={s.picture}
+              mob1x={img1x_2}
+              mob2x={img2x_2}
+              tab1x={img1x_2}
+              tab2x={img2x_2}
+              desk1x={img1x_2}
+              desk2x={img2x_2}
+              defaultImg={img1x_2}
+              width={302}
+              alt="photo"
+            />
+            <h3 className={s.itemTitle}>{blogList[1].title}</h3>
           </Link>
         </li>
         <li>
           <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[2].id)}>
-            {blogList[2].title}
+            <Picture
+              className={s.picture}
+              mob1x={img1x_3}
+              mob2x={img2x_3}
+              tab1x={img1x_3}
+              tab2x={img2x_3}
+              desk1x={img1x_3}
+              desk2x={img2x_3}
+              defaultImg={img1x_3}
+              width={302}
+              alt="photo"
+            />
+            <h3 className={s.itemTitle}>{blogList[2].title}</h3>
           </Link>
         </li>
         <li>
           <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[3].id)}>
-            {blogList[3].title}
+            <Picture
+              className={s.picture}
+              mob1x={img1x_4}
+              mob2x={img2x_4}
+              tab1x={img1x_4}
+              tab2x={img2x_4}
+              desk1x={img1x_4}
+              desk2x={img2x_4}
+              defaultImg={img1x_4}
+              width={302}
+              alt="photo"
+            />
+            <h3 className={s.itemTitle}>{blogList[3].title}</h3>
           </Link>
         </li>
         <li>
           <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[4].id)}>
-            {blogList[4].title}
+            <Picture
+              className={s.picture}
+              mob1x={img1x_5}
+              mob2x={img2x_5}
+              tab1x={img1x_5}
+              tab2x={img2x_5}
+              desk1x={img1x_5}
+              desk2x={img2x_5}
+              defaultImg={img1x_5}
+              width={302}
+              alt="photo"
+            />
+            <h3 className={s.itemTitle}>{blogList[4].title}</h3>
           </Link>
         </li>
         <li>
           <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[5].id)}>
-            {blogList[5].title}
+            <Picture
+              className={s.picture}
+              mob1x={img1x_5}
+              mob2x={img2x_5}
+              tab1x={img1x_5}
+              tab2x={img2x_5}
+              desk1x={img1x_5}
+              desk2x={img2x_5}
+              defaultImg={img1x_5}
+              width={302}
+              alt="photo"
+            />
+            <h3 className={s.itemTitle}>{blogList[5].title}</h3>
           </Link>
         </li>
       </ul>
