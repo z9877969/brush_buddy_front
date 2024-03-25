@@ -9,19 +9,22 @@ const OrderFinished = () => {
   const [order] = useState({ number: 375 });
 
   return (
-    <Container className={s.section}>
-      <img src={animation} alt="animation" className={s.animation} />
-
-      <h2 className={s.title}>Подякували!</h2>
-      <p className={s.text}>
-        Замовлення №{order.number} успішно оформлене. Ми відправили усю
-        інформацію на вказану електронну адресу. Наші співробітники вже дбайливо
-        збирають посилочку для Вас.
-      </p>
-      <Link className={s.linkButton} to={ROUTES.PRODUCTS}>
-        І вам дякуємо
-      </Link>
-    </Container>
+    <>
+      <Container className={s.section}>
+        <div className={s.animaContent}>
+          <img src={animation} alt="animation" className={s.animation} />
+        </div>
+        <h2 className={s.title}>Подякували!</h2>
+        <p className={s.text}>
+          Замовлення №{order.number} успішно оформлене. Ми відправили усю
+          інформацію на вказану електронну адресу. Наші співробітники вже
+          дбайливо збирають посилочку для Вас.
+        </p>
+        <Link className={s.linkButton} to={ROUTES.PRODUCTS}>
+          І вам дякуємо
+        </Link>
+      </Container>
+    </>
   );
 };
 
