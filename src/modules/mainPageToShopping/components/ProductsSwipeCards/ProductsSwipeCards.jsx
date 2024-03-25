@@ -1,11 +1,8 @@
 import { useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import { Navigation } from 'swiper/modules';
-
 import { ProductCardItem } from 'shared/components';
-// import 'swiper/css';
-// import 'swiper/css/navigation';
+
 const ProductsSwipeCards = ({
   productsCardData,
   swiperData,

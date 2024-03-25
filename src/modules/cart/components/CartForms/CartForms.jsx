@@ -32,9 +32,9 @@ const CartForms = () => {
   const [fullCityName, setFullCityName] = useState('');
   const listRef = useRef();
 
-  const SubmitForm = useSelector(selectSubmitForm);
+  const isSubmitForm = useSelector(selectSubmitForm);
   const cityData = useSelector(selectCityData);
-  const PostOffice = useSelector(selectPostOffice);
+  const postOffice = useSelector(selectPostOffice);
 
   const maxLength = 300;
 
@@ -63,8 +63,8 @@ const CartForms = () => {
   }, [dispatch, fullCityName]);
 
   const setListDepartments = () => {
-    if (PostOffice?.length > 0) {
-      const options = PostOffice.map(({ SiteKey, Description }) => ({
+    if (postOffice?.length > 0) {
+      const options = postOffice.map(({ SiteKey, Description }) => ({
         label: Description,
         value: SiteKey,
       }));
@@ -91,11 +91,11 @@ const CartForms = () => {
   });
 
   useEffect(() => {
-    if (SubmitForm) {
+    if (isSubmitForm) {
       formik.submitForm();
       dispatch(submitForm(false));
     }
-  }, [SubmitForm, dispatch, formik]);
+  }, [isSubmitForm, dispatch, formik]);
 
   const handleCityName = (cityName) => {
     formik.setFieldValue('city', cityName);
