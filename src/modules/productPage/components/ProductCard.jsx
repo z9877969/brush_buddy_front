@@ -11,7 +11,7 @@ import { sprite } from 'shared/icons';
 // import { useDispatch } from 'react-redux';
 // import { addProduct } from '@redux/cart/cartSlice';
 // import productCard from '../data/products.json';
-import { products } from 'shared/data';
+import products from '../../paginateProdList/data/products.json';
 import clsx from 'clsx';
 import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
 
@@ -40,19 +40,46 @@ const ProductCard = () => {
   // console.log(color.quantity);
   const [productess] = useState([productes]);
 
+  const type = productess[0].type.map((item) => item);
+  // const typess = type.join(' ');
+
+  // console.log(typess);
+
+  const shouldRenderChild = type.includes('child');
+  const shouldRenderAnimal = type.includes('animal');
+  const shouldRenderAdult = type.includes('adult');
+
+  // const type = productess[0].type.map((item) => item);
+  // const typess = type.join(' ');
+
+  // console.log(typess);
+
+  // const types = useMemo(() => {
+  //   switch (typess) {
+  //     case 'child':
+  //       return 'icon-bage-child';
+  //     case 'animal':
+  //       return 'icon-bage-animal';
+  //     case 'adult':
+  //       return 'icon-bage-adult';
+  //     default:
+  //       return null;
+  //   }
+  // }, [typess]);
+
   const switchs = useMemo(() => {
-    switch (productes.watermark[0]) {
+    switch (productess[0].watermark[0]) {
       case 'sale':
         return 'icon-sale';
       case 'wow':
         return 'icon-wow';
       default:
-        return 'icon';
+        return null;
     }
-  }, [productes]);
+  }, [productess]);
+  // console.log(switchs);
   return (
     <Container>
-      <h2>Product card</h2>
       <div>
         <ul>
           {productess.map((product) => {
@@ -60,14 +87,42 @@ const ProductCard = () => {
               <li className={s.containerList} key={product.id}>
                 <MyImage imges={product.images} />
                 <div className={s.informationBlock}>
-                  <div>
-                    <svg width="48" height="24">
-                      <use href={`${sprite}#${switchs}`}></use>
-                    </svg>
+                  <div className={s.spriteBlock}>
+                    <div>
+                      <svg
+                        className={clsx(
+                          s.switch,
+                          switchs === null
+                            ? s.none
+                            : switchs === 'icon-sale'
+                              ? s.sale
+                              : s.wow
+                        )}
+                      >
+                        <use href={`${sprite}#${switchs}`}></use>
+                      </svg>
+                    </div>
+                    <div>
+                      {shouldRenderChild && (
+                        <svg className={s.child} width="48" height="24">
+                          <use href={`${sprite}#icon-bage-child`}></use>
+                        </svg>
+                      )}
+                      {shouldRenderAnimal && (
+                        <svg className={s.animal} width="48" height="24">
+                          <use href={`${sprite}#icon-bage-animal`}></use>
+                        </svg>
+                      )}
+                      {shouldRenderAdult && (
+                        <svg className={s.adult} width="48" height="24">
+                          <use href={`${sprite}#icon-bage-adult`}></use>
+                        </svg>
+                      )}
+                    </div>
                   </div>
                   <h2 className={s.title}>{product.title}</h2>
-                  <p className={s.paragraph}>{product.text}</p>
-                  {product.salePrice.length > 0 ? (
+                  <p className={s.paragraph}>{product.subtitle}</p>
+                  {product.salePrice > 0 ? (
                     <div className={s.saleBlock}>
                       <p
                         className={clsx(
@@ -93,7 +148,7 @@ const ProductCard = () => {
                         className={clsx(
                           s.notSalePrice,
                           flavor.inStock === false || color.inStock === false
-                            ? s.notHaveItemPrice
+                            ? s.notHaveItemSalePrice
                             : s.notSalePrice
                         )}
                       >
@@ -102,7 +157,7 @@ const ProductCard = () => {
                           className={clsx(
                             s.grn,
                             flavor.inStock === false || color.inStock === false
-                              ? s.notHaveItemPrice
+                              ? s.notHaveItemSalePrice
                               : s.grn
                           )}
                         >
@@ -115,7 +170,7 @@ const ProductCard = () => {
                       className={clsx(
                         s.price,
                         flavor.inStock === false || color.inStock === false
-                          ? s.notHaveItemPrice
+                          ? s.notHavePrices
                           : s.price
                       )}
                     >
@@ -124,7 +179,7 @@ const ProductCard = () => {
                         className={clsx(
                           s.grn,
                           flavor.inStock === false || color.inStock === false
-                            ? s.notHaveItemPrice
+                            ? s.notHavePrices
                             : s.grn
                         )}
                       >
@@ -212,27 +267,28 @@ const ProductCard = () => {
                           () =>
                             onClickAdd({
                               id: product.id,
-                              url: product.images[0],
+                              images: product.images[0],
                               price: product.price,
                               salePrice: product.salePrice,
                               title: product.title,
                               volume: product.volume.length === 0 ? null : mls,
-                              flavor:
+                              flavors:
                                 product.flavors.length === 0 ? null : flavor,
-                              color: product.colors.length === 0 ? null : color,
-                              quantity: quantity,
+                              colors:
+                                product.colors.length === 0 ? null : color,
+                              amount: quantity,
                             })
                           // console.log({
                           //   id: product.id,
-                          //   url: product.images[0],
+                          //   images: product.images[0],
                           //   price: product.price,
                           //   salePrice: product.salePrice,
                           //   title: product.title,
                           //   volume: product.volume.length === 0 ? null : mls,
-                          //   flavor:
+                          //   flavors:
                           //     product.flavors.length === 0 ? null : flavor,
-                          //   color: product.colors.length === 0 ? null : color,
-                          //   quantity: quantity,
+                          //   colors: product.colors.length === 0 ? null : color,
+                          //   amount: quantity,
                           // })
                         }
                         disabled={flavor.quantity === 0 || color.quantity === 0}

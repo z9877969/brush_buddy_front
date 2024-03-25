@@ -3,8 +3,6 @@ import clsx from 'clsx';
 import s from './ProductWatermark.module.scss';
 
 const ProductWatermark = ({ watermark, sprite }) => {
-  // let statusIcon = null;
-
   const watermarkIcon = useMemo(() => {
     switch (watermark) {
       case 'wow':

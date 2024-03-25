@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { totalPrice, totalPriceDiscount } from 'modules/cart';
+//import { fetchSendPromoCode } from './operations.js';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -43,11 +44,13 @@ const cartSlice = createSlice({
     promoCode: null,
     discount: 0,
     isSubmitForm: false,
+    isLoading: false,
   },
   reducers: {
     addProduct(state, action) {
       //state.products.push(action.payload); старий стейт
       const { id, category, flavor, volume, color } = action.payload;
+
       const existingProductIndex = state.products.findIndex((product) => {
         if (flavor && volume) {
           return (
@@ -58,7 +61,7 @@ const cartSlice = createSlice({
         } else if (color) {
           return product.id === id && product.colors?.color === color;
         } else if (category) {
-          return product.id === id && product.category === category;
+          return product.id === id;
         } else {
           return product.id === id;
         }
@@ -85,8 +88,8 @@ const cartSlice = createSlice({
       const { id, category, flavor, volume, color } = action.payload;
       state.products = state.products.filter(
         (product) =>
-          (product.id !== id &&
-            product.flavors?.flavor !== flavor &&
+          product.id !== id ||
+          (product.flavors?.flavor !== flavor &&
             product.flavors?.volume !== volume) ||
           product.colors?.color !== color ||
           product.category !== category
@@ -144,6 +147,14 @@ const cartSlice = createSlice({
   },
 
   extraReducers: (builder) => builder,
+  // .addCase(fetchSendPromoCode.pending, (state) => state.isLoading === true)
+  // .addCase(fetchSendPromoCode.fulfilled, (state, { payload }) => {
+  //   state.promocodeDiscount === payload,
+  //     (state.discount = totalPriceDiscount(total, promocodeDiscount));
+  // })
+  // .addCase(fetchSendPromoCode.rejected, (state, { payload }) => {
+  //   state.isLoading = false;
+  // }),
 });
 
 export const {

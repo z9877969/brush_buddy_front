@@ -1,10 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { RoundButton } from 'shared/components';
 import { ProductTypeIcon } from 'shared/components';
 import { ProductWatermark } from 'shared/components';
 import * as img from 'shared/images/productItem';
 import { sprite } from 'shared/icons';
+import { addProduct } from '@redux/cart/cartSlice';
+import { useDispatch } from 'react-redux';
 
 import s from './ProductCardItem.module.scss';
 
@@ -15,17 +17,37 @@ const ProductCardItem = ({
   type,
   watermark,
   images,
+  colors,
+  flavors,
 }) => {
   const [watermarkValue] = watermark;
-  const navigate = useNavigate();
-  const isAvalible = true;
+
   const { url } = images?.[0] || { url: null };
+  const inStockColorsValues =
+    colors && colors.length && colors.map((color) => color.inStock);
+
+  const inStockFlavorsValues =
+    flavors && flavors.length && flavors.map((flavor) => flavor.inStock);
+
+  const someColorsInStock =
+    inStockColorsValues &&
+    inStockColorsValues.length &&
+    inStockColorsValues.some((value) => value === true);
+
+  const someFlavorsInStock =
+    inStockFlavorsValues &&
+    inStockFlavorsValues.length &&
+    inStockFlavorsValues.some((value) => value === true);
+
+  const disableBtn = colors?.length ? !someColorsInStock : !someFlavorsInStock;
+  const dispatch = useDispatch();
+  const mainVariant = flavors?.length ? flavors[0] : colors[0];
 
   const hanleClick = () => {
-    navigate(`/products/${title}`);
+    dispatch(addProduct({ title, images, price, salePrice, mainVariant }));
   };
   return (
-    <li className={clsx(s.productItem, !isAvalible && s.unavailable)}>
+    <li className={clsx(s.productItem, disableBtn && s.unavailable)}>
       <Link to={`/products/${title}`}>
         <img
           src={url ?? img['product_1']}
@@ -49,6 +71,7 @@ const ProductCardItem = ({
           iconId={'icon-cart'}
           className={s.cartBtn}
           onClick={hanleClick}
+          disabled={disableBtn}
         />
       </div>
     </li>
