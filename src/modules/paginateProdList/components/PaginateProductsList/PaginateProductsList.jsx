@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ProdList from '../ProdList/ProdList';
 import Paginator from '../Paginator/Paginator';
 import s from './PaginateProductsList.module.scss';
+import { scrollToTop } from 'helpers/scrollToTop';
 
 const PaginateProdList = ({ products }) => {
   const [currentItems, setCurrentItems] = useState([]);
@@ -19,6 +20,7 @@ const PaginateProdList = ({ products }) => {
   const handlePageClick = (event) => {
     const newOffset = event.selected * itemsPerPage;
     setItemOffset(newOffset);
+    scrollToTop();
   };
   return (
     <div className={s.blockPaginateProductsList}>
