@@ -1,6 +1,6 @@
 import Select from 'react-select';
 import { useFormik } from 'formik';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 
@@ -10,7 +10,7 @@ import {
   categoriesOptions,
   brandsOptions,
   sortByOptions,
-} from 'modules/productsPageFilter/data/options.js';
+} from '../../data/options';
 import { Button } from 'shared/components';
 import { customStyles } from './customStyles.js';
 import { sprite } from 'shared/icons';
@@ -20,9 +20,20 @@ import s from './FiltersForm.module.scss';
 const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
   const ref = useRef(null);
 
-  useEffect(() => {
-    ref.current.inputRef.readOnly = 'true';
-  }, []);
+  const products = useSelector((s) => s.products.list);
+
+  const productsByCategory = useMemo(() => {
+    const data = {};
+
+    products.forEach((product) => {
+      if (data[product.category]) {
+        data[product.category]++;
+      } else {
+        data[product.category] = 1;
+      }
+    });
+    return data;
+  }, [products]);
 
   const initialValues = filter
     ? {
@@ -37,22 +48,10 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
         search: '',
         recommendedFor: [],
         age: ageOptions[0],
-        category: categoriesOptions()[0],
+        category: categoriesOptions(productsByCategory)[0],
         brand: brandsOptions[0],
         sortBy: sortByOptions[0],
       };
-
-  const products = useSelector((s) => s.products.list);
-
-  const productsByCategory = {};
-
-  products.map((product) => {
-    if (productsByCategory[product.category]) {
-      productsByCategory[product.category]++;
-    } else {
-      productsByCategory[product.category] = 1;
-    }
-  });
 
   const formik = useFormik({
     initialValues,
@@ -62,6 +61,10 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
   });
   const { values, handleSubmit, handleChange, setFieldValue, resetForm } =
     formik;
+
+  useEffect(() => {
+    ref.current.inputRef.readOnly = 'true';
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} className={s.form}>
