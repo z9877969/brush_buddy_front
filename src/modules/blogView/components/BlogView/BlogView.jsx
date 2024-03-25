@@ -1,15 +1,13 @@
-import { Container } from 'shared/components';
 import Article from '../Article/Article';
-import ArticlesList from '../ArticlesList/ArticlesList';
 import { testArticle } from '../data/testArticle';
+import { BlogPageCards } from 'modules/blogPageCards';
+import css from './BlogView.module.scss';
 
 const BlogView = () => {
   return (
-    <div>
-      <Container>
-        <ArticlesList />
-        <Article article={testArticle} />
-      </Container>
+    <div className={css.blog}>
+      <BlogPageCards />
+      <Article article={testArticle} />
     </div>
   );
 };

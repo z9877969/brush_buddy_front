@@ -12,7 +12,7 @@ const MainPageHelpers = () => {
   const [disablEndButton, setdisablEndButton] = useState(false);
 
   const swiperData = (ref) => {
-    setRefSwiper(ref);
+    setRefSwiper(ref); 
   };
 
   const reachEndButton = (isEnd) => {

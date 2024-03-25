@@ -10,7 +10,20 @@
   }
   @include media(desktop) {
     max-width: unset;
+    min-width: 324px;
+    margin-top: 64px;
   }
+}
+.div::-webkit-scrollbar {
+  height: 4px;
+}
+.div::-webkit-scrollbar-track {
+  background: $secondary-bg-color;
+}
+div::-webkit-scrollbar-thumb {
+  background-color: $disabled-content-color;
+  border-radius: 4px;
+  width: 200px;
 }
 .list {
   display: flex;
