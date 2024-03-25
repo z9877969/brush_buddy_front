@@ -4,18 +4,33 @@ const instance = axios.create({
   baseURL: 'https://api.novaposhta.ua/v2.0/json/',
 });
 
-const getBody = (cityName) => ({
+const getBody = (partCityName) => ({
   apiKey: 'fd98607b38c9aafeba92696d45e45cb5',
   modelName: 'Address',
   calledMethod: 'searchSettlements',
   methodProperties: {
-    CityName: cityName,
+    CityName: partCityName,
     Limit: '50',
     Page: '1',
   },
 });
 
-export const requestCity = async (cityName) => {
-  const response = await instance.post('', getBody(cityName));
+const getDepartment = (fullCityName) => ({
+  apiKey: 'fd98607b38c9aafeba92696d45e45cb5',
+  modelName: 'Address',
+  calledMethod: 'getWarehouses',
+  methodProperties: {
+    FindByString: '',
+    CityName: fullCityName,
+  },
+});
+
+export const requestCity = async (partCityName) => {
+  const response = await instance.post('', getBody(partCityName));
+  return response.data;
+};
+
+export const requestDepartment = async (fullCityName) => {
+  const response = await instance.post('', getDepartment(fullCityName));
   return response.data;
 };

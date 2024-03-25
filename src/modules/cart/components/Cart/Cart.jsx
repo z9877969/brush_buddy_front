@@ -6,6 +6,7 @@ import CartForms from '../CartForms/CartForms';
 import { notUsedPromoCode } from '@redux/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import CartPaymentMethods from '../CartPaymentMethods/CartPaymentMethods';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Cart = () => {
         <section>
           <CartListCurrentProducts />
           <CartForms />
-          <p>component delivery</p>
+          <CartPaymentMethods />
         </section>
         <CartOrder />
       </Container>

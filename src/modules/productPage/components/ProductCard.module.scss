@@ -185,7 +185,7 @@
   font-family: $main-font-family;
   color: $disabled-content-color;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 32px;
   line-height: 112%;
   @include media(tablet) {
     font-size: 28px;
@@ -193,6 +193,16 @@
   @include media(desktop) {
     font-size: 32px;
   }
+}
+
+.notHaveItemSalePrice {
+  font-size: 16px;
+}
+
+.notHavePrices {
+  font-family: $main-font-family;
+  color: $disabled-content-color;
+  font-size: 24px;
 }
 
 .haveItem {
@@ -253,4 +263,39 @@
     fill: #1f1f1f;
     fill-opacity: 0.2;
   }
+}
+
+.spriteBlock {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.none {
+  display: none;
+}
+
+.switch {
+  width: 48px;
+  height: 24px;
+}
+
+.sale {
+  fill: $pet-color;
+}
+
+.wow {
+  fill: $adult-color;
+}
+
+.child {
+  fill: $child-color;
+}
+
+.animal {
+  fill: $pet-color;
+}
+
+.adult {
+  fill: $adult-color;
 }
