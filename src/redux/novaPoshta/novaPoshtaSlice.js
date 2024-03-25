@@ -25,7 +25,7 @@ export const apiGetDepartment = createAsyncThunk(
   }
 );
 
-const initialState = {
+const initialState = { 
   cityData: [],
   postOffice: [],
   error: null,
