@@ -11,7 +11,8 @@ import { sprite } from 'shared/icons';
 // import { useDispatch } from 'react-redux';
 // import { addProduct } from '@redux/cart/cartSlice';
 // import productCard from '../data/products.json';
-import products from '../../paginateProdList/data/products.json';
+import { products } from 'shared/data';
+// import products from '../../paginateProdList/data/products.json';
 import clsx from 'clsx';
 import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
 
