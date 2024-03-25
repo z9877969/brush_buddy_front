@@ -1,57 +1,70 @@
 import Select from 'react-select';
 import { useFormik } from 'formik';
+import { useEffect, useMemo, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 
 import { PRODUCT_TYPES } from 'shared/constants/index.js';
-
-import s from './FiltersForm.module.scss';
 import {
   ageOptions,
   categoriesOptions,
   brandsOptions,
   sortByOptions,
-} from 'modules/productsPageFilter/data/options';
+} from '../../data/options';
 import { Button } from 'shared/components';
-import { customStyles } from './customStyles';
+import { customStyles } from './customStyles.js';
 import { sprite } from 'shared/icons';
-import { useEffect, useRef } from 'react';
 
-const FiltersForm = ({ filterProductsCb, onClose }) => {
+import s from './FiltersForm.module.scss';
+
+const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
   const ref = useRef(null);
 
-  useEffect(() => {
-    ref.current.inputRef.readOnly = 'true';
-  }, []);
+  const products = useSelector((s) => s.products.list);
 
-  const initialValues = {
-    search: '',
-    age: ageOptions[0],
-    category: categoriesOptions[0],
-    brand: brandsOptions[0],
-    sortBy: sortByOptions[0],
-  };
+  const productsByCategory = useMemo(() => {
+    const data = {};
+
+    products.forEach((product) => {
+      if (data[product.category]) {
+        data[product.category]++;
+      } else {
+        data[product.category] = 1;
+      }
+    });
+    return data;
+  }, [products]);
+
+  const initialValues = filter
+    ? {
+        search: filter.search,
+        recommendedFor: filter.recommendedFor,
+        age: filter.age,
+        category: filter.category,
+        brand: filter.brand,
+        sortBy: filter.sortBy,
+      }
+    : {
+        search: '',
+        recommendedFor: [],
+        age: ageOptions[0],
+        category: categoriesOptions(productsByCategory)[0],
+        brand: brandsOptions[0],
+        sortBy: sortByOptions[0],
+      };
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      const {
-        search,
-        age: { value: ageValue },
-        category: { value: catValue },
-        brand: { value: brandValue },
-        sortBy: { sortBy: sortByValue },
-      } = values;
-
-      filterProductsCb({
-        age: ageValue,
-        category: catValue,
-        search,
-        brand: brandValue,
-        sortBy: sortByValue,
-      });
+      filterProductsCb(values);
     },
   });
   const { values, handleSubmit, handleChange, setFieldValue, resetForm } =
     formik;
+
+  useEffect(() => {
+    ref.current.inputRef.readOnly = 'true';
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} className={s.form}>
@@ -79,13 +92,15 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
           <label htmlFor="checkboxes" className={s.label}>
             Рекомендовано для
           </label>
-          <div id="checkboxes" className={s.checkboxes}>
+          <div id="checkboxes" className={s.checkboxes} role="group">
             <label htmlFor={PRODUCT_TYPES.ADULT} className={s.checkboxLabel}>
               <input
                 type="checkbox"
                 id={PRODUCT_TYPES.ADULT}
                 name="recommendedFor"
+                value={PRODUCT_TYPES.ADULT}
                 className={clsx(s.check_input, s.adult)}
+                onChange={(e) => handleChange(e)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -99,8 +114,10 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
               <input
                 type="checkbox"
                 id={PRODUCT_TYPES.CHILD}
+                value={PRODUCT_TYPES.CHILD}
                 name="recommendedFor"
                 className={clsx(s.check_input, s.child)}
+                onChange={(e) => handleChange(e)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -114,8 +131,10 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
               <input
                 type="checkbox"
                 id={PRODUCT_TYPES.ANIMAL}
+                value={PRODUCT_TYPES.ANIMAL}
                 name="recommendedFor"
                 className={clsx(s.check_input, s.animal)}
+                onChange={(e) => handleChange(e)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -135,7 +154,7 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
             ref={ref}
             id="age"
             options={ageOptions}
-            value={values.age}
+            value={values.age ? values.age : ageOptions[0]}
             onChange={(option) => {
               setFieldValue('age', option);
             }}
@@ -149,8 +168,12 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
           </label>
           <Select
             id="category"
-            options={categoriesOptions}
-            value={values.category}
+            options={categoriesOptions(productsByCategory)}
+            value={
+              values.category
+                ? values.category
+                : categoriesOptions(productsByCategory)[0]
+            }
             onChange={(option) => {
               setFieldValue('category', option);
             }}
@@ -166,7 +189,7 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
           <Select
             id="brand"
             options={brandsOptions}
-            value={values.brand}
+            value={values.brand ? values.brand : brandsOptions[0]}
             onChange={(option) => {
               setFieldValue('brand', option);
             }}
@@ -182,7 +205,7 @@ const FiltersForm = ({ filterProductsCb, onClose }) => {
           <Select
             id="sortBy"
             options={sortByOptions}
-            value={values.sortBy}
+            value={values.sortBy ? values.sortBy : sortByOptions[0]}
             onChange={(option) => {
               setFieldValue('sortBy', option);
             }}

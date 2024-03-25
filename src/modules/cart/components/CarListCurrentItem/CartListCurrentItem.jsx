@@ -7,7 +7,7 @@ const CartListCurrentItem = ({
   onClickDelete,
   //onClickAdd,
 }) => {
-  const hasFlavorsOrColors = data.some((item) => item.flavors || item.colors);
+  const hasFlavorsOrColors = data.some((item) => item.flavor || item.color);
   const hasHelpersProducts = data.some((item) => item.category === 'helpers');
 
   if (hasFlavorsOrColors && hasHelpersProducts) {
@@ -15,7 +15,7 @@ const CartListCurrentItem = ({
     return (
       <>
         <CartListCurrentItemToothCleaners
-          data={data.filter((item) => item.flavors || item.colors)}
+          data={data.filter((item) => item.flavor || item.color)}
           changeCount={changeCount}
           onClickDelete={onClickDelete}
           // onClickAdd={onClickAdd}
@@ -32,7 +32,7 @@ const CartListCurrentItem = ({
     // якщо є тільки flavors/colors
     return (
       <CartListCurrentItemToothCleaners
-        data={data.filter((item) => item.flavors || item.colors)}
+        data={data.filter((item) => item.flavor || item.color)}
         changeCount={changeCount}
         onClickDelete={onClickDelete}
         //onClickAdd={onClickAdd}
