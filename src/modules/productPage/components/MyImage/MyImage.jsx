@@ -27,7 +27,8 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
       <img
         className={s.largeImage}
         src={imges.length === 0 ? null : mainImage.url}
-        alt=""
+        alt="Зображення товару"
+        height={'350'}
       />
       {/* </div> */}
     </div>

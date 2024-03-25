@@ -1,7 +1,7 @@
 import ProductCard from 'modules/productPage/components/ProductCard';
 
-const ProductCartPage = () => {
+const ProductCardPage = () => {
   return <ProductCard />;
 };
 
-export default ProductCartPage;
+export default ProductCardPage;
