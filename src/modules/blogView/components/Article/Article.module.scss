@@ -7,3 +7,8 @@
     padding-bottom: 32px;
   }
 }
+.article {
+  @include media(desktop) {
+    padding-left: 40px;
+  }
+}
