@@ -8,8 +8,8 @@ const BlogItem = ({ item }) => {
     <li className={s.blogItem}>
       <Link to={`/blog/${id}`} className={s.blogLink}>
         <img src={images[imgUrl]} alt={title} className={s.blogImg} />
+        <p className={s.blogDescr}>{title}</p>
       </Link>
-      <p className={s.blogDescr}>{title}</p>
     </li>
   );
 };
