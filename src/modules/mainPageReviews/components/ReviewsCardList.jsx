@@ -12,7 +12,6 @@ const ReviewsCardList = ({
   reachEndButton,
   reachStartButton,
 }) => {
-  const lengthCards = reviewsCardData.length;
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleOpenModal = (image) => {
@@ -32,40 +31,17 @@ const ReviewsCardList = ({
           swiperData(swiper);
         }}
         onSlideChange={(swiper) => {
-          let activeIndexCondition;
-          switch (swiper.params.breakpoints.currentBreakpoint) {
-            case 375:
-              activeIndexCondition =
-                swiper.activeIndex === 1 ||
-                swiper.activeIndex === lengthCards - 1.5;
-              break;
-            case 768:
-              activeIndexCondition =
-                swiper.activeIndex === 1 ||
-                swiper.activeIndex === lengthCards - 1.6;
-              break;
-            case 1440:
-              activeIndexCondition =
-                swiper.activeIndex === 1 ||
-                swiper.activeIndex === lengthCards - 2.5;
-              break;
-            default:
-              activeIndexCondition =
-                swiper.activeIndex === 3 ||
-                swiper.activeIndex === lengthCards - 3.5;
-              break;
-          }
+          const isEnd = swiper.isEnd;
+          const isBeginning = swiper.isBeginning;
 
-          if (activeIndexCondition) {
+          if (isEnd) {
+            reachEndButton(true);
+          } else if (isBeginning) {
+            reachStartButton(true);
+          } else {
             reachEndButton(false);
             reachStartButton(false);
           }
-        }}
-        onReachEnd={() => {
-          reachEndButton(true);
-        }}
-        onReachBeginning={() => {
-          reachStartButton(true);
         }}
         breakpoints={{
           375: {
