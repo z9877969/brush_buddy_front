@@ -70,6 +70,10 @@ export const selectStyles = {
       color: '#1f1f1f',
     },
   }),
+  menu: (styles) => ({
+    ...styles,
+    left: '0',
+  }),
   menuList: (styles) => ({
     ...styles,
     display: 'flex',
