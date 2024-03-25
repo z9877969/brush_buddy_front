@@ -23,46 +23,45 @@ const CartListCurrentItemHelpersProducts = ({
       return (
         <li className={s.itemBox} key={id} id={id}>
           <Link className={s.itemproduct} to={`/products/${title}`}>
-            <img className={s.itemImg} src={images.url} alt={title} />
-            <div className={s.itemInfo}>
-              <div>
-                <p className={s.itemName}>{title}</p>
-              </div>
-              <div className={s.prices}>
-                <p className={s.itemPrice}>{price} грн</p>
-              </div>
-            </div>
+            <img className={s.itemImg} src={images} alt={title} />
           </Link>
-          <div className={s.itemFooter}>
-            <Counter
-              classWrapper={s.counter}
-              classSvg={s.classSvg}
-              value={amount ? amount : 1}
-              changeCount={(newCount) =>
-                changeCount({
-                  id,
-                  category,
-                  quantity,
-                  newCount,
-                })
-              }
-              disabledIncrem={isDisabledIncrement}
-            />
-            <button
-              type="button"
-              className={s.deleteBtn}
-              onClick={() =>
-                onClickDelete({
-                  id,
-                  category,
-                })
-              }
-            >
-              <svg>
-                <use href={sprite + '#icon-delete'}></use>
-              </svg>
-            </button>
-            {/* <button
+          <div className={s.itemInfo}>
+            <div>
+              <p className={s.itemName}>{title}</p>
+            </div>
+            <div className={s.prices}>
+              <p className={s.itemPrice}>{price} грн</p>
+            </div>
+            <div className={s.itemFooter}>
+              <Counter
+                classWrapper={s.counter}
+                classSvg={s.classSvg}
+                value={amount ? amount : 1}
+                changeCount={(newCount) =>
+                  changeCount({
+                    id,
+                    category,
+                    quantity,
+                    newCount,
+                  })
+                }
+                disabledIncrem={isDisabledIncrement}
+              />
+              <button
+                type="button"
+                className={s.deleteBtn}
+                onClick={() =>
+                  onClickDelete({
+                    id,
+                    category,
+                  })
+                }
+              >
+                <svg>
+                  <use href={sprite + '#icon-delete'}></use>
+                </svg>
+              </button>
+              {/* <button
               className={s.btnTest}
               type="submit"
               onClick={() =>
@@ -76,6 +75,7 @@ const CartListCurrentItemHelpersProducts = ({
             >
               Test btn
             </button> */}
+            </div>
           </div>
         </li>
       );

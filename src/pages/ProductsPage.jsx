@@ -3,6 +3,8 @@ import ProductsPageFilter from 'modules/productsPageFilter/components/ProductsPa
 import { useSelector } from 'react-redux';
 import { PaginateProdList } from 'modules/paginateProdList/index.js';
 import { ProductsPageWrapper } from 'modules/productsPageWrapper';
+import { NumberOfProducts } from 'modules/paginateProdList/index.js';
+import { SelectedFilters } from 'modules/selectedFilters';
 
 const ProductsPage = () => {
   const products = useSelector((s) => s.products.list);
@@ -16,7 +18,11 @@ const ProductsPage = () => {
   return (
     <ProductsPageWrapper>
       <ProductsPageFilter />
-      <PaginateProdList products={products} />
+      <div>
+        <SelectedFilters />
+        <NumberOfProducts productsLength={products.length} />
+        <PaginateProdList products={products} />
+      </div>
     </ProductsPageWrapper>
   );
 };

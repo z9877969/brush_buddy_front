@@ -1,0 +1,12 @@
+.foundProducts {
+  @include font(16, 24);
+  margin-bottom: 24px;
+
+  @include media(tablet) {
+    margin-bottom: 32px;
+  }
+}
+
+.numberColor {
+  color: $pet-color;
+}

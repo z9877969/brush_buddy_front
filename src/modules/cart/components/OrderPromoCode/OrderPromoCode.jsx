@@ -4,9 +4,9 @@ import s from './OrderPromoCode.module.scss';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { usedPromoCode, notUsedPromoCode } from '@redux/cart/cartSlice';
+import { notUsedPromoCode } from '@redux/cart/cartSlice';
 import { selectTotalPrice } from '@redux/cart/selectorsCart';
-
+import { checkPromoCode } from '@redux/cart/operationsCart';
 const OrderPromoCode = ({ priceDisc }) => {
   const [isPromoUsed, setIsPromoUsed] = useState(false);
   const total = useSelector(selectTotalPrice);
@@ -25,7 +25,7 @@ const OrderPromoCode = ({ priceDisc }) => {
     },
     onSubmit: (values) => {
       setIsPromoUsed(true);
-      dispatch(usedPromoCode({ values, total }));
+      dispatch(checkPromoCode({ values, total }));
       return values;
       //console.log('Введений промокод:', values.promoCode);
     },
@@ -42,7 +42,7 @@ const OrderPromoCode = ({ priceDisc }) => {
         <div>
           <input
             className={s.input}
-            type="text" 
+            type="text"
             name="promoCode"
             placeholder="Промокод"
             onChange={formik.handleChange}

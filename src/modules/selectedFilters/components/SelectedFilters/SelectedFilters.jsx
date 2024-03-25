@@ -10,9 +10,6 @@ const filters = [
   { id: 'qrst', filterName: 'Sensodyne' },
   { id: 'uvwx', filterName: 'Aquafresh' },
   { id: 'yzab', filterName: 'Oral-B' },
-  { id: 'cdef', filterName: 'adult' },
-  { id: 'ghij', filterName: 'child' },
-  { id: 'klmn', filterName: 'animal' },
 ];
 
 const SelectedFilters = () => {

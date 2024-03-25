@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { totalPrice, totalPriceDiscount } from 'modules/cart';
-//import { fetchSendPromoCode } from './operations.js';
+import { checkPromoCode } from './operationsCart.js';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -10,33 +10,27 @@ const cartSlice = createSlice({
     products: [
       {
         id: '45cf',
-        images: {
-          url: 'https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on',
-        },
+        images:
+          'https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on',
         title:
           'Відбілювальна зубна паста Curaprox Be You Candy Lover Toothpaste',
         price: 288.8,
         salePrice: 188.8,
-        flavors: {
-          flavor: 'Яблуко',
-          colorMarker: 'green',
-          quantity: 5,
-        },
+        flavor: 'Яблуко',
+        colorMarker: 'green',
+        quantity: 5,
         volume: '50',
       },
       {
         id: '45dd',
-        images: {
-          url: 'https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on',
-        },
+        images:
+          'https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on',
         title: 'Зубна щітка СS 5460 Ultra Soft',
         price: 288.8,
         salePrice: 0,
-        colors: {
-          name: 'зелений',
-          color: 'seagreen',
-          quantity: 6,
-        },
+        name: 'зелений',
+        color: 'seagreen',
+        quantity: 6,
         amount: 4,
       },
     ],
@@ -45,6 +39,7 @@ const cartSlice = createSlice({
     discount: 0,
     isSubmitForm: false,
     isLoading: false,
+    error: null,
   },
   reducers: {
     addProduct(state, action) {
@@ -95,6 +90,9 @@ const cartSlice = createSlice({
           product.category !== category
       );
       state.totalPrice = totalPrice(state.products);
+      const total = state.totalPrice;
+      const promoCodeDiscount = state.discountValue;
+      state.discount = totalPriceDiscount(total, promoCodeDiscount);
     },
     changeProductAmount(state, action) {
       const { id, category, quantity, flavor, volume, color, newCount } =
@@ -125,18 +123,20 @@ const cartSlice = createSlice({
       }
       state.totalPrice = totalPrice(state.products);
       if (state.promoCode !== null) {
-        state.discount = totalPriceDiscount(state.totalPrice);
+        const total = state.totalPrice;
+        const promoCodeDiscount = state.discountValue;
+        state.discount = totalPriceDiscount(total, promoCodeDiscount);
       }
     },
     addTotalPrice(state, action) {
       state.totalPrice = totalPrice(action.payload);
     },
-    usedPromoCode(state, action) {
-      const { values, total } = action.payload;
-      const { promoCode } = values;
-      state.promoCode = promoCode;
-      state.discount = totalPriceDiscount(total);
-    },
+    // usedPromoCode(state, action) {
+    //   const { values, total } = action.payload;
+    //   const { promoCode } = values;
+    //   state.promoCode = promoCode;
+    //   state.discount = totalPriceDiscount(total);
+    // },  використання промокоду синхронна операція (без запиту)
     notUsedPromoCode(state) {
       state.promoCode = null;
       state.discount = 0;
@@ -146,15 +146,24 @@ const cartSlice = createSlice({
     },
   },
 
-  extraReducers: (builder) => builder,
-  // .addCase(fetchSendPromoCode.pending, (state) => state.isLoading === true)
-  // .addCase(fetchSendPromoCode.fulfilled, (state, { payload }) => {
-  //   state.promocodeDiscount === payload,
-  //     (state.discount = totalPriceDiscount(total, promocodeDiscount));
-  // })
-  // .addCase(fetchSendPromoCode.rejected, (state, { payload }) => {
-  //   state.isLoading = false;
-  // }),
+  extraReducers: (builder) =>
+    builder
+      .addCase(checkPromoCode.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(checkPromoCode.fulfilled, (state, { meta, payload }) => {
+        state.isLoading = false;
+        const promoCode = meta.arg.values.promoCode;
+        state.promoCode = promoCode;
+        let total = payload.total;
+        const promoCodeDiscount = payload.discount;
+        state.discountValue = promoCodeDiscount;
+        state.discount = totalPriceDiscount(total, promoCodeDiscount);
+      })
+      .addCase(checkPromoCode.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      }),
 });
 
 export const {
