@@ -11,15 +11,40 @@ export const ageOptions = [
   { value: '4to6', label: '4-6 років' },
   { value: '6to12', label: '6-12 років' },
 ];
-export const categoriesOptions = [
-  { value: 'toothbrushes', label: 'Зубні щітки (10)' },
-  { value: 'toothpastes', label: 'Зубна паста (5)' },
-  { value: 'brushheads', label: 'Насадки для щітки (5)' },
-  { value: 'sets', label: 'Готові набори (0)' },
-  { value: 'plaqueIndicators', label: 'Індикація нальоту (3)' },
-  { value: 'interdentalCleaning', label: 'Міжзубне чищення (4)' },
-  { value: 'goodies', label: 'Корисні смаколики (5)' },
-  { value: 'helpers', label: 'Допомагайки (2)' },
+
+export const categoriesOptions = (options) => [
+  {
+    value: 'toothbrushes',
+    label: `Зубні щітки (${options.toothbrushes !== undefined ? options.toothbrushes : 0})`,
+  },
+  {
+    value: 'toothpastes',
+    label: `Зубна паста (${options.toothpastes !== undefined ? options.toothpastes : 0})`,
+  },
+  {
+    value: 'brushheads',
+    label: `Насадки для щітки (${options.brushheads !== undefined ? options.brushheads : 0})`,
+  },
+  {
+    value: 'sets',
+    label: `Готові набори (${options.sets !== undefined ? options.sets : 0})`,
+  },
+  {
+    value: 'plaqueIndicators',
+    label: `Індикація нальоту (${options.plaqueIndicators !== undefined ? options.plaqueIndicators : 0})`,
+  },
+  {
+    value: 'interdentalCleaning',
+    label: `Міжзубне чищення (${options.interdentalCleaning !== undefined ? options.interdentalCleaning : 0})`,
+  },
+  {
+    value: 'goodies',
+    label: `Корисні смаколики (${options.goodies !== undefined ? options.goodies : 0})`,
+  },
+  {
+    value: 'helpers',
+    label: `Допомагайки (${options.helpers !== undefined ? options.helpers : 0})`,
+  },
 ];
 export const brandsOptions = [
   { value: 'all', label: 'Усі' },
