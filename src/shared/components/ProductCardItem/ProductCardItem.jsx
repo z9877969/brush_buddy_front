@@ -19,6 +19,7 @@ const ProductCardItem = ({
   images,
   colors,
   flavors,
+  id,
 }) => {
   const [watermarkValue] = watermark;
 
@@ -48,7 +49,7 @@ const ProductCardItem = ({
   };
   return (
     <li className={clsx(s.productItem, disableBtn && s.unavailable)}>
-      <Link to={`/products/${title}`}>
+      <Link to={`/products/${id}`}>
         <img
           src={url ?? img['product_1']}
           alt={title}

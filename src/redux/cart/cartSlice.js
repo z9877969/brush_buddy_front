@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { totalPrice, totalPriceDiscount } from 'modules/cart';
-//import { fetchSendPromoCode } from './operations.js';
+import { checkPromoCode } from './operationsCart.js';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -45,6 +45,7 @@ const cartSlice = createSlice({
     discount: 0,
     isSubmitForm: false,
     isLoading: false,
+    error: null,
   },
   reducers: {
     addProduct(state, action) {
@@ -95,6 +96,9 @@ const cartSlice = createSlice({
           product.category !== category
       );
       state.totalPrice = totalPrice(state.products);
+      const total = state.totalPrice;
+      const promoCodeDiscount = state.discountValue;
+      state.discount = totalPriceDiscount(total, promoCodeDiscount);
     },
     changeProductAmount(state, action) {
       const { id, category, quantity, flavor, volume, color, newCount } =
@@ -125,18 +129,20 @@ const cartSlice = createSlice({
       }
       state.totalPrice = totalPrice(state.products);
       if (state.promoCode !== null) {
-        state.discount = totalPriceDiscount(state.totalPrice);
+        const total = state.totalPrice;
+        const promoCodeDiscount = state.discountValue;
+        state.discount = totalPriceDiscount(total, promoCodeDiscount);
       }
     },
     addTotalPrice(state, action) {
       state.totalPrice = totalPrice(action.payload);
     },
-    usedPromoCode(state, action) {
-      const { values, total } = action.payload;
-      const { promoCode } = values;
-      state.promoCode = promoCode;
-      state.discount = totalPriceDiscount(total);
-    },
+    // usedPromoCode(state, action) {
+    //   const { values, total } = action.payload;
+    //   const { promoCode } = values;
+    //   state.promoCode = promoCode;
+    //   state.discount = totalPriceDiscount(total);
+    // },  використання промокоду синхронна операція (без запиту)
     notUsedPromoCode(state) {
       state.promoCode = null;
       state.discount = 0;
@@ -146,15 +152,24 @@ const cartSlice = createSlice({
     },
   },
 
-  extraReducers: (builder) => builder,
-  // .addCase(fetchSendPromoCode.pending, (state) => state.isLoading === true)
-  // .addCase(fetchSendPromoCode.fulfilled, (state, { payload }) => {
-  //   state.promocodeDiscount === payload,
-  //     (state.discount = totalPriceDiscount(total, promocodeDiscount));
-  // })
-  // .addCase(fetchSendPromoCode.rejected, (state, { payload }) => {
-  //   state.isLoading = false;
-  // }),
+  extraReducers: (builder) =>
+    builder
+      .addCase(checkPromoCode.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(checkPromoCode.fulfilled, (state, { meta, payload }) => {
+        state.isLoading = false;
+        const promoCode = meta.arg.values.promoCode;
+        state.promoCode = promoCode;
+        let total = payload.total;
+        const promoCodeDiscount = payload.discount;
+        state.discountValue = promoCodeDiscount;
+        state.discount = totalPriceDiscount(total, promoCodeDiscount);
+      })
+      .addCase(checkPromoCode.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      }),
 });
 
 export const {

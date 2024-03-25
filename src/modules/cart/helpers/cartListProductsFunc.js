@@ -15,8 +15,8 @@ export function totalPrice(products) {
   return fixPrice;
 }
 
-export function totalPriceDiscount(totalPriceDisc) {
-  const discount = 0.1;
-  const discountedPrice = totalPriceDisc * discount;
+export function totalPriceDiscount(totalPriceDisc, discount) {
+  //const discount = 0.1;
+  const discountedPrice = (totalPriceDisc * discount) / 100;
   return discountedPrice.toFixed(2);
 }
