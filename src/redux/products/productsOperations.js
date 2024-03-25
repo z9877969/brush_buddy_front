@@ -20,5 +20,10 @@ export const getProducts = createAsyncThunk(
       return rejectWithValue(error.message);
     }
   },
-  {}
+  {
+    condition(_, { getState }) {
+      const { list } = getState().products;
+      return list.length === 0;
+    },
+  }
 );

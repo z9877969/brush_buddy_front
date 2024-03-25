@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import s from './Flavor.module.scss';
 
-export const Flavor = ({ products, value, setFlavor }) => {
+export const Flavor = ({ productFlavours, value, setFlavor }) => {
   return (
     <>
       <p className={s.mlText}>
@@ -9,10 +9,10 @@ export const Flavor = ({ products, value, setFlavor }) => {
         <span className={s.selectFlavorText}>{value.flavor}</span>
       </p>
       <ul className={s.mlBlock}>
-        {products.flavors.map((item) => {
+        {productFlavours.map((item, i) => {
           return (
             <li
-              key={item.flavor}
+              key={i}
               className={clsx(
                 s.item,
                 item.flavor === value.flavor ? s.itemFocus : s.item
