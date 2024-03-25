@@ -14,10 +14,12 @@ const CartListCurrentItemToothCleaners = ({
       id,
       images,
       title,
-      colors,
+      color,
+      name,
       price,
       salePrice,
-      flavors,
+      flavor,
+      quantity,
       volume,
       isDisabledIncrement,
       amount,
@@ -25,66 +27,59 @@ const CartListCurrentItemToothCleaners = ({
       return (
         <li className={s.itemBox} key={id} id={id}>
           <Link className={s.itemproduct} to={`/products/${title}`}>
-            <img className={s.itemImg} src={images.url} alt={title} />
-            <div className={s.itemInfo}>
-              <div>
-                <p className={s.itemName}>{title}</p>
-                <div className={s.itemDetails}>
-                  {flavors && flavors.flavor && (
-                    <p className={s.itemFlavor}>Смак: {flavors.flavor}</p>
-                  )}
-                  {colors && colors.name && (
-                    <p className={s.itemColor}>Колір: {colors.name}</p>
-                  )}
-                  {volume && <p className={s.itemVol}>, об’єм: {volume} мл</p>}
-                </div>
-              </div>
-              <div className={s.prices}>
-                {salePrice !== 0 && (
-                  <p className={s.itemDiscPrice}>{salePrice} грн</p>
-                )}
-                {salePrice !== 0 ? (
-                  <p className={s.itemPriceDisc}>{price} грн</p>
-                ) : (
-                  <p className={s.itemPrice}>{price} грн</p>
-                )}
-              </div>
-            </div>
+            <img className={s.itemImg} src={images} alt={title} />
           </Link>
-          <div className={s.itemFooter}>
-            <Counter
-              classWrapper={s.counter}
-              classSvg={s.classSvg}
-              value={amount ? amount : 1}
-              changeCount={(newCount) =>
-                changeCount({
-                  id,
-                  flavor: flavors?.flavor,
-                  quantity: flavors?.quantity || colors.quantity,
-                  volume: flavors?.volume,
-                  color: colors?.color,
-                  newCount,
-                })
-              }
-              disabledIncrem={isDisabledIncrement}
-            />
-            <button
-              type="button"
-              className={s.deleteBtn}
-              onClick={() =>
-                onClickDelete({
-                  id,
-                  flavor: flavors?.flavor,
-                  volume: flavors?.volume,
-                  color: colors?.color,
-                })
-              }
-            >
-              <svg>
-                <use href={sprite + '#icon-delete'}></use>
-              </svg>
-            </button>
-            {/* <button
+          <div className={s.itemInfo}>
+            <p className={s.itemName}>{title}</p>
+            <div className={s.itemDetails}>
+              {flavor && <p className={s.itemFlavor}>Смак: {flavor}</p>}
+              {color && name && <p className={s.itemColor}>Колір: {name}</p>}
+              {volume && <p className={s.itemVol}>об’єм: {volume} мл</p>}
+            </div>
+            <div className={s.prices}>
+              {salePrice !== 0 && (
+                <p className={s.itemDiscPrice}>{salePrice} грн</p>
+              )}
+              {salePrice !== 0 ? (
+                <p className={s.itemPriceDisc}>{price} грн</p>
+              ) : (
+                <p className={s.itemPrice}>{price} грн</p>
+              )}
+            </div>
+            <div className={s.itemFooter}>
+              <Counter
+                classWrapper={s.counter}
+                classSvg={s.classSvg}
+                value={amount ? amount : 1}
+                changeCount={(newCount) =>
+                  changeCount({
+                    id,
+                    flavor: flavor?.flavor,
+                    quantity: quantity,
+                    volume: flavor?.volume,
+                    color: color?.color,
+                    newCount,
+                  })
+                }
+                disabledIncrem={isDisabledIncrement}
+              />
+              <button
+                type="button"
+                className={s.deleteBtn}
+                onClick={() =>
+                  onClickDelete({
+                    id,
+                    flavor: flavor?.flavor,
+                    volume: flavor?.volume,
+                    color: color?.color,
+                  })
+                }
+              >
+                <svg>
+                  <use href={sprite + '#icon-delete'}></use>
+                </svg>
+              </button>
+              {/* <button
                 className={s.btnTest}
                 type="submit"
                 onClick={() =>
@@ -103,6 +98,7 @@ const CartListCurrentItemToothCleaners = ({
               >
                 Test btn
               </button> */}
+            </div>
           </div>
         </li>
       );
