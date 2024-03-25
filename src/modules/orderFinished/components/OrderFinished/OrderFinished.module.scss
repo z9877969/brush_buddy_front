@@ -1,9 +1,9 @@
 .section {
-  margin-top: 178px;
+  margin-top: 43px;
   margin-bottom: 178px;
   text-align: center;
   @include media(tablet) {
-    margin-top: 249px;
+    margin-top: 48px;
     margin-bottom: 249px;
   }
 }
@@ -22,6 +22,14 @@
   font-weight: 500;
   color: #49494a;
   @include font(16, 24);
+  @include media(tablet) {
+    max-width: 577px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include media(desktop) {
+    max-width: 873px;
+  }
 }
 .linkButton {
   border: 1px solid rgba(31, 31, 31, 0.1);
@@ -35,9 +43,15 @@
     padding: 16px 40px;
   }
 }
-.animation {
-  margin: 0 auto;
+.animaContent {
+  background-image: url('../../images/mobThanks.gif');
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  height: 177px;
+  margin-bottom: 32px;
   @include media(tablet) {
     width: 577px;
+    height: 227px;
   }
 }

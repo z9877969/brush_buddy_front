@@ -1,13 +1,13 @@
 .section {
-  margin-top: 255px;
+  margin-top: 118px;
   margin-bottom: 255px;
   text-align: center;
   @include media(tablet) {
-    margin-top: 269px;
+    margin-top: 132px;
     margin-bottom: 269px;
   }
   @include media(desktop) {
-    margin-top: 199px;
+    margin-top: 46px;
     margin-bottom: 199px;
   }
 }

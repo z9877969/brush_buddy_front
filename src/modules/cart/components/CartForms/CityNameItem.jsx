@@ -1,14 +1,35 @@
-import s from './CityNameItem.module.scss';
+import { useSelector } from 'react-redux';
 
-const CityNameItem = () => {
+import { nanoid } from 'nanoid';
+import s from './CityNameItem.module.scss';
+import { selectCityData } from '@redux/novaPoshta/selectorsNovaPoshta';
+
+const CityNameItem = ({ handleCityName }) => {
+  const cityData = useSelector(selectCityData);
+
+  const handleCityClick = (Present) => {
+    const firstCommaIndex = Present.indexOf(',');
+
+    if (firstCommaIndex !== -1) {
+      const trimmedStr = Present.substring(0, firstCommaIndex);
+      handleCityName(trimmedStr);
+    } else {
+      handleCityName(Present);
+    }
+  };
+
   return (
     <ul className={s.cityNameList}>
-      <li>city-1</li>
-      <li>city-2</li>
-      <li>city-3</li>
-      <li>city-4</li>
-      <li>city-5</li>
-      <li>city-6</li>
+      {Array.isArray(cityData) &&
+        cityData.map(({ Present }) => (
+          <li
+            onClick={() => handleCityClick(Present)}
+            className={s.cityNameItem}
+            key={nanoid()}
+          >
+            {Present}
+          </li>
+        ))}
     </ul>
   );
 };
