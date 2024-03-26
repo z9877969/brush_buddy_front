@@ -24,7 +24,6 @@ export const customStyles = {
     outline: 'none',
     border: 'none',
 
-    // borderColor: isSelected ? 'red' : 'none',
     '&:hover': {
       border: 'none',
     },
@@ -32,10 +31,7 @@ export const customStyles = {
       border: 'none',
     },
   }),
-  // : (styles { isFocused }) => ({
-  //   ...styles,
-  //   borderColor: isFocused ?"red":"green"
-  // }),
+
   valueContainer: (styles) => ({
     ...styles,
     padding: 0,
@@ -53,16 +49,7 @@ export const customStyles = {
     ...styles,
     display: 'none',
   }),
-  // placeholder: (styles) => ({
-  //   ...styles,
-  //   fontSize: '16px',
-  //   lineHeight: '24px',
-  //   color: '#a5a5a5',
-  // }),
-  // menu: (styles) => ({
-  //   ...styles,
-  //   backgroundColor: 'red',
-  // }),
+
   option: (styles) => ({
     ...styles,
     padding: 'none',
@@ -76,6 +63,13 @@ export const customStyles = {
     '&:focus': {
       color: '#1f1f1f',
     },
+  }),
+  menu: (styles) => ({
+    ...styles,
+    marginTop: '-48px',
+    marginLeft: '-12px',
+    borderRadius: '16px',
+    border: '1px solid rgba(31, 31, 31, 0.2)',
   }),
   menuList: (styles) => ({
     ...styles,
