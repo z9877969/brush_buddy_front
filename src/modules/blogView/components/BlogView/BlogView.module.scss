@@ -1,9 +1,9 @@
 .paragraph {
   margin-bottom: 1em;
 }
-.accent {
-}
-.list {
-}
-.item {
+
+.blog {
+  @include media(desktop) {
+    display: flex;
+  }
 }

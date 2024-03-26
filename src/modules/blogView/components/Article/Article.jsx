@@ -44,6 +44,6 @@ const Article = ({ article }) => {
         return <p key={index}>Section unsupported</p>;
     }
   });
-  return <div> {blocks}</div>;
+  return <div className={css.article}> {blocks}</div>;
 };
 export default Article;
