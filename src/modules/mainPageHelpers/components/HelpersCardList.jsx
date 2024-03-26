@@ -65,8 +65,9 @@ const HelpersCardList = ({
               <div className={s.mainHelpersBox}>
                 <div className={s.boxTitleText}>
                   <div className={s.helpersBoxTitle}>
-                    <h3>{title}</h3>
+                    <h3 className={s.helpersBoxTitleText}>{title}</h3>
                     <button
+                      className={s.helpersBoxButton}
                       type="button"
                       onClick={(event) => {
                         event.preventDefault(),
@@ -80,7 +81,7 @@ const HelpersCardList = ({
                           });
                       }}
                     >
-                      <svg>
+                      <svg className={s.helpersBoxSVG}>
                         <use href={sprite + '#icon-cart'}></use>
                       </svg>
                     </button>
@@ -88,7 +89,7 @@ const HelpersCardList = ({
                   <p className={s.helpersBoxPrice}>{`${price} грн`}</p>
                   <p className={s.helpersBoxText}>{text}</p>
                 </div>
-                <img src={images} alt="photo" />
+                <img className={s.helpersBoxIMG} src={images} alt="photo" />
               </div>
             </Link>
           </SwiperSlide>
