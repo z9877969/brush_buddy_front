@@ -1,4 +1,4 @@
-import s from './CartListCurrentItemToothCleaners.module.scss';
+import s from './CartListCurrentItem.module.scss';
 import { Link } from 'react-router-dom';
 import Counter from 'shared/components/Counter/Counter';
 import { sprite } from 'shared/icons';
