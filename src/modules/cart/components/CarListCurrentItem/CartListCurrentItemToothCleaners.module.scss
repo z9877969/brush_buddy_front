@@ -6,11 +6,10 @@
   flex-direction: row;
   gap: 16px;
   width: 100%;
-
-  @include media(tablet) {
-    position: relative;
-    align-items: flex-start;
-  }
+}
+@include media(tablet) {
+  position: relative;
+  align-items: flex-start;
 }
 
 .itemproduct {

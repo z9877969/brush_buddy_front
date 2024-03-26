@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   @include media(desktop) {
-    width: 332px;
     padding: 32px;
     gap: 40px;
     flex-shrink: 0;
@@ -21,7 +20,9 @@
   gap: 16px;
   flex: 1 0 0;
   align-self: stretch;
-
+  overflow-y: scroll;
+  position: static;
+  z-index: 0;
   @include media(tablet) {
     gap: 24px;
     padding: 24px 32px 0px 32px;
@@ -34,6 +35,9 @@
     padding: 0;
     gap: 24px;
     height: auto;
+    overflow-y: visible; /* протилежна умова до overflow-y: scroll; */
+    position: static;
+    // overflow-y: scroll;
   }
 }
 
@@ -45,6 +49,10 @@
   gap: 8px;
   align-self: stretch;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+  position: static;
+  z-index: 1;
+  bottom: 0;
+  background-color: #fff;
   @include media(tablet) {
     gap: 24px;
     padding: 32px;
@@ -53,6 +61,7 @@
   }
   @include media(desktop) {
     border-top: none;
+    background-color: transparent;
     @include media(desktop) {
       padding: 0;
     }
@@ -66,6 +75,12 @@
   width: 100%;
   height: auto;
   background-color: transparent;
+}
+.inputContainer:last-child {
+  margin-bottom: 64px;
+  @include media(desktop) {
+    margin-bottom: 0;
+  }
 }
 .label {
   display: flex;
@@ -120,6 +135,7 @@
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
+  position: relative;
 }
 .checkboxLabel {
   display: flex;
