@@ -3,7 +3,7 @@ import { PRODUCT_TYPES } from 'shared/constants';
 import clsx from 'clsx';
 import s from './FilterItem.module.scss';
 
-const FilterItem = ({ filterName }) => {
+const FilterItem = ({ filterName, removeFilter }) => {
   let subClass = null;
 
   switch (filterName) {
@@ -24,7 +24,11 @@ const FilterItem = ({ filterName }) => {
     <li>
       <div className={clsx(s.filterBlock, subClass && s[subClass])}>
         {filterName}
-        <RoundButton iconId={'icon-close-cross'} className={s.deleteBtn} />
+        <RoundButton
+          iconId={'icon-close-cross'}
+          className={s.deleteBtn}
+          onClick={() => removeFilter(filterName)}
+        />
       </div>
     </li>
   );

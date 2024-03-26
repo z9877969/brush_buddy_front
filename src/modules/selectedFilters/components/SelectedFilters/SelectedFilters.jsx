@@ -2,24 +2,50 @@ import { Button } from 'shared/components';
 import FilterItem from '../FilterItem/FilterItem';
 import s from './SelectedFilters.module.scss';
 
-const filters = [
-  { id: 'abcd', filterName: 'adult' },
-  { id: 'efgh', filterName: 'child' },
-  { id: 'ijkl', filterName: 'animal' },
-  { id: 'mnop', filterName: 'Colgate' },
-  { id: 'qrst', filterName: 'Sensodyne' },
-  { id: 'uvwx', filterName: 'Aquafresh' },
-  { id: 'yzab', filterName: 'Oral-B' },
-];
+const SelectedFilters = ({ filter, setFilter }) => {
+  const handleRemoveFilter = (filterName) => {
+    const updatedFilter = { ...filter };
+    delete updatedFilter[filterName];
+    setFilter(updatedFilter);
+  };
 
-const SelectedFilters = () => {
-  const elements = filters.map((filter) => (
-    <FilterItem filterName={filter.filterName} key={filter.id} />
-  ));
+  const resetFilters = () => setFilter(null);
+
+  const elements = Object.values(filter).flatMap((value) => {
+    if (typeof value === 'object' && value.label) {
+      return (
+        <FilterItem
+          filterName={value.label}
+          key={value.label}
+          removeFilter={handleRemoveFilter}
+        />
+      );
+    } else if (Array.isArray(value)) {
+      return value.map((item, index) => (
+        <FilterItem
+          filterName={item}
+          key={index}
+          removeFilter={handleRemoveFilter}
+        />
+      ));
+    }
+    return (
+      <FilterItem
+        filterName={value}
+        key={value}
+        removeFilter={handleRemoveFilter}
+      />
+    );
+  });
+
   return (
     <div className={s.filtersWrapper}>
       <ul className={s.filtersBlock}>{elements}</ul>
-      <Button title={'Скинути усі фільтри'} className={s.resetBtn} />
+      <Button
+        title={'Скинути усі фільтри'}
+        className={s.resetBtn}
+        onClick={() => resetFilters()}
+      />
     </div>
   );
 };
