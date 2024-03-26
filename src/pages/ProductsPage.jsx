@@ -5,19 +5,23 @@ import { PaginateProdList } from 'modules/paginateProdList/index.js';
 import { ProductsPageWrapper } from 'modules/productsPageWrapper';
 import { NumberOfProducts } from 'modules/paginateProdList/index.js';
 import { SelectedFilters } from 'modules/selectedFilters';
+import { useEffect, useState } from 'react';
 
 const ProductsPage = () => {
   const products = useSelector((s) => s.products.list);
-  // const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState(() => sessionStorage.getItem('filter'));
 
   // const filteredProducts = useMemo(() => {
   //   if (!filter) return products;
   //   products.filter((el) => el);
   // }, [filter, products]);
+  useEffect(() => {
+    sessionStorage.setItem('filter', filter);
+  }, [filter]);
 
   return (
     <ProductsPageWrapper>
-      <ProductsPageFilter />
+      <ProductsPageFilter onFormSubmit={setFilter} filter={filter} />
       <div>
         <SelectedFilters />
         <NumberOfProducts productsLength={products.length} />

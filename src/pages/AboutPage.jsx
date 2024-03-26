@@ -1,7 +1,8 @@
 import { AboutBlog } from 'modules/aboutBlog';
 import { AboutHero } from 'modules/aboutHero';
+import { MainPageHelpers } from 'modules/mainPageHelpers';
 import { SomeHumor } from 'modules/someHumor';
-import { Button, MainTitle, ProductCardItem } from 'shared/components';
+import { MainTitle } from 'shared/components';
 
 const AboutPage = () => {
   return (
@@ -9,8 +10,7 @@ const AboutPage = () => {
       <MainTitle title={'some title'} className={'some-class'} light />
       <AboutHero />
       <AboutBlog />
-      <Button title={'Button title'} border />
-      <ProductCardItem />
+      <MainPageHelpers />
       <SomeHumor />
     </>
   );

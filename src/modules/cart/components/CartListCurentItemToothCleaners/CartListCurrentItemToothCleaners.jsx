@@ -19,8 +19,8 @@ const CartListCurrentItemToothCleaners = ({
       price,
       salePrice,
       flavor,
-      quantity,
       volume,
+      quantity,
       isDisabledIncrement,
       amount,
     }) => {
@@ -33,8 +33,8 @@ const CartListCurrentItemToothCleaners = ({
             <p className={s.itemName}>{title}</p>
             <div className={s.itemDetails}>
               {flavor && <p className={s.itemFlavor}>Смак: {flavor}</p>}
-              {color && name && <p className={s.itemColor}>Колір: {name}</p>}
-              {volume && <p className={s.itemVol}>об’єм: {volume} мл</p>}
+              {color && <p className={s.itemColor}>Колір: {name}</p>}
+              {volume && <p className={s.itemVol}> об’єм: {volume} мл</p>}
             </div>
             <div className={s.prices}>
               {salePrice !== 0 && (
