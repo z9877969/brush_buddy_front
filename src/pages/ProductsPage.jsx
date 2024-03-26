@@ -23,7 +23,11 @@ const ProductsPage = () => {
     <ProductsPageWrapper>
       <ProductsPageFilter onFormSubmit={setFilter} filter={filter} />
       <div>
-        <SelectedFilters />
+        {typeof filter === 'object' &&
+          filter !== null &&
+          Object.keys(filter).length > 0 && (
+            <SelectedFilters filter={filter} setFilter={setFilter} />
+          )}
         <NumberOfProducts productsLength={products.length} />
         <PaginateProdList products={products} />
       </div>
