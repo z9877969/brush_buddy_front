@@ -7,33 +7,7 @@ import { checkPromoCode } from './operationsCart.js';
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    products: [
-      {
-        id: '45cf',
-        images:
-          'https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on',
-        title:
-          'Відбілювальна зубна паста Curaprox Be You Candy Lover Toothpaste',
-        price: 288.8,
-        salePrice: 188.8,
-        flavor: 'Яблуко',
-        colorMarker: 'green',
-        quantity: 5,
-        volume: '50',
-      },
-      {
-        id: '45dd',
-        images:
-          'https://cdn11.bigcommerce.com/s-a8e5b/images/stencil/1280x1280/products/3322/3847/Edel_White_Ultrasoft_Flosser_Toothbrush_2_pack_swiss_made__66902.1616093153.jpg?c=2?imbypass=on',
-        title: 'Зубна щітка СS 5460 Ultra Soft',
-        price: 288.8,
-        salePrice: 0,
-        name: 'зелений',
-        color: 'seagreen',
-        quantity: 6,
-        amount: 4,
-      },
-    ],
+    products: [],
     totalPrice: 0,
     promoCode: null,
     discount: 0,
@@ -50,11 +24,11 @@ const cartSlice = createSlice({
         if (flavor && volume) {
           return (
             product.id === id &&
-            product.flavors?.flavor === flavor &&
-            product.flavors?.volume === volume
+            product.flavor?.flavor === flavor &&
+            product.flavor?.volume === volume
           );
         } else if (color) {
-          return product.id === id && product.colors?.color === color;
+          return product.id === id && product.color?.color === color;
         } else if (category) {
           return product.id === id;
         } else {
@@ -84,14 +58,14 @@ const cartSlice = createSlice({
       state.products = state.products.filter(
         (product) =>
           product.id !== id ||
-          (product.flavors?.flavor !== flavor &&
-            product.flavors?.volume !== volume) ||
-          product.colors?.color !== color ||
-          product.category !== category
+          (product.flavor !== flavor && product.volume !== volume) ||
+          product.color !== color ||
+          product.category !== category ||
+          product.flavor !== flavor
       );
       state.totalPrice = totalPrice(state.products);
       const total = state.totalPrice;
-      const promoCodeDiscount = state.discountValue;
+      const promoCodeDiscount = state.discountValue ? state.discountValue : 0;
       state.discount = totalPriceDiscount(total, promoCodeDiscount);
     },
     changeProductAmount(state, action) {
@@ -102,20 +76,22 @@ const cartSlice = createSlice({
           // Якщо є flavors
           return (
             product.id === id &&
-            product.flavors?.flavor === flavor &&
-            product.flavors?.volume === volume
+            product.flavor === flavor &&
+            product.volume === volume
           );
         } else if (color) {
           // Якщо є colors
-          return product.id === id && product.colors?.color === color;
+          return product.id === id && product.color === color;
         } else if (category) {
-          //якщо є категорія
+          //якщо є only flavor
           return product.id === id && product.category === category;
+        } else if (flavor) {
+          // Якщо є colors
+          return product.id === id && product.flavor === flavor;
         } else {
           return product.id === id;
         }
       });
-
       if (productIndex !== -1) {
         state.products[productIndex].amount = newCount;
         state.products[productIndex].isDisabledIncrement =
@@ -131,14 +107,9 @@ const cartSlice = createSlice({
     addTotalPrice(state, action) {
       state.totalPrice = totalPrice(action.payload);
     },
-    // usedPromoCode(state, action) {
-    //   const { values, total } = action.payload;
-    //   const { promoCode } = values;
-    //   state.promoCode = promoCode;
-    //   state.discount = totalPriceDiscount(total);
-    // },  використання промокоду синхронна операція (без запиту)
     notUsedPromoCode(state) {
       state.promoCode = null;
+      state.discountValue = 0;
       state.discount = 0;
     },
     submitForm(state, action) {
