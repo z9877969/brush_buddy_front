@@ -1,4 +1,5 @@
 .itemBox {
+  margin-top: 24px;
   border-bottom: 1px solid rgba(31, 31, 31, 0.1);
   display: flex;
   align-items: flex-start;
@@ -6,15 +7,8 @@
   gap: 16px;
   width: 100%;
 
-  &:not(:first-child) {
-    margin-top: 24px;
-  }
   @include media(tablet) {
     position: relative;
-<<<<<<< HEAD
-    gap: 24px;
-=======
->>>>>>> 6b3ae2dd7e20e2918316ed88a5b5017e7dc37610
     align-items: flex-start;
   }
 }
