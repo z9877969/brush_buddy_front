@@ -54,7 +54,7 @@
   .boxTitleText {
     margin-bottom: 24px;
   }
-  h3 {
+  .helpersBoxTitleText {
     @include font(24, 32);
 
     @include media(tablet) {
@@ -63,7 +63,7 @@
     }
   }
 
-  button {
+  .helpersBoxButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,7 +72,7 @@
     border-radius: 200px;
     background-color: $child-color;
   }
-  svg {
+  .helpersBoxSVG {
     width: 20px;
     height: 20px;
     fill: $light-color;
@@ -94,7 +94,7 @@
   }
 }
 
-img {
+.helpersBoxIMG {
   height: 200px;
   background-size: cover;
 

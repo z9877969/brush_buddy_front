@@ -94,6 +94,9 @@ const ProductCard = () => {
     setFlavor(product.flavors[0]);
     setMl(product.volume[0]);
   }, [product]);
+
+  // console.log(products);
+  // console.log(Object.keys(product));
   return (
     <Container>
       {Object.keys(product).length > 0 && (
@@ -284,29 +287,34 @@ const ProductCard = () => {
                     () =>
                       onClickAdd({
                         id: product.id,
-                        images: product.images[0],
+                        imgUrl: product.images[0],
                         price: product.price,
                         salePrice: product.salePrice,
                         title: product.title,
                         volume: product.volume.length === 0 ? null : mls,
-                        flavors: product.flavors.length === 0 ? null : flavor,
-                        colors: product.colors.length === 0 ? null : color,
+                        flavor: product.flavors.length === 0 ? null : flavor,
+                        color: product.colors.length === 0 ? null : color,
                         amount: quantity,
+                        quantity:
+                          product.flavors[0]?.quantity ??
+                          product.colors[0]?.quantity,
                       })
                     // console.log({
                     //   id: product.id,
-                    //   images: product.images[0],
+                    //   imgUrl: product.images[0],
                     //   price: product.price,
                     //   salePrice: product.salePrice,
                     //   title: product.title,
                     //   volume: product.volume.length === 0 ? null : mls,
-                    //   flavors:
-                    //     product.flavors.length === 0 ? null : flavor,
-                    //   colors: product.colors.length === 0 ? null : color,
+                    //   flavor: product.flavors.length === 0 ? null : flavor,
+                    //   color: product.colors.length === 0 ? null : color,
                     //   amount: quantity,
+                    //   quantity:
+                    //     product.flavors[0]?.quantity ??
+                    //     product.colors[0]?.quantity,
                     // })
                   }
-                  disabled={flavor?.quantity === 0 || color?.quantity === 0}
+                  disabled={flavor?.quantity === 0 && color?.quantity === 0}
                 >
                   В кошик
                   <svg width="20" height="20">
