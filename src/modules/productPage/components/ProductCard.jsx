@@ -95,8 +95,8 @@ const ProductCard = () => {
     setMl(product.volume[0]);
   }, [product]);
 
-  console.log(products);
-  console.log(Object.keys(product));
+  // console.log(products);
+  // console.log(Object.keys(product));
   return (
     <Container>
       {Object.keys(product).length > 0 && (
