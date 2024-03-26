@@ -1,39 +1,97 @@
-import ReactPaginate from 'react-paginate';
 import { sprite } from 'shared/icons';
 import s from './Paginator.module.scss';
+import { useState, useEffect } from 'react';
 
-const Paginator = ({ handlePageClick, displayedPages, pageCount }) => {
+const Paginator = ({ totalPages, onPageChange }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    onPageChange(currentPage);
+  }, [currentPage, onPageChange]);
+
+  const changePage = async (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const renderPagination = () => {
+    const pages = [];
+    const showPage = 3;
+    const visiblePages = Math.min(totalPages, showPage);
+    const showDots = totalPages > showPage;
+
+    for (let i = 1; i <= visiblePages; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => changePage(i)}
+          className={`${s.pageNum} ${s.paginatFigure} ${currentPage === i ? s.active : ''}`}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    if (showDots) {
+      pages.push(
+        <button key="dots" className={s.pageNum} disabled>
+          <span>...</span>
+        </button>
+      );
+    }
+    if (currentPage > showPage) {
+      pages.push(
+        <button
+          key={currentPage}
+          onClick={() => changePage(currentPage)}
+          className={`${s.pageNum} ${s.paginatFigure} ${currentPage === currentPage ? s.active : ''}`}
+        >
+          {currentPage}
+        </button>
+      );
+      if (currentPage > showPage && currentPage !== totalPages) {
+        pages.push(
+          <button key="dots" className={s.pageNum} disabled>
+            <span>...</span>
+          </button>
+        );
+      }
+    }
+    if (showDots && currentPage !== totalPages) {
+      pages.push(
+        <button
+          key={totalPages}
+          onClick={() => changePage(totalPages)}
+          className={`${s.pageNum} ${currentPage === totalPages ? s.active : ''}`}
+        >
+          {totalPages}
+        </button>
+      );
+    }
+
+    return <div className={s.blockFigure}>{pages}</div>;
+  };
+
   return (
-    <div className={s.blockPagination}>
-      <ReactPaginate
-        breakLabel={<span>...</span>}
-        nextLabel={
-          <svg className={s.paginationIcon}>
-            <use href={sprite + '#icon-chevron-right'}></use>
-          </svg>
-        }
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={
-          pageCount > displayedPages ? displayedPages : pageCount
-        }
-        marginPagesDisplayed={0}
-        pageCount={pageCount}
-        previousLabel={
-          <svg className={s.paginationIcon}>
-            <use href={sprite + '#icon-chevron-left'}></use>
-          </svg>
-        }
-        renderOnZeroPageCount={null}
-        containerClassName={s.boxpagination}
-        pageLinkClassName={s.pageNum}
-        pageClassName={s.pageFigure}
-        previousLinkClassName={s.pageNum}
-        nextLinkClassName={s.pageNum}
-        activeLinkClassName={s.active}
-        previousClassName={s.previous}
-        nextClassName={s.next}
-        disabledClassName={s.disabled}
-      />
+    <div className={s.boxpagination}>
+      <button
+        className={s.pageNum}
+        onClick={() => changePage(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        <svg className={s.paginationIcon}>
+          <use href={sprite + '#icon-chevron-left'}></use>
+        </svg>
+      </button>
+      {renderPagination()}
+      <button
+        className={s.pageNum}
+        onClick={() => changePage(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        <svg className={s.paginationIcon}>
+          <use href={sprite + '#icon-chevron-right'}></use>
+        </svg>
+      </button>
     </div>
   );
 };

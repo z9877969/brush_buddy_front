@@ -1,5 +1,4 @@
 .boxpagination {
-  max-width: 343px;
   display: flex;
   padding: 32px 16px 48px 16px;
   align-items: center;
@@ -11,7 +10,15 @@
     padding: 48px 128px 68px 128px;
   }
   @include media(desktop) {
+    gap: 32px;
     padding: 64px 250px 100px 250px;
+  }
+}
+.blockFigure {
+  display: flex;
+  gap: 6px;
+  @include media(desktop) {
+    gap: 16px;
   }
 }
 .boxpagination .pageNum {
@@ -38,47 +45,28 @@
   }
 }
 .boxpagination .pageNum:hover,
-.boxpagination .active {
+.boxpagination .paginatFigure.active {
   color: $light-color;
   background-color: $pet-color;
   .paginationIcon {
     fill: $light-color;
   }
 }
-.boxpagination li.next.disabled:hover,
-.boxpagination li.previous.disabled:hover {
+.boxpagination .pageNum:disabled:hover {
   background-color: $light-color;
-  svg {
-    fill: $disabled-content-color;
-  }
-}
-.boxpagination .pageFigure:not(:last-child) {
-  margin-right: 8px;
-  @include media(tablet) {
-    margin-right: 16px;
-  }
-}
-
-.boxpagination .previous.disabled,
-.boxpagination .next.disabled {
-  .pageNum {
-    background-color: $light-color;
-    cursor: not-allowed;
-  }
+  cursor: not-allowed;
   svg {
     fill: $disabled-content-color;
   }
 }
 
-.previous {
-  margin-right: 24px;
-  @include media(tablet) {
-    margin-right: 32px;
+.boxpagination .pageNum:disabled {
+  background-color: $light-color;
+  cursor: not-allowed;
+  svg {
+    fill: $disabled-content-color;
   }
 }
-.next {
-  margin-left: 24px;
-  @include media(tablet) {
-    margin-left: 32px;
-  }
+.paginatDots {
+  cursor: not-allowed;
 }
