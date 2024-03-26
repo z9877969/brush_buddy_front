@@ -5,7 +5,6 @@ import s from './FilterItem.module.scss';
 
 const FilterItem = ({ filterName, removeFilter }) => {
   let subClass = null;
-
   switch (filterName) {
     case PRODUCT_TYPES.ADULT:
       subClass = 'adult';
@@ -20,17 +19,22 @@ const FilterItem = ({ filterName, removeFilter }) => {
       subClass = null;
       break;
   }
+
+  const isVisible = filterName && filterName !== 'search' && filterName.search;
+
   return (
-    <li>
-      <div className={clsx(s.filterBlock, subClass && s[subClass])}>
-        {filterName}
-        <RoundButton
-          iconId={'icon-close-cross'}
-          className={s.deleteBtn}
-          onClick={() => removeFilter(filterName)}
-        />
-      </div>
-    </li>
+    isVisible && (
+      <li>
+        <div className={clsx(s.filterBlock, subClass && s[subClass])}>
+          {filterName}
+          <RoundButton
+            iconId={'icon-close-cross'}
+            className={s.deleteBtn}
+            onClick={() => removeFilter(filterName)}
+          />
+        </div>
+      </li>
+    )
   );
 };
 

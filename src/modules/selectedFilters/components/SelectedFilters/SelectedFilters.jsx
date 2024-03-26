@@ -1,11 +1,28 @@
+import { nanoid } from 'nanoid';
 import { Button } from 'shared/components';
 import FilterItem from '../FilterItem/FilterItem';
 import s from './SelectedFilters.module.scss';
 
 const SelectedFilters = ({ filter, setFilter }) => {
-  const handleRemoveFilter = (filterName) => {
+  const handleRemoveFilter = (filterValue) => {
     const updatedFilter = { ...filter };
-    delete updatedFilter[filterName];
+    Object.keys(updatedFilter).forEach((key) => {
+      if (Array.isArray(updatedFilter[key])) {
+        updatedFilter[key] = updatedFilter[key].filter(
+          (item) => item !== filterValue
+        );
+        if (updatedFilter[key].length === 0) {
+          delete updatedFilter[key];
+        }
+      } else if (
+        typeof updatedFilter[key] === 'object' &&
+        updatedFilter[key].label === filterValue
+      ) {
+        delete updatedFilter[key];
+      } else if (key === 'search' && updatedFilter[key] === filterValue) {
+        delete updatedFilter[key];
+      }
+    });
     setFilter(updatedFilter);
   };
 
@@ -16,24 +33,24 @@ const SelectedFilters = ({ filter, setFilter }) => {
       return (
         <FilterItem
           filterName={value.label}
-          key={value.label}
           removeFilter={handleRemoveFilter}
+          key={nanoid(4)}
         />
       );
     } else if (Array.isArray(value)) {
-      return value.map((item, index) => (
+      return value.map((item) => (
         <FilterItem
           filterName={item}
-          key={index}
           removeFilter={handleRemoveFilter}
+          key={nanoid(5)}
         />
       ));
     }
     return (
       <FilterItem
         filterName={value}
-        key={value}
         removeFilter={handleRemoveFilter}
+        key={nanoid(6)}
       />
     );
   });
