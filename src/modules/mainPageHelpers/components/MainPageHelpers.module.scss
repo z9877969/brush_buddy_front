@@ -84,10 +84,6 @@
     justify-content: space-between;
     gap: 24px;
     margin-bottom: 16px;
-
-    @include media(tablet) {
-      margin-bottom: 20px;
-    }
   }
   .helpersBoxPrice {
     @include font(16, 24);
@@ -95,6 +91,15 @@
   }
   .helpersBoxText {
     @include font(18, 28);
+  }
+}
+
+img {
+  height: 200px;
+  background-size: cover;
+
+  @include media(tablet) {
+    height: 372px;
   }
 }
 

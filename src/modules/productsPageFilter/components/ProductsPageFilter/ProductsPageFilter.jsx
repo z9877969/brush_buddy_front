@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { Button } from 'shared/components';
 import { sprite } from 'shared/icons';
-// import FiltersForm from '../FiltersForm/FiltersForm';
-import s from './ProductsPageFilter.module.scss';
 import { FilterModal } from '../FilterModal/FilterModal';
 
-const ProductsPageFilter = () => {
+import s from './ProductsPageFilter.module.scss';
+
+const ProductsPageFilter = ({ onFormSubmit, filter }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
-  const onFormSubmit = () => {};
 
   return (
     <aside className={s.aside}>
@@ -33,6 +31,7 @@ const ProductsPageFilter = () => {
         isOpen={isModalOpen}
         onClose={toggleModal}
         onFormSubmit={onFormSubmit}
+        filter={filter}
       />
     </aside>
   );

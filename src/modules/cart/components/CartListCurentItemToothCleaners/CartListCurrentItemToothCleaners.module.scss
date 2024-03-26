@@ -11,6 +11,10 @@
   }
   @include media(tablet) {
     position: relative;
+<<<<<<< HEAD
+    gap: 24px;
+=======
+>>>>>>> 6b3ae2dd7e20e2918316ed88a5b5017e7dc37610
     align-items: flex-start;
   }
 }
