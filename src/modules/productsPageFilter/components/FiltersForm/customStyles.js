@@ -1,35 +1,47 @@
 export const customStyles = {
   container: (styles) => ({
     ...styles,
-    width: '100%',
+
+    '@media (min-width: 1440px)': {
+      border: 'none',
+    },
+  }),
+  control: (styles, { isFocused }) => ({
+    ...styles,
+    backgroundColor: '#fff',
+    border: '1px solid rgba(31, 31, 31, 0.2)',
+    outline: 'none',
+    width: '343px',
     display: 'flex',
     justifyContent: 'flex-start',
     height: '48px',
     padding: '12px',
     alignItems: 'center',
     borderRadius: '16px',
-    border: '1px solid rgba(31, 31, 31, 0.2)',
-
-    '@media (min-width: 1440px)': {
-      backgroundColor: '#fff',
-      border: 'none',
-    },
-  }),
-  control: (styles) => ({
-    ...styles,
-    backgroundColor: 'transparent',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    outline: 'none',
-    border: 'none',
+    boxShadow: 'none',
 
     // borderColor: isSelected ? 'red' : 'none',
+    ...(isFocused && {
+      boxShadow: 'none',
+      borderBottom: '1px solid rgba(31, 31, 31, 0.2)',
+      borderRadius: '16px 16px 0 0',
+    }),
     '&:hover': {
-      border: 'none',
+      boxShadow: 'none',
     },
-    '&:focus': {
-      border: 'none',
+
+    '@media (min-width: 768px)': {
+      width: '704px',
+    },
+    '@media (min-width: 1440px)': {
+      width: '268px',
+      border: 0,
+      ...(isFocused && {
+        border: 'none',
+        boxShadow: 'none',
+        borderBottom: '1px solid rgba(31, 31, 31, 0.2)',
+        borderRadius: '16px 16px 0 0',
+      }),
     },
   }),
   // : (styles { isFocused }) => ({
@@ -59,17 +71,28 @@ export const customStyles = {
   //   lineHeight: '24px',
   //   color: '#a5a5a5',
   // }),
-  // menu: (styles) => ({
-  //   ...styles,
-  //   backgroundColor: 'red',
-  // }),
+  menu: (styles) => ({
+    ...styles,
+    margin: 0,
+    boxShadow: 'none',
+    borderRadius: '0 0 16px 16px',
+    position: 'static',
+    zIndex: -111,
+    border: '1px solid rgba(31, 31, 31, 0.2)',
+    marginBottom: '900px',
+    '@media (min-width: 1440px)': {
+      border: 0,
+      borderRadius: '16px',
+    },
+  }),
   option: (styles) => ({
     ...styles,
     padding: 'none',
     fontSize: '16px',
-    lineHeight: '24px',
+    height: '24px',
     color: '#797979',
-    backgroundColor: 'transparent',
+    backgroundColor: '#fff',
+
     '&:hover': {
       color: '#1f1f1f',
     },
@@ -81,13 +104,14 @@ export const customStyles = {
     ...styles,
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: '16px',
     padding: '12px',
     backgroundColor: '#fff',
     gap: '8px',
+    borderRadius: '0 0 16px 16px',
     '@media (min-width: 1440px)': {
       backgroundColor: '#fff',
       border: 'none',
+      borderRadius: '0 0 16px 16px',
     },
   }),
 };

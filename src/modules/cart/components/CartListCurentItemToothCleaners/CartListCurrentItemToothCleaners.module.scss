@@ -11,6 +11,7 @@
   }
   @include media(tablet) {
     position: relative;
+    gap: 24px;
     align-items: flex-start;
   }
 }
