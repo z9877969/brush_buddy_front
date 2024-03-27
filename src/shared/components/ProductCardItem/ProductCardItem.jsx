@@ -45,7 +45,7 @@ const ProductCardItem = ({
   const mainVariant = flavors?.length ? flavors[0] : colors[0];
 
   const hanleClick = () => {
-    dispatch(addProduct({ title, images, price, salePrice, mainVariant }));
+    dispatch(addProduct({ title, images: url, price, salePrice, mainVariant }));
   };
   return (
     <li className={clsx(s.productItem, disableBtn && s.unavailable)}>

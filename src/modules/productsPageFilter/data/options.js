@@ -14,6 +14,10 @@ export const ageOptions = [
 
 export const categoriesOptions = (options) => [
   {
+    value: 'all',
+    label: 'Усі',
+  },
+  {
     value: 'toothbrushes',
     label: `Зубні щітки (${options.toothbrushes !== undefined ? options.toothbrushes : 0})`,
   },

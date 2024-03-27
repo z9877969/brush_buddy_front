@@ -15,6 +15,7 @@
   @include font(36, 44);
   @include media(tablet) {
     @include font(48, 56);
+    margin-top: 66px;
   }
 }
 .text {
