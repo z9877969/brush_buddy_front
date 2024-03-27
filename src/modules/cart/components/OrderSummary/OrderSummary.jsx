@@ -10,7 +10,7 @@ import { sendOrderData } from '@redux/cart/operationsCart';
 import CartLoader from '../CartLoader/CartLoader';
 import { isLoading, selectDiscountValue } from '@redux/cart/selectorsCart';
 
-const OrederSummary = () => {
+const OrederSummary = ({ canSubmit, validateForm }) => {
   const priceDisc = useSelector(selectDiscount); // sum discount
   const discountValue = useSelector(selectDiscountValue); //value discount
   const products = useSelector(selectProd);
@@ -47,16 +47,18 @@ const OrederSummary = () => {
             type="submit"
             title={'Оформити замовлення'}
             className={s.btn}
-            onClick={() =>
-              dispatch(
-                sendOrderData({
-                  products,
-                  discount: discountValue,
-                  totalPrice: totalPriceWithoutDisc,
-                  saleTotal: fixTotalprice,
-                })
-              )
-            }
+            onClick={() => {
+              validateForm();
+              canSubmit &&
+                dispatch(
+                  sendOrderData({
+                    products,
+                    discount: discountValue,
+                    totalPrice: totalPriceWithoutDisc,
+                    saleTotal: fixTotalprice,
+                  })
+                );
+            }}
           />
           <p className={s.accept}>
             * Натискаючи на кнопку, я погоджуюсь з умовами обробки персональних

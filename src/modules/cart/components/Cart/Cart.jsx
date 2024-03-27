@@ -5,11 +5,18 @@ import CartOrder from '../CartOrder/CartOrder';
 import CartForms from '../CartForms/CartForms';
 import { notUsedPromoCode } from '@redux/cart/cartSlice';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CartPaymentMethods from '../CartPaymentMethods/CartPaymentMethods';
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const [canSubmit, setCanSubmit] = useState(false);
+  const [isValidating, setIsValidating] = useState(false);
+
+  const handleValidateForm = () => {
+    setIsValidating(true);
+  };
+
   useEffect(() => {
     dispatch(notUsedPromoCode());
   }, [dispatch]);
@@ -18,10 +25,10 @@ const Cart = () => {
       <Container className={s.cartBlock}>
         <section>
           <CartListCurrentProducts />
-          <CartForms />
+          <CartForms isValidating={isValidating} setCanSubmit={setCanSubmit} />
           <CartPaymentMethods />
         </section>
-        <CartOrder />
+        <CartOrder canSubmit={canSubmit} validateForm={handleValidateForm} />
       </Container>
     </section>
   );
