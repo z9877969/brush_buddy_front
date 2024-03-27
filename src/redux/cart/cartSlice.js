@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { totalPrice, totalPriceDiscount } from 'modules/cart';
-import { checkPromoCode } from './operationsCart.js';
+import { checkPromoCode, sendOrderData } from './operationsCart.js';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -11,9 +11,9 @@ const cartSlice = createSlice({
     totalPrice: 0,
     promoCode: null,
     discount: 0,
-    isSubmitForm: false,
     isLoading: false,
     error: null,
+    submitForm: false,
   },
   reducers: {
     addProduct(state, action) {
@@ -113,7 +113,7 @@ const cartSlice = createSlice({
       state.discount = 0;
     },
     submitForm(state, action) {
-      state.isSubmitForm = action.payload;
+      state.submitForm = action.payload;
     },
   },
 
@@ -133,6 +133,18 @@ const cartSlice = createSlice({
       })
       .addCase(checkPromoCode.rejected, (state, { payload }) => {
         state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(sendOrderData.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(sendOrderData.fulfilled, (state, { payload }) => {
+        state.submitForm = payload.submit;
+        state.isLoading = false;
+      })
+      .addCase(sendOrderData.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.submitForm = false;
         state.error = payload;
       }),
 });

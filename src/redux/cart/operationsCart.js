@@ -17,13 +17,20 @@ export const checkPromoCode = createAsyncThunk(
   }
 );
 
-// export const fetchSendOrderData = createAsyncThunk(
-//     'cart/sendOrder',
-//     async (data, thunkApi) => {
-//         try {
-
-//         } catch (error) {
-
-//         }
-//     }
-// )
+export const sendOrderData = createAsyncThunk(
+  'cart/sendOrder',
+  async (data, { rejectWithValue }) => {
+    try {
+      const promise = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(data);
+        }, 2000);
+      });
+      const order = await promise;
+      //console.log(order);
+      return order;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
