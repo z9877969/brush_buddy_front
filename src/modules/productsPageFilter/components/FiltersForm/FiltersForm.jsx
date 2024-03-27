@@ -18,7 +18,10 @@ import { sprite } from 'shared/icons';
 import s from './FiltersForm.module.scss';
 
 const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
-  const ref = useRef(null);
+  const ageRef = useRef(null);
+  const categoryRef = useRef(null);
+  const brandRef = useRef(null);
+  const sortByRef = useRef(null);
 
   const products = useSelector((s) => s.products.list);
 
@@ -45,7 +48,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
         sortBy: filter.sortBy,
       }
     : {
-        search: '',
+        search: null,
         recommendedFor: [],
         age: ageOptions[0],
         category: categoriesOptions(productsByCategory)[0],
@@ -63,7 +66,10 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
     formik;
 
   useEffect(() => {
-    ref.current.inputRef.readOnly = 'true';
+    ageRef.current.inputRef.readOnly = true;
+    categoryRef.current.inputRef.readOnly = true;
+    brandRef.current.inputRef.readOnly = true;
+    sortByRef.current.inputRef.readOnly = true;
   }, []);
 
   return (
@@ -145,20 +151,20 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
             </label>
           </div>
         </div>
-
         <div className={s.inputContainer}>
           <label htmlFor="age" className={s.label}>
             Вік дитини
           </label>
           <Select
-            ref={ref}
             id="age"
             options={ageOptions}
             value={values.age ? values.age : ageOptions[0]}
             onChange={(option) => {
               setFieldValue('age', option);
+              ageRef.current.blur();
             }}
             styles={customStyles}
+            ref={ageRef}
           />
         </div>
 
@@ -176,9 +182,10 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
             }
             onChange={(option) => {
               setFieldValue('category', option);
+              categoryRef.current.blur();
             }}
             styles={customStyles}
-            ref={ref}
+            ref={categoryRef}
           />
         </div>
 
@@ -192,9 +199,10 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
             value={values.brand ? values.brand : brandsOptions[0]}
             onChange={(option) => {
               setFieldValue('brand', option);
+              brandRef.current.blur();
             }}
             styles={customStyles}
-            ref={ref}
+            ref={brandRef}
           />
         </div>
 
@@ -208,9 +216,10 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
             value={values.sortBy ? values.sortBy : sortByOptions[0]}
             onChange={(option) => {
               setFieldValue('sortBy', option);
+              sortByRef.current.blur();
             }}
             styles={customStyles}
-            ref={ref}
+            ref={sortByRef}
           />
         </div>
       </div>

@@ -6,7 +6,7 @@ export const Flavor = ({ productFlavours, value, setFlavor }) => {
     <>
       <p className={s.mlText}>
         Виберіть смак:
-        <span className={s.selectFlavorText}>{value.flavor}</span>
+        <span className={s.selectFlavorText}>{value.colorMarker}</span>
       </p>
       <ul className={s.mlBlock}>
         {productFlavours.map((item, i) => {

@@ -283,37 +283,23 @@ const ProductCard = () => {
                   //   s.btnDontWorking && s.btnTest
                   // )}
                   type="submit"
-                  onClick={
-                    () =>
-                      onClickAdd({
-                        id: product.id,
-                        imgUrl: product.images[0],
-                        price: product.price,
-                        salePrice: product.salePrice,
-                        title: product.title,
-                        volume: product.volume.length === 0 ? null : mls,
-                        flavor: product.flavors.length === 0 ? null : flavor,
-                        color: product.colors.length === 0 ? null : color,
-                        amount: quantity,
-                        quantity:
-                          product.flavors[0]?.quantity ??
-                          product.colors[0]?.quantity,
-                      })
-                    // console.log({
-                    //   id: product.id,
-                    //   imgUrl: product.images[0],
-                    //   price: product.price,
-                    //   salePrice: product.salePrice,
-                    //   title: product.title,
-                    //   volume: product.volume.length === 0 ? null : mls,
-                    //   flavor: product.flavors.length === 0 ? null : flavor,
-                    //   color: product.colors.length === 0 ? null : color,
-                    //   amount: quantity,
-                    //   quantity:
-                    //     product.flavors[0]?.quantity ??
-                    //     product.colors[0]?.quantity,
-                    // })
-                  }
+                  onClick={() => {
+                    onClickAdd({
+                      id: product.id,
+                      images: product.images[0].url,
+                      price: product.price,
+                      salePrice: product.salePrice,
+                      title: product.title,
+                      volume: mls?.volume ?? '',
+                      flavor: flavor?.flavor ?? '',
+                      color: color?.color ?? '',
+                      amount: quantity,
+                      quantity:
+                        product.flavors[0]?.quantity ??
+                        product.colors[0]?.quantity,
+                      name: mls?.name ?? flavor?.name ?? color?.name,
+                    });
+                  }}
                   disabled={flavor?.quantity === 0 && color?.quantity === 0}
                 >
                   В кошик

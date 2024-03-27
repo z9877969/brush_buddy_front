@@ -1,25 +1,84 @@
+import { nanoid } from 'nanoid';
 import { Button } from 'shared/components';
 import FilterItem from '../FilterItem/FilterItem';
 import s from './SelectedFilters.module.scss';
 
-const filters = [
-  { id: 'abcd', filterName: 'adult' },
-  { id: 'efgh', filterName: 'child' },
-  { id: 'ijkl', filterName: 'animal' },
-  { id: 'mnop', filterName: 'Colgate' },
-  { id: 'qrst', filterName: 'Sensodyne' },
-  { id: 'uvwx', filterName: 'Aquafresh' },
-  { id: 'yzab', filterName: 'Oral-B' },
-];
+const SelectedFilters = ({ filter, setFilter }) => {
+  const isAllNullValues = (filter) => {
+    for (const key in filter) {
+      if (typeof filter[key] === 'object' && filter[key] !== null) {
+        if (!isAllNullValues(filter[key])) {
+          return false;
+        }
+      } else if (filter[key] !== null) {
+        return false;
+      }
+    }
+    return true;
+  };
 
-const SelectedFilters = () => {
-  const elements = filters.map((filter) => (
-    <FilterItem filterName={filter.filterName} key={filter.id} />
-  ));
+  if (isAllNullValues(filter)) {
+    setFilter(null);
+  }
+  const handleRemoveFilter = (filterValue) => {
+    const updatedFilter = { ...filter };
+    Object.keys(updatedFilter).forEach((key) => {
+      if (Array.isArray(updatedFilter[key])) {
+        updatedFilter[key] = updatedFilter[key].filter(
+          (item) => item !== filterValue
+        );
+        if (updatedFilter[key].length === 0) {
+          delete updatedFilter[key];
+        }
+      } else if (
+        typeof updatedFilter[key] === 'object' &&
+        updatedFilter[key].label === filterValue
+      ) {
+        delete updatedFilter[key];
+      } else if (key === 'search' && updatedFilter[key] === filterValue) {
+        delete updatedFilter[key];
+      }
+    });
+    setFilter(updatedFilter);
+  };
+
+  const resetFilters = () => setFilter(null);
+
+  const elements = Object.values(filter).flatMap((value) => {
+    if (typeof value === 'object' && value.label) {
+      return (
+        <FilterItem
+          filterName={value.label}
+          removeFilter={handleRemoveFilter}
+          key={nanoid(4)}
+        />
+      );
+    } else if (Array.isArray(value)) {
+      return value.map((item) => (
+        <FilterItem
+          filterName={item}
+          removeFilter={handleRemoveFilter}
+          key={nanoid(5)}
+        />
+      ));
+    }
+    return (
+      <FilterItem
+        filterName={value}
+        removeFilter={handleRemoveFilter}
+        key={nanoid(6)}
+      />
+    );
+  });
+
   return (
     <div className={s.filtersWrapper}>
       <ul className={s.filtersBlock}>{elements}</ul>
-      <Button title={'Скинути усі фільтри'} className={s.resetBtn} />
+      <Button
+        title={'Скинути усі фільтри'}
+        className={s.resetBtn}
+        onClick={() => resetFilters()}
+      />
     </div>
   );
 };

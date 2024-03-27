@@ -9,12 +9,10 @@ import {
   addTotalPrice,
 } from '@redux/cart/cartSlice';
 import { useEffect } from 'react';
-//import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
 
 const CartListCurrentProducts = () => {
   const products = useSelector(selectProd);
   const dispatch = useDispatch();
-  //const onClickAdd = useAddProduct();
 
   const changeCount = (
     id,
@@ -41,15 +39,15 @@ const CartListCurrentProducts = () => {
     dispatch(addTotalPrice(products));
   }, [dispatch, products]);
 
-  const onClickDelete = (id, category, flavor, color, volume) => {
+  const onClickDelete = ({ id, category, flavor, color, volume }) => {
     dispatch(
-      removeProduct(
+      removeProduct({
         id,
-        category?.category,
-        flavor?.flavor,
-        volume?.volume,
-        color?.color
-      )
+        category,
+        flavor,
+        volume,
+        color,
+      })
     );
   };
 
@@ -61,7 +59,6 @@ const CartListCurrentProducts = () => {
           data={products}
           changeCount={changeCount}
           onClickDelete={onClickDelete}
-          //onClickAdd={onClickAdd}
         />
       </ul>
     </section>
