@@ -4,6 +4,22 @@ import FilterItem from '../FilterItem/FilterItem';
 import s from './SelectedFilters.module.scss';
 
 const SelectedFilters = ({ filter, setFilter }) => {
+  const isAllNullValues = (filter) => {
+    for (const key in filter) {
+      if (typeof filter[key] === 'object' && filter[key] !== null) {
+        if (!isAllNullValues(filter[key])) {
+          return false;
+        }
+      } else if (filter[key] !== null) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  if (isAllNullValues(filter)) {
+    setFilter(null);
+  }
   const handleRemoveFilter = (filterValue) => {
     const updatedFilter = { ...filter };
     Object.keys(updatedFilter).forEach((key) => {
