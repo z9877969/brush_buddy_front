@@ -550,7 +550,7 @@
     "colors": [],
     "flavors": [
       {
-        "nanme": "мята",
+        "name": "мята",
         "colorMarker": "lightblur",
         "quantity": 10,
         "inStock": true

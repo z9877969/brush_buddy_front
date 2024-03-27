@@ -19,6 +19,7 @@ const ProductCardItem = ({
   images,
   colors,
   flavors,
+  volume,
   id,
 }) => {
   const [watermarkValue] = watermark;
@@ -42,10 +43,22 @@ const ProductCardItem = ({
 
   const disableBtn = colors?.length ? !someColorsInStock : !someFlavorsInStock;
   const dispatch = useDispatch();
-  const mainVariant = flavors?.length ? flavors[0] : colors[0];
+  const flavorName = flavors && flavors.length > 0 ? flavors[0].name : null;
+  const colorName = colors && colors.length > 0 ? colors[0].name : null;
 
   const hanleClick = () => {
-    dispatch(addProduct({ title, images: url, price, salePrice, mainVariant }));
+    dispatch(
+      addProduct({
+        id,
+        title,
+        images: url,
+        price,
+        salePrice,
+        color: colorName,
+        flavor: flavorName,
+        volume,
+      })
+    );
   };
   return (
     <li className={clsx(s.productItem, disableBtn && s.unavailable)}>

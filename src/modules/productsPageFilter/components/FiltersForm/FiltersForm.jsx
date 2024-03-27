@@ -48,7 +48,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
         sortBy: filter.sortBy,
       }
     : {
-        search: null,
+        search: '',
         recommendedFor: [],
         age: ageOptions[0],
         category: categoriesOptions(productsByCategory)[0],
@@ -158,7 +158,8 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="age"
             options={ageOptions}
-            value={values.age ? values.age : ageOptions[0]}
+            placeholder={'Усі'}
+            value={values.age}
             onChange={(option) => {
               setFieldValue('age', option);
               ageRef.current.blur();
@@ -175,11 +176,8 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="category"
             options={categoriesOptions(productsByCategory)}
-            value={
-              values.category
-                ? values.category
-                : categoriesOptions(productsByCategory)[0]
-            }
+            value={values.category}
+            placeholder={'Усі'}
             onChange={(option) => {
               setFieldValue('category', option);
               categoryRef.current.blur();
@@ -196,7 +194,8 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="brand"
             options={brandsOptions}
-            value={values.brand ? values.brand : brandsOptions[0]}
+            value={values.brand}
+            placeholder={'Усі'}
             onChange={(option) => {
               setFieldValue('brand', option);
               brandRef.current.blur();
@@ -213,7 +212,8 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="sortBy"
             options={sortByOptions}
-            value={values.sortBy ? values.sortBy : sortByOptions[0]}
+            value={values.sortBy}
+            placeholder={'Оберіть сортування'}
             onChange={(option) => {
               setFieldValue('sortBy', option);
               sortByRef.current.blur();

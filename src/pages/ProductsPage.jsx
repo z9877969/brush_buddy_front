@@ -9,7 +9,9 @@ import { useEffect, useMemo, useState } from 'react';
 
 const ProductsPage = () => {
   const products = useSelector((s) => s.products.list);
-  const [filter, setFilter] = useState(() => JSON.parse(sessionStorage.getItem('filter')) || null);
+  const [filter, setFilter] = useState(
+    () => JSON.parse(sessionStorage.getItem('filter')) || null
+  );
 
   const filteredProducts = useMemo(() => {
     if (!filter) return products.slice();

@@ -6,11 +6,11 @@ import s from './SelectedFilters.module.scss';
 const SelectedFilters = ({ filter, setFilter }) => {
   const isAllNullValues = (filter) => {
     for (const key in filter) {
-      if (typeof filter[key] === 'object' && filter[key] !== null) {
+      if (typeof filter[key] === 'object' && filter[key]) {
         if (!isAllNullValues(filter[key])) {
           return false;
         }
-      } else if (filter[key] !== null) {
+      } else if (filter[key]) {
         return false;
       }
     }
