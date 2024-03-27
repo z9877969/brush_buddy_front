@@ -23,6 +23,7 @@ const LangSwitcher = () => {
       options={options}
       defaultValue={defaultValue}
       styles={customStyles}
+      isDisabled={true}
     />
   );
 };
