@@ -8,8 +8,6 @@ import {
   apiGetCity,
   apiGetDepartment,
 } from '@redux/novaPoshta/novaPoshtaSlice';
-import { submitForm } from '@redux/cart/cartSlice';
-import { selectSubmitForm } from '@redux/cart/selectorsCart';
 import {
   selectCityData,
   selectPostOffice,
@@ -41,7 +39,6 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
   const [fullCityName, setFullCityName] = useState('');
   const listRef = useRef();
 
-  const isSubmitForm = useSelector(selectSubmitForm);
   const cityData = useSelector(selectCityData);
   const postOffice = useSelector(selectPostOffice);
   // const buttonSave = useSelector(selectButtonSave);
@@ -97,7 +94,6 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
-      console.log('test');
       const { name, email, phone, city, department, comments, isShow } = values;
       const departmentLabel = department.label;
       const deliveryInfo = {
@@ -114,7 +110,7 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
     },
   });
 
-  const { validateForm, isValid } = formik;
+  const { validateForm } = formik;
 
   const handleDeliveryData = (name = '') => {
     name && formik.validateField(name);
@@ -124,7 +120,6 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
         department: formik.values.department.label,
       })
     );
-    console.log(formik.values);
   };
   // useEffect(() => {
   //   if (buttonSave) {
