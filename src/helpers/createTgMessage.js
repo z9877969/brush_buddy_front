@@ -1,5 +1,4 @@
 const orderData = {
-  orderNum: 1,
   products: [
     {
       id: '45cf',
