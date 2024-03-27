@@ -2,10 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   delivery: null,
-  saveInfo: null,
-  buttonSave: false,
-  error: null,
-  status: 'idle',
 };
 
 const deliveryInfoSlice = createSlice({
