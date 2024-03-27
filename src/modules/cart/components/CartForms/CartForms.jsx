@@ -24,6 +24,15 @@ import { sprite } from 'shared/icons';
 import { clsx } from 'clsx';
 
 import s from './CartForms.module.scss';
+import {
+  addDeliveryInfo,
+  addSaveInfo,
+  changeButtonSave,
+} from '@redux/deliveryInfo/deliveryInfoSlice';
+import {
+  selectButtonSave,
+  selectSaveInfo,
+} from '@redux/deliveryInfo/selectorsDeliveryInfo';
 
 const CartForms = () => {
   const dispatch = useDispatch();
@@ -35,6 +44,8 @@ const CartForms = () => {
   const isSubmitForm = useSelector(selectSubmitForm);
   const cityData = useSelector(selectCityData);
   const postOffice = useSelector(selectPostOffice);
+  const buttonSave = useSelector(selectButtonSave);
+  const saveInfo = useSelector(selectSaveInfo);
 
   const maxLength = 300;
 
@@ -86,9 +97,29 @@ const CartForms = () => {
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      const { name, email, phone, city, department, comments, show } = values;
+      const departmentLabel = department.label;
+      const deliveryInfo = {
+        name,
+        email,
+        phone,
+        comments,
+        city,
+        departmentLabel,
+      };
+      dispatch(addDeliveryInfo(deliveryInfo));
+      dispatch(changeButtonSave(show));
+      dispatch(addSaveInfo(values));
     },
   });
+
+  // useEffect(() => {
+  //   if (buttonSave) {
+  //     const { name, email, phone, city, department, comments, show } = saveInfo;
+  //     formik.setFieldValue('name', name);
+  //   }
+  //   return;
+  // });
 
   useEffect(() => {
     if (isSubmitForm) {
