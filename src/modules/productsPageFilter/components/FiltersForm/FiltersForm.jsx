@@ -45,7 +45,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
         sortBy: filter.sortBy,
       }
     : {
-        search: '',
+        search: null,
         recommendedFor: [],
         age: ageOptions[0],
         category: categoriesOptions(productsByCategory)[0],
