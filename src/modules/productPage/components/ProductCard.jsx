@@ -284,16 +284,9 @@ const ProductCard = () => {
                   // )}
                   type="submit"
                   onClick={() => {
-                    //  return onClickAdd({
-                    //     id: product.id,
-                    //     title: product.title,
-                    //     price: product.price,
-                    //     images: product.images[0],
-                    //     quantity: quantity,
-                    //   });
                     onClickAdd({
                       id: product.id,
-                      imgUrl: product.images[0].url,
+                      images: product.images[0].url,
                       price: product.price,
                       salePrice: product.salePrice,
                       title: product.title,
@@ -306,22 +299,6 @@ const ProductCard = () => {
                         product.colors[0]?.quantity,
                       name: mls?.name ?? flavor?.name ?? color?.name,
                     });
-                    // console.log({
-                    //   id: product.id,
-                    //   imgUrl: product.images[0].url,
-                    //   price: product.price,
-                    //   salePrice: product.salePrice,
-                    //   title: product.title,
-                    //   volume: product.volume.length === 0 ? '' : mls.volume,
-                    //   flavor:
-                    //     product.flavors.length === 0 ? '' : flavor.colorMarker,
-                    //   color: product.colors.length === 0 ? '' : color.color,
-                    //   amount: quantity,
-                    //   quantity:
-                    //     product.flavors[0]?.quantity ??
-                    //     product.colors[0]?.quantity,
-                    //   name: mls?.name ?? flavor?.name ?? color?.name,
-                    // });
                   }}
                   disabled={flavor?.quantity === 0 && color?.quantity === 0}
                 >
