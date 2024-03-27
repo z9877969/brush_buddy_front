@@ -293,7 +293,7 @@ const ProductCard = () => {
                     //   });
                     onClickAdd({
                       id: product.id,
-                      images: product.images[0].url,
+                      imgUrl: product.images[0].url,
                       price: product.price,
                       salePrice: product.salePrice,
                       title: product.title,
