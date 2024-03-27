@@ -9,8 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 const ProductsPage = () => {
   const products = useSelector((s) => s.products.list);
-
-  const [filter, setFilter] = useState(() => sessionStorage.getItem('filter'));
+  const [filter, setFilter] = useState(() => JSON.parse(sessionStorage.getItem('filter')) || null);
 
   // const filteredProducts = useMemo(() => {
   //   if (!filter) return products;
@@ -81,7 +80,7 @@ const ProductsPage = () => {
   }, [filter, products]);
 
   useEffect(() => {
-    sessionStorage.setItem('filter', filter);
+    sessionStorage.setItem('filter', JSON.stringify(filter));
   }, [filter]);
 
   return (
