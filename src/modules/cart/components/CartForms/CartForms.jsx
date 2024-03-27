@@ -29,10 +29,10 @@ import {
   addSaveInfo,
   changeButtonSave,
 } from '@redux/deliveryInfo/deliveryInfoSlice';
-import {
-  selectButtonSave,
-  selectSaveInfo,
-} from '@redux/deliveryInfo/selectorsDeliveryInfo';
+// import {
+//   selectButtonSave,
+//   selectSaveInfo,
+// } from '@redux/deliveryInfo/selectorsDeliveryInfo';
 
 const CartForms = () => {
   const dispatch = useDispatch();
@@ -44,8 +44,8 @@ const CartForms = () => {
   const isSubmitForm = useSelector(selectSubmitForm);
   const cityData = useSelector(selectCityData);
   const postOffice = useSelector(selectPostOffice);
-  const buttonSave = useSelector(selectButtonSave);
-  const saveInfo = useSelector(selectSaveInfo);
+  // const buttonSave = useSelector(selectButtonSave);
+  // const saveInfo = useSelector(selectSaveInfo);
 
   const maxLength = 300;
 
