@@ -139,8 +139,13 @@ const cartSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(sendOrderData.fulfilled, (state, { payload }) => {
-        state.submitForm = payload.submit;
+        state.products = [];
+        state.totalPrice = 0;
+        state.promoCode = null;
+        state.discount = 0;
         state.isLoading = false;
+        state.error = null;
+        state.submitForm = payload.submit;
       })
       .addCase(sendOrderData.rejected, (state, { payload }) => {
         state.isLoading = false;
