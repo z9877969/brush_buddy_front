@@ -9,14 +9,17 @@ import { useEffect, useState } from 'react';
 
 const ProductsPage = () => {
   const products = useSelector((s) => s.products.list);
-  const [filter, setFilter] = useState(() => sessionStorage.getItem('filter'));
+  const [filter, setFilter] = useState(() => {
+    const storedFilter = sessionStorage.getItem('filter');
+    return storedFilter ? JSON.parse(storedFilter) : null;
+  });
 
   // const filteredProducts = useMemo(() => {
   //   if (!filter) return products;
   //   products.filter((el) => el);
   // }, [filter, products]);
   useEffect(() => {
-    sessionStorage.setItem('filter', filter);
+    sessionStorage.setItem('filter', JSON.stringify(filter));
   }, [filter]);
 
   return (
