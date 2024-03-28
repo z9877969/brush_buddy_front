@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// //import * as productsApi from '../../services/index.js';
+import { sendMessageTg } from '../../services/index.js';
 
 export const checkPromoCode = createAsyncThunk(
   'cart/sendPromo',
@@ -21,13 +21,7 @@ export const sendOrderData = createAsyncThunk(
   'cart/sendOrder',
   async (data, { rejectWithValue }) => {
     try {
-      const promise = new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(data);
-        }, 2000);
-      });
-      const order = await promise;
-      //console.log(order);
+      const order = await sendMessageTg(data);
       return order;
     } catch (error) {
       return rejectWithValue(error.message);

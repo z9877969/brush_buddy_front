@@ -53,5 +53,6 @@ export const customStyles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',
+    width: '25px',
   }),
 };

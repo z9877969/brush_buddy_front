@@ -24,13 +24,15 @@ const cartSlice = createSlice({
         if (flavor && volume) {
           return (
             product.id === id &&
-            product.flavor?.flavor === flavor &&
-            product.flavor?.volume === volume
+            product.flavor === flavor &&
+            product.volume === volume
           );
         } else if (color) {
-          return product.id === id && product.color?.color === color;
+          return product.id === id && product.color === color;
         } else if (category) {
-          return product.id === id;
+          return product.id === id && product.category === category;
+        } else if (volume) {
+          return product.id === id && product.volume === volume;
         } else {
           return product.id === id;
         }
@@ -139,8 +141,13 @@ const cartSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(sendOrderData.fulfilled, (state, { payload }) => {
-        state.submitForm = payload.submit;
+        state.products = [];
+        state.totalPrice = 0;
+        state.promoCode = null;
+        state.discount = 0;
         state.isLoading = false;
+        state.error = null;
+        state.submitForm = payload.submit;
       })
       .addCase(sendOrderData.rejected, (state, { payload }) => {
         state.isLoading = false;

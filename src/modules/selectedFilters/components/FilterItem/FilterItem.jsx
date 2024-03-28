@@ -21,12 +21,9 @@ const FilterItem = ({ filterName, removeFilter }) => {
   }
 
   const isVisible = filterName && filterName !== 'search' && filterName.search;
-  const isVisible2 =
-    filterName && filterName !== 'Усі' && filterName !== 'Оберіть сортування';
 
   return (
-    isVisible &&
-    isVisible2 && (
+    isVisible && (
       <li>
         <div className={clsx(s.filterBlock, subClass && s[subClass])}>
           {filterName}

@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 .image {
@@ -28,7 +29,7 @@
     line-height: 117%;
   }
   @include media(desktop) {
-    width: 700px;
+    width: 800px;
   }
 }
 
@@ -96,8 +97,10 @@
   }
 
   @include media(tablet) {
-    padding: 16px 55px;
     width: 235px;
     font-size: 18px;
+    border-radius: 200px;
+    padding: 16px 40px;
+    height: 56px;
   }
 }

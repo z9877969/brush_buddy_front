@@ -6,17 +6,12 @@ export const recommendedForOptions = [
   { value: PRODUCT_TYPES.ANIMAL, label: 'Тварин' },
 ];
 export const ageOptions = [
-  { value: null, label: 'Усі' },
   { value: '0to3', label: '0-3 роки' },
   { value: '4to6', label: '4-6 років' },
   { value: '6to12', label: '6-12 років' },
 ];
 
 export const categoriesOptions = (options) => [
-  {
-    value: null,
-    label: 'Усі',
-  },
   {
     value: 'toothbrushes',
     label: `Зубні щітки (${options.toothbrushes !== undefined ? options.toothbrushes : 0})`,
@@ -51,7 +46,6 @@ export const categoriesOptions = (options) => [
   },
 ];
 export const brandsOptions = [
-  { value: null, label: 'Усі' },
   { value: 'tello', label: 'TELLO' },
   { value: 'miradent', label: 'Miradent' },
   { value: 'dentek', label: 'DenTek' },
@@ -62,7 +56,6 @@ export const brandsOptions = [
   { value: 'brushbuddy', label: 'BrushBuddy' },
 ];
 export const sortByOptions = [
-  { value: null, label: 'Оберіть сортування' },
   { value: 'new', label: 'Новинки' },
   { value: 'actions', label: 'Акції' },
   { value: 'increment', label: 'Ціна за зростанням' },
