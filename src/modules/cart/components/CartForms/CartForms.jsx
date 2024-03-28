@@ -59,7 +59,9 @@ const CartForms = () => {
 
   useEffect(() => {
     if (!fullCityName) return;
-    dispatch(apiGetDepartment(fullCityName.substring(3)));
+    dispatch(
+      apiGetDepartment(fullCityName.replace(/^[а-яА-ЯІіїЇєЄ]+\.\s*/, ''))
+    );
   }, [dispatch, fullCityName]);
 
   const listDepartments = useMemo(() => {

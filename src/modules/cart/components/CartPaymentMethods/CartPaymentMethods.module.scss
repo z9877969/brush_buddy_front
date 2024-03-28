@@ -27,6 +27,51 @@
     @include font(16, 24);
     font-weight: 500;
     color: $primary-text-color;
-    margin-left: 12px;
   }
+}
+
+.cartPaymentsInput {
+  display: none;
+
+  + .cartPaymentsLabel {
+    cursor: pointer;
+    display: flex;
+
+    .listPaymentsOnline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50px;
+      border: 2px solid $disabled-content-color;
+      margin-right: 12px;
+      fill: transparent;
+    }
+
+    .cartFormSVG {
+      width: 28px;
+      height: 28px;
+      margin: -2px;
+    }
+  }
+
+  &:checked + .cartPaymentsLabel .listPaymentsOnline {
+    background-color: $light-color;
+    border: none;
+    fill: $pet-color;
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
