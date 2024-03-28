@@ -18,7 +18,7 @@ const cartSlice = createSlice({
   reducers: {
     addProduct(state, action) {
       //state.products.push(action.payload); старий стейт
-      const { id, category, flavor, volume, color } = action.payload;
+      const { id, category, flavor, volume, color, amount } = action.payload;
 
       const existingProductIndex = state.products.findIndex((product) => {
         if (flavor && volume) {
@@ -49,7 +49,7 @@ const cartSlice = createSlice({
         // Якщо товару ще немає, додаємо його
         state.products.push({
           ...action.payload,
-          amount: 1,
+          amount: amount ? amount : 1,
         });
       }
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Select from 'react-select';
 import { useDebounceValue } from 'usehooks-ts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,11 +11,6 @@ import {
   selectCityData,
   selectPostOffice,
 } from '@redux/novaPoshta/selectorsNovaPoshta';
-import {
-  addDeliveryInfo,
-  // addSaveInfo,
-  // changeButtonSave,
-} from '@redux/deliveryInfo/deliveryInfoSlice';
 import CityNameItem from '../CityNameItem/CityNameItem';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { getDelliverySelectStyles } from './deliverySelectStyles';
@@ -30,12 +25,18 @@ const CartForms = () => {
   const cityData = useSelector(selectCityData);
   const postOffice = useSelector(selectPostOffice);
 
-  const [debouncedValue, setValue] = useDebounceValue('', 500);
+  const [debouncedValue, setValue] = useDebounceValue('', 300);
   const [open, setOpen] = useState(false);
   const [fullCityName, setFullCityName] = useState('');
-  const [isShow, setIsShow] = useState(false);
+  const [isSave, setIsSave] = useState(
+    () => JSON.parse(localStorage.getItem('isSaveDeliveryInfo')) ?? false
+  );
 
   const listRef = useRef(null);
+
+  const formik = useDeliveryForm();
+
+  const { values, errors, touched } = formik;
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -58,10 +59,12 @@ const CartForms = () => {
 
   useEffect(() => {
     if (!fullCityName) return;
-    dispatch(apiGetDepartment(fullCityName.substring(3)));
+    dispatch(
+      apiGetDepartment(fullCityName.replace(/^[а-яА-ЯІіїЇєЄ]+\.\s*/, ''))
+    );
   }, [dispatch, fullCityName]);
 
-  const setListDepartments = () => {
+  const listDepartments = useMemo(() => {
     if (postOffice?.length > 0) {
       const options = postOffice.map(({ SiteKey, Description }) => ({
         label: Description,
@@ -69,34 +72,9 @@ const CartForms = () => {
       }));
       return options;
     } else {
-      return;
+      return [];
     }
-  };
-  const formik = useDeliveryForm();
-
-  const { values, errors, touched } = formik;
-
-  const setDeliveryData = () => {
-    dispatch(
-      addDeliveryInfo({
-        ...formik.values,
-        department: formik.values.department.label,
-      })
-    );
-  };
-  // useEffect(() => {
-  //   if (buttonSave) {
-  //     const { name, email, phone, city, department, comments, show } = saveInfo;
-  //     formik.setFieldValue('name', name);
-  //   }
-  //   return;
-  // });
-
-  // useEffect(() => {
-  //   if (isSubmitForm) {
-  //     formik.submitForm();
-  //   }
-  // }, [isSubmitForm, dispatch, formik]);
+  }, [postOffice]);
 
   const handleCityName = (cityName) => {
     formik.setFieldValue('city', cityName);
@@ -106,18 +84,13 @@ const CartForms = () => {
   };
 
   useEffect(() => {
-    if (isShow) {
+    if (isSave) {
       localStorage.setItem('delivery', JSON.stringify(values));
     } else {
       localStorage.setItem('delivery', JSON.stringify(null));
     }
-    localStorage.setItem('isShow', isShow);
-  }, [isShow, values]);
-
-  useEffect(() => {
-    formik.setFieldValue('city', debouncedValue);
-    // eslint-disable-next-line
-  }, [debouncedValue]);
+    localStorage.setItem('isSaveDeliveryInfo', isSave);
+  }, [isSave, values]);
 
   return (
     <div className={s.cartForm}>
@@ -183,6 +156,7 @@ const CartForms = () => {
               name="city"
               value={formik.values.city}
               onChange={(event) => {
+                formik.handleChange(event);
                 setValue(event.target.value);
               }}
               onClick={() => {
@@ -196,7 +170,7 @@ const CartForms = () => {
           <span className={s.cartFormSpan}>Відділення Нової пошти</span>
           <Select
             name="department"
-            options={setListDepartments()}
+            options={listDepartments}
             placeholder={'Обрати відділення...'}
             styles={getDelliverySelectStyles({
               isError: Boolean(errors.department && touched.department),
@@ -216,7 +190,6 @@ const CartForms = () => {
           <div className={s.cartFormTextarea}>
             <textarea
               maxLength={DELIVERY_FORM.COMMENT_MAX_LENGTH}
-              onBlur={setDeliveryData}
               name="comments"
               rows="5"
               onChange={formik.handleChange}
@@ -231,9 +204,10 @@ const CartForms = () => {
           <input
             className={clsx(s.cartFormInputCheckbox, s.visuallyHidden)}
             type="checkbox"
-            name="isShow"
+            name="isSave"
             id="show"
-            onChange={() => setIsShow((p) => !p)}
+            checked={isSave}
+            onChange={() => setIsSave((p) => !p)}
           />
           <label htmlFor="show" className={s.checkText}>
             <span className={s.cartFormCheckboxBG}>

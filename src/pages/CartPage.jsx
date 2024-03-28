@@ -14,11 +14,7 @@ const CartPage = () => {
     }
   }, [products, navigate]);
 
-  return (
-    <>
-      <Cart />
-    </>
-  );
+  return <>{products.length > 0 && <Cart />}</>;
 };
 
 export default CartPage;

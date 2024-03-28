@@ -37,6 +37,7 @@ const DeliveryFormProvider = ({ children }) => {
           city: deliveryLS.city,
           department: deliveryLS.department,
           comments: '',
+          payment: 'card',
         }
       : {
           name: '',
@@ -45,6 +46,7 @@ const DeliveryFormProvider = ({ children }) => {
           city: '',
           department: '',
           comments: '',
+          payment: 'card',
         },
     validationSchema: deliveryFormSchema,
     onSubmit: (values) => {

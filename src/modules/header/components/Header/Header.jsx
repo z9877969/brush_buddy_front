@@ -34,9 +34,7 @@ const Header = () => {
       )}
       <div className={s.headerWrap}>
         <Container className={s.flex}>
-          {/* <Link to={'/'}> */}
           <Logo className={s.logo} />
-          {/* </Link> */}
 
           <HeaderNav handleMenuToggle={handleMenuToggle} />
           <div className={s.rightSideWrap}>
