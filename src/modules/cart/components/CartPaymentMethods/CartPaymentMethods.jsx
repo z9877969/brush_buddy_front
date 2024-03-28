@@ -1,6 +1,11 @@
+import { useDeliveryForm } from 'context/DeliveryFormProvider';
 import s from './CartPaymentMethods.module.scss';
 
 const CartPaymentMethods = () => {
+  const formik = useDeliveryForm();
+
+  const { handleChange, values } = formik;
+
   return (
     <div>
       <h4 className={s.cartPaymentsTitle}>Спосіб оплати</h4>
@@ -9,8 +14,10 @@ const CartPaymentMethods = () => {
           <input
             type="radio"
             name="payment"
-            value="Visa/MasterCard"
+            value="card"
             id="online"
+            checked={values.payment === 'card'}
+            onChange={handleChange}
           />
           <label htmlFor="online">
             <span className={s.listPaymentsOnline}></span>
@@ -24,7 +31,9 @@ const CartPaymentMethods = () => {
             type="radio"
             name="payment"
             id="receipt"
-            value="Оплата при отриманні"
+            value="cash"
+            checked={values.payment === 'cash'}
+            onChange={handleChange}
           />
           <label htmlFor="receipt">
             <span className={s.listPaymentsTitleText}>
