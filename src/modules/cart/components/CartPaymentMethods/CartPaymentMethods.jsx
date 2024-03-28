@@ -1,5 +1,7 @@
 import { useDeliveryForm } from 'context/DeliveryFormProvider';
 import s from './CartPaymentMethods.module.scss';
+import clsx from 'clsx';
+import { sprite } from 'shared/icons';
 
 const CartPaymentMethods = () => {
   const formik = useDeliveryForm();
@@ -12,6 +14,7 @@ const CartPaymentMethods = () => {
       <form action="" className={s.listPayments}>
         <div>
           <input
+            className={clsx(s.cartPaymentsInput)}
             type="radio"
             name="payment"
             value="card"
@@ -19,8 +22,12 @@ const CartPaymentMethods = () => {
             checked={values.payment === 'card'}
             onChange={handleChange}
           />
-          <label htmlFor="online">
-            <span className={s.listPaymentsOnline}></span>
+          <label htmlFor="online" className={s.cartPaymentsLabel}>
+            <span className={s.listPaymentsOnline}>
+              <svg className={s.cartFormSVG}>
+                <use href={sprite + `#icon-radio-true`}></use>
+              </svg>
+            </span>
             <span className={s.listPaymentsTitleText}>
               Карткою Visa/MasterCard
             </span>
@@ -28,6 +35,7 @@ const CartPaymentMethods = () => {
         </div>
         <div>
           <input
+            className={s.cartPaymentsInput}
             type="radio"
             name="payment"
             id="receipt"
@@ -35,7 +43,12 @@ const CartPaymentMethods = () => {
             checked={values.payment === 'cash'}
             onChange={handleChange}
           />
-          <label htmlFor="receipt">
+          <label htmlFor="receipt" className={s.cartPaymentsLabel}>
+            <span className={s.listPaymentsOnline}>
+              <svg className={s.cartFormSVG}>
+                <use href={sprite + `#icon-radio-true`}></use>
+              </svg>
+            </span>
             <span className={s.listPaymentsTitleText}>
               Оплата при отриманні
             </span>
