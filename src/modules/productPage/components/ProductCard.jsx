@@ -286,6 +286,7 @@ const ProductCard = () => {
                   onClick={() => {
                     onClickAdd({
                       id: product.id,
+                      category: product.category,
                       images: product.images[0].url,
                       price: product.price,
                       salePrice: product.salePrice,
