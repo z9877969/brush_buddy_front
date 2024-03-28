@@ -18,19 +18,21 @@ const cartSlice = createSlice({
   reducers: {
     addProduct(state, action) {
       //state.products.push(action.payload); старий стейт
-      const { id, category, flavor, volume, color } = action.payload;
+      const { id, category, flavor, volume, color, amount } = action.payload;
 
       const existingProductIndex = state.products.findIndex((product) => {
         if (flavor && volume) {
           return (
             product.id === id &&
-            product.flavor?.flavor === flavor &&
-            product.flavor?.volume === volume
+            product.flavor === flavor &&
+            product.volume === volume
           );
         } else if (color) {
-          return product.id === id && product.color?.color === color;
+          return product.id === id && product.color === color;
         } else if (category) {
-          return product.id === id;
+          return product.id === id && product.category === category;
+        } else if (volume) {
+          return product.id === id && product.volume === volume;
         } else {
           return product.id === id;
         }
@@ -47,7 +49,7 @@ const cartSlice = createSlice({
         // Якщо товару ще немає, додаємо його
         state.products.push({
           ...action.payload,
-          amount: 1,
+          amount: amount ? amount : 1,
         });
       }
 

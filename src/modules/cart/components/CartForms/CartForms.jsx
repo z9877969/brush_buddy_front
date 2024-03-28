@@ -1,42 +1,42 @@
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Select from 'react-select';
-import { selectStyles } from './SelectStyles';
 import { useDebounceValue } from 'usehooks-ts';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
-
+import { clsx } from 'clsx';
 import {
   apiGetCity,
   apiGetDepartment,
 } from '@redux/novaPoshta/novaPoshtaSlice';
-import { submitForm } from '@redux/cart/cartSlice';
-import { selectSubmitForm } from '@redux/cart/selectorsCart';
 import {
   selectCityData,
   selectPostOffice,
 } from '@redux/novaPoshta/selectorsNovaPoshta';
-import CityNameItem from './CityNameItem';
-import { SignupSchema } from './SignupSchemaYup';
-
-import { useFormik } from 'formik';
-
-import { sprite } from 'shared/icons';
-
-import { clsx } from 'clsx';
-
+import CityNameItem from '../CityNameItem/CityNameItem';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { getDelliverySelectStyles } from './deliverySelectStyles';
 import s from './CartForms.module.scss';
+import { sprite } from 'shared/icons';
+import { DELIVERY_FORM } from 'shared/constants';
+import { useDeliveryForm } from 'context/DeliveryFormProvider';
 
 const CartForms = () => {
   const dispatch = useDispatch();
-  const [debouncedValue, setValue] = useDebounceValue('', 500);
-  const [open, setOpen] = useState(false);
-  const [fullCityName, setFullCityName] = useState('');
-  const listRef = useRef();
 
-  const isSubmitForm = useSelector(selectSubmitForm);
   const cityData = useSelector(selectCityData);
   const postOffice = useSelector(selectPostOffice);
 
-  const maxLength = 300;
+  const [debouncedValue, setValue] = useDebounceValue('', 300);
+  const [open, setOpen] = useState(false);
+  const [fullCityName, setFullCityName] = useState('');
+  const [isSave, setIsSave] = useState(
+    () => JSON.parse(localStorage.getItem('isSaveDeliveryInfo')) ?? false
+  );
+
+  const listRef = useRef(null);
+
+  const formik = useDeliveryForm();
+
+  const { values, errors, touched } = formik;
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -62,7 +62,7 @@ const CartForms = () => {
     dispatch(apiGetDepartment(fullCityName.substring(3)));
   }, [dispatch, fullCityName]);
 
-  const setListDepartments = () => {
+  const listDepartments = useMemo(() => {
     if (postOffice?.length > 0) {
       const options = postOffice.map(({ SiteKey, Description }) => ({
         label: Description,
@@ -70,32 +70,9 @@ const CartForms = () => {
       }));
       return options;
     } else {
-      return;
+      return [];
     }
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      phone: '+380 ',
-      city: '',
-      department: '',
-      comments: '',
-      show: false,
-    },
-    validationSchema: SignupSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-
-  useEffect(() => {
-    if (isSubmitForm) {
-      formik.submitForm();
-      dispatch(submitForm(false));
-    }
-  }, [isSubmitForm, dispatch, formik]);
+  }, [postOffice]);
 
   const handleCityName = (cityName) => {
     formik.setFieldValue('city', cityName);
@@ -104,120 +81,131 @@ const CartForms = () => {
     formik.setFieldValue('department', '');
   };
 
+  useEffect(() => {
+    if (isSave) {
+      localStorage.setItem('delivery', JSON.stringify(values));
+    } else {
+      localStorage.setItem('delivery', JSON.stringify(null));
+    }
+    localStorage.setItem('isSaveDeliveryInfo', isSave);
+  }, [isSave, values]);
+
   return (
     <div className={s.cartForm}>
       <h4 className={s.cartFormsTitle}>Оформлення замовлення</h4>
       <p className={s.cartFormText}>
         Заповніть контактні дані та адресу доставки
       </p>
-      <form className={s.cartformData} onSubmit={formik.handleSubmit}>
-        <label
-          className={`${s.cartFormLabel} ${formik.touched.name && formik.errors.name ? s.error : ''}`}
-        >
+      <div className={s.cartformData}>
+        <label className={s.cartFormLabel}>
           <span className={s.cartFormSpan}>ПІБ</span>
           <input
+            className={clsx(
+              s.input,
+              errors.name && touched.name && s.inputError
+            )}
             name="name"
+            value={values.name}
             placeholder="Приходько Анжеліка Миколаївна"
             onChange={formik.handleChange}
-            value={formik.values.name}
           />
-          {formik.touched.name && formik.errors.name && (
-            <div className={s.cartFormError}>{formik.errors.name}</div>
-          )}
+          <ErrorMessage errorMessage={errors.name} touched={touched.name} />
         </label>
         <div className={s.cartFormInput2}>
-          <label
-            className={`${s.cartFormLabel} ${formik.touched.email && formik.errors.email ? s.error : ''}`}
-          >
+          <label className={s.cartFormLabel}>
             <span className={s.cartFormSpan}>Електронна пошта</span>
             <input
+              className={clsx(
+                s.input,
+                errors.email && touched.email && s.inputError
+              )}
               name="email"
+              value={values.email}
               onChange={formik.handleChange}
-              value={formik.values.email}
             />
-            {formik.touched.name && formik.errors.email && (
-              <div className={s.cartFormError}>{formik.errors.email}</div>
-            )}
+            <ErrorMessage errorMessage={errors.email} touched={touched.email} />
           </label>
-          <label
-            className={`${s.cartFormLabel} ${formik.touched.phone && formik.errors.phone ? s.error : ''}`}
-          >
+          <label className={s.cartFormLabel}>
             <span className={s.cartFormSpan}>Телефон</span>
             <input
+              className={clsx(
+                s.input,
+                errors.phone && touched.phone && s.inputError
+              )}
               name="phone"
+              value={values.phone}
               onChange={formik.handleChange}
-              value={formik.values.phone}
             />
-            {formik.touched.name && formik.errors.phone && (
-              <div className={s.cartFormError}>{formik.errors.phone}</div>
-            )}
+            <ErrorMessage errorMessage={errors.phone} touched={touched.phone} />
           </label>
         </div>
         <div className={s.cityWrapper}>
           {open && cityData.length > 0 && (
             <CityNameItem handleCityName={handleCityName} />
           )}
-          <label
-            className={`${s.cartFormLabel} ${formik.touched.city && formik.errors.city ? s.error : ''}`}
-          >
+          <label className={s.cartFormLabel}>
             <span className={s.cartFormSpan}>Місто</span>
             <input
-              onClick={() => {
-                setOpen(true);
-              }}
               ref={listRef}
+              className={clsx(
+                s.input,
+                errors.city && touched.city && s.inputError
+              )}
               name="city"
+              value={formik.values.city}
               onChange={(event) => {
                 formik.handleChange(event);
                 setValue(event.target.value);
               }}
-              value={formik.values.city}
+              onClick={() => {
+                setOpen(true);
+              }}
             />
-            {formik.touched.name && formik.errors.city && (
-              <div className={s.cartFormError}>{formik.errors.city}</div>
-            )}
+            <ErrorMessage errorMessage={errors.city} touched={touched.city} />
           </label>
         </div>
-        <label
-          className={`${s.cartFormLabel} ${formik.touched.department && formik.errors.department ? s.error : ''}`}
-        >
+        <label className={s.cartFormLabel}>
           <span className={s.cartFormSpan}>Відділення Нової пошти</span>
           <Select
             name="department"
-            options={setListDepartments()}
+            options={listDepartments}
             placeholder={'Обрати відділення...'}
-            styles={selectStyles}
+            styles={getDelliverySelectStyles({
+              isError: Boolean(errors.department && touched.department),
+            })}
             onChange={(newValue) =>
               formik.setFieldValue('department', newValue)
             }
-            value={formik.values.department}
+            value={values.department}
           />
-          {formik.touched.name && formik.errors.department && (
-            <div className={s.cartFormError}>{formik.errors.department}</div>
-          )}
+          <ErrorMessage
+            errorMessage={errors.department}
+            touched={touched.department}
+          />
         </label>
         <label className={s.cartFormLabel}>
           <span className={s.cartFormSpan}>Коментар</span>
           <div className={s.cartFormTextarea}>
             <textarea
-              maxLength={maxLength}
+              maxLength={DELIVERY_FORM.COMMENT_MAX_LENGTH}
               name="comments"
               rows="5"
               onChange={formik.handleChange}
-              value={formik.values.comments}
+              value={values.comments}
             />
           </div>
           <div className={s.cartFormTextareaSum}>
-            {formik.values.comments.length}/{maxLength}
+            {formik.values.comments.length}/{DELIVERY_FORM.COMMENT_MAX_LENGTH}
           </div>
         </label>
         <div className={s.cartFormCustomChekbox}>
           <input
             className={clsx(s.cartFormInputCheckbox, s.visuallyHidden)}
             type="checkbox"
-            name="show"
+            name="isSave"
             id="show"
-            onChange={() => formik.setFieldValue('show', true)}
+            checked={isSave}
+            onChange={() => setIsSave((p) => !p)}
           />
           <label htmlFor="show" className={s.checkText}>
             <span className={s.cartFormCheckboxBG}>
@@ -228,7 +216,7 @@ const CartForms = () => {
             Зберегти цю інформацію для наступного разу
           </label>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

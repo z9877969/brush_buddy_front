@@ -1,9 +1,13 @@
 import * as Yup from 'yup';
 
-export const SignupSchema = Yup.object().shape({
+export const deliveryFormSchema = Yup.object().shape({
   name: Yup.string()
-    .min(5, 'Введіть повністю ПІБ')
-    .max(50, 'Занадто довге ПІБ')
+    // .min(5, 'Введіть повністю ПІБ')
+    .matches(
+      /^[a-яА-ЯєЄїЇьЬҐґйЙіІ]{2,18}[\s]{1,2}[a-яА-ЯєЄїЇьЬҐґйЙіІ]{2,18}[\s]{1,2}[a-яА-ЯєЄїЇьЬҐґйЙіІ]{6,24}$/,
+      'Введіть повністю ПІБ через пробіл'
+    )
+    .max(64, 'Занадто довге ПІБ')
     .required('Поле обов`язкове для заповнення'),
   email: Yup.string()
     .email('Введіть дійсну адресу ел. пошти')
