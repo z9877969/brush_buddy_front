@@ -31,3 +31,7 @@ export const SOCIAL_NETWORKS = {
   VIBER: '#',
   FACEBOOK: 'https://www.facebook.com/profile.php?id=61557426364064',
 };
+
+export const DELIVERY_FORM = {
+  COMMENT_MAX_LENGTH: 300,
+};
