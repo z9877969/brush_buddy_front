@@ -50,25 +50,23 @@
 
 export const createTgMessage = (orderData) => {
   const orderNum = Math.ceil(Date.now() / 1000);
+  const minTab = Array(4).fill(' ').join('');
+  const middleTab = Array(6).fill(' ').join('');
+
   const productsList = orderData.products.reduce((acc, el, i) => {
     return (
       acc +
-      `${i > 0 ? '\n' : ''}<b><i>${i + 1}. ${el.title}</i></b>${el.color ? 'Колір: ' + el.color : ''}
-         ${el.flavor ? 'Смак: ' + el.flavor : ''}
-         ${el.volume ? "Об'єм: " + el.volume : ''}
-         Кількість - ${el.quantity}шт.
-         Ціна: ${el.salePrice > 0 ? el.salePrice : el.price}`
+      `${i > 0 ? '\n' : ''}<b><i>${i + 1}. ${el.title}</i></b>${el.color ? `\n${middleTab}Колір: ` + el.color : ''}${el.flavor ? `\n${middleTab}Смак: ` + el.flavor : ''}${el.volume ? `\n${middleTab}Об'єм: ` + el.volume : ''}
+      Кількість: ${el.quantity}шт.
+      Ціна: ${el.salePrice > 0 ? el.salePrice : el.price}`
     );
   }, '');
-  const total = `
-      <b>Загалом:</b> ${orderData.totalPrice}грн
-      ${orderData.discount ? '<b>Знижка:</b> ' + orderData.discount + '%' : ''}
-      ${orderData.saleTotal ? '<b>Сума зі знижкою:</b> ' + orderData.saleTotal : ''}`;
+  const total = `<b>Загалом:</b> ${orderData.totalPrice}грн${orderData.discount ? `\n${minTab}<b>Знижка:</b> ` + orderData.discount + '%' : ''}${orderData.saleTotal ? `\n${minTab}<b>Сума зі знижкою:</b> ` + orderData.saleTotal : ''}`;
   const delivery = `
-      <b>Телефон</b>: ${orderData.delivery.phone}
-      <b>Ім'я</b>: ${orderData.delivery.name}
-      <b>Місто</b>: ${orderData.delivery.city}
-      <b>Відділення/Поштомат</b>: ${orderData.delivery.postOffice}
+    <b>Телефон</b>: ${orderData.delivery.phone}
+    <b>Ім'я</b>: ${orderData.delivery.name}
+    <b>Місто</b>: ${orderData.delivery.city}
+    <b>Відділення/Поштомат</b>: ${orderData.delivery.postOffice}
     `;
 
   const message = `
