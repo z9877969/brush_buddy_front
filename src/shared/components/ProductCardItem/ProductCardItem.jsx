@@ -20,6 +20,7 @@ const ProductCardItem = ({
   colors,
   flavors,
   volume,
+  category,
   id,
 }) => {
   const [watermarkValue] = watermark;
@@ -44,19 +45,26 @@ const ProductCardItem = ({
   const disableBtn = colors?.length ? !someColorsInStock : !someFlavorsInStock;
   const dispatch = useDispatch();
   const flavorName = flavors && flavors.length > 0 ? flavors[0].name : null;
+  const volumeName = volume && volume.length > 0 ? volume[0] : null;
   const colorName = colors && colors.length > 0 ? colors[0].name : null;
+  const colorNameV = colors && colors.length > 0 ? colors[0].color : null;
+  const quantity =
+    (colors && colors[0]?.quantity) || (flavors && flavors[0]?.quantity);
 
   const hanleClick = () => {
     dispatch(
       addProduct({
         id,
+        category,
+        quantity,
         title,
         images: url,
         price,
         salePrice,
-        color: colorName,
+        color: colorNameV,
+        name: colorName,
         flavor: flavorName,
-        volume,
+        volume: volumeName,
       })
     );
   };

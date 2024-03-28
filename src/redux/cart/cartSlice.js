@@ -30,7 +30,7 @@ const cartSlice = createSlice({
         } else if (color) {
           return product.id === id && product.color === color;
         } else if (category) {
-          return product.id === id;
+          return product.id === id && product.category === category;
         } else if (volume) {
           return product.id === id && product.volume === volume;
         } else {
