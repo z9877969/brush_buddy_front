@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import s from './ErrorMessage.module.scss';
 
-const ErrorMessage = ({ touched = true, errorMessage, className }) => {
+const ErrorMessage = ({ touched, errorMessage, className }) => {
   return (
     touched &&
     errorMessage && (

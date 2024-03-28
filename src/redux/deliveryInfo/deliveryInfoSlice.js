@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  delivery: null,
+  data: null,
 };
 
 const deliveryInfoSlice = createSlice({
@@ -9,7 +9,7 @@ const deliveryInfoSlice = createSlice({
   initialState,
   reducers: {
     addDeliveryInfo(state, { payload }) {
-      state.delivery = payload;
+      state.data = payload;
     },
     addSaveInfo(state, { payload }) {
       state.saveInfo = payload;

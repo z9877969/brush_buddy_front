@@ -17,7 +17,7 @@ import {
   // addSaveInfo,
   changeButtonSave,
 } from '@redux/deliveryInfo/deliveryInfoSlice';
-import CityNameItem from './CityNameItem';
+import CityNameItem from '../CityNameItem/CityNameItem';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { signupSchema } from '../../data/deliveryFormSchema';
 import { getDelliverySelectStyles } from './deliverySelectStyles';
@@ -25,7 +25,7 @@ import s from './CartForms.module.scss';
 import { sprite } from 'shared/icons';
 import { DELIVERY_FORM } from 'shared/constants';
 
-const CartForms = ({ isValidating, setCanSubmit }) => {
+const CartForms = ({ mustValidate, setCanSubmit }) => {
   const dispatch = useDispatch();
 
   const cityData = useSelector(selectCityData);
@@ -34,8 +34,10 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
   const [debouncedValue, setValue] = useDebounceValue('', 500);
   const [open, setOpen] = useState(false);
   const [fullCityName, setFullCityName] = useState('');
+  const [isShow, setIsShow] = useState(false);
 
   const listRef = useRef(null);
+  const isFirstRenderRef = useRef(true);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -81,11 +83,10 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
       city: '',
       department: '',
       comments: '',
-      isShow: false,
     },
     validationSchema: signupSchema,
     onSubmit: (values) => {
-      const { name, email, phone, city, department, comments, isShow } = values;
+      const { name, email, phone, city, department, comments } = values;
       const departmentLabel = department.label;
       const deliveryInfo = {
         name,
@@ -101,7 +102,7 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
     },
   });
 
-  const { values, errors } = formik;
+  const { values, errors, touched } = formik;
 
   const handleDeliveryData = (name = '') => {
     name && formik.validateField(name);
@@ -133,12 +134,17 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
     formik.setFieldValue('department', '');
   };
 
-  const isFirstRenderRef = useRef(true);
-
   useEffect(() => {
-    isValidating && formik.validateForm();
+    if (mustValidate) {
+      formik.validateForm();
+      const touchedFields = Object.keys(formik.values).reduce((acc, el) => {
+        acc[el] = true;
+        return acc;
+      }, {});
+      formik.setTouched(touchedFields);
+    }
     // eslint-disable-next-line
-  }, [isValidating]);
+  }, [mustValidate]);
 
   useEffect(() => {
     if (isFirstRenderRef.current) {
@@ -146,7 +152,15 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
       return;
     }
     setCanSubmit(formik.isValid);
-  }, [formik.isValid, setCanSubmit]);
+    if (formik.isValid) {
+      dispatch(
+        addDeliveryInfo({
+          ...values,
+          department: values.department.label,
+        })
+      );
+    }
+  }, [formik.isValid, values, setCanSubmit, dispatch]);
 
   useEffect(() => {
     formik.setFieldValue('city', debouncedValue);
@@ -163,37 +177,46 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
         <label className={s.cartFormLabel}>
           <span className={s.cartFormSpan}>ПІБ</span>
           <input
-            className={clsx(s.input, errors.name && s.inputError)}
+            className={clsx(
+              s.input,
+              errors.name && touched.name && s.inputError
+            )}
             name="name"
             value={values.name}
             placeholder="Приходько Анжеліка Миколаївна"
-            onBlur={() => handleDeliveryData('name')}
+            // onBlur={() => handleDeliveryData('name')}
             onChange={formik.handleChange}
           />
-          <ErrorMessage errorMessage={errors.name} />
+          <ErrorMessage errorMessage={errors.name} touched={touched.name} />
         </label>
         <div className={s.cartFormInput2}>
           <label className={s.cartFormLabel}>
             <span className={s.cartFormSpan}>Електронна пошта</span>
             <input
-              className={clsx(s.input, errors.email && s.inputError)}
+              className={clsx(
+                s.input,
+                errors.email && touched.email && s.inputError
+              )}
               name="email"
               value={values.email}
-              onBlur={() => handleDeliveryData('email')}
+              // onBlur={() => handleDeliveryData('email')}
               onChange={formik.handleChange}
             />
-            <ErrorMessage errorMessage={errors.email} />
+            <ErrorMessage errorMessage={errors.email} touched={touched.email} />
           </label>
           <label className={s.cartFormLabel}>
             <span className={s.cartFormSpan}>Телефон</span>
             <input
-              className={clsx(s.input, formik.errors.phone && s.inputError)}
+              className={clsx(
+                s.input,
+                errors.phone && touched.phone && s.inputError
+              )}
               name="phone"
               value={values.phone}
               onBlur={handleDeliveryData}
               onChange={formik.handleChange}
             />
-            <ErrorMessage errorMessage={errors.phone} />
+            <ErrorMessage errorMessage={errors.phone} touched={touched.phone} />
           </label>
         </div>
         <div className={s.cityWrapper}>
@@ -204,10 +227,13 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
             <span className={s.cartFormSpan}>Місто</span>
             <input
               ref={listRef}
-              className={clsx(s.input, errors.city && s.inputError)}
+              className={clsx(
+                s.input,
+                errors.city && touched.city && s.inputError
+              )}
               name="city"
               value={formik.values.city}
-              onBlur={handleDeliveryData}
+              // onBlur={handleDeliveryData}
               onChange={(event) => {
                 // formik.handleChange(event);
                 setValue(event.target.value);
@@ -216,39 +242,30 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
                 setOpen(true);
               }}
             />
-            <ErrorMessage errorMessage={errors.city} />
+            <ErrorMessage errorMessage={errors.city} touched={touched.city} />
           </label>
         </div>
         <label className={s.cartFormLabel}>
           <span className={s.cartFormSpan}>Відділення Нової пошти</span>
           <Select
-            // ref={selectRef}
             name="department"
-            onBlur={() => {
-              handleDeliveryData();
-            }}
+            // onBlur={() => {
+            //   handleDeliveryData();
+            // }}
             options={setListDepartments()}
             placeholder={'Обрати відділення...'}
             styles={getDelliverySelectStyles({
-              isError: Boolean(errors.department),
+              isError: Boolean(errors.department && touched.department),
             })}
             onChange={(newValue) =>
               formik.setFieldValue('department', newValue)
             }
             value={values.department}
-            // onMenuClose={(...args) => {
-            //   // console.log('args :>> ', args);
-            //   // console.log('selectRef.current', selectRef.current);
-            //   selectRef.current.blur();
-            //   // selectRef.current.style.borderColor = '#0101011a';
-            //   // selectRef.current.controlRef.style.boxShadow = 'none';
-            // }}
-            // onMenuOpen={() => {
-            //   selectRef.current.focus();
-            //   // selectRef.current.con.style.boxShadow = '0 0 0 1px #2684ff';
-            // }}
           />
-          <ErrorMessage errorMessage={errors.department} />
+          <ErrorMessage
+            errorMessage={errors.department}
+            touched={touched.department}
+          />
         </label>
         <label className={s.cartFormLabel}>
           <span className={s.cartFormSpan}>Коментар</span>
@@ -272,7 +289,7 @@ const CartForms = ({ isValidating, setCanSubmit }) => {
             type="checkbox"
             name="isShow"
             id="show"
-            onChange={() => formik.setFieldValue('show', true)}
+            onChange={() => setIsShow((p) => !p)}
           />
           <label htmlFor="show" className={s.checkText}>
             <span className={s.cartFormCheckboxBG}>

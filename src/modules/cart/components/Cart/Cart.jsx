@@ -11,10 +11,10 @@ import CartPaymentMethods from '../CartPaymentMethods/CartPaymentMethods';
 const Cart = () => {
   const dispatch = useDispatch();
   const [canSubmit, setCanSubmit] = useState(false);
-  const [isValidating, setIsValidating] = useState(false);
+  const [mustValidate, setMustValidate] = useState(false);
 
   const handleValidateForm = () => {
-    setIsValidating(true);
+    setMustValidate(true);
   };
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Cart = () => {
       <Container className={s.cartBlock}>
         <section>
           <CartListCurrentProducts />
-          <CartForms isValidating={isValidating} setCanSubmit={setCanSubmit} />
+          <CartForms mustValidate={mustValidate} setCanSubmit={setCanSubmit} />
           <CartPaymentMethods />
         </section>
         <CartOrder canSubmit={canSubmit} validateForm={handleValidateForm} />

@@ -44,7 +44,7 @@ const OrederSummary = ({ canSubmit, validateForm }) => {
       ) : (
         <>
           <Button
-            type="submit"
+            type="button"
             title={'Оформити замовлення'}
             className={s.btn}
             onClick={() => {
