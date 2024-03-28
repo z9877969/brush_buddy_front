@@ -60,10 +60,18 @@
   line-height: 133%;
   text-align: center;
   @include media(tablet) {
-    padding: 16px 55px;
     width: 235px;
     font-size: 18px;
+    border-radius: 200px;
+    padding: 16px 40px;
+    height: 56px;
   }
+}
+
+.link:hover,
+.link:focus {
+  color: $light-color;
+  background-color: $pet-color;
 }
 
 .productLink {
@@ -102,5 +110,13 @@
     border-radius: 200px;
     padding: 16px 40px;
     height: 56px;
+  }
+}
+
+.productLink:hover,
+.productLink:focus {
+  color: $primary-text-color !important;
+  svg {
+    fill: $primary-text-color;
   }
 }
