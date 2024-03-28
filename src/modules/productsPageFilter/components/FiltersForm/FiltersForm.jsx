@@ -48,7 +48,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
         sortBy: filter.sortBy,
       }
     : {
-        search: '',
+        search: null,
         recommendedFor: [],
         age: ageOptions[0],
         category: categoriesOptions(productsByCategory)[0],
@@ -160,6 +160,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
             options={ageOptions}
             placeholder={'Усі'}
             value={values.age}
+            defaultValue={null}
             onChange={(option) => {
               setFieldValue('age', option);
               ageRef.current.blur();
@@ -176,8 +177,8 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="category"
             options={categoriesOptions(productsByCategory)}
-            value={values.category}
             placeholder={'Усі'}
+            value={values.category}
             onChange={(option) => {
               setFieldValue('category', option);
               categoryRef.current.blur();
@@ -213,7 +214,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
             id="sortBy"
             options={sortByOptions}
             value={values.sortBy}
-            placeholder={'Оберіть сортування'}
+            placeholder={'Оберіть'}
             onChange={(option) => {
               setFieldValue('sortBy', option);
               sortByRef.current.blur();
