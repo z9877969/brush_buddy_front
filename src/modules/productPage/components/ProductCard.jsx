@@ -1,27 +1,21 @@
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { Container } from 'shared/components';
 // import productCard from '../data/products.json';
 import { MyImage } from './MyImage/MyImage';
-import s from './ProductCard.module.scss';
 import { useEffect, useMemo, useState } from 'react';
 import { Volume } from './Volume/Volume';
 import { Color } from './Color/Color';
 import { Flavor } from './Flavor/Flavor';
 import { sprite } from 'shared/icons';
-// import { useDispatch } from 'react-redux';
-// import { addProduct } from '@redux/cart/cartSlice';
-// import productCard from '../data/products.json';
-// import products from '../../paginateProdList/data/products.json';
 import clsx from 'clsx';
 import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
-import { useSelector } from 'react-redux';
-import { selectProductsList } from '@redux/products/productsSelectors';
+// import { useSelector } from 'react-redux';
+// import { selectProductsList } from '@redux/products/productsSelectors';
+import s from './ProductCard.module.scss';
 
-const ProductCard = () => {
-  // const dispatch = useDispatch();
-
-  const { productId } = useParams();
-  const products = useSelector(selectProductsList);
+const ProductCard = ({ product }) => {
+  // const { productId } = useParams();
+  // const products = useSelector(selectProductsList);
 
   const [mls, setMl] = useState(null);
   const [flavor, setFlavor] = useState(null);
@@ -30,50 +24,11 @@ const ProductCard = () => {
 
   const onClickAdd = useAddProduct();
 
-  const product = useMemo(() => {
-    const numId = Number(productId);
-    return (
-      products.find((el, i) => (el._id ? el._id === productId : i === numId)) ||
-      {}
-    );
-  }, [productId, products]);
-
   // const onClickAdd = (product) => {
   //   dispatch(addProduct(product));
   // };
-  // let productes = products[0];
 
-  // console.log(productes);
-  // console.log(color?.quantity);
-  // const [productess] = useState([productes]);
-
-  // const type = productess[0].type.map((item) => item);
   const type = product.type?.map((item) => item) || '';
-  // const typess = type.join(' ');
-
-  // console.log(typess);
-
-  const shouldRenderChild = type.includes('child');
-  const shouldRenderAnimal = type.includes('animal');
-  const shouldRenderAdult = type.includes('adult');
-
-  // const type = productess[0].type.map((item) => item);
-  // const typess = type.join(' ');
-
-  // console.log(typess);
-
-  // const types = useMemo(() => {
-  //   switch (typess) {
-  //     case 'child':
-  //       return 'icon-bage-child';
-  //     case 'animal':
-  //       return 'icon-bage-animal';
-  //     case 'adult':
-  //       return 'icon-bage-adult';
-  //     default:
-  //       return null;
-  //   }
-  // }, [typess]);
 
   const switchs = useMemo(() => {
     if (!product.watermark) return null;
@@ -86,7 +41,6 @@ const ProductCard = () => {
         return null;
     }
   }, [product]);
-  // console.log(switchs);
 
   useEffect(() => {
     if (!Object.keys(product).length) return;
@@ -95,12 +49,14 @@ const ProductCard = () => {
     setMl(product.volume[0]);
   }, [product]);
 
-  // console.log(products);
-  // console.log(Object.keys(product));
   return (
     <Container>
       {Object.keys(product).length > 0 && (
-        <div className={s.containerList} key={product.id}>
+        <div
+          // style={{ minHeight: '150vh' }}
+          className={s.containerList}
+          key={product.id}
+        >
           <MyImage imges={product?.images || []} />
           <div className={s.informationBlock}>
             <div className={s.spriteBlock}>
@@ -119,21 +75,11 @@ const ProductCard = () => {
                 </svg>
               </div>
               <div>
-                {shouldRenderChild && (
-                  <svg className={s.child} width="48" height="24">
-                    <use href={`${sprite}#icon-bage-child`}></use>
+                {type.map((el) => (
+                  <svg key={el} className={s[el]} width="48" height="24">
+                    <use href={`${sprite}#icon-bage-${el}`}></use>
                   </svg>
-                )}
-                {shouldRenderAnimal && (
-                  <svg className={s.animal} width="48" height="24">
-                    <use href={`${sprite}#icon-bage-animal`}></use>
-                  </svg>
-                )}
-                {shouldRenderAdult && (
-                  <svg className={s.adult} width="48" height="24">
-                    <use href={`${sprite}#icon-bage-adult`}></use>
-                  </svg>
-                )}
+                ))}
               </div>
             </div>
             <h2 className={s.title}>{product?.title}</h2>
@@ -207,21 +153,21 @@ const ProductCard = () => {
             {/* <p>Виберіть колір: {product.colors.map((color) => {
                               return <p>{color}</p>
                           })}</p> */}
-            {product.flavors.length > 0 && flavor ? (
+            {product.flavors?.length > 0 && flavor ? (
               <Flavor
                 productFlavours={product.flavors}
                 value={flavor}
                 setFlavor={setFlavor}
               />
             ) : null}
-            {product.colors.length > 0 && color ? (
+            {product.colors?.length > 0 && color ? (
               <Color
                 productColors={product.colors}
                 value={color}
                 setColor={setColor}
               />
             ) : null}
-            {product.volume.length > 0 && mls ? (
+            {product.volume?.length > 0 && mls ? (
               <Volume
                 productVolume={product.volume}
                 value={mls}
@@ -259,7 +205,7 @@ const ProductCard = () => {
                     return setQuantity(quantity + 1);
                   }}
                   disabled={
-                    product.flavors.length > 0
+                    product.flavors?.length > 0
                       ? quantity === flavor?.quantity
                       : quantity === color?.quantity
                   }

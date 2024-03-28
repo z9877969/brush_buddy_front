@@ -14,6 +14,7 @@ export default defineConfig({
       shared: '/src/shared',
       helpers: '/src/helpers',
       context: '/src/context',
+      services: '/src/services',
     },
   },
   css: {
