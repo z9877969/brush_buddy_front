@@ -16,18 +16,20 @@ const Cart = () => {
     dispatch(notUsedPromoCode());
   }, [dispatch]);
   return (
-    <DeliveryFormProvider>
-      <section>
-        <Container className={s.cartBlock}>
-          <section>
-            <CartListCurrentProducts />
-            <CartForms />
-            <CartPaymentMethods />
-          </section>
-          <CartOrder />
-        </Container>
-      </section>
-    </DeliveryFormProvider>
+    <section>
+      <Container>
+        <DeliveryFormProvider>
+          <div className={s.cartBlock}>
+            <div>
+              <CartListCurrentProducts />
+              <CartForms />
+              <CartPaymentMethods />
+            </div>
+            <CartOrder />
+          </div>
+        </DeliveryFormProvider>
+      </Container>
+    </section>
   );
 };
 

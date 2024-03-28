@@ -29,7 +29,7 @@ const CartListCurrentItem = ({ data, changeCount, onClickDelete }) => {
         volume && volume !== 0 && volume !== undefined && volume !== null;
       return (
         <li className={s.itemBox} key={id} id={id}>
-          <Link className={s.itemproduct} to={`/products/${title}`}>
+          <Link className={s.itemproduct} to={`/products/${id}`}>
             <img className={s.itemImg} src={images} alt={title} />
           </Link>
           <div className={s.itemInfo}>
