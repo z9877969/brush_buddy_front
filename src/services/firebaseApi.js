@@ -25,9 +25,10 @@ const setProductEmptyFields = (product) => {
 
 export const getProductsApi = () => {
   return instance.get('/products.json').then(({ data }) => {
-    const updatedData = data.map((el) => {
-      return setProductEmptyFields(el);
-    });
+    const updatedData =
+      data?.map((el) => {
+        return setProductEmptyFields(el);
+      }) || [];
     return updatedData;
   });
 };

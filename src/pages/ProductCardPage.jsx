@@ -1,34 +1,31 @@
-import { useLayoutEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ProductCard } from 'modules/productPage';
 import { firebaseApi as fbApi } from 'services';
 import { ROUTES } from 'shared/constants';
+import { Loader } from 'shared/components';
 
 const ProductCardPage = () => {
-  // const location = useLocation();
-
+  const navigate = useNavigate();
   const { productId } = useParams();
 
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setIsLoading(true);
     fbApi
       .getProductById(productId)
-      .then((product) => setProduct(product))
+      .then((product) => {
+        product ? setProduct(product) : navigate(ROUTES.NOT_FOUND);
+      })
       // eslint-disable-next-line
       .catch((err) => console.log(err.message))
       .finally(() => setIsLoading(false));
+    // eslint-disable-next-line
   }, [productId]);
 
-  const locations = !product ? (
-    <Navigate to={ROUTES.NOT_FOUND} />
-  ) : (
-    <ProductCard product={product} />
-  );
-  return isLoading ? <h1>Loading...</h1> : locations;
+  return isLoading ? <Loader /> : <ProductCard product={product} />;
 };
 
 export default ProductCardPage;

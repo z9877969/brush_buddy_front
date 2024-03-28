@@ -75,6 +75,8 @@ const ProductCardItem = ({
           src={url ?? img['product_1']}
           alt={title}
           className={s.productImg}
+          height={340}
+          width={340}
         />
         <ProductTypeIcon type={type} sprite={sprite} />
         <ProductWatermark watermark={watermarkValue} sprite={sprite} />
