@@ -286,6 +286,7 @@ const ProductCard = () => {
                   onClick={() => {
                     onClickAdd({
                       id: product.id,
+                      category: product.category,
                       images: product.images[0].url,
                       price: product.price,
                       salePrice: product.salePrice,
@@ -294,9 +295,7 @@ const ProductCard = () => {
                       flavor: flavor?.flavor ?? '',
                       color: color?.color ?? '',
                       amount: quantity,
-                      quantity:
-                        product.flavors[0]?.quantity ??
-                        product.colors[0]?.quantity,
+                      quantity: flavor?.quantity ?? color?.quantity,
                       name: mls?.name ?? flavor?.name ?? color?.name,
                     });
                   }}

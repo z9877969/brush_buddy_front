@@ -7,21 +7,25 @@ import { notUsedPromoCode } from '@redux/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import CartPaymentMethods from '../CartPaymentMethods/CartPaymentMethods';
+import DeliveryFormProvider from 'context/DeliveryFormProvider';
 
 const Cart = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(notUsedPromoCode());
   }, [dispatch]);
   return (
     <section>
       <Container className={s.cartBlock}>
-        <section>
-          <CartListCurrentProducts />
-          <CartForms />
-          <CartPaymentMethods />
-        </section>
-        <CartOrder />
+        <DeliveryFormProvider>
+          <div>
+            <CartListCurrentProducts />
+            <CartForms />
+            <CartPaymentMethods />
+          </div>
+          <CartOrder />
+        </DeliveryFormProvider>
       </Container>
     </section>
   );

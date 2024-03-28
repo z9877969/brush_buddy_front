@@ -23,7 +23,7 @@
     margin-bottom: 110px;
   }
 
-  span {
+  .listPaymentsTitleText {
     @include font(16, 24);
     font-weight: 500;
     color: $primary-text-color;
