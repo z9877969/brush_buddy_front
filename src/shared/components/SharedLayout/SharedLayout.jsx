@@ -11,7 +11,9 @@ const SharedLayout = () => {
     <>
       <Header />
       <Suspense fallback={<Loader />}>
-        <Outlet />
+        <div style={{ minHeight: '100vh' }}>
+          <Outlet />
+        </div>
       </Suspense>
       {switches === true ? null : <Footer />}
     </>

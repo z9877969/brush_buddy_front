@@ -8,7 +8,8 @@
       "@redux/*": ["redux/*"],
       "shared/*": ["shared/*"],
       "helpers/*": ["helpers/*"],
-      "context/*": ["context/*"]
+      "context/*": ["context/*"],
+      "services/*": ["services/*"]
     }
   },
   "exclude": ["node_modules", "dist", ".vite"]

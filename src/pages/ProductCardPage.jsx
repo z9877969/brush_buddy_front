@@ -1,17 +1,31 @@
-import ProductCard from 'modules/productPage/components/ProductCard';
-import { useLocation } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ProductCard } from 'modules/productPage';
+import { firebaseApi as fbApi } from 'services';
 import { ROUTES } from 'shared/constants';
+import { Loader } from 'shared/components';
 
 const ProductCardPage = () => {
-  const location = useLocation();
-  const locations =
-    location.pathname === '/products/undefined' ? (
-      <Navigate to={ROUTES.NOT_FOUND} />
-    ) : (
-      <ProductCard />
-    );
-  return locations;
+  const navigate = useNavigate();
+  const { productId } = useParams();
+
+  const [product, setProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fbApi
+      .getProductById(productId)
+      .then((product) => {
+        product ? setProduct(product) : navigate(ROUTES.NOT_FOUND);
+      })
+      // eslint-disable-next-line
+      .catch((err) => console.log(err.message))
+      .finally(() => setIsLoading(false));
+    // eslint-disable-next-line
+  }, [productId]);
+
+  return isLoading ? <Loader /> : <ProductCard product={product} />;
 };
 
 export default ProductCardPage;
