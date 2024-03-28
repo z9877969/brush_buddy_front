@@ -40,11 +40,11 @@ const CartListCurrentItem = ({ data, changeCount, onClickDelete }) => {
               {isVolume && <p className={s.itemVol}> об’єм: {volume} мл</p>}
             </div>
             <div className={s.prices}>
-              {isSalePrice && (
-                <p className={s.itemDiscPrice}>{salePrice} грн</p>
-              )}
               {isSalePrice ? (
-                <p className={s.itemPriceDisc}>{price} грн</p>
+                <>
+                  <p className={s.itemDiscPrice}>{salePrice} грн</p>
+                  <p className={s.itemPriceDisc}>{price} грн</p>
+                </>
               ) : (
                 <p className={s.itemPrice}>{price} грн</p>
               )}

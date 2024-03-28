@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import s from './MyImage.module.scss';
 import clsx from 'clsx';
+import s from './MyImage.module.scss';
 
 export const MyImage = ({ imges = [{ url: ' ' }] }) => {
   const [mainImage, setMainImage] = useState(imges[0]);
-  // console.log(mainImage);
+
   return (
     <div className={s.container}>
       <div className={s.imageList}>
@@ -23,14 +23,14 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
           );
         })}
       </div>
-      {/* <div className={s.imgContainer}> */}
-      <img
-        className={s.largeImage}
-        src={imges.length === 0 ? null : mainImage.url}
-        alt="Зображення товару"
-        height={'350'}
-      />
-      {/* </div> */}
+      <div className={s.imgContainer}>
+        <img
+          className={s.largeImage}
+          src={imges.length === 0 ? null : mainImage.url}
+          alt="Зображення товару"
+          height={'350'}
+        />
+      </div>
     </div>
   );
 };

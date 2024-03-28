@@ -149,10 +149,6 @@ const ProductCard = ({ product }) => {
                 </span>
               </p>
             )}
-            {/* <p>Виберіть колір:</p> */}
-            {/* <p>Виберіть колір: {product.colors.map((color) => {
-                              return <p>{color}</p>
-                          })}</p> */}
             {product.flavors?.length > 0 && flavor ? (
               <Flavor
                 productFlavours={product.flavors}
@@ -224,10 +220,6 @@ const ProductCard = ({ product }) => {
                       ? s.btnDontWorking
                       : s.btnTest
                   )}
-                  // className={clsx(
-                  //   s.btnTest,
-                  //   s.btnDontWorking && s.btnTest
-                  // )}
                   type="submit"
                   onClick={() => {
                     onClickAdd({
@@ -238,8 +230,8 @@ const ProductCard = ({ product }) => {
                       salePrice: product.salePrice,
                       title: product.title,
                       volume: mls?.volume ?? '',
-                      flavor: flavor?.flavor ?? '',
-                      color: color?.color ?? '',
+                      flavor: flavor?.name ?? '',
+                      color: color?.name ?? '',
                       amount: quantity,
                       quantity: flavor?.quantity ?? color?.quantity,
                       name: mls?.name ?? flavor?.name ?? color?.name,
@@ -256,7 +248,7 @@ const ProductCard = ({ product }) => {
             </div>
             <div>
               <p className={s.description}>Опис</p>
-              <p className={s.info}>{product.recomendation}</p>
+              <p className={s.info}>{product.description}</p>
             </div>
             <div>
               <p className={s.recomendation}>Рекомендація</p>

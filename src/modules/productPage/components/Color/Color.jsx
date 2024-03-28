@@ -2,10 +2,11 @@ import clsx from 'clsx';
 import s from './Color.module.scss';
 
 export const Color = ({ productColors, value, setColor }) => {
+  const { color: colorMarker, name: colorName } = value;
   return (
     <>
       <p className={s.colorText}>
-        Виберіть колір: <span className={s.selectColorText}>{value.color}</span>
+        Виберіть колір: <span className={s.selectColorText}>{colorName}</span>
       </p>
       <ul className={s.colorBlock}>
         {productColors.map((item, i) => {
@@ -14,7 +15,7 @@ export const Color = ({ productColors, value, setColor }) => {
               key={i}
               className={clsx(
                 s.item,
-                item.color === value.color ? s.itemFocus : s.item
+                item.color === colorMarker ? s.itemFocus : s.item
               )}
             >
               <label
