@@ -9,7 +9,6 @@ export const getDelliverySelectStyles = ({ isError }) => ({
     alignItems: 'center',
     borderRadius: '16px',
     border: `1px solid ${
-      // 'green'
       state.isFocused ? '#F5516F' : isError ? '#BA1A1A' : '#1F1F1F33'
     }`,
 
