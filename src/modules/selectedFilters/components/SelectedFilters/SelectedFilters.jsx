@@ -2,24 +2,30 @@ import { nanoid } from 'nanoid';
 import { Button } from 'shared/components';
 import FilterItem from '../FilterItem/FilterItem';
 import s from './SelectedFilters.module.scss';
+import { useEffect } from 'react';
 
 const SelectedFilters = ({ filter, setFilter }) => {
-  const isAllNullValues = (filter) => {
-    for (const key in filter) {
-      if (typeof filter[key] === 'object' && filter[key]) {
-        if (!isAllNullValues(filter[key])) {
+  useEffect(() => {
+    const checkAllNullValues = (obj) => {
+      for (const key in obj) {
+        if (obj[key] !== null && typeof obj[key] === 'object') {
+          if (!checkAllNullValues(obj[key])) {
+            return false;
+          }
+        } else if (obj[key] !== null) {
           return false;
+        } else if (key === 'value' && obj['value'] === null) {
+          setFilter(null);
         }
-      } else if (filter[key]) {
-        return false;
       }
-    }
-    return true;
-  };
+      return true;
+    };
 
-  if (isAllNullValues(filter)) {
-    setFilter(null);
-  }
+    if (checkAllNullValues(filter)) {
+      setFilter(null);
+    }
+  }, [filter, setFilter]);
+
   const handleRemoveFilter = (filterValue) => {
     const updatedFilter = { ...filter };
     Object.keys(updatedFilter).forEach((key) => {
@@ -32,6 +38,7 @@ const SelectedFilters = ({ filter, setFilter }) => {
         }
       } else if (
         typeof updatedFilter[key] === 'object' &&
+        updatedFilter[key] !== null &&
         updatedFilter[key].label === filterValue
       ) {
         delete updatedFilter[key];
@@ -39,13 +46,14 @@ const SelectedFilters = ({ filter, setFilter }) => {
         delete updatedFilter[key];
       }
     });
+
     setFilter(updatedFilter);
   };
 
   const resetFilters = () => setFilter(null);
 
   const elements = Object.values(filter).flatMap((value) => {
-    if (typeof value === 'object' && value.label) {
+    if (typeof value === 'object' && value && value.label) {
       return (
         <FilterItem
           filterName={value.label}
@@ -74,11 +82,13 @@ const SelectedFilters = ({ filter, setFilter }) => {
   return (
     <div className={s.filtersWrapper}>
       <ul className={s.filtersBlock}>{elements}</ul>
-      <Button
-        title={'Скинути усі фільтри'}
-        className={s.resetBtn}
-        onClick={() => resetFilters()}
-      />
+      {filter && (
+        <Button
+          title={'Скинути усі фільтри'}
+          className={s.resetBtn}
+          onClick={() => resetFilters()}
+        />
+      )}
     </div>
   );
 };
