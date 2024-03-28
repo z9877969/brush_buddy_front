@@ -51,9 +51,19 @@ const SelectedFilters = ({ filter, setFilter }) => {
   };
 
   const resetFilters = () => setFilter(null);
+  const verifyValue = (value) => {
+    const invalidValues = [null, 'Усі', 'Оберіть'];
+    return !invalidValues.includes(value);
+  };
 
   const elements = Object.values(filter).flatMap((value) => {
-    if (typeof value === 'object' && value && value.label) {
+    if (
+      typeof value === 'object' &&
+      value &&
+      value.value &&
+      verifyValue(value.value) &&
+      value.label
+    ) {
       return (
         <FilterItem
           filterName={value.label}
