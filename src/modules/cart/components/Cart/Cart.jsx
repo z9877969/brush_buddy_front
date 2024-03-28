@@ -17,14 +17,16 @@ const Cart = () => {
   }, [dispatch]);
   return (
     <section>
-      <Container className={s.cartBlock}>
+      <Container>
         <DeliveryFormProvider>
-          <div>
-            <CartListCurrentProducts />
-            <CartForms />
-            <CartPaymentMethods />
+          <div className={s.cartBlock}>
+            <div>
+              <CartListCurrentProducts />
+              <CartForms />
+              <CartPaymentMethods />
+            </div>
+            <CartOrder />
           </div>
-          <CartOrder />
         </DeliveryFormProvider>
       </Container>
     </section>

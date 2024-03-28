@@ -23,12 +23,6 @@ const OrderPromoCode = ({ priceDisc }) => {
       }
       return errors;
     },
-    onSubmit: (values) => {
-      setIsPromoUsed(true);
-      dispatch(checkPromoCode({ values, total }));
-      return values;
-      //console.log('Введений промокод:', values.promoCode);
-    },
   });
 
   const handleClickDeactivePromo = () => {
@@ -53,7 +47,11 @@ const OrderPromoCode = ({ priceDisc }) => {
         <Button
           title={'Застосувати'}
           className={s.btn}
-          type="submit"
+          type="button"
+          onClick={() => {
+            setIsPromoUsed(true);
+            dispatch(checkPromoCode({ values: formik.values, total }));
+          }}
           disabled={!formik.isValid || formik.values.promoCode.trim() === ''}
         ></Button>
       </form>
