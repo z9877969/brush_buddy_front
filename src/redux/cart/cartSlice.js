@@ -24,13 +24,15 @@ const cartSlice = createSlice({
         if (flavor && volume) {
           return (
             product.id === id &&
-            product.flavor?.flavor === flavor &&
-            product.flavor?.volume === volume
+            product.flavor === flavor &&
+            product.volume === volume
           );
         } else if (color) {
-          return product.id === id && product.color?.color === color;
+          return product.id === id && product.color === color;
         } else if (category) {
           return product.id === id;
+        } else if (volume) {
+          return product.id === id && product.volume === volume;
         } else {
           return product.id === id;
         }
