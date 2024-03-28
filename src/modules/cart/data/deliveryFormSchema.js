@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const signupSchema = Yup.object().shape({
+export const deliveryFormSchema = Yup.object().shape({
   name: Yup.string()
     // .min(5, 'Введіть повністю ПІБ')
     .matches(

@@ -2,11 +2,11 @@ import OrderPromoCode from '../OrderPromoCode/OrderPromoCode';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import s from './CartOrder.module.scss';
 
-const CartOrder = ({ canSubmit, validateForm }) => {
+const CartOrder = () => {
   return (
     <section className={s.blockRight}>
       <OrderPromoCode />
-      <OrderSummary canSubmit={canSubmit} validateForm={validateForm} />
+      <OrderSummary />
     </section>
   );
 };

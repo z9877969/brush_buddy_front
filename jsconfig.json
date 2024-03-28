@@ -7,7 +7,8 @@
       "pages/*": ["pages/*"],
       "@redux/*": ["redux/*"],
       "shared/*": ["shared/*"],
-      "helpers/*": ["helpers/*"]
+      "helpers/*": ["helpers/*"],
+      "context/*": ["context/*"]
     }
   },
   "exclude": ["node_modules", "dist", ".vite"]

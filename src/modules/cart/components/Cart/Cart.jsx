@@ -5,32 +5,29 @@ import CartOrder from '../CartOrder/CartOrder';
 import CartForms from '../CartForms/CartForms';
 import { notUsedPromoCode } from '@redux/cart/cartSlice';
 import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import CartPaymentMethods from '../CartPaymentMethods/CartPaymentMethods';
+import DeliveryFormProvider from 'context/DeliveryFormProvider';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const [canSubmit, setCanSubmit] = useState(false);
-  const [mustValidate, setMustValidate] = useState(false);
-
-  const handleValidateForm = () => {
-    setMustValidate(true);
-  };
 
   useEffect(() => {
     dispatch(notUsedPromoCode());
   }, [dispatch]);
   return (
-    <section>
-      <Container className={s.cartBlock}>
-        <section>
-          <CartListCurrentProducts />
-          <CartForms mustValidate={mustValidate} setCanSubmit={setCanSubmit} />
-          <CartPaymentMethods />
-        </section>
-        <CartOrder canSubmit={canSubmit} validateForm={handleValidateForm} />
-      </Container>
-    </section>
+    <DeliveryFormProvider>
+      <section>
+        <Container className={s.cartBlock}>
+          <section>
+            <CartListCurrentProducts />
+            <CartForms />
+            <CartPaymentMethods />
+          </section>
+          <CartOrder />
+        </Container>
+      </section>
+    </DeliveryFormProvider>
   );
 };
 

@@ -1,24 +1,21 @@
 import { Button } from 'shared/components';
 import s from './OrderSummary.module.scss';
-import {
-  selectDiscount,
-  selectProd,
-  selectTotalPrice,
-} from '@redux/cart/selectorsCart';
-import { useDispatch, useSelector } from 'react-redux';
-import { sendOrderData } from '@redux/cart/operationsCart';
+import { selectDiscount, selectTotalPrice } from '@redux/cart/selectorsCart';
+import { useSelector } from 'react-redux';
 import CartLoader from '../CartLoader/CartLoader';
-import { isLoading, selectDiscountValue } from '@redux/cart/selectorsCart';
+import { isLoading } from '@redux/cart/selectorsCart';
+import { useMemo } from 'react';
 
-const OrederSummary = ({ canSubmit, validateForm }) => {
-  const priceDisc = useSelector(selectDiscount); // sum discount
-  const discountValue = useSelector(selectDiscountValue); //value discount
-  const products = useSelector(selectProd);
-  const totalPriceWithoutDisc = useSelector(selectTotalPrice);
-  const totalPriceMinusDics = totalPriceWithoutDisc - priceDisc;
-  const fixTotalprice = totalPriceMinusDics.toFixed(2);
+const OrederSummary = () => {
   const isLoad = useSelector(isLoading);
-  const dispatch = useDispatch();
+  const priceDisc = useSelector(selectDiscount); // sum discount
+  const totalPriceWithoutDisc = useSelector(selectTotalPrice);
+
+  const fixTotalprice = useMemo(() => {
+    const totalPriceMinusDics = totalPriceWithoutDisc - priceDisc;
+    return totalPriceMinusDics.toFixed(2);
+  }, [priceDisc, totalPriceWithoutDisc]);
+
   return (
     <section className={s.boxSummary}>
       <div className={s.boxSum}>
@@ -44,21 +41,9 @@ const OrederSummary = ({ canSubmit, validateForm }) => {
       ) : (
         <>
           <Button
-            type="button"
+            type="submit"
             title={'Оформити замовлення'}
             className={s.btn}
-            onClick={() => {
-              validateForm();
-              canSubmit &&
-                dispatch(
-                  sendOrderData({
-                    products,
-                    discount: discountValue,
-                    totalPrice: totalPriceWithoutDisc,
-                    saleTotal: fixTotalprice,
-                  })
-                );
-            }}
           />
           <p className={s.accept}>
             * Натискаючи на кнопку, я погоджуюсь з умовами обробки персональних

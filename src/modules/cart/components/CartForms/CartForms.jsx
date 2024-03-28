@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import Select from 'react-select';
 import { useDebounceValue } from 'usehooks-ts';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFormik } from 'formik';
 import { clsx } from 'clsx';
 import {
   apiGetCity,
@@ -15,17 +14,17 @@ import {
 import {
   addDeliveryInfo,
   // addSaveInfo,
-  changeButtonSave,
+  // changeButtonSave,
 } from '@redux/deliveryInfo/deliveryInfoSlice';
 import CityNameItem from '../CityNameItem/CityNameItem';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { signupSchema } from '../../data/deliveryFormSchema';
 import { getDelliverySelectStyles } from './deliverySelectStyles';
 import s from './CartForms.module.scss';
 import { sprite } from 'shared/icons';
 import { DELIVERY_FORM } from 'shared/constants';
+import { useDeliveryForm } from 'context/DeliveryFormProvider';
 
-const CartForms = ({ mustValidate, setCanSubmit }) => {
+const CartForms = () => {
   const dispatch = useDispatch();
 
   const cityData = useSelector(selectCityData);
@@ -37,7 +36,6 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
   const [isShow, setIsShow] = useState(false);
 
   const listRef = useRef(null);
-  const isFirstRenderRef = useRef(true);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -74,38 +72,11 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
       return;
     }
   };
-
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      phone: '+380',
-      city: '',
-      department: '',
-      comments: '',
-    },
-    validationSchema: signupSchema,
-    onSubmit: (values) => {
-      const { name, email, phone, city, department, comments } = values;
-      const departmentLabel = department.label;
-      const deliveryInfo = {
-        name,
-        email,
-        phone,
-        comments,
-        city,
-        departmentLabel,
-      };
-      dispatch(addDeliveryInfo(deliveryInfo));
-      dispatch(changeButtonSave(isShow));
-      // dispatch(addSaveInfo(values));
-    },
-  });
+  const formik = useDeliveryForm();
 
   const { values, errors, touched } = formik;
 
-  const handleDeliveryData = (name = '') => {
-    name && formik.validateField(name);
+  const setDeliveryData = () => {
     dispatch(
       addDeliveryInfo({
         ...formik.values,
@@ -135,32 +106,13 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
   };
 
   useEffect(() => {
-    if (mustValidate) {
-      formik.validateForm();
-      const touchedFields = Object.keys(formik.values).reduce((acc, el) => {
-        acc[el] = true;
-        return acc;
-      }, {});
-      formik.setTouched(touchedFields);
+    if (isShow) {
+      localStorage.setItem('delivery', JSON.stringify(values));
+    } else {
+      localStorage.setItem('delivery', JSON.stringify(null));
     }
-    // eslint-disable-next-line
-  }, [mustValidate]);
-
-  useEffect(() => {
-    if (isFirstRenderRef.current) {
-      isFirstRenderRef.current = false;
-      return;
-    }
-    setCanSubmit(formik.isValid);
-    if (formik.isValid) {
-      dispatch(
-        addDeliveryInfo({
-          ...values,
-          department: values.department.label,
-        })
-      );
-    }
-  }, [formik.isValid, values, setCanSubmit, dispatch]);
+    localStorage.setItem('isShow', isShow);
+  }, [isShow, values]);
 
   useEffect(() => {
     formik.setFieldValue('city', debouncedValue);
@@ -173,7 +125,7 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
       <p className={s.cartFormText}>
         Заповніть контактні дані та адресу доставки
       </p>
-      <form className={s.cartformData} onSubmit={formik.handleSubmit}>
+      <div className={s.cartformData}>
         <label className={s.cartFormLabel}>
           <span className={s.cartFormSpan}>ПІБ</span>
           <input
@@ -184,7 +136,6 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
             name="name"
             value={values.name}
             placeholder="Приходько Анжеліка Миколаївна"
-            // onBlur={() => handleDeliveryData('name')}
             onChange={formik.handleChange}
           />
           <ErrorMessage errorMessage={errors.name} touched={touched.name} />
@@ -199,7 +150,6 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
               )}
               name="email"
               value={values.email}
-              // onBlur={() => handleDeliveryData('email')}
               onChange={formik.handleChange}
             />
             <ErrorMessage errorMessage={errors.email} touched={touched.email} />
@@ -213,7 +163,6 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
               )}
               name="phone"
               value={values.phone}
-              onBlur={handleDeliveryData}
               onChange={formik.handleChange}
             />
             <ErrorMessage errorMessage={errors.phone} touched={touched.phone} />
@@ -233,9 +182,7 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
               )}
               name="city"
               value={formik.values.city}
-              // onBlur={handleDeliveryData}
               onChange={(event) => {
-                // formik.handleChange(event);
                 setValue(event.target.value);
               }}
               onClick={() => {
@@ -249,9 +196,6 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
           <span className={s.cartFormSpan}>Відділення Нової пошти</span>
           <Select
             name="department"
-            // onBlur={() => {
-            //   handleDeliveryData();
-            // }}
             options={setListDepartments()}
             placeholder={'Обрати відділення...'}
             styles={getDelliverySelectStyles({
@@ -272,11 +216,11 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
           <div className={s.cartFormTextarea}>
             <textarea
               maxLength={DELIVERY_FORM.COMMENT_MAX_LENGTH}
-              onBlur={handleDeliveryData}
+              onBlur={setDeliveryData}
               name="comments"
               rows="5"
               onChange={formik.handleChange}
-              value={formik.values.comments}
+              value={values.comments}
             />
           </div>
           <div className={s.cartFormTextareaSum}>
@@ -300,7 +244,7 @@ const CartForms = ({ mustValidate, setCanSubmit }) => {
             Зберегти цю інформацію для наступного разу
           </label>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
