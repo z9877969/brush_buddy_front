@@ -34,6 +34,7 @@ const Counter = ({
   return (
     <div className={clsx(s.counterWrapper, classWrapper && classWrapper)}>
       <button
+        type="button"
         disabled={count <= 1 || disabledDecr}
         className={clsx(s.btn, classBtn && classBtn)}
         onClick={handleDecrement}
@@ -44,6 +45,7 @@ const Counter = ({
       </button>
       <span className={clsx(s.table, classTable && classTable)}>{count}</span>
       <button
+        type="button"
         disabled={disabledIncrem}
         className={clsx(s.btn, classBtn && classBtn)}
         onClick={handleIncrement}
