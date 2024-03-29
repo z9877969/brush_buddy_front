@@ -18,6 +18,7 @@ const cartSlice = createSlice({
   reducers: {
     addProduct(state, action) {
       //state.products.push(action.payload); старий стейт
+      state.submitForm = false;
       const { id, category, flavor, volume, color, amount } = action.payload;
 
       const existingProductIndex = state.products.findIndex((product) => {
@@ -140,14 +141,14 @@ const cartSlice = createSlice({
       .addCase(sendOrderData.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(sendOrderData.fulfilled, (state, { payload }) => {
+      .addCase(sendOrderData.fulfilled, (state) => {
         state.products = [];
         state.totalPrice = 0;
         state.promoCode = null;
         state.discount = 0;
         state.isLoading = false;
         state.error = null;
-        state.submitForm = payload.submit;
+        state.submitForm = true;
       })
       .addCase(sendOrderData.rejected, (state, { payload }) => {
         state.isLoading = false;
