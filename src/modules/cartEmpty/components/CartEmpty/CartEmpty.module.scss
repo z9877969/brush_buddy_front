@@ -38,6 +38,13 @@
     width: 216px;
   }
 }
+.linkButton:hover,
+.linkButton:focus,
+.linkButton:active {
+  & svg {
+    fill: $primary-text-color;
+  }
+}
 
 .animation {
   margin: 0 auto;
