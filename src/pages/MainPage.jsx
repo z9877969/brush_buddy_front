@@ -12,7 +12,7 @@ const MainPage = () => {
       <MainPageAbout />
       <MainPageDialog />
       <MainPageToShopping />
-      <MainPageHelpers />
+      <MainPageHelpers isDescrShow={false} />
       <MainPageBlog />
       <MainPageReviews />
     </>

@@ -10,7 +10,7 @@ const AboutPage = () => {
       <MainTitle title={'some title'} className={'some-class'} light />
       <AboutHero />
       <AboutBlog />
-      <MainPageHelpers />
+      <MainPageHelpers isDescrShow={true} />
       <SomeHumor />
     </>
   );
