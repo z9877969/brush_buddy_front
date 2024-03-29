@@ -49,7 +49,7 @@
 // };
 
 export const createTgMessage = (orderData) => {
-  const orderNum = Math.ceil(Date.now() / 1000);
+  // const orderNum = Math.ceil(Date.now() / 1000);
   const minTab = Array(4).fill(' ').join('');
   const middleTab = Array(6).fill(' ').join('');
 
@@ -71,7 +71,7 @@ export const createTgMessage = (orderData) => {
     `;
 
   const message = `
-    <b>Замовлення №${orderNum}</b>
+    <b>Замовлення №${orderData.orderNum}</b>
     <b>==========</b>\n${productsList}
     ${total}
     ${delivery}

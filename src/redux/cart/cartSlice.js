@@ -18,7 +18,6 @@ const cartSlice = createSlice({
   },
   reducers: {
     addProduct(state, action) {
-      //state.products.push(action.payload); старий стейт
       state.submitForm = false;
       const { id, category, flavor, volume, color, amount } = action.payload;
 

@@ -11,10 +11,13 @@ const instance = axios.create({
 });
 
 export const sendMessageTg = async (orderData) => {
+  const orderNum = Math.ceil(Date.now() / 1000);
+  orderData.orderNum = orderNum;
   const { data } = await instance.post('/sendMessage', {
     chat_id: CHAT_ID,
     parse_mode: 'html',
     text: createTgMessage(orderData),
   });
-  return data;
+
+  return { ...data, orderNum };
 };
