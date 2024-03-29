@@ -6,34 +6,63 @@
   color: $primary-text-color;
 }
 
+.boxForButton {
+  position: relative;
+}
+
 .helpersBoxAll {
+  padding-top: 48px;
   position: relative;
 
+  @include media(tablet) {
+    padding-top: 68px;
+  }
   @include media(desktop) {
+    padding-top: 100px;
     padding-bottom: 100px;
   }
 }
 
 .mainHelpersTitle {
   color: $light-color;
-  padding-top: 48px;
   padding-bottom: 32px;
 
   @include media(tablet) {
-    padding-top: 68px;
     @include font(48, 56);
     padding-bottom: 64px;
   }
 
   @include media(desktop) {
     @include font(56, 64);
-    padding-top: 100px;
   }
 }
 
 .helpersCardUL {
   display: flex;
   gap: 24px;
+}
+
+.aboutHelpersBox {
+  box-sizing: border-box;
+  padding: 24px;
+  margin-bottom: 16px;
+  border-radius: 24px;
+  background-color: $light-color;
+
+  @include media(tablet) {
+    padding: 44px;
+    margin-bottom: 32px;
+  }
+
+  .aboutHelpersText {
+    @include font(20, 28);
+    font-weight: 500;
+    color: $primary-text-color;
+
+    @include media(tablet) {
+      @include font(24, 32);
+    }
+  }
 }
 
 .mainHelpersBox {
@@ -45,7 +74,7 @@
 
   @include media(tablet) {
     padding: 32px;
-    margin-bottom: 64px;
+    margin-bottom: 68px;
   }
   @include media(desktop) {
     margin-bottom: 0;
@@ -111,15 +140,15 @@
 
   @include media(tablet) {
     position: absolute;
-    top: 68px;
+    top: 0;
     right: 0;
     padding-bottom: 0;
     gap: 16px;
   }
 
-  @include media(desktop) {
-    top: 100px;
-  }
+  // @include media(desktop) {
+  //   top: 100px;
+  // }
 
   .helpersSliderButton {
     border: 1px solid #ffffff80;

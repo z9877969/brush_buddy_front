@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 export const deliveryFormSchema = Yup.object().shape({
   name: Yup.string()
-    // .min(5, 'Введіть повністю ПІБ')
+    .trim()
     .matches(
       /^[a-яА-ЯєЄїЇьЬҐґйЙіІ]{2,18}[\s]{1,2}[a-яА-ЯєЄїЇьЬҐґйЙіІ]{2,18}[\s]{1,2}[a-яА-ЯєЄїЇьЬҐґйЙіІ]{6,24}$/,
       'Введіть повністю ПІБ через пробіл'
@@ -10,9 +10,11 @@ export const deliveryFormSchema = Yup.object().shape({
     .max(64, 'Занадто довге ПІБ')
     .required('Поле обов`язкове для заповнення'),
   email: Yup.string()
+    .trim()
     .email('Введіть дійсну адресу ел. пошти')
     .required('Поле обов`язкове для заповнення'),
   phone: Yup.string()
+    .trim()
     .matches(/^\+?3?8?(0\d{9})$/, 'Введіть коректний номер телефону')
     .required('Поле обов`язкове для заповнення'),
   city: Yup.string().required('Поле обов`язкове для заповнення'),
