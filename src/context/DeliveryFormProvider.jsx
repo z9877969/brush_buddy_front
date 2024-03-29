@@ -1,7 +1,7 @@
 import { sendOrderData } from '@redux/cart/operationsCart';
 import {
   selectDiscount,
-  selectDiscountValue,
+  selectDiscountPersentage,
   selectProd,
   selectPromocode,
   selectTotalPrice,
@@ -18,13 +18,12 @@ export const useDeliveryForm = () => useContext(DeliveryFormContext);
 const DeliveryFormProvider = ({ children }) => {
   const dispatch = useDispatch();
 
-  const priceDisc = useSelector(selectDiscount); // sum discount
-  const discountValue = useSelector(selectDiscountValue); //value discount
+  const discountSum = useSelector(selectDiscount); // sum discount
+  const discountPercentage = useSelector(selectDiscountPersentage); //value discount
   const promocode = useSelector(selectPromocode);
   const products = useSelector(selectProd);
-  const totalPriceWithoutDisc = useSelector(selectTotalPrice);
-  const totalPriceMinusDics = totalPriceWithoutDisc - priceDisc;
-  const fixTotalprice = totalPriceMinusDics.toFixed(2);
+  const totalPrice = useSelector(selectTotalPrice);
+  const discountedTotal = totalPrice - discountSum;
   const [deliveryLS] = useState(() =>
     JSON.parse(localStorage.getItem('delivery'))
   );
@@ -66,9 +65,9 @@ const DeliveryFormProvider = ({ children }) => {
           products,
           delivery,
           promocode,
-          discount: discountValue,
-          totalPrice: totalPriceWithoutDisc,
-          saleTotal: fixTotalprice,
+          discount: discountPercentage,
+          totalPrice,
+          saleTotal: discountedTotal,
         })
       );
     },
