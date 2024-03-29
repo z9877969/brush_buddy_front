@@ -10,11 +10,9 @@ const ThankPage = () => {
   const dispatch = useDispatch();
   const orderNum = useSelector(selectOrderNum);
   const location = useLocation();
-  if (location.pathname === '/thank') {
-    dispatch(submitForm(false));
-  }
 
   useEffect(() => {
+    dispatch(submitForm(false));
     return () => {
       dispatch(resetOrderNum());
     };
