@@ -61,12 +61,13 @@ export const createTgMessage = (orderData) => {
       Ціна: ${el.salePrice > 0 ? el.salePrice : el.price}`
     );
   }, '');
-  const total = `<b>Загалом:</b> ${orderData.totalPrice}грн${orderData.discount ? `\n${minTab}<b>Знижка:</b> ` + orderData.discount + '%' : ''}${orderData.saleTotal ? `\n${minTab}<b>Сума зі знижкою:</b> ` + orderData.saleTotal : ''}`;
+  const total = `<b>Загалом:</b> ${orderData.totalPrice}грн${orderData.discount ? `\n${minTab}<b>Знижка:</b> ` + orderData.discount + '%' : ''}${orderData.discount ? `\n${minTab}<b>Сума зі знижкою:</b> ` + orderData.saleTotal : ''}${orderData.promocode ? `\n${minTab}<b>Промокод:</b> ` + orderData.promocode : ''}`;
   const delivery = `
     <b>Телефон</b>: ${orderData.delivery.phone}
     <b>Ім'я</b>: ${orderData.delivery.name}
     <b>Місто</b>: ${orderData.delivery.city}
     <b>Відділення/Поштомат</b>: ${orderData.delivery.postOffice}
+    ${orderData.delivery.comments ? '<b>Коментар</b>: ' + orderData.delivery.comments : ''}
     `;
 
   const message = `

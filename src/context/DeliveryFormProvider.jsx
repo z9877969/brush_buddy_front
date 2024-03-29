@@ -3,6 +3,7 @@ import {
   selectDiscount,
   selectDiscountValue,
   selectProd,
+  selectPromocode,
   selectTotalPrice,
 } from '@redux/cart/selectorsCart';
 import { useFormik } from 'formik';
@@ -19,6 +20,7 @@ const DeliveryFormProvider = ({ children }) => {
 
   const priceDisc = useSelector(selectDiscount); // sum discount
   const discountValue = useSelector(selectDiscountValue); //value discount
+  const promocode = useSelector(selectPromocode);
   const products = useSelector(selectProd);
   const totalPriceWithoutDisc = useSelector(selectTotalPrice);
   const totalPriceMinusDics = totalPriceWithoutDisc - priceDisc;
@@ -63,6 +65,7 @@ const DeliveryFormProvider = ({ children }) => {
         sendOrderData({
           products,
           delivery,
+          promocode,
           discount: discountValue,
           totalPrice: totalPriceWithoutDisc,
           saleTotal: fixTotalprice,
