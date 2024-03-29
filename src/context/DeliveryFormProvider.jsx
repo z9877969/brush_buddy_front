@@ -1,11 +1,11 @@
 import { sendOrderData } from '@redux/cart/operationsCart';
 import {
   selectDiscount,
-  selectDiscountValue,
+  selectDiscountPersentage,
   selectProd,
+  selectPromocode,
   selectTotalPrice,
 } from '@redux/cart/selectorsCart';
-// import { addDeliveryInfo } from '@redux/deliveryInfo/deliveryInfoSlice';
 import { useFormik } from 'formik';
 import { deliveryFormSchema } from 'modules/cart';
 import { createContext, useContext, useState } from 'react';
@@ -18,12 +18,12 @@ export const useDeliveryForm = () => useContext(DeliveryFormContext);
 const DeliveryFormProvider = ({ children }) => {
   const dispatch = useDispatch();
 
-  const priceDisc = useSelector(selectDiscount); // sum discount
-  const discountValue = useSelector(selectDiscountValue); //value discount
+  const discountSum = useSelector(selectDiscount); // sum discount
+  const discountPercentage = useSelector(selectDiscountPersentage); //value discount
+  const promocode = useSelector(selectPromocode);
   const products = useSelector(selectProd);
-  const totalPriceWithoutDisc = useSelector(selectTotalPrice);
-  const totalPriceMinusDics = totalPriceWithoutDisc - priceDisc;
-  const fixTotalprice = totalPriceMinusDics.toFixed(2);
+  const totalPrice = useSelector(selectTotalPrice);
+  const discountedTotal = totalPrice - discountSum;
   const [deliveryLS] = useState(() =>
     JSON.parse(localStorage.getItem('delivery'))
   );
@@ -64,9 +64,10 @@ const DeliveryFormProvider = ({ children }) => {
         sendOrderData({
           products,
           delivery,
-          discount: discountValue,
-          totalPrice: totalPriceWithoutDisc,
-          saleTotal: fixTotalprice,
+          promocode,
+          discount: discountPercentage,
+          totalPrice,
+          saleTotal: discountedTotal,
         })
       );
     },

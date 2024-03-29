@@ -1,13 +1,10 @@
-import { Container } from 'shared/components';
-import s from './OrderFinished.module.scss';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Container } from 'shared/components';
 import { ROUTES } from 'shared/constants';
-import { animation } from 'modules/orderFinished/images';
+import { animation } from '../../images';
+import s from './OrderFinished.module.scss';
 
-const OrderFinished = () => {
-  const [order] = useState({ number: 375 });
-
+const OrderFinished = ({ orderNum }) => {
   return (
     <>
       <Container className={s.section}>
@@ -16,9 +13,9 @@ const OrderFinished = () => {
         </div>
         <h2 className={s.title}>Подякували!</h2>
         <p className={s.text}>
-          Замовлення №{order.number} успішно оформлене. Ми відправили усю
-          інформацію на вказану електронну адресу. Наші співробітники вже
-          дбайливо збирають посилочку для Вас.
+          Замовлення №{orderNum} успішно оформлене. Ми відправили усю інформацію
+          на вказану електронну адресу. Наші співробітники вже дбайливо збирають
+          посилочку для Вас.
         </p>
         <Link className={s.linkButton} to={ROUTES.PRODUCTS}>
           І вам дякуємо

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { sendMessageTg } from '../../services/index.js';
+import { telegramApi as tgApi } from 'services';
 
 export const checkPromoCode = createAsyncThunk(
   'cart/sendPromo',
@@ -21,7 +21,7 @@ export const sendOrderData = createAsyncThunk(
   'cart/sendOrder',
   async (data, { rejectWithValue }) => {
     try {
-      const order = await sendMessageTg(data);
+      const order = await tgApi.sendMessageTg(data);
       return order;
     } catch (error) {
       return rejectWithValue(error.message);
