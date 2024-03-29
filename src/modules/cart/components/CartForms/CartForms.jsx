@@ -79,10 +79,10 @@ const CartForms = () => {
   const handleCityName = (cityName) => {
     formik.setFieldValue('city', cityName);
     setFullCityName(cityName);
+
     setOpen(false);
     formik.setFieldValue('department', '');
   };
-
   useEffect(() => {
     if (isSave) {
       localStorage.setItem('delivery', JSON.stringify(values));
