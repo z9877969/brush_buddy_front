@@ -10,6 +10,8 @@ import { sprite } from 'shared/icons';
 import clsx from 'clsx';
 import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
 import s from './ProductCard.module.scss';
+import { ProductsList } from 'modules/mainPageToShopping';
+import { useSelector } from 'react-redux';
 
 const ProductCard = ({ product }) => {
   const [mls, setMl] = useState(null);
@@ -20,6 +22,35 @@ const ProductCard = ({ product }) => {
   const onClickAdd = useAddProduct();
 
   const type = product.type?.map((item) => item) || '';
+  const products = useSelector((s) => s.products.list);
+  const productsInStock = useMemo(() => {
+    const productsWithColorsInStock = products.filter((product) => {
+      return (
+        product.colors?.length &&
+        product.colors.some((color) => color.inStock === true)
+      );
+    });
+
+    const productsWithFlavorsInStock = products.filter((product) => {
+      return (
+        product.flavors?.length &&
+        product.flavors.some((flavor) => flavor.inStock === true)
+      );
+    });
+
+    const allProductsInStock = [
+      ...productsWithColorsInStock,
+      ...productsWithFlavorsInStock,
+    ];
+
+    return allProductsInStock;
+  }, [products]);
+  const recommendedProducts = useMemo(() => {
+    if (!type || !Array.isArray(type)) return [];
+    return productsInStock.filter((prod) =>
+      prod.type.some((item) => type.includes(item))
+    );
+  }, [productsInStock, type]);
 
   const switchs = useMemo(() => {
     if (!product.watermark) return null;
@@ -143,7 +174,9 @@ const ProductCard = ({ product }) => {
                 setFlavor={setFlavor}
               />
             ) : null}
-            {product.colors?.length > 0 && color ? (
+            {product.colors?.length > 0 &&
+            product.colors[0].color.length > 0 &&
+            color ? (
               <Color
                 productColors={product.colors}
                 value={color}
@@ -244,6 +277,7 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       )}
+      <ProductsList title={'Супутні товари'} products={recommendedProducts} />
     </Container>
   );
 };
