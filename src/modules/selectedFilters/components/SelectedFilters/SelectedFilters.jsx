@@ -3,19 +3,31 @@ import { Button } from 'shared/components';
 import FilterItem from '../FilterItem/FilterItem';
 import s from './SelectedFilters.module.scss';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from 'shared/constants';
 
 const SelectedFilters = ({ filter, setFilter }) => {
+  const navigate = useNavigate();
   useEffect(() => {
     const checkAllNullValues = (obj) => {
       for (const key in obj) {
-        if (obj[key] !== null && typeof obj[key] === 'object') {
+        if (
+          obj[key] !== null &&
+          obj[key] !== undefined &&
+          typeof obj[key] === 'object'
+        ) {
           if (!checkAllNullValues(obj[key])) {
             return false;
           }
-        } else if (obj[key] !== null) {
+        } else if (obj[key] !== null && obj[key] !== undefined) {
           return false;
-        } else if (key === 'value' && obj['value'] === null) {
+        } else if (
+          key === 'value' &&
+          obj['value'] === null &&
+          obj['value'] === undefined
+        ) {
           setFilter(null);
+          navigate(ROUTES.PRODUCTS);
         }
       }
       return true;
@@ -23,8 +35,9 @@ const SelectedFilters = ({ filter, setFilter }) => {
 
     if (checkAllNullValues(filter)) {
       setFilter(null);
+      navigate(ROUTES.PRODUCTS);
     }
-  }, [filter, setFilter]);
+  }, [filter, setFilter, navigate]);
 
   const handleRemoveFilter = (filterValue) => {
     const updatedFilter = { ...filter };

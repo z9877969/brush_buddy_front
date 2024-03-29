@@ -72,6 +72,15 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
     sortByRef.current.inputRef.readOnly = true;
   }, []);
 
+  useEffect(() => {
+    if (filter?.category?.value === 'helpers') {
+      setFieldValue('category', filter.category);
+    }
+    if (filter?.category === undefined) {
+      setFieldValue('category', categoriesOptions(productsByCategory)[0]);
+    }
+  }, [filter, setFieldValue, productsByCategory]);
+
   return (
     <form onSubmit={handleSubmit} className={s.form}>
       <div className={s.inputs}>
@@ -107,6 +116,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 value={PRODUCT_TYPES.ADULT}
                 className={clsx(s.check_input, s.adult)}
                 onChange={(e) => handleChange(e)}
+                checked={filter?.recommendedFor?.includes(PRODUCT_TYPES.ADULT)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -124,6 +134,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.child)}
                 onChange={(e) => handleChange(e)}
+                checked={filter?.recommendedFor?.includes(PRODUCT_TYPES.CHILD)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -141,6 +152,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.animal)}
                 onChange={(e) => handleChange(e)}
+                checked={filter?.recommendedFor?.includes(PRODUCT_TYPES.ANIMAL)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>

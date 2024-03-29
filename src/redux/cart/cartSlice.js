@@ -11,13 +11,13 @@ const cartSlice = createSlice({
     totalPrice: 0,
     promoCode: null,
     discount: 0,
+    discountPercentage: 0,
     isLoading: false,
     error: null,
     submitForm: false,
   },
   reducers: {
     addProduct(state, action) {
-      //state.products.push(action.payload); старий стейт
       state.submitForm = false;
       const { id, category, flavor, volume, color, amount } = action.payload;
 
@@ -68,7 +68,9 @@ const cartSlice = createSlice({
       );
       state.totalPrice = totalPrice(state.products);
       const total = state.totalPrice;
-      const promoCodeDiscount = state.discountValue ? state.discountValue : 0;
+      const promoCodeDiscount = state.discountPercentage
+        ? state.discountPercentage
+        : 0;
       state.discount = totalPriceDiscount(total, promoCodeDiscount);
     },
     changeProductAmount(state, action) {
@@ -103,7 +105,7 @@ const cartSlice = createSlice({
       state.totalPrice = totalPrice(state.products);
       if (state.promoCode !== null) {
         const total = state.totalPrice;
-        const promoCodeDiscount = state.discountValue;
+        const promoCodeDiscount = state.discountPercentage;
         state.discount = totalPriceDiscount(total, promoCodeDiscount);
       }
     },
@@ -112,7 +114,7 @@ const cartSlice = createSlice({
     },
     notUsedPromoCode(state) {
       state.promoCode = null;
-      state.discountValue = 0;
+      state.discountPercentage = 0;
       state.discount = 0;
     },
     submitForm(state, action) {
@@ -131,7 +133,7 @@ const cartSlice = createSlice({
         state.promoCode = promoCode;
         let total = payload.total;
         const promoCodeDiscount = payload.discount;
-        state.discountValue = promoCodeDiscount;
+        state.discountPercentage = promoCodeDiscount;
         state.discount = totalPriceDiscount(total, promoCodeDiscount);
       })
       .addCase(checkPromoCode.rejected, (state, { payload }) => {

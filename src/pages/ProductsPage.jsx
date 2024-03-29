@@ -6,12 +6,17 @@ import { ProductsPageWrapper } from 'modules/productsPageWrapper';
 import { NumberOfProducts } from 'modules/paginateProdList/index.js';
 import { SelectedFilters } from 'modules/selectedFilters';
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { PRODUCT_TYPES } from 'shared/constants';
 
 const ProductsPage = () => {
+  const [search, setSearch] = useSearchParams();
   const products = useSelector((s) => s.products.list);
   const [filter, setFilter] = useState(
     () => JSON.parse(sessionStorage.getItem('filter')) || null
   );
+
+  const productType = search.get('productType');
 
   const filteredProducts = useMemo(() => {
     if (!filter) return products.slice();
@@ -82,6 +87,28 @@ const ProductsPage = () => {
   useEffect(() => {
     sessionStorage.setItem('filter', JSON.stringify(filter));
   }, [filter]);
+
+  useEffect(() => {
+    if (!productType) return;
+    if (productType !== PRODUCT_TYPES.HELPER) {
+      setFilter((p) => ({
+        ...p,
+        recommendedFor:
+          p.recommendedFor && !p.recommendedFor.includes(productType)
+            ? [...p.recommendedFor, productType]
+            : p.recommendedFor && p.recommendedFor.includes(productType)
+              ? p.recommendedFor
+              : [productType],
+      }));
+      setSearch({});
+    } else {
+      setFilter((p) => ({
+        ...p,
+        category: { value: 'helpers', label: 'Допомагайки' },
+      }));
+    }
+    setSearch({});
+  }, [search, productType, setSearch]);
 
   return (
     <ProductsPageWrapper>

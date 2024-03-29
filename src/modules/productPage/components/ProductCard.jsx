@@ -9,24 +9,15 @@ import { Flavor } from './Flavor/Flavor';
 import { sprite } from 'shared/icons';
 import clsx from 'clsx';
 import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
-// import { useSelector } from 'react-redux';
-// import { selectProductsList } from '@redux/products/productsSelectors';
 import s from './ProductCard.module.scss';
 
 const ProductCard = ({ product }) => {
-  // const { productId } = useParams();
-  // const products = useSelector(selectProductsList);
-
   const [mls, setMl] = useState(null);
   const [flavor, setFlavor] = useState(null);
   const [color, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
   const onClickAdd = useAddProduct();
-
-  // const onClickAdd = (product) => {
-  //   dispatch(addProduct(product));
-  // };
 
   const type = product.type?.map((item) => item) || '';
 
@@ -52,11 +43,7 @@ const ProductCard = ({ product }) => {
   return (
     <Container>
       {Object.keys(product).length > 0 && (
-        <div
-          // style={{ minHeight: '150vh' }}
-          className={s.containerList}
-          key={product.id}
-        >
+        <div className={s.containerList} key={product.id}>
           <MyImage imges={product?.images || []} />
           <div className={s.informationBlock}>
             <div className={s.spriteBlock}>
