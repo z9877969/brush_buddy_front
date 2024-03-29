@@ -143,7 +143,9 @@ const ProductCard = ({ product }) => {
                 setFlavor={setFlavor}
               />
             ) : null}
-            {product.colors?.length > 0 && color ? (
+            {product.colors?.length > 0 &&
+            product.colors[0].color.length > 0 &&
+            color ? (
               <Color
                 productColors={product.colors}
                 value={color}
