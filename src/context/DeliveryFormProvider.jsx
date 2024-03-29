@@ -5,7 +5,6 @@ import {
   selectProd,
   selectTotalPrice,
 } from '@redux/cart/selectorsCart';
-// import { addDeliveryInfo } from '@redux/deliveryInfo/deliveryInfoSlice';
 import { useFormik } from 'formik';
 import { deliveryFormSchema } from 'modules/cart';
 import { createContext, useContext, useState } from 'react';
