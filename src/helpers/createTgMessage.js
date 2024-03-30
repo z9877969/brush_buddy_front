@@ -49,14 +49,13 @@
 // };
 
 export const createTgMessage = (orderData) => {
-  // const orderNum = Math.ceil(Date.now() / 1000);
   const minTab = Array(4).fill(' ').join('');
   const middleTab = Array(6).fill(' ').join('');
 
   const productsList = orderData.products.reduce((acc, el, i) => {
     return (
       acc +
-      `${i > 0 ? '\n' : ''}<b><i>${i + 1}. ${el.title}</i></b>${el.color ? `\n${middleTab}Колір: ` + el.color : ''}${el.flavor ? `\n${middleTab}Смак: ` + el.flavor : ''}${el.volume ? `\n${middleTab}Об'єм: ` + el.volume : ''}
+      `${i > 0 ? '\n' : ''}<b><i>${i + 1}. ${el.title}</i></b>${el.color ? `\n${middleTab}Колір: ` + el.name : ''}${el.flavor ? `\n${middleTab}Смак: ` + el.name : ''}${el.volume ? `\n${middleTab}Об'єм: ` + el.volume : ''}
       Кількість: ${el.amount}шт.
       Ціна: ${el.salePrice > 0 ? el.salePrice : el.price}`
     );
@@ -67,14 +66,18 @@ export const createTgMessage = (orderData) => {
     <b>Ім'я</b>: ${orderData.delivery.name}
     <b>Місто</b>: ${orderData.delivery.city}
     <b>Відділення/Поштомат</b>: ${orderData.delivery.postOffice}
-    ${orderData.delivery.comments ? '<b>Коментар</b>: ' + orderData.delivery.comments : ''}
-    `;
+    ${orderData.delivery.comments ? '<b>Коментар</b>: ' + orderData.delivery.comments : ''}`;
+  const paymentMethod =
+    orderData.payment === 'card'
+      ? '<b>Оплата карткою</b>'
+      : '<b>Оплата при отриманні</b>';
 
   const message = `
     <b>Замовлення №${orderData.orderNum}</b>
     <b>==========</b>\n${productsList}
     ${total}
     ${delivery}
+    ${paymentMethod}
     `;
 
   return message;

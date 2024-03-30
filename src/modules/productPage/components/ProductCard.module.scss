@@ -150,6 +150,10 @@
     height: 56px;
   }
 }
+.buttonBlock button:disabled {
+  fill: #cccccc;
+  cursor: not-allowed;
+}
 
 .quantityText {
   font-weight: 500;

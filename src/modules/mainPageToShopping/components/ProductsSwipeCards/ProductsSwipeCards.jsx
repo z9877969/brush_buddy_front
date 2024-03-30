@@ -26,8 +26,8 @@ const ProductsSwipeCards = ({
         const slidesHost = swiper?.hostEl;
         if (slidesHost) {
           slidesHost.style.overflow = 'hidden';
-          slidesHost.style.marginLeft = '-1px';
-          slidesHost.style.marginRight = '-1px';
+          // slidesHost.style.marginLeft = '-1px';
+          // slidesHost.style.marginRight = '-1px';
         }
         if (slidesWrapper) {
           slidesWrapper.style.display = 'flex';

@@ -32,7 +32,7 @@ const OrderPromoCode = ({ priceDisc }) => {
 
   return (
     <section className={s.sectionPromo}>
-      <form className={s.form} onSubmit={formik.handleSubmit}>
+      <div className={s.form}>
         <div>
           <input
             className={s.input}
@@ -54,7 +54,7 @@ const OrderPromoCode = ({ priceDisc }) => {
           }}
           disabled={!formik.isValid || formik.values.promoCode.trim() === ''}
         ></Button>
-      </form>
+      </div>
       {isPromoUsed && (
         <OrderPromoCodeUsed
           priceDisc={priceDisc}

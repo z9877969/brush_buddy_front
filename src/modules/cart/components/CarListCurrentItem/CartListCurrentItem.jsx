@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import s from './CartListCurrentItem.module.scss';
 import { Link } from 'react-router-dom';
 import Counter from 'shared/components/Counter/Counter';
@@ -28,7 +29,7 @@ const CartListCurrentItem = ({ data, changeCount, onClickDelete }) => {
       const isVolume =
         volume && volume !== 0 && volume !== undefined && volume !== null;
       return (
-        <li className={s.itemBox} key={id} id={id}>
+        <li className={s.itemBox} key={id + nanoid(5)} id={id}>
           <Link className={s.itemproduct} to={`/products/${id}`}>
             <img className={s.itemImg} src={images} alt={title} />
           </Link>
