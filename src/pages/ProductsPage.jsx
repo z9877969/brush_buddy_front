@@ -25,10 +25,14 @@ const ProductsPage = () => {
 
     let filteredList = products.slice().filter((product) => {
       const { search, age, category, recommendedFor, brand } = filter;
-
       if (
         search &&
-        !product.title.toLowerCase().includes(search.toLowerCase())
+        !product.title
+          .toLowerCase()
+          .split(' ')
+          .filter((el) => el.length > 0)
+          .join(' ')
+          .includes(search.toLowerCase().trim())
       ) {
         return false;
       }
