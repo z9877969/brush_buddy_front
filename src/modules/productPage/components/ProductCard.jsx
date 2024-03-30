@@ -252,7 +252,7 @@ const ProductCard = ({ product }) => {
                       title: product.title,
                       volume: mls?.volume ?? '',
                       flavor: flavor?.name ?? '',
-                      color: color?.name ?? '',
+                      color: color?.color ?? '',
                       amount: quantity,
                       quantity: flavor?.quantity ?? color?.quantity,
                       name: mls?.name ?? flavor?.name ?? color?.name,
