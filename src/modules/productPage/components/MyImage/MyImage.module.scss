@@ -1,27 +1,8 @@
-.image {
-  border: 1px solid rgba(31, 31, 31, 0.15);
-  border-radius: 8px;
-  width: 52px;
-  height: 52px;
-  @include media(tablet) {
-    border-radius: 24px;
-    width: 97px;
-    height: 97px;
-  }
-  @include media(desktop) {
-    width: 127px;
-    height: 127px;
-  }
-}
-
-.imageFocus {
-  border: 1px solid rgba(31, 31, 31, 0.7);
-}
-
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  // justify-content: center;
+  justify-content: space-between;
   margin-bottom: 32px;
   height: 256px;
   overflow-y: hidden;
@@ -37,35 +18,40 @@
 
 .imgListBlock {
   margin: 0;
-}
+  border: 1px solid rgba(31, 31, 31, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 
-// .imgContainer {
-//   border: 1px solid rgba(31, 31, 31, 0.15);
-//   border-radius: 24px;
-//   width: 275px;
-//   height: 256px;
-//   @include media(tablet) {
-//     width: 575px;
-//     height: 460px;
-//   }
-//   @include media(desktop) {
-//     width: 493px;
-//     height: 580px;
-//   }
-// }
+  border-radius: 8px;
+  width: calc(100% - 2px);
+  height: fit-content;
+
+  @include media(tablet) {
+    border-radius: 24px;
+  }
+
+  &.focused {
+    border: 1px solid rgba(31, 31, 31, 0.7);
+  }
+}
 
 .imageList {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-right: 16px;
+  // flex-direction: column;
+  // gap: 16px;
+  // margin-right: 16px;
   overflow-y: scroll;
+  width: 52px;
   @include media(tablet) {
-    gap: 24px;
+    // gap: 24px;
     margin-right: 32px;
+    width: 97px;
   }
   @include media(desktop) {
     margin-right: 24px;
+    width: 127px;
   }
 }
 
