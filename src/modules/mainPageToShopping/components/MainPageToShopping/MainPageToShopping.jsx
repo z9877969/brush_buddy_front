@@ -42,8 +42,12 @@ const MainPageToShopping = () => {
     <section className={s.shoppingSection}>
       <Container>
         <MainTitle title={'До покупок'} className={s.shoppingTitle} />
-        <ProductsList title={'Новинки'} products={wowProducts} />
-        <ProductsList title={'Акційні товари'} products={saleProducts} />
+        {wowProducts.length > 0 && (
+          <ProductsList title={'Новинки'} products={wowProducts} />
+        )}
+        {saleProducts.length > 0 && (
+          <ProductsList title={'Акційні товари'} products={saleProducts} />
+        )}
         <LinkButton
           title={'Більше товарів'}
           className={s.productsBtn}

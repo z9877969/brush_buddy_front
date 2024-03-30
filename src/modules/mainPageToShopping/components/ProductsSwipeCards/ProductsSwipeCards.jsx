@@ -22,6 +22,14 @@ const ProductsSwipeCards = ({
     <Swiper
       onSwiper={(swiper) => {
         swiperData(swiper);
+        const slidesWrapper = swiper?.slidesEl;
+        const slidesHost = swiper?.hostEl;
+        if (slidesHost) {
+          slidesHost.style.overflow = 'hidden';
+        }
+        if (slidesWrapper) {
+          slidesWrapper.style.display = 'flex';
+        }
       }}
       onSlideChange={(swiper) => {
         if (

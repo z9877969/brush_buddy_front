@@ -6,16 +6,17 @@ import { Footer } from 'modules/footer';
 import { useShowFooter } from 'hooks/useShowFooter';
 
 const SharedLayout = () => {
-  const switches = useShowFooter();
+  const isHide = useShowFooter();
+
   return (
     <>
       <Header />
-      <Suspense fallback={<Loader />}>
-        <div style={{ minHeight: '100vh' }}>
+      <div style={{ minHeight: '100vh' }}>
+        <Suspense fallback={<Loader />}>
           <Outlet />
-        </div>
-      </Suspense>
-      {switches === true ? null : <Footer />}
+        </Suspense>
+      </div>
+      {isHide ? null : <Footer />}
     </>
   );
 };

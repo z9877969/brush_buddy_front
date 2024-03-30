@@ -45,6 +45,7 @@ const ProductCard = ({ product }) => {
 
     return allProductsInStock;
   }, [products]);
+
   const recommendedProducts = useMemo(() => {
     if (!type || !Array.isArray(type)) return [];
     return productsInStock.filter((prod) =>
@@ -277,7 +278,9 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       )}
-      <ProductsList title={'Супутні товари'} products={recommendedProducts} />
+      {recommendedProducts.length > 0 && (
+        <ProductsList title={'Супутні товари'} products={recommendedProducts} />
+      )}
     </Container>
   );
 };
