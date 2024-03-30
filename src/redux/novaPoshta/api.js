@@ -20,8 +20,7 @@ const getDepartment = (fullCityName) => ({
   modelName: 'Address',
   calledMethod: 'getWarehouses',
   methodProperties: {
-    FindByString: '',
-    CityName: fullCityName,
+    CityRef: fullCityName,
   },
 });
 

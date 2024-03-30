@@ -7,23 +7,23 @@ import { selectCityData } from '@redux/novaPoshta/selectorsNovaPoshta';
 const CityNameItem = ({ handleCityName }) => {
   const cityData = useSelector(selectCityData);
 
-  const handleCityClick = (Present) => {
+  const handleCityClick = (Present, DeliveryCity) => {
     const firstCommaIndex = Present.indexOf(',');
 
     if (firstCommaIndex !== -1) {
       const trimmedStr = Present.substring(0, firstCommaIndex);
-      handleCityName(trimmedStr);
+      handleCityName(trimmedStr, DeliveryCity);
     } else {
-      handleCityName(Present);
+      handleCityName(Present, DeliveryCity);
     }
   };
 
   return (
     <ul className={s.cityNameList}>
       {Array.isArray(cityData) &&
-        cityData.map(({ Present }) => (
+        cityData.map(({ Present, DeliveryCity }) => (
           <li
-            onClick={() => handleCityClick(Present)}
+            onClick={() => handleCityClick(Present, DeliveryCity)}
             className={s.cityNameItem}
             key={nanoid()}
           >
