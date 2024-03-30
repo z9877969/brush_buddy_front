@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PRODUCT_TYPES } from 'shared/constants';
 import { initialFilterValues } from 'modules/productsPageFilter';
+import { sortByAvailability } from 'helpers/sortByAvailability';
 
 const ProductsPage = () => {
   const [search, setSearch] = useSearchParams();
@@ -35,7 +36,6 @@ const ProductsPage = () => {
         age &&
         age.value &&
         product.ageType &&
-        product.ageType.includes(age.value) &&
         !product.ageType.includes(age.value)
       ) {
         return false;
@@ -44,7 +44,7 @@ const ProductsPage = () => {
         return false;
       }
       if (recommendedFor && recommendedFor.length > 0) {
-        if (!recommendedFor.every((target) => product.type.includes(target))) {
+        if (!recommendedFor.some((target) => product.type.includes(target))) {
           return false;
         }
       }
@@ -57,10 +57,18 @@ const ProductsPage = () => {
     if (filter.sortBy) {
       switch (filter.sortBy.value) {
         case 'increment':
-          filteredList.sort((a, b) => a.price - b.price);
+          filteredList.sort((a, b) => {
+            const aPrice = a.salePrice || a.price;
+            const bPrice = b.salePrice || b.price;
+            return aPrice - bPrice;
+          });
           break;
         case 'decrement':
-          filteredList.sort((a, b) => b.price - a.price);
+          filteredList.sort((a, b) => {
+            const aPrice = a.salePrice || a.price;
+            const bPrice = b.salePrice || b.price;
+            return bPrice - aPrice;
+          });
           break;
         case 'new':
           filteredList = filteredList.filter((product) =>
@@ -76,8 +84,9 @@ const ProductsPage = () => {
           break;
       }
     }
+    const filteredByAvailability = sortByAvailability(filteredList);
 
-    return filteredList;
+    return filteredByAvailability;
   }, [filter, products]);
 
   useEffect(() => {
