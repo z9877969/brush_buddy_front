@@ -55,7 +55,7 @@ export const createTgMessage = (orderData) => {
   const productsList = orderData.products.reduce((acc, el, i) => {
     return (
       acc +
-      `${i > 0 ? '\n' : ''}<b><i>${i + 1}. ${el.title}</i></b>${el.color ? `\n${middleTab}Колір: ` + el.color : ''}${el.flavor ? `\n${middleTab}Смак: ` + el.flavor : ''}${el.volume ? `\n${middleTab}Об'єм: ` + el.volume : ''}
+      `${i > 0 ? '\n' : ''}<b><i>${i + 1}. ${el.title}</i></b>${el.color ? `\n${middleTab}Колір: ` + el.name : ''}${el.flavor ? `\n${middleTab}Смак: ` + el.name : ''}${el.volume ? `\n${middleTab}Об'єм: ` + el.volume : ''}
       Кількість: ${el.amount}шт.
       Ціна: ${el.salePrice > 0 ? el.salePrice : el.price}`
     );
