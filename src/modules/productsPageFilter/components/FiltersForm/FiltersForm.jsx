@@ -96,6 +96,7 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
               placeholder="Знайти товар"
               onChange={(e) => handleChange(e)}
               className={s.input}
+              value={values.search}
             />
             <svg width={20} className={s.searchIcon}>
               <use href={sprite + '#icon-search'}></use>
