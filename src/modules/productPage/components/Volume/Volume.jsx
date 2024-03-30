@@ -1,7 +1,11 @@
 import clsx from 'clsx';
 import s from './Volume.module.scss';
 
-export const Volume = ({ productVolume, value, setMls }) => {
+export const Volume = ({ productVolume, value, setMls, setQuantity }) => {
+  const handleVolumeChange = (item) => {
+    setMls(item);
+    setQuantity(1);
+  };
   return (
     <>
       <p className={s.mlText}>Об’єм: {value.ml}</p>
@@ -21,7 +25,7 @@ export const Volume = ({ productVolume, value, setMls }) => {
                 type="radio"
                 name="ml"
                 value={item}
-                onChange={() => setMls(item)}
+                onChange={() => handleVolumeChange(item)}
               />
             </label>
           );
