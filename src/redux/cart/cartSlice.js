@@ -42,7 +42,12 @@ const cartSlice = createSlice({
       if (existingProductIndex !== -1) {
         // Якщо товар вже існує, викликаємо changeProductAmount
         const existingProduct = state.products[existingProductIndex];
-        const newCount = existingProduct.amount + 1;
+        let newCount;
+        if (amount && amount > 1) {
+          newCount = amount;
+        } else {
+          newCount = existingProduct.amount + 1;
+        }
         state.products[existingProductIndex].amount = newCount;
         state.products[existingProductIndex].isDisabledIncrement =
           newCount === existingProduct.quantity;
@@ -51,6 +56,8 @@ const cartSlice = createSlice({
         state.products.push({
           ...action.payload,
           amount: amount ? amount : 1,
+          isDisabledIncrement:
+            amount && amount === action.payload.quantity ? true : false,
         });
       }
 
