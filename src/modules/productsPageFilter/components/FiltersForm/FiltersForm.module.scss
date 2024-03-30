@@ -42,9 +42,9 @@
 
 .bottom {
   display: flex;
-  padding: 0 32px 32px 32px;
   flex-direction: column;
   align-items: flex-start;
+  padding: 16px 32px;
   gap: 8px;
   align-self: stretch;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
@@ -233,4 +233,7 @@
   @include media(desktop) {
     width: auto;
   }
+}
+
+.bottom {
 }
