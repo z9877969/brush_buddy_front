@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Cart, RecomendationProducts } from 'modules/cart';
 import { selectProd, selectSubmitForm } from '@redux/cart/selectorsCart';
@@ -13,16 +13,19 @@ const CartPage = () => {
   useEffect(() => {
     if (isSubmit) {
       navigate(ROUTES.THANK, { replace: true });
+      return;
+    } else if (!products.length) {
+      navigate(ROUTES.CART_EMPTY, { replace: true });
     }
-  }, [isSubmit, navigate]);
+  }, [isSubmit, navigate, products]);
 
-  return products.length > 0 ? (
-    <>
-      <Cart />
-      <RecomendationProducts />
-    </>
-  ) : (
-    <Navigate to={ROUTES.CART_EMPTY} replace={true} />
+  return (
+    products.length > 0 && (
+      <>
+        <Cart />
+        <RecomendationProducts />
+      </>
+    )
   );
 };
 

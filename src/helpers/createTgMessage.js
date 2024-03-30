@@ -49,7 +49,6 @@
 // };
 
 export const createTgMessage = (orderData) => {
-  // const orderNum = Math.ceil(Date.now() / 1000);
   const minTab = Array(4).fill(' ').join('');
   const middleTab = Array(6).fill(' ').join('');
 
@@ -67,14 +66,18 @@ export const createTgMessage = (orderData) => {
     <b>Ім'я</b>: ${orderData.delivery.name}
     <b>Місто</b>: ${orderData.delivery.city}
     <b>Відділення/Поштомат</b>: ${orderData.delivery.postOffice}
-    ${orderData.delivery.comments ? '<b>Коментар</b>: ' + orderData.delivery.comments : ''}
-    `;
+    ${orderData.delivery.comments ? '<b>Коментар</b>: ' + orderData.delivery.comments : ''}`;
+  const paymentMethod =
+    orderData.payment === 'card'
+      ? '<b>Оплата карткою</b>'
+      : '<b>Оплата при отриманні</b>';
 
   const message = `
     <b>Замовлення №${orderData.orderNum}</b>
     <b>==========</b>\n${productsList}
     ${total}
     ${delivery}
+    ${paymentMethod}
     `;
 
   return message;
