@@ -212,6 +212,7 @@ const ProductCard = () => {
                 productFlavours={product.flavors}
                 value={flavor}
                 setFlavor={setFlavor}
+                setQuantity={setQuantity}
               />
             ) : null}
             {product.colors.length > 0 && color ? (
@@ -219,6 +220,7 @@ const ProductCard = () => {
                 productColors={product.colors}
                 value={color}
                 setColor={setColor}
+                setQuantity={setQuantity}
               />
             ) : null}
             {product.volume.length > 0 && mls ? (
@@ -226,6 +228,7 @@ const ProductCard = () => {
                 productVolume={product.volume}
                 value={mls}
                 setMls={setMl}
+                setQuantity={setQuantity}
               />
             ) : null}
             <p className={s.itemHave}>

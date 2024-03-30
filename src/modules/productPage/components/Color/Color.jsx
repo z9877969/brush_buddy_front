@@ -1,7 +1,11 @@
 import clsx from 'clsx';
 import s from './Color.module.scss';
 
-export const Color = ({ productColors, value, setColor }) => {
+export const Color = ({ productColors, value, setColor, setQuantity }) => {
+  const handleColorChange = (item) => {
+    setColor(item);
+    setQuantity(1);
+  };
   return (
     <>
       <p className={s.colorText}>
@@ -26,7 +30,7 @@ export const Color = ({ productColors, value, setColor }) => {
                   type="radio"
                   name="color"
                   value={item.color}
-                  onChange={() => setColor(item)}
+                  onChange={() => handleColorChange(item)}
                 />
               </label>
             </li>
