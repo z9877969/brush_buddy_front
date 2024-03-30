@@ -76,13 +76,14 @@ const CartForms = () => {
     }
   }, [postOffice]);
 
-  const handleCityName = (cityName) => {
+  const handleCityName = (cityName, cityID) => {
     formik.setFieldValue('city', cityName);
-    setFullCityName(cityName);
+    setFullCityName(cityID);
 
     setOpen(false);
     formik.setFieldValue('department', '');
   };
+
   useEffect(() => {
     if (isSave) {
       localStorage.setItem('delivery', JSON.stringify(values));
