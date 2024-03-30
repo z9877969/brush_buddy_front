@@ -22,24 +22,29 @@ const CartListCurrentItem = ({ data, changeCount, onClickDelete }) => {
     }) => {
       const isSalePrice =
         salePrice !== 0 && salePrice !== undefined && salePrice !== null; //перевірка чи існує ціна зі знижкою від цього залежать стилі
+      const isFlavor =
+        flavor && flavor !== 0 && flavor !== undefined && flavor !== null;
+      const isColor = color && color !== '';
+      const isVolume =
+        volume && volume !== 0 && volume !== undefined && volume !== null;
       return (
         <li className={s.itemBox} key={id} id={id}>
-          <Link className={s.itemproduct} to={`/products/${title}`}>
+          <Link className={s.itemproduct} to={`/products/${id}`}>
             <img className={s.itemImg} src={images} alt={title} />
           </Link>
           <div className={s.itemInfo}>
             <p className={s.itemName}>{title}</p>
             <div className={s.itemDetails}>
-              {flavor && <p className={s.itemFlavor}>Смак: {flavor}</p>}
-              {color && <p className={s.itemColor}>Колір: {name}</p>}
-              {volume && <p className={s.itemVol}> об’єм: {volume} мл</p>}
+              {isFlavor && <p className={s.itemFlavor}>Смак: {flavor}</p>}
+              {isColor && <p className={s.itemColor}>Колір: {name}</p>}
+              {isVolume && <p className={s.itemVol}> об’єм: {volume} мл</p>}
             </div>
             <div className={s.prices}>
-              {isSalePrice && (
-                <p className={s.itemDiscPrice}>{salePrice} грн</p>
-              )}
               {isSalePrice ? (
-                <p className={s.itemPriceDisc}>{price} грн</p>
+                <>
+                  <p className={s.itemDiscPrice}>{salePrice} грн</p>
+                  <p className={s.itemPriceDisc}>{price} грн</p>
+                </>
               ) : (
                 <p className={s.itemPrice}>{price} грн</p>
               )}

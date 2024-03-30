@@ -13,10 +13,7 @@ export const ageOptions = [
 ];
 
 export const categoriesOptions = (options) => [
-  {
-    value: null,
-    label: 'Усі',
-  },
+  { value: null, label: 'Усі' },
   {
     value: 'toothbrushes',
     label: `Зубні щітки (${options.toothbrushes !== undefined ? options.toothbrushes : 0})`,
@@ -62,9 +59,9 @@ export const brandsOptions = [
   { value: 'brushbuddy', label: 'BrushBuddy' },
 ];
 export const sortByOptions = [
-  { value: null, label: 'Оберіть сортування' },
+  { value: null, label: 'Оберіть' },
+  { value: 'increment', label: 'Ціна за зростанням' },
   { value: 'new', label: 'Новинки' },
   { value: 'actions', label: 'Акції' },
-  { value: 'increment', label: 'Ціна за зростанням' },
   { value: 'decrement', label: 'Ціна за спаданням' },
 ];

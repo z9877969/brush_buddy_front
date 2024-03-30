@@ -13,6 +13,8 @@ export default defineConfig({
       '@redux': '/src/redux',
       shared: '/src/shared',
       helpers: '/src/helpers',
+      context: '/src/context',
+      services: '/src/services',
     },
   },
   css: {

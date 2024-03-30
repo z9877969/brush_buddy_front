@@ -1,28 +1,19 @@
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { Container } from 'shared/components';
 // import productCard from '../data/products.json';
 import { MyImage } from './MyImage/MyImage';
-import s from './ProductCard.module.scss';
 import { useEffect, useMemo, useState } from 'react';
 import { Volume } from './Volume/Volume';
 import { Color } from './Color/Color';
 import { Flavor } from './Flavor/Flavor';
 import { sprite } from 'shared/icons';
-// import { useDispatch } from 'react-redux';
-// import { addProduct } from '@redux/cart/cartSlice';
-// import productCard from '../data/products.json';
-// import products from '../../paginateProdList/data/products.json';
 import clsx from 'clsx';
 import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
+import s from './ProductCard.module.scss';
+import { ProductsList } from 'modules/mainPageToShopping';
 import { useSelector } from 'react-redux';
-import { selectProductsList } from '@redux/products/productsSelectors';
 
-const ProductCard = () => {
-  // const dispatch = useDispatch();
-
-  const { productId } = useParams();
-  const products = useSelector(selectProductsList);
-
+const ProductCard = ({ product }) => {
   const [mls, setMl] = useState(null);
   const [flavor, setFlavor] = useState(null);
   const [color, setColor] = useState(null);
@@ -30,50 +21,37 @@ const ProductCard = () => {
 
   const onClickAdd = useAddProduct();
 
-  const product = useMemo(() => {
-    const numId = Number(productId);
-    return (
-      products.find((el, i) => (el._id ? el._id === productId : i === numId)) ||
-      {}
-    );
-  }, [productId, products]);
-
-  // const onClickAdd = (product) => {
-  //   dispatch(addProduct(product));
-  // };
-  // let productes = products[0];
-
-  // console.log(productes);
-  // console.log(color?.quantity);
-  // const [productess] = useState([productes]);
-
-  // const type = productess[0].type.map((item) => item);
   const type = product.type?.map((item) => item) || '';
-  // const typess = type.join(' ');
+  const products = useSelector((s) => s.products.list);
+  const productsInStock = useMemo(() => {
+    const productsWithColorsInStock = products.filter((product) => {
+      return (
+        product.colors?.length &&
+        product.colors.some((color) => color.inStock === true)
+      );
+    });
 
-  // console.log(typess);
+    const productsWithFlavorsInStock = products.filter((product) => {
+      return (
+        product.flavors?.length &&
+        product.flavors.some((flavor) => flavor.inStock === true)
+      );
+    });
 
-  const shouldRenderChild = type.includes('child');
-  const shouldRenderAnimal = type.includes('animal');
-  const shouldRenderAdult = type.includes('adult');
+    const allProductsInStock = [
+      ...productsWithColorsInStock,
+      ...productsWithFlavorsInStock,
+    ];
 
-  // const type = productess[0].type.map((item) => item);
-  // const typess = type.join(' ');
+    return allProductsInStock;
+  }, [products]);
 
-  // console.log(typess);
-
-  // const types = useMemo(() => {
-  //   switch (typess) {
-  //     case 'child':
-  //       return 'icon-bage-child';
-  //     case 'animal':
-  //       return 'icon-bage-animal';
-  //     case 'adult':
-  //       return 'icon-bage-adult';
-  //     default:
-  //       return null;
-  //   }
-  // }, [typess]);
+  const recommendedProducts = useMemo(() => {
+    if (!type || !Array.isArray(type)) return [];
+    return productsInStock.filter((prod) =>
+      prod.type.some((item) => type.includes(item))
+    );
+  }, [productsInStock, type]);
 
   const switchs = useMemo(() => {
     if (!product.watermark) return null;
@@ -86,7 +64,6 @@ const ProductCard = () => {
         return null;
     }
   }, [product]);
-  // console.log(switchs);
 
   useEffect(() => {
     if (!Object.keys(product).length) return;
@@ -95,8 +72,6 @@ const ProductCard = () => {
     setMl(product.volume[0]);
   }, [product]);
 
-  // console.log(products);
-  // console.log(Object.keys(product));
   return (
     <Container>
       {Object.keys(product).length > 0 && (
@@ -119,21 +94,11 @@ const ProductCard = () => {
                 </svg>
               </div>
               <div>
-                {shouldRenderChild && (
-                  <svg className={s.child} width="48" height="24">
-                    <use href={`${sprite}#icon-bage-child`}></use>
+                {type.map((el) => (
+                  <svg key={el} className={s[el]} width="48" height="24">
+                    <use href={`${sprite}#icon-bage-${el}`}></use>
                   </svg>
-                )}
-                {shouldRenderAnimal && (
-                  <svg className={s.animal} width="48" height="24">
-                    <use href={`${sprite}#icon-bage-animal`}></use>
-                  </svg>
-                )}
-                {shouldRenderAdult && (
-                  <svg className={s.adult} width="48" height="24">
-                    <use href={`${sprite}#icon-bage-adult`}></use>
-                  </svg>
-                )}
+                ))}
               </div>
             </div>
             <h2 className={s.title}>{product?.title}</h2>
@@ -203,11 +168,7 @@ const ProductCard = () => {
                 </span>
               </p>
             )}
-            {/* <p>Виберіть колір:</p> */}
-            {/* <p>Виберіть колір: {product.colors.map((color) => {
-                              return <p>{color}</p>
-                          })}</p> */}
-            {product.flavors.length > 0 && flavor ? (
+            {product.flavors?.length > 0 && flavor ? (
               <Flavor
                 productFlavours={product.flavors}
                 value={flavor}
@@ -215,7 +176,9 @@ const ProductCard = () => {
                 setQuantity={setQuantity}
               />
             ) : null}
-            {product.colors.length > 0 && color ? (
+            {product.colors?.length > 0 &&
+            product.colors[0].color.length > 0 &&
+            color ? (
               <Color
                 productColors={product.colors}
                 value={color}
@@ -223,7 +186,7 @@ const ProductCard = () => {
                 setQuantity={setQuantity}
               />
             ) : null}
-            {product.volume.length > 0 && mls ? (
+            {product.volume?.length > 0 && mls ? (
               <Volume
                 productVolume={product.volume}
                 value={mls}
@@ -262,7 +225,7 @@ const ProductCard = () => {
                     return setQuantity(quantity + 1);
                   }}
                   disabled={
-                    product.flavors.length > 0
+                    product.flavors?.length > 0
                       ? quantity === flavor?.quantity
                       : quantity === color?.quantity
                   }
@@ -281,25 +244,20 @@ const ProductCard = () => {
                       ? s.btnDontWorking
                       : s.btnTest
                   )}
-                  // className={clsx(
-                  //   s.btnTest,
-                  //   s.btnDontWorking && s.btnTest
-                  // )}
                   type="submit"
                   onClick={() => {
                     onClickAdd({
                       id: product.id,
+                      category: product.category,
                       images: product.images[0].url,
                       price: product.price,
                       salePrice: product.salePrice,
                       title: product.title,
                       volume: mls?.volume ?? '',
-                      flavor: flavor?.flavor ?? '',
-                      color: color?.color ?? '',
+                      flavor: flavor?.name ?? '',
+                      color: color?.name ?? '',
                       amount: quantity,
-                      quantity:
-                        product.flavors[0]?.quantity ??
-                        product.colors[0]?.quantity,
+                      quantity: flavor?.quantity ?? color?.quantity,
                       name: mls?.name ?? flavor?.name ?? color?.name,
                     });
                   }}
@@ -314,7 +272,7 @@ const ProductCard = () => {
             </div>
             <div>
               <p className={s.description}>Опис</p>
-              <p className={s.info}>{product.recomendation}</p>
+              <p className={s.info}>{product.description}</p>
             </div>
             <div>
               <p className={s.recomendation}>Рекомендація</p>
@@ -322,6 +280,9 @@ const ProductCard = () => {
             </div>
           </div>
         </div>
+      )}
+      {recommendedProducts.length > 0 && (
+        <ProductsList title={'Супутні товари'} products={recommendedProducts} />
       )}
     </Container>
   );

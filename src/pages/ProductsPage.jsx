@@ -6,10 +6,18 @@ import { ProductsPageWrapper } from 'modules/productsPageWrapper';
 import { NumberOfProducts } from 'modules/paginateProdList/index.js';
 import { SelectedFilters } from 'modules/selectedFilters';
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { PRODUCT_TYPES } from 'shared/constants';
+import { initialFilterValues } from 'modules/productsPageFilter';
 
 const ProductsPage = () => {
+  const [search, setSearch] = useSearchParams();
   const products = useSelector((s) => s.products.list);
-  const [filter, setFilter] = useState(() => JSON.parse(sessionStorage.getItem('filter')) || null);
+  const [filter, setFilter] = useState(
+    () => JSON.parse(sessionStorage.getItem('filter')) || initialFilterValues
+  );
+
+  const productType = search.get('productType');
 
   const filteredProducts = useMemo(() => {
     if (!filter) return products.slice();
@@ -23,7 +31,6 @@ const ProductsPage = () => {
       ) {
         return false;
       }
-
       if (
         age &&
         age.value &&
@@ -33,21 +40,17 @@ const ProductsPage = () => {
       ) {
         return false;
       }
-
       if (category && category.value && product.category !== category.value) {
         return false;
       }
-
       if (recommendedFor && recommendedFor.length > 0) {
         if (!recommendedFor.every((target) => product.type.includes(target))) {
           return false;
         }
       }
-
       if (brand && brand.value && product.maker !== brand.value) {
         return false;
       }
-
       return true;
     });
 
@@ -81,9 +84,40 @@ const ProductsPage = () => {
     sessionStorage.setItem('filter', JSON.stringify(filter));
   }, [filter]);
 
+  useEffect(() => {
+    if (!productType) return;
+    if (productType !== PRODUCT_TYPES.HELPER) {
+      setFilter((p) => {
+        const filter = p ? p : {};
+        return {
+          ...filter,
+          recommendedFor:
+            filter.recommendedFor &&
+            !filter.recommendedFor.includes(productType)
+              ? [...filter.recommendedFor, productType]
+              : filter.recommendedFor &&
+                  filter.recommendedFor.includes(productType)
+                ? filter.recommendedFor
+                : [productType],
+        };
+      });
+      setSearch({});
+    } else {
+      setFilter((p) => ({
+        ...p,
+        category: { value: 'helpers', label: 'Допомагайки' },
+      }));
+    }
+    setSearch({});
+  }, [search, productType, setSearch]);
+
   return (
     <ProductsPageWrapper>
-      <ProductsPageFilter onFormSubmit={setFilter} filter={filter} />
+      <ProductsPageFilter
+        setFilter={setFilter}
+        onFormSubmit={setFilter}
+        filter={filter}
+      />
       <div>
         {typeof filter === 'object' &&
           filter !== null &&

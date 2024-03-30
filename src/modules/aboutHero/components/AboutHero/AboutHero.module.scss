@@ -10,6 +10,7 @@
   }
 }
 .aboutHeroTittle {
+  margin-top: 48px;
   color: $primary-text-color;
   font-weight: 900;
   @include font(36, 44);
@@ -21,6 +22,7 @@
   @include media(desktop) {
     @include font(56, 64);
     margin-bottom: 64px;
+    margin-top: 64px;
   }
 }
 .textHero {

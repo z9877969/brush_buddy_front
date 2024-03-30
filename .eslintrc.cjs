@@ -16,7 +16,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react-refresh/only-export-components': [
       'warn',
-      { allowConstantExport: true },
+      { allowConstantExport: true, allowExportNames: ['useDeliveryForm'] },
     ],
     'no-var': 'error',
     'no-console': 'warn',

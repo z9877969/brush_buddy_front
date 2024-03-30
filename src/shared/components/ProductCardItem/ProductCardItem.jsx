@@ -19,6 +19,8 @@ const ProductCardItem = ({
   images,
   colors,
   flavors,
+  volume,
+  category,
   id,
 }) => {
   const [watermarkValue] = watermark;
@@ -42,18 +44,39 @@ const ProductCardItem = ({
 
   const disableBtn = colors?.length ? !someColorsInStock : !someFlavorsInStock;
   const dispatch = useDispatch();
-  const mainVariant = flavors?.length ? flavors[0] : colors[0];
+  const flavorName = flavors && flavors.length > 0 ? flavors[0].name : null;
+  const volumeName = volume && volume.length > 0 ? volume[0] : null;
+  const colorName = colors && colors.length > 0 ? colors[0].name : null;
+  const colorNameV = colors && colors.length > 0 ? colors[0].color : null;
+  const quantity =
+    (colors && colors[0]?.quantity) || (flavors && flavors[0]?.quantity);
 
   const hanleClick = () => {
-    dispatch(addProduct({ title, images: url, price, salePrice, mainVariant }));
+    dispatch(
+      addProduct({
+        id,
+        category,
+        quantity,
+        title,
+        images: url,
+        price,
+        salePrice,
+        color: colorNameV,
+        name: colorName,
+        flavor: flavorName,
+        volume: volumeName,
+      })
+    );
   };
   return (
-    <li className={clsx(s.productItem, disableBtn && s.unavailable)}>
+    <div className={clsx(s.productItem, disableBtn && s.unavailable)}>
       <Link to={`/products/${id}`}>
         <img
           src={url ?? img['product_1']}
           alt={title}
           className={s.productImg}
+          height={340}
+          width={340}
         />
         <ProductTypeIcon type={type} sprite={sprite} />
         <ProductWatermark watermark={watermarkValue} sprite={sprite} />
@@ -75,7 +98,7 @@ const ProductCardItem = ({
           disabled={disableBtn}
         />
       </div>
-    </li>
+    </div>
   );
 };
 

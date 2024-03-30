@@ -113,14 +113,23 @@
   display: flex;
 
   flex-direction: column;
+  margin-top: 32px;
+  @include media(tablet) {
+    margin-top: 48px;
+  }
   @include media(desktop) {
     flex-direction: row;
+    margin-top: 64px;
   }
 }
 
 .informationBlock {
   display: flex;
   flex-direction: column;
+
+  @include media(desktop) {
+    width: 604px;
+  }
 }
 
 .buttonBlock {

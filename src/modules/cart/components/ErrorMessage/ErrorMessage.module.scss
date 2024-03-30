@@ -1,0 +1,8 @@
+.errorMessage {
+  position: absolute;
+  top: calc(100%);
+  left: 0;
+  color: $form-field-error-color;
+  @include font(12, 18);
+  font-weight: 500;
+}

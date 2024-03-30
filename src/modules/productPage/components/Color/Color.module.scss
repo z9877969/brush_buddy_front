@@ -41,6 +41,7 @@
 }
 
 .selectColorText {
+  text-transform: capitalize;
   color: $primary-text-color;
   font-weight: 500;
   font-size: 16px;

@@ -1,84 +1,77 @@
-import { nanoid } from 'nanoid';
 import { Button } from 'shared/components';
 import FilterItem from '../FilterItem/FilterItem';
 import s from './SelectedFilters.module.scss';
 
+import { PRODUCT_TYPES } from 'shared/constants';
+import { initialFilterValues } from 'modules/productsPageFilter';
+import { useCallback, useMemo } from 'react';
+
+const recommended = {
+  [PRODUCT_TYPES.ADULT]: 'Для дорослих',
+  [PRODUCT_TYPES.ANIMAL]: 'Для тварин',
+  [PRODUCT_TYPES.CHILD]: 'Для дітей',
+};
+
 const SelectedFilters = ({ filter, setFilter }) => {
-  const isAllNullValues = (filter) => {
-    for (const key in filter) {
-      if (typeof filter[key] === 'object' && filter[key] !== null) {
-        if (!isAllNullValues(filter[key])) {
-          return false;
-        }
-      } else if (filter[key] !== null) {
-        return false;
+  const resetFilters = () => setFilter(initialFilterValues);
+
+  const handleRemove = useCallback(
+    ({ category, value, type }) => {
+      if (type === 'check') {
+        setFilter((p) => ({
+          ...p,
+          [category]: p[category].filter((el) => el !== value),
+        }));
+      } else {
+        setFilter((p) => ({
+          ...p,
+          [category]: initialFilterValues[category],
+        }));
       }
-    }
-    return true;
-  };
+    },
+    [setFilter]
+  );
 
-  if (isAllNullValues(filter)) {
-    setFilter(null);
-  }
-  const handleRemoveFilter = (filterValue) => {
-    const updatedFilter = { ...filter };
-    Object.keys(updatedFilter).forEach((key) => {
-      if (Array.isArray(updatedFilter[key])) {
-        updatedFilter[key] = updatedFilter[key].filter(
-          (item) => item !== filterValue
-        );
-        if (updatedFilter[key].length === 0) {
-          delete updatedFilter[key];
-        }
-      } else if (
-        typeof updatedFilter[key] === 'object' &&
-        updatedFilter[key].label === filterValue
-      ) {
-        delete updatedFilter[key];
-      } else if (key === 'search' && updatedFilter[key] === filterValue) {
-        delete updatedFilter[key];
-      }
-    });
-    setFilter(updatedFilter);
-  };
-
-  const resetFilters = () => setFilter(null);
-
-  const elements = Object.values(filter).flatMap((value) => {
-    if (typeof value === 'object' && value.label) {
-      return (
-        <FilterItem
-          filterName={value.label}
-          removeFilter={handleRemoveFilter}
-          key={nanoid(4)}
-        />
-      );
-    } else if (Array.isArray(value)) {
-      return value.map((item) => (
-        <FilterItem
-          filterName={item}
-          removeFilter={handleRemoveFilter}
-          key={nanoid(5)}
-        />
-      ));
-    }
-    return (
-      <FilterItem
-        filterName={value}
-        removeFilter={handleRemoveFilter}
-        key={nanoid(6)}
-      />
-    );
-  });
+  const elements = useMemo(
+    () =>
+      Object.entries(filter)
+        .flatMap(([key, data]) => {
+          if (Array.isArray(data)) {
+            return data.map((el) => ({
+              category: key,
+              value: el,
+              label: recommended[el],
+              type: 'check',
+            }));
+          }
+          if (typeof data === 'string') {
+            return data
+              ? { category: key, value: key, label: data, type: 'search' }
+              : [];
+          }
+          return data.value ? { ...data, category: key, type: 'option' } : [];
+        })
+        .map(({ category, value, label, type }) => (
+          <FilterItem
+            filterName={label}
+            subClass={value}
+            removeFilter={() => handleRemove({ category, type, value })}
+            key={category + value}
+          />
+        )),
+    [filter, handleRemove]
+  );
 
   return (
     <div className={s.filtersWrapper}>
       <ul className={s.filtersBlock}>{elements}</ul>
-      <Button
-        title={'Скинути усі фільтри'}
-        className={s.resetBtn}
-        onClick={() => resetFilters()}
-      />
+      {elements.length > 0 && (
+        <Button
+          title={'Скинути усі фільтри'}
+          className={s.resetBtn}
+          onClick={() => resetFilters()}
+        />
+      )}
     </div>
   );
 };

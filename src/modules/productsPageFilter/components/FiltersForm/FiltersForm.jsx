@@ -16,8 +16,9 @@ import { customStyles } from './customStyles.js';
 import { sprite } from 'shared/icons';
 
 import s from './FiltersForm.module.scss';
+import { initialFilterValues } from 'modules/productsPageFilter/data/initialFilterValues';
 
-const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
+const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
   const ageRef = useRef(null);
   const categoryRef = useRef(null);
   const brandRef = useRef(null);
@@ -47,14 +48,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
         brand: filter.brand,
         sortBy: filter.sortBy,
       }
-    : {
-        search: null,
-        recommendedFor: [],
-        age: ageOptions[0],
-        category: categoriesOptions(productsByCategory)[0],
-        brand: brandsOptions[0],
-        sortBy: sortByOptions[0],
-      };
+    : initialFilterValues;
 
   const formik = useFormik({
     initialValues,
@@ -62,8 +56,14 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
       filterProductsCb(values);
     },
   });
-  const { values, handleSubmit, handleChange, setFieldValue, resetForm } =
-    formik;
+  const {
+    values,
+    handleSubmit,
+    handleChange,
+    setFieldValue,
+    // resetForm,
+    setValues,
+  } = formik;
 
   useEffect(() => {
     ageRef.current.inputRef.readOnly = true;
@@ -71,6 +71,15 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
     brandRef.current.inputRef.readOnly = true;
     sortByRef.current.inputRef.readOnly = true;
   }, []);
+
+  useEffect(() => {
+    filterProductsCb(values);
+    // eslint-disable-next-line
+  }, [filterProductsCb]);
+
+  useEffect(() => {
+    setValues(filter);
+  }, [filter, setValues]);
 
   return (
     <form onSubmit={handleSubmit} className={s.form}>
@@ -87,6 +96,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
               placeholder="Знайти товар"
               onChange={(e) => handleChange(e)}
               className={s.input}
+              value={values.search}
             />
             <svg width={20} className={s.searchIcon}>
               <use href={sprite + '#icon-search'}></use>
@@ -107,6 +117,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 value={PRODUCT_TYPES.ADULT}
                 className={clsx(s.check_input, s.adult)}
                 onChange={(e) => handleChange(e)}
+                checked={values.recommendedFor.includes(PRODUCT_TYPES.ADULT)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -124,6 +135,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.child)}
                 onChange={(e) => handleChange(e)}
+                checked={values.recommendedFor.includes(PRODUCT_TYPES.CHILD)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -141,6 +153,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.animal)}
                 onChange={(e) => handleChange(e)}
+                checked={values.recommendedFor.includes(PRODUCT_TYPES.ANIMAL)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -158,7 +171,9 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="age"
             options={ageOptions}
-            value={values.age ? values.age : ageOptions[0]}
+            placeholder={'Усі'}
+            value={values.age}
+            defaultValue={null}
             onChange={(option) => {
               setFieldValue('age', option);
               ageRef.current.blur();
@@ -175,11 +190,8 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="category"
             options={categoriesOptions(productsByCategory)}
-            value={
-              values.category
-                ? values.category
-                : categoriesOptions(productsByCategory)[0]
-            }
+            placeholder={'Усі'}
+            value={values.category}
             onChange={(option) => {
               setFieldValue('category', option);
               categoryRef.current.blur();
@@ -196,7 +208,8 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="brand"
             options={brandsOptions}
-            value={values.brand ? values.brand : brandsOptions[0]}
+            value={values.brand}
+            placeholder={'Усі'}
             onChange={(option) => {
               setFieldValue('brand', option);
               brandRef.current.blur();
@@ -213,7 +226,8 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           <Select
             id="sortBy"
             options={sortByOptions}
-            value={values.sortBy ? values.sortBy : sortByOptions[0]}
+            value={values.sortBy}
+            placeholder={'Оберіть'}
             onChange={(option) => {
               setFieldValue('sortBy', option);
               sortByRef.current.blur();
@@ -228,7 +242,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           className={s.resetBtn}
           title={'Скинути усі фільтри'}
           border
-          onClick={resetForm}
+          onClick={() => setFilter(initialFilterValues)}
         />
         <Button
           type="submit"

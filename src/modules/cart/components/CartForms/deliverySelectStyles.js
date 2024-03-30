@@ -1,4 +1,4 @@
-export const selectStyles = {
+export const getDelliverySelectStyles = ({ isError }) => ({
   container: (styles, state) => ({
     ...styles,
     width: '100%',
@@ -8,8 +8,9 @@ export const selectStyles = {
     padding: '12px',
     alignItems: 'center',
     borderRadius: '16px',
-    border: '1px solid rgba(31, 31, 31, 0.2)',
-    borderColor: state.isFocused ? 'red' : 'rgba(31, 31, 31, 0.2)',
+    border: `1px solid ${
+      state.isFocused ? '#F5516F' : isError ? '#BA1A1A' : '#1F1F1F33'
+    }`,
 
     '@media (min-width: 1440px)': {
       backgroundColor: '#fff',
@@ -37,11 +38,14 @@ export const selectStyles = {
     ...styles,
     padding: 0,
   }),
-  dropdownIndicator: (styles) => ({
-    ...styles,
-    color: '#797979',
-    padding: 0,
-  }),
+  dropdownIndicator: (styles, state) => {
+    return {
+      ...styles,
+      color: '#797979',
+      padding: 0,
+      transform: state.isFocused ? 'rotate(180deg)' : 'rotate(0)',
+    };
+  },
   indicatorSeparator: (styles) => ({
     ...styles,
     display: 'none',
@@ -87,4 +91,4 @@ export const selectStyles = {
       border: 'none',
     },
   }),
-};
+});

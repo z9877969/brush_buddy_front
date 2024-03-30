@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 200px;
 }
 
 .image {
@@ -28,7 +29,7 @@
     line-height: 117%;
   }
   @include media(desktop) {
-    width: 700px;
+    width: 800px;
   }
 }
 
@@ -59,10 +60,18 @@
   line-height: 133%;
   text-align: center;
   @include media(tablet) {
-    padding: 16px 55px;
     width: 235px;
     font-size: 18px;
+    border-radius: 200px;
+    padding: 16px 55px;
+    height: 56px;
   }
+}
+
+.link:hover,
+.link:focus {
+  color: $light-color;
+  background-color: $pet-color;
 }
 
 .productLink {
@@ -96,8 +105,17 @@
   }
 
   @include media(tablet) {
-    padding: 16px 55px;
     width: 235px;
     font-size: 18px;
+    border-radius: 200px;
+    height: 56px;
+  }
+}
+
+.productLink:hover,
+.productLink:focus {
+  color: $primary-text-color !important;
+  svg {
+    fill: $primary-text-color;
   }
 }
