@@ -32,7 +32,7 @@ const ProductsList = ({ title, products }) => {
   };
 
   return (
-    <>
+    <div>
       <div className={s.titleWrapper}>
         <h4 className={s.prodSubtitle}>{title}</h4>
         <div className={s.buttonsWrapper}>
@@ -56,7 +56,7 @@ const ProductsList = ({ title, products }) => {
         reachEndButton={reachEndButton}
         reachStartButton={reachStartButton}
       />
-    </>
+    </div>
   );
 };
 

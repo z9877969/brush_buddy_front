@@ -69,7 +69,7 @@ const ProductCardItem = ({
     );
   };
   return (
-    <li className={clsx(s.productItem, disableBtn && s.unavailable)}>
+    <div className={clsx(s.productItem, disableBtn && s.unavailable)}>
       <Link to={`/products/${id}`}>
         <img
           src={url ?? img['product_1']}
@@ -98,7 +98,7 @@ const ProductCardItem = ({
           disabled={disableBtn}
         />
       </div>
-    </li>
+    </div>
   );
 };
 

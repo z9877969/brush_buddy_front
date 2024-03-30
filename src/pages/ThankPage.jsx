@@ -1,3 +1,4 @@
+import { submitForm } from '@redux/cart/cartSlice';
 import { selectOrderNum } from '@redux/order/orderSelectors';
 import { resetOrderNum } from '@redux/order/orderSlice';
 import { OrderFinished } from 'modules/orderFinished';
@@ -9,6 +10,7 @@ const ThankPage = () => {
   const orderNum = useSelector(selectOrderNum);
 
   useEffect(() => {
+    dispatch(submitForm(false));
     return () => {
       dispatch(resetOrderNum());
     };
