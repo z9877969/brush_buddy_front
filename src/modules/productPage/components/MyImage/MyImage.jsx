@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import clsx from 'clsx';
 import s from './MyImage.module.scss';
 
@@ -8,20 +10,53 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
   return (
     <div className={s.container}>
       <div className={s.imageList}>
-        {imges.map((img) => {
-          return (
-            <figure className={s.imgListBlock} key={Math.random()}>
-              <img
-                className={clsx(
-                  s.image,
-                  img.url === mainImage.url ? s.imageFocus : s.image
-                )}
-                src={img.url}
-                onClick={() => setMainImage(img)}
-              />
-            </figure>
-          );
-        })}
+        <Swiper
+          className="product-card-img"
+          onSwiper={(swiper) => {
+            swiper.hostEl.style.height = '100%';
+          }}
+          direction={'vertical'}
+          pagination={{
+            clickable: true,
+          }}
+          breakpoints={{
+            375: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 10,
+            },
+            1440: {
+              slidesPerView: 4,
+              spaceBetween: 5,
+            },
+          }}
+          modules={[Pagination]}
+        >
+          {imges.map((img) => {
+            return (
+              <SwiperSlide key={img.url}>
+                <button
+                  className={clsx(
+                    s.imgListBlock,
+                    mainImage.url === img.url && s.focused
+                  )}
+                >
+                  <img
+                    className={clsx(
+                      s.image,
+                      img.url === mainImage.url ? s.imageFocus : s.image
+                    )}
+                    src={img.url}
+                    onClick={() => setMainImage(img)}
+                  />
+                </button>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </div>
       <div className={s.imgContainer}>
         <img

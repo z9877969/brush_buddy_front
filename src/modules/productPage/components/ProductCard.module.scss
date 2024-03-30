@@ -126,6 +126,10 @@
 .informationBlock {
   display: flex;
   flex-direction: column;
+
+  @include media(desktop) {
+    width: 604px;
+  }
 }
 
 .buttonBlock {
