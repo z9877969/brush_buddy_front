@@ -44,7 +44,7 @@ const ProductsPage = () => {
         return false;
       }
       if (recommendedFor && recommendedFor.length > 0) {
-        if (!recommendedFor.every((target) => product.type.includes(target))) {
+        if (!recommendedFor.some((target) => product.type.includes(target))) {
           return false;
         }
       }
