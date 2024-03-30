@@ -57,10 +57,18 @@ const ProductsPage = () => {
     if (filter.sortBy) {
       switch (filter.sortBy.value) {
         case 'increment':
-          filteredList.sort((a, b) => a.price - b.price);
+          filteredList.sort((a, b) => {
+            const aPrice = a.salePrice || a.price;
+            const bPrice = b.salePrice || b.price;
+            return aPrice - bPrice;
+          });
           break;
         case 'decrement':
-          filteredList.sort((a, b) => b.price - a.price);
+          filteredList.sort((a, b) => {
+            const aPrice = a.salePrice || a.price;
+            const bPrice = b.salePrice || b.price;
+            return bPrice - aPrice;
+          });
           break;
         case 'new':
           filteredList = filteredList.filter((product) =>
