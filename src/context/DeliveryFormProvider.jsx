@@ -50,7 +50,8 @@ const DeliveryFormProvider = ({ children }) => {
         },
     validationSchema: deliveryFormSchema,
     onSubmit: (values) => {
-      const { name, email, phone, city, department, comments } = values;
+      const { name, email, phone, city, department, comments, payment } =
+        values;
 
       const delivery = {
         name,
@@ -68,6 +69,7 @@ const DeliveryFormProvider = ({ children }) => {
           discount: discountPercentage,
           totalPrice,
           saleTotal: discountedTotal,
+          payment,
         })
       );
     },

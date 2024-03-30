@@ -11,7 +11,7 @@ const CartPaymentMethods = () => {
   return (
     <div>
       <h4 className={s.cartPaymentsTitle}>Спосіб оплати</h4>
-      <form action="" className={s.listPayments}>
+      <div className={s.listPayments}>
         <div>
           <input
             className={clsx(s.cartPaymentsInput)}
@@ -54,7 +54,7 @@ const CartPaymentMethods = () => {
             </span>
           </label>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
