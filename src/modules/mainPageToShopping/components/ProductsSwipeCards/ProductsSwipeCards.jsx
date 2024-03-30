@@ -26,6 +26,8 @@ const ProductsSwipeCards = ({
         const slidesHost = swiper?.hostEl;
         if (slidesHost) {
           slidesHost.style.overflow = 'hidden';
+          slidesHost.style.marginLeft = '-1px';
+          slidesHost.style.marginRight = '-1px';
         }
         if (slidesWrapper) {
           slidesWrapper.style.display = 'flex';
@@ -47,6 +49,10 @@ const ProductsSwipeCards = ({
         reachStartButton(true);
       }}
       breakpoints={{
+        0: {
+          slidesPerView: 'auto',
+          // spaceBetween: 24,
+        },
         375: {
           slidesPerView: 1,
           spaceBetween: 24,
