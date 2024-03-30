@@ -25,7 +25,7 @@ const PaginateProdList = ({ products }) => {
   return (
     <div className={s.blockPaginateProductsList}>
       <ProdList products={currentItems} />
-      {currentItems.length && (
+      {currentItems.length > 0 && (
         <Paginator
           totalPages={pageCount}
           onPageChange={handlePageClick}
