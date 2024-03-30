@@ -71,13 +71,15 @@ const ProductCardItem = ({
   return (
     <div className={clsx(s.productItem, disableBtn && s.unavailable)}>
       <Link to={`/products/${id}`}>
-        <img
-          src={url ?? img['product_1']}
-          alt={title}
-          className={s.productImg}
-          height={340}
-          width={340}
-        />
+        <div className={s.imageWarpper}>
+          <img
+            src={url ?? img['product_1']}
+            alt={title}
+            className={s.productImg}
+            height={340}
+            width={340}
+          />
+        </div>
         <ProductTypeIcon type={type} sprite={sprite} />
         <ProductWatermark watermark={watermarkValue} sprite={sprite} />
         <p className={s.productName}>{title}</p>

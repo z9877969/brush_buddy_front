@@ -1,24 +1,29 @@
-import { Cart } from 'modules/cart';
-import { selectProd, selectSubmitForm } from '@redux/cart/selectorsCart';
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Cart, RecomendationProducts } from 'modules/cart';
+import { selectProd, selectSubmitForm } from '@redux/cart/selectorsCart';
+import { ROUTES } from 'shared/constants';
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const products = useSelector(selectProd);
   const isSubmit = useSelector(selectSubmitForm);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (products.length === 0) {
-      navigate('/cart-empty', { replace: true });
-    }
     if (isSubmit) {
-      navigate('/thank', { replace: true });
+      navigate(ROUTES.THANK, { replace: true });
     }
-  }, [products, isSubmit, navigate]);
+  }, [isSubmit, navigate]);
 
-  return <>{products.length > 0 && <Cart />}</>;
+  return products.length > 0 ? (
+    <>
+      <Cart />
+      <RecomendationProducts />
+    </>
+  ) : (
+    <Navigate to={ROUTES.CART_EMPTY} replace={true} />
+  );
 };
 
 export default CartPage;
