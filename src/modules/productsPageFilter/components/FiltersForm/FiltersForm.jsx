@@ -180,6 +180,7 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
             }}
             styles={customStyles}
             ref={ageRef}
+            isDisabled={!values.recommendedFor.includes(PRODUCT_TYPES.CHILD)}
           />
         </div>
 
@@ -227,7 +228,7 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
             id="sortBy"
             options={sortByOptions}
             value={values.sortBy}
-            placeholder={'Оберіть'}
+            placeholder={'Товари'}
             onChange={(option) => {
               setFieldValue('sortBy', option);
               sortByRef.current.blur();

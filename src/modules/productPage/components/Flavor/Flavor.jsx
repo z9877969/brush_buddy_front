@@ -1,7 +1,11 @@
 import clsx from 'clsx';
 import s from './Flavor.module.scss';
 
-export const Flavor = ({ productFlavours, value, setFlavor }) => {
+export const Flavor = ({ productFlavours, value, setFlavor, setQuantity }) => {
+  const handleFlavorChange = (item) => {
+    setFlavor(item);
+    setQuantity(1);
+  };
   return (
     <>
       <p className={s.mlText}>
@@ -27,7 +31,7 @@ export const Flavor = ({ productFlavours, value, setFlavor }) => {
                   type="radio"
                   name="flavor"
                   value={item.color}
-                  onChange={() => setFlavor(item)}
+                  onChange={() => handleFlavorChange(item)}
                 />
               </label>
             </li>

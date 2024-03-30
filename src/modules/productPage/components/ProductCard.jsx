@@ -173,6 +173,7 @@ const ProductCard = ({ product }) => {
                 productFlavours={product.flavors}
                 value={flavor}
                 setFlavor={setFlavor}
+                setQuantity={setQuantity}
               />
             ) : null}
             {product.colors?.length > 0 &&
@@ -182,6 +183,7 @@ const ProductCard = ({ product }) => {
                 productColors={product.colors}
                 value={color}
                 setColor={setColor}
+                setQuantity={setQuantity}
               />
             ) : null}
             {product.volume?.length > 0 && mls ? (
@@ -189,6 +191,7 @@ const ProductCard = ({ product }) => {
                 productVolume={product.volume}
                 value={mls}
                 setMls={setMl}
+                setQuantity={setQuantity}
               />
             ) : null}
             <p className={s.itemHave}>
@@ -252,7 +255,7 @@ const ProductCard = ({ product }) => {
                       title: product.title,
                       volume: mls?.volume ?? '',
                       flavor: flavor?.name ?? '',
-                      color: color?.name ?? '',
+                      color: color?.color ?? '',
                       amount: quantity,
                       quantity: flavor?.quantity ?? color?.quantity,
                       name: mls?.name ?? flavor?.name ?? color?.name,
