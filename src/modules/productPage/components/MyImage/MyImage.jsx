@@ -9,7 +9,7 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
 
   return (
     <div className={s.container}>
-      <div className={s.imageList}>
+      <div className={s.imagesSwiperWrapper}>
         <Swiper
           className="product-card-img"
           onSwiper={(swiper) => {
@@ -44,16 +44,14 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
             return (
               <SwiperSlide key={img.url}>
                 <button
+                  type="button"
                   className={clsx(
-                    s.imgListBlock,
+                    s.slideBtn,
                     mainImage.url === img.url && s.focused
                   )}
                 >
                   <img
-                    className={clsx(
-                      s.image,
-                      img.url === mainImage.url ? s.imageFocus : s.image
-                    )}
+                    className={s.slideImage}
                     src={img.url}
                     onClick={() => setMainImage(img)}
                   />
