@@ -240,7 +240,10 @@ const ProductCard = ({ product }) => {
                 <button
                   className={clsx(
                     s.btnTest,
-                    flavor?.inStock === false || color?.inStock === false
+                    flavor?.inStock === false ||
+                      color?.inStock === false ||
+                      (product.colors.length === 0 &&
+                        product.flavors.length === 0)
                       ? s.btnDontWorking
                       : s.btnTest
                   )}
@@ -261,7 +264,11 @@ const ProductCard = ({ product }) => {
                       name: mls?.name ?? flavor?.name ?? color?.name,
                     });
                   }}
-                  disabled={flavor?.quantity === 0 && color?.quantity === 0}
+                  disabled={
+                    (flavor?.quantity === 0 && color?.quantity === 0) ||
+                    (product.colors.length === 0 &&
+                      product.flavors.length === 0)
+                  }
                 >
                   В кошик
                   <svg width="20" height="20">
