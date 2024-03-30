@@ -16,8 +16,9 @@ import { customStyles } from './customStyles.js';
 import { sprite } from 'shared/icons';
 
 import s from './FiltersForm.module.scss';
+import { initialFilterValues } from 'modules/productsPageFilter/data/initialFilterValues';
 
-const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
+const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
   const ageRef = useRef(null);
   const categoryRef = useRef(null);
   const brandRef = useRef(null);
@@ -47,14 +48,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
         brand: filter.brand,
         sortBy: filter.sortBy,
       }
-    : {
-        search: null,
-        recommendedFor: [],
-        age: ageOptions[0],
-        category: categoriesOptions(productsByCategory)[0],
-        brand: brandsOptions[0],
-        sortBy: sortByOptions[0],
-      };
+    : initialFilterValues;
 
   const formik = useFormik({
     initialValues,
@@ -62,8 +56,14 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
       filterProductsCb(values);
     },
   });
-  const { values, handleSubmit, handleChange, setFieldValue, resetForm } =
-    formik;
+  const {
+    values,
+    handleSubmit,
+    handleChange,
+    setFieldValue,
+    // resetForm,
+    setValues,
+  } = formik;
 
   useEffect(() => {
     ageRef.current.inputRef.readOnly = true;
@@ -73,13 +73,13 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
   }, []);
 
   useEffect(() => {
-    if (filter?.category?.value === 'helpers') {
-      setFieldValue('category', filter.category);
-    }
-    if (filter?.category === undefined) {
-      setFieldValue('category', categoriesOptions(productsByCategory)[0]);
-    }
-  }, [filter, setFieldValue, productsByCategory]);
+    filterProductsCb(values);
+    // eslint-disable-next-line
+  }, [filterProductsCb]);
+
+  useEffect(() => {
+    setValues(filter);
+  }, [filter, setValues]);
 
   return (
     <form onSubmit={handleSubmit} className={s.form}>
@@ -116,7 +116,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 value={PRODUCT_TYPES.ADULT}
                 className={clsx(s.check_input, s.adult)}
                 onChange={(e) => handleChange(e)}
-                checked={filter?.recommendedFor?.includes(PRODUCT_TYPES.ADULT)}
+                checked={values.recommendedFor.includes(PRODUCT_TYPES.ADULT)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -134,7 +134,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.child)}
                 onChange={(e) => handleChange(e)}
-                checked={filter?.recommendedFor?.includes(PRODUCT_TYPES.CHILD)}
+                checked={values.recommendedFor.includes(PRODUCT_TYPES.CHILD)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -152,7 +152,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
                 name="recommendedFor"
                 className={clsx(s.check_input, s.animal)}
                 onChange={(e) => handleChange(e)}
-                checked={filter?.recommendedFor?.includes(PRODUCT_TYPES.ANIMAL)}
+                checked={values.recommendedFor.includes(PRODUCT_TYPES.ANIMAL)}
               />
               <span className={s.check_box}>
                 <svg className={s.checkIcon}>
@@ -241,7 +241,7 @@ const FiltersForm = ({ filterProductsCb, onClose, filter }) => {
           className={s.resetBtn}
           title={'Скинути усі фільтри'}
           border
-          onClick={resetForm}
+          onClick={() => setFilter(initialFilterValues)}
         />
         <Button
           type="submit"
