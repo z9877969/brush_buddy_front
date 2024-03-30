@@ -16,10 +16,15 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
             swiper.hostEl.style.height = '100%';
           }}
           direction={'vertical'}
+          scrollbar={true}
           pagination={{
             clickable: true,
           }}
           breakpoints={{
+            0: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
             375: {
               slidesPerView: 4,
               spaceBetween: 20,
