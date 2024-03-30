@@ -19,8 +19,7 @@ const ProductCardPage = () => {
       .then((product) => {
         product ? setProduct(product) : navigate(ROUTES.NOT_FOUND);
       })
-      // eslint-disable-next-line
-      .catch((err) => console.log(err.message))
+      .catch(() => navigate(ROUTES.NOT_FOUND))
       .finally(() => setIsLoading(false));
     // eslint-disable-next-line
   }, [productId]);
