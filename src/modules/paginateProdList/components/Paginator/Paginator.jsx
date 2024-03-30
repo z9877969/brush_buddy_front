@@ -2,12 +2,16 @@ import { sprite } from 'shared/icons';
 import s from './Paginator.module.scss';
 import { useState, useEffect } from 'react';
 
-const Paginator = ({ totalPages, onPageChange }) => {
+const Paginator = ({ totalPages, onPageChange, key }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [key]);
+
+  useEffect(() => {
     onPageChange(currentPage);
-  }, [currentPage, onPageChange]);
+  }, [currentPage, onPageChange, totalPages]);
 
   const changePage = async (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -70,6 +74,9 @@ const Paginator = ({ totalPages, onPageChange }) => {
 
     return <div className={s.blockFigure}>{pages}</div>;
   };
+  if (totalPages < 2) {
+    return null;
+  }
 
   return (
     <div className={s.boxpagination}>
