@@ -10,7 +10,7 @@ import BurgerButton from '../BurgerButton/BurgerButton';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import { useMedia } from 'hooks/useMedia';
 
-const Header = ({ headerRef }) => {
+const Header = () => {
   const [isDiscountReminderOpen, setDiscountReminderOpen] = useState(true);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const media = useMedia();
@@ -28,7 +28,7 @@ const Header = ({ headerRef }) => {
   }, []);
 
   return (
-    <header ref={headerRef} className={s.header}>
+    <header className={s.header}>
       {isDiscountReminderOpen && (
         <DiscountReminder handleClose={handleCloseDiscountReminder} />
       )}
