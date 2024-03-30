@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PRODUCT_TYPES } from 'shared/constants';
 import { initialFilterValues } from 'modules/productsPageFilter';
+import { sortByAvailability } from 'helpers/sortByAvailability';
 
 const ProductsPage = () => {
   const [search, setSearch] = useSearchParams();
@@ -35,7 +36,6 @@ const ProductsPage = () => {
         age &&
         age.value &&
         product.ageType &&
-        product.ageType.includes(age.value) &&
         !product.ageType.includes(age.value)
       ) {
         return false;
@@ -84,8 +84,9 @@ const ProductsPage = () => {
           break;
       }
     }
+    const filteredByAvailability = sortByAvailability(filteredList);
 
-    return filteredList;
+    return filteredByAvailability;
   }, [filter, products]);
 
   useEffect(() => {
