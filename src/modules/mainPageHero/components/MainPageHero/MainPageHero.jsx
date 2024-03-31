@@ -16,7 +16,7 @@ const MainPageAbout = () => {
           <LinkButton
             title={'За покупками'}
             className={s.mainHeroBtn}
-            to={ROUTES.PRODUCTS}
+            to={`${ROUTES.PRODUCTS}?page=1`}
           />
         </div>
         <img src={animation} alt="animation" className={s.animation} />
