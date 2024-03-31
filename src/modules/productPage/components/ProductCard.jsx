@@ -151,7 +151,9 @@ const ProductCard = ({ product }) => {
               <p
                 className={clsx(
                   s.price,
-                  flavor?.inStock === false || color?.inStock === false
+                  flavor?.inStock === false ||
+                    color?.inStock === false ||
+                    (!flavor?.quantity && !color?.quantity)
                     ? s.notHavePrices
                     : s.price
                 )}
@@ -160,7 +162,9 @@ const ProductCard = ({ product }) => {
                 <span
                   className={clsx(
                     s.grn,
-                    flavor?.inStock === false || color?.inStock === false
+                    flavor?.inStock === false ||
+                      color?.inStock === false ||
+                      (!flavor?.quantity && !color?.quantity)
                       ? s.notHavePrices
                       : s.grn
                   )}
@@ -228,7 +232,8 @@ const ProductCard = ({ product }) => {
                   disabled={
                     product.flavors?.length > 0
                       ? quantity === flavor?.quantity
-                      : quantity === color?.quantity
+                      : quantity === color?.quantity ||
+                        (!flavor?.quantity && !color?.quantity)
                   }
                   type="button"
                 >
