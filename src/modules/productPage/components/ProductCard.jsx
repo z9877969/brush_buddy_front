@@ -68,10 +68,20 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     if (!Object.keys(product).length) return;
-    setColor(product.colors[0]);
-    setFlavor(product.flavors[0]);
-    setMl(product.volume[0]);
+    setColor(product.colors[0] || null);
+    setFlavor(product.flavors[0] || null);
+    setMl(product.volume[0] || null);
   }, [product]);
+
+  const isInStockProduct =
+    flavor || color
+      ? Boolean(
+          flavor?.inStock ||
+            color?.inStock ||
+            flavor?.quantity ||
+            color?.quantity
+        )
+      : false;
 
   return (
     <Container>
@@ -109,18 +119,14 @@ const ProductCard = ({ product }) => {
                 <p
                   className={clsx(
                     s.salePrice,
-                    flavor?.inStock === false || color?.inStock === false
-                      ? s.notHaveItemPrice
-                      : s.salePrice
+                    !isInStockProduct ? s.notHaveItemPrice : s.salePrice
                   )}
                 >
                   {product.salePrice}
                   <span
                     className={clsx(
                       s.grn,
-                      flavor?.inStock === false || color?.inStock === false
-                        ? s.notHaveItemPrice
-                        : s.grn
+                      !isInStockProduct ? s.notHaveItemPrice : s.grn
                     )}
                   >
                     грн
@@ -129,18 +135,14 @@ const ProductCard = ({ product }) => {
                 <p
                   className={clsx(
                     s.notSalePrice,
-                    flavor?.inStock === false || color?.inStock === false
-                      ? s.notHaveItemSalePrice
-                      : s.notSalePrice
+                    !isInStockProduct ? s.notHaveItemSalePrice : s.notSalePrice
                   )}
                 >
                   {product.price}
                   <span
                     className={clsx(
                       s.grn,
-                      flavor?.inStock === false || color?.inStock === false
-                        ? s.notHaveItemSalePrice
-                        : s.grn
+                      !isInStockProduct ? s.notHaveItemSalePrice : s.grn
                     )}
                   >
                     грн
@@ -151,22 +153,14 @@ const ProductCard = ({ product }) => {
               <p
                 className={clsx(
                   s.price,
-                  flavor?.inStock === false ||
-                    color?.inStock === false ||
-                    (!flavor?.quantity && !color?.quantity)
-                    ? s.notHavePrices
-                    : s.price
+                  !isInStockProduct ? s.notHavePrices : s.price
                 )}
               >
                 {product.price}
                 <span
                   className={clsx(
                     s.grn,
-                    flavor?.inStock === false ||
-                      color?.inStock === false ||
-                      (!flavor?.quantity && !color?.quantity)
-                      ? s.notHavePrices
-                      : s.grn
+                    !isInStockProduct ? s.notHavePrices : s.grn
                   )}
                 >
                   грн
@@ -200,7 +194,7 @@ const ProductCard = ({ product }) => {
               />
             ) : null}
             <p className={s.itemHave}>
-              {flavor?.quantity || color?.quantity > 0 ? (
+              {isInStockProduct ? (
                 <span className={s.haveItem}>Є в наявності</span>
               ) : (
                 <span className={s.notHaveItem}>Товар закінчився</span>
@@ -231,9 +225,10 @@ const ProductCard = ({ product }) => {
                   }}
                   disabled={
                     product.flavors?.length > 0
-                      ? quantity === flavor?.quantity
-                      : quantity === color?.quantity ||
-                        (!flavor?.quantity && !color?.quantity)
+                      ? quantity >= flavor?.quantity
+                      : product.colors?.length > 0
+                        ? quantity >= color?.quantity
+                        : !isInStockProduct
                   }
                   type="button"
                 >
@@ -246,12 +241,7 @@ const ProductCard = ({ product }) => {
                 <button
                   className={clsx(
                     s.btnTest,
-                    flavor?.inStock === false ||
-                      color?.inStock === false ||
-                      (product.colors.length === 0 &&
-                        product.flavors.length === 0)
-                      ? s.btnDontWorking
-                      : s.btnTest
+                    !isInStockProduct ? s.btnDontWorking : s.btnTest
                   )}
                   type="submit"
                   onClick={() => {
@@ -270,11 +260,7 @@ const ProductCard = ({ product }) => {
                       name: mls?.name ?? flavor?.name ?? color?.name,
                     });
                   }}
-                  disabled={
-                    (flavor?.quantity === 0 && color?.quantity === 0) ||
-                    (product.colors.length === 0 &&
-                      product.flavors.length === 0)
-                  }
+                  disabled={!isInStockProduct}
                 >
                   В кошик
                   <svg width="20" height="20">
