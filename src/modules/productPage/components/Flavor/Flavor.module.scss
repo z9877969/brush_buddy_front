@@ -42,6 +42,7 @@
 }
 
 .selectFlavorText {
+  text-transform: capitalize;
   font-family: $main-font-family;
   color: $primary-text-color;
   font-weight: 500;
