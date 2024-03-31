@@ -1,13 +1,17 @@
 .section {
-  position: relative;
-  margin: 48px 0;
+  padding: 48px 0;
   @include media(tablet) {
-    margin: 68px 0;
+    padding: 68px 0;
   }
   @include media(desktop) {
-    margin: 100px 0;
+    padding: 100px 0;
   }
 }
+
+.wrapper {
+  position: relative;
+}
+
 .blogContent {
   @include media(desktop) {
     display: flex;
@@ -22,6 +26,7 @@
     gap: 24px;
   }
   @include media(desktop) {
+    margin-bottom: 0;
   }
 }
 
@@ -43,6 +48,7 @@
 }
 
 .text {
+  text-align: justify;
   margin-bottom: 32px;
   font-weight: 500;
   @include font(20, 28);
@@ -79,7 +85,7 @@
   }
   @include media(desktop) {
     position: absolute;
-    left: 340px;
+    right: calc(64px + 644px + 64px);
     top: 370px;
   }
 }
