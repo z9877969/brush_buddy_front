@@ -1,4 +1,5 @@
 .section {
+  position: relative;
   margin: 48px 0;
   @include media(tablet) {
     margin: 68px 0;
@@ -46,7 +47,6 @@
   font-weight: 500;
   @include font(20, 28);
   color: $primary-text-color;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   @include media(tablet) {
     text-shadow: none;
     @include font(24, 32);
@@ -80,7 +80,7 @@
   @include media(desktop) {
     position: absolute;
     left: 340px;
-    top: 1480px;
+    top: 370px;
   }
 }
 .buttonLink:hover,
