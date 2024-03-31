@@ -12,6 +12,7 @@ import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
 import s from './ProductCard.module.scss';
 import { ProductsList } from 'modules/mainPageToShopping';
 import { useSelector } from 'react-redux';
+import ProductDescriptionList from './ProductDescriptionList/ProductDescriptionList';
 
 const ProductCard = ({ product }) => {
   const [mls, setMl] = useState(null);
@@ -279,7 +280,28 @@ const ProductCard = ({ product }) => {
             </div>
             <div>
               <p className={s.description}>Опис</p>
-              <p className={s.info}>{product.description}</p>
+              {typeof product?.description === 'string' ? (
+                <p className={s.info}>{product.description}</p>
+              ) : (
+                product.description?.map(
+                  ({ title, items, paragraph }, i, arr) =>
+                    paragraph ? (
+                      <p
+                        className={clsx(s.info, i < arr.length - 1 && s.mb)}
+                        key={i}
+                      >
+                        {paragraph}
+                      </p>
+                    ) : (
+                      <ProductDescriptionList
+                        key={i}
+                        title={title}
+                        items={items}
+                        mb={i < arr.length - 1}
+                      />
+                    )
+                )
+              )}
             </div>
             <div>
               <p className={s.recomendation}>Рекомендація</p>

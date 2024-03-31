@@ -61,7 +61,7 @@ const HelpersCardList = ({
       {helpersCardData.map(
         ({ id, title, price, text, images, quantity, category }) => (
           <SwiperSlide key={id}>
-            <Link className={s.link} to={ROUTES.PRODUCTS}>
+            <Link className={s.link} to={`${ROUTES.PRODUCTS}?page=1`}>
               <div className={s.mainHelpersBox}>
                 <div className={s.boxTitleText}>
                   <div className={s.helpersBoxTitle}>

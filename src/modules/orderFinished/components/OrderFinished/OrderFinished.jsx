@@ -17,7 +17,7 @@ const OrderFinished = ({ orderNum }) => {
           на вказану електронну адресу. Наші співробітники вже дбайливо збирають
           посилочку для Вас.
         </p>
-        <Link className={s.linkButton} to={ROUTES.PRODUCTS}>
+        <Link className={s.linkButton} to={`${ROUTES.PRODUCTS}?page=1`}>
           І вам дякуємо
         </Link>
       </Container>
