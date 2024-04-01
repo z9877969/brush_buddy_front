@@ -8,7 +8,6 @@ export const Color = ({ productColors, value, setColor, setQuantity }) => {
     setColor(item);
     setQuantity(1);
   };
-
   return (
     <>
       <p className={s.colorText}>
@@ -21,12 +20,17 @@ export const Color = ({ productColors, value, setColor, setQuantity }) => {
               key={i}
               className={clsx(
                 s.item,
-                item.color === colorMarker ? s.itemFocus : s.item
+                item.color === colorMarker ? s.itemFocus : null
               )}
             >
               <label
                 style={{ backgroundColor: item.color }}
-                className={s.labels}
+                className={clsx(
+                  s.labels,
+                  productColors[i].inStock === true
+                    ? s.labels
+                    : s.disabledLabels
+                )}
               >
                 <input
                   className={s.radioBtn}

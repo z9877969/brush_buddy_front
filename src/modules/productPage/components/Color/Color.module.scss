@@ -19,6 +19,10 @@
   border-radius: 100%;
 }
 
+.disabledLabels {
+  background-color: gray !important;
+}
+
 .colorBlock {
   display: flex;
   flex-direction: row;
