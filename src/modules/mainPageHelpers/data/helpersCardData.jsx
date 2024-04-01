@@ -2,7 +2,7 @@ import testIMG from '../images/111.jpg';
 
 export const helpersCardData = [
   {
-    id: '1',
+    id: '1234569',
     category: 'helpers',
     title: 'Календар-трекер для дітей',
     price: '288.80',
@@ -11,7 +11,7 @@ export const helpersCardData = [
     quantity: 10,
   },
   {
-    id: '2',
+    id: '222255568',
     category: 'helpers',
     title: 'Календар-трекер для дітей',
     price: '288.80',
@@ -20,7 +20,7 @@ export const helpersCardData = [
     quantity: 15,
   },
   {
-    id: '3',
+    id: '33336677898',
     category: 'helpers',
     title: 'Календар-трекер для дітей',
     price: '288.80',
