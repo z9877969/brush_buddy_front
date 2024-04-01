@@ -17,13 +17,14 @@
 }
 
 .imagesSwiperWrapper {
-  width: 52px;
+  width: 54px;
+  padding: 2px;
   @include media(tablet) {
-    width: 97px;
+    width: 99px;
   }
   @include media(desktop) {
     margin-right: 24px;
-    width: 127px;
+    width: 129px;
   }
 }
 
