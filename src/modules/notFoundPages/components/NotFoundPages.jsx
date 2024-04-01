@@ -3,6 +3,7 @@ import s from './NotFoundPages.module.scss';
 import { Link } from 'react-router-dom';
 import { sprite } from 'shared/icons';
 import Anima from '../images/Anima.gif';
+import { ROUTES } from 'shared/constants';
 
 const NotFoundPages = () => {
   return (
@@ -15,7 +16,7 @@ const NotFoundPages = () => {
             На головну
           </Link>
           {/* <LinkButton className={s.productLink} title={'До покупок'} /> */}
-          <Link to="/products" className={s.productLink}>
+          <Link to={`${ROUTES.PRODUCTS}?page=1`} className={s.productLink}>
             До поkупоk
             <svg>
               <use href={sprite + '#icon-arrow-right'}></use>
