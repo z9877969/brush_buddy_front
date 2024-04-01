@@ -14,6 +14,7 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
           className="product-card-img"
           onSwiper={(swiper) => {
             swiper.hostEl.style.height = '100%';
+            swiper.wrapperEl.style.width = 'calc(100% - 2px)';
           }}
           direction={'vertical'}
           scrollbar={true}
