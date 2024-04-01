@@ -19,6 +19,11 @@
   border-radius: 100%;
 }
 
+.disabledLabels {
+  background-color: gray !important;
+  opacity: 0.3;
+}
+
 .mlBlock {
   display: flex;
   flex-direction: row;

@@ -24,7 +24,12 @@ export const Flavor = ({ productFlavours, value, setFlavor, setQuantity }) => {
             >
               <label
                 style={{ backgroundColor: item.colorMarker }}
-                className={s.labels}
+                className={clsx(
+                  s.labels,
+                  productFlavours[i].inStock === true
+                    ? s.labels
+                    : s.disabledLabels
+                )}
               >
                 <input
                   className={s.radioBtn}
