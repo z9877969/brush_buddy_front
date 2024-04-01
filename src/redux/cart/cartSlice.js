@@ -20,7 +20,7 @@ const cartSlice = createSlice({
     addProduct(state, action) {
       state.submitForm = false;
       const { id, category, flavor, volume, color, amount } = action.payload;
-
+      //знаходимо індекс товару(перевірка на наявність в корзині)
       const existingProductIndex = state.products.findIndex((product) => {
         if (flavor && volume) {
           return (
@@ -40,29 +40,43 @@ const cartSlice = createSlice({
       });
 
       if (existingProductIndex !== -1) {
-        // Якщо товар вже існує, викликаємо changeProductAmount
+        // якщо товар вже існує, викликаємо changeProductAmount
         const existingProduct = state.products[existingProductIndex];
         let newCount;
-        if (amount && amount > 1) {
-          newCount = amount;
+
+        // чи передано нове значення amount
+        if (amount !== undefined) {
+          // сума існуючого amount та переданого amount більше за quantity
+          if (existingProduct.amount + amount > existingProduct.quantity) {
+            newCount = existingProduct.quantity;
+          } else {
+            newCount = existingProduct.amount + amount;
+          }
         } else {
-          newCount = existingProduct.amount + 1;
+          // amount не передано
+          if (existingProduct.amount + 1 > existingProduct.quantity) {
+            newCount = existingProduct.quantity;
+          } else {
+            newCount = existingProduct.amount + 1;
+          }
         }
+
         state.products[existingProductIndex].amount = newCount;
         state.products[existingProductIndex].isDisabledIncrement =
           newCount === existingProduct.quantity;
       } else {
-        // Якщо товару ще немає, додаємо його
+        // якщо товару ще немає, додаємо його
         state.products.push({
           ...action.payload,
-          amount: amount ? amount : 1,
+          amount: amount !== undefined ? amount : 1,
           isDisabledIncrement:
-            amount && amount === action.payload.quantity ? true : false,
+            amount !== undefined ? amount === action.payload.quantity : false,
         });
       }
 
       state.totalPrice = totalPrice(state.products);
     },
+
     removeProduct(state, action) {
       const { id, category, flavor, volume, color } = action.payload;
       state.products = state.products.filter(
