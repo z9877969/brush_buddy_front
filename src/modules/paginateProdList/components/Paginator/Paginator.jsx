@@ -9,14 +9,14 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
-  const params = new URLSearchParams(location.search);
-  const page = parseInt(params.get('page'));
-
   useEffect(() => {
-    if (customkey) {
-      setCurrentPage(1);
-    } else {
+    const params = new URLSearchParams(location.search);
+    const page = parseInt(params.get('page'));
+
+    if (!isNaN(page) && page > 0) {
       setCurrentPage(page);
+    } else {
+      setCurrentPage(1);
     }
     // eslint-disable-next-line
   }, [customkey]);
