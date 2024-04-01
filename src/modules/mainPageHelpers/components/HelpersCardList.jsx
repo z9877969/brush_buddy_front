@@ -10,7 +10,6 @@ import { Navigation } from 'swiper/modules';
 import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
 
 import s from './MainPageHelpers.module.scss';
-import { ROUTES } from 'shared/constants';
 
 const HelpersCardList = ({
   helpersCardData,
