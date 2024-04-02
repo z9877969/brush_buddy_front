@@ -1,8 +1,6 @@
 .div {
   max-width: 343px;
-  margin-top: 32px;
   overflow: auto;
-  margin-bottom: 32px;
   scrollbar-width: auto;
 
   @include media(tablet) {
@@ -11,7 +9,6 @@
   @include media(desktop) {
     max-width: unset;
     min-width: 324px;
-    margin-top: 64px;
   }
 }
 .div::-webkit-scrollbar {
