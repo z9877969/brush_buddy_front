@@ -59,7 +59,7 @@ export const brandsOptions = [
   { value: 'brushbuddy', label: 'BrushBuddy' },
 ];
 export const sortByOptions = [
-  { value: null, label: 'Оберіть' },
+  { value: null, label: 'Товари' },
   { value: 'increment', label: 'Ціна за зростанням' },
   { value: 'new', label: 'Новинки' },
   { value: 'actions', label: 'Акції' },
