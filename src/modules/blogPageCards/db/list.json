@@ -19,9 +19,8 @@
   },
   {
     "id": "4",
-    "img1x": "../images/IMG1x-4.jpg",
-    "img2x": "../images/IMG2x-4.jpg",
-    "title": "Як вибрати зубну щітку?"
+    "imgUrl": "https://res.cloudinary.com/dmfu2r8kg/image/upload/v1712058532/blogs/brushbuddy_blog_3.1_jkvpue.jpg",
+    "title": "Переваги та недоліки електричних зубних щіток"
   },
   {
     "id": "5",

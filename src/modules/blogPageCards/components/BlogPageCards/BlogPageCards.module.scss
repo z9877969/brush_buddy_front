@@ -38,6 +38,15 @@ div::-webkit-scrollbar-thumb {
   color: #1f1f1f;
   @include font(32, 36);
 }
+.imageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 302px;
+  height: 180px;
+  border-radius: 24px;
+  overflow: hidden;
+}
 .picture {
   width: 302px;
 }
