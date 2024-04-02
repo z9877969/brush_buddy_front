@@ -10,8 +10,8 @@ const getBlogListApi = () => {
   return new Promise((resolve) => {
     const id = setTimeout(() => {
       resolve(list);
+      clearTimeout(id);
     }, 500);
-    clearTimeout(id);
   });
 };
 
@@ -22,13 +22,15 @@ const BlogPageCards = () => {
   useEffect(() => {
     setIsLoading(true);
     getBlogListApi()
-      .then((data) => setBlogList(data))
+      .then((data) => {
+        setBlogList(data);
+      })
       // eslint-disable-next-line
       .catch((err) => console.log(err.message))
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [blogList]);
 
   return (
     <>
