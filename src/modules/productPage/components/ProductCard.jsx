@@ -12,6 +12,7 @@ import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
 import s from './ProductCard.module.scss';
 import { ProductsList } from 'modules/mainPageToShopping';
 import { useSelector } from 'react-redux';
+import ProductDescriptionList from './ProductDescriptionList/ProductDescriptionList';
 
 const ProductCard = ({ product }) => {
   const [mls, setMl] = useState(null);
@@ -67,10 +68,20 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     if (!Object.keys(product).length) return;
-    setColor(product.colors[0]);
-    setFlavor(product.flavors[0]);
-    setMl(product.volume[0]);
+    setColor(product.colors[0] || null);
+    setFlavor(product.flavors[0] || null);
+    setMl(product.volume[0] || null);
   }, [product]);
+
+  const isInStockProduct =
+    flavor || color
+      ? Boolean(
+          flavor?.inStock ||
+            color?.inStock ||
+            flavor?.quantity ||
+            color?.quantity
+        )
+      : false;
 
   return (
     <Container>
@@ -108,18 +119,14 @@ const ProductCard = ({ product }) => {
                 <p
                   className={clsx(
                     s.salePrice,
-                    flavor?.inStock === false || color?.inStock === false
-                      ? s.notHaveItemPrice
-                      : s.salePrice
+                    !isInStockProduct ? s.notHaveItemPrice : s.salePrice
                   )}
                 >
                   {product.salePrice}
                   <span
                     className={clsx(
                       s.grn,
-                      flavor?.inStock === false || color?.inStock === false
-                        ? s.notHaveItemPrice
-                        : s.grn
+                      !isInStockProduct ? s.notHaveItemPrice : s.grn
                     )}
                   >
                     грн
@@ -128,18 +135,14 @@ const ProductCard = ({ product }) => {
                 <p
                   className={clsx(
                     s.notSalePrice,
-                    flavor?.inStock === false || color?.inStock === false
-                      ? s.notHaveItemSalePrice
-                      : s.notSalePrice
+                    !isInStockProduct ? s.notHaveItemSalePrice : s.notSalePrice
                   )}
                 >
                   {product.price}
                   <span
                     className={clsx(
                       s.grn,
-                      flavor?.inStock === false || color?.inStock === false
-                        ? s.notHaveItemSalePrice
-                        : s.grn
+                      !isInStockProduct ? s.notHaveItemSalePrice : s.grn
                     )}
                   >
                     грн
@@ -150,18 +153,14 @@ const ProductCard = ({ product }) => {
               <p
                 className={clsx(
                   s.price,
-                  flavor?.inStock === false || color?.inStock === false
-                    ? s.notHavePrices
-                    : s.price
+                  !isInStockProduct ? s.notHavePrices : s.price
                 )}
               >
                 {product.price}
                 <span
                   className={clsx(
                     s.grn,
-                    flavor?.inStock === false || color?.inStock === false
-                      ? s.notHavePrices
-                      : s.grn
+                    !isInStockProduct ? s.notHavePrices : s.grn
                   )}
                 >
                   грн
@@ -177,7 +176,7 @@ const ProductCard = ({ product }) => {
               />
             ) : null}
             {product.colors?.length > 0 &&
-            product.colors[0].color.length > 0 &&
+            product.colors[0].color !== '' &&
             color ? (
               <Color
                 productColors={product.colors}
@@ -195,17 +194,12 @@ const ProductCard = ({ product }) => {
               />
             ) : null}
             <p className={s.itemHave}>
-              {flavor?.quantity || color?.quantity > 0 ? (
+              {isInStockProduct ? (
                 <span className={s.haveItem}>Є в наявності</span>
               ) : (
                 <span className={s.notHaveItem}>Товар закінчився</span>
               )}
             </p>
-            {/* <Counter
-                    value={Number(product.quantit)}
-                    changeCount={Number(product.quantit)}
-                    disabledIncrem={Number(product.quantity)}
-                  /> */}
             <div className={s.cartBlock}>
               <div className={s.buttonBlock}>
                 <button
@@ -226,8 +220,10 @@ const ProductCard = ({ product }) => {
                   }}
                   disabled={
                     product.flavors?.length > 0
-                      ? quantity === flavor?.quantity
-                      : quantity === color?.quantity
+                      ? quantity >= flavor?.quantity
+                      : product.colors?.length > 0
+                        ? quantity >= color?.quantity
+                        : !isInStockProduct
                   }
                   type="button"
                 >
@@ -240,12 +236,7 @@ const ProductCard = ({ product }) => {
                 <button
                   className={clsx(
                     s.btnTest,
-                    flavor?.inStock === false ||
-                      color?.inStock === false ||
-                      (product.colors.length === 0 &&
-                        product.flavors.length === 0)
-                      ? s.btnDontWorking
-                      : s.btnTest
+                    !isInStockProduct ? s.btnDontWorking : s.btnTest
                   )}
                   type="submit"
                   onClick={() => {
@@ -264,11 +255,7 @@ const ProductCard = ({ product }) => {
                       name: mls?.name ?? flavor?.name ?? color?.name,
                     });
                   }}
-                  disabled={
-                    (flavor?.quantity === 0 && color?.quantity === 0) ||
-                    (product.colors.length === 0 &&
-                      product.flavors.length === 0)
-                  }
+                  disabled={!isInStockProduct}
                 >
                   В кошик
                   <svg width="20" height="20">
@@ -277,11 +264,32 @@ const ProductCard = ({ product }) => {
                 </button>
               </div>
             </div>
-            <div>
+            <div className={s.descrWrapper}>
               <p className={s.description}>Опис</p>
-              <p className={s.info}>{product.description}</p>
+              {typeof product?.description === 'string' ? (
+                <p className={s.info}>{product.description}</p>
+              ) : (
+                product.description?.map(
+                  ({ title, items, paragraph }, i, arr) =>
+                    paragraph ? (
+                      <p
+                        className={clsx(s.info, i < arr.length - 1 && s.mb)}
+                        key={i}
+                      >
+                        {paragraph}
+                      </p>
+                    ) : (
+                      <ProductDescriptionList
+                        key={i}
+                        title={title}
+                        items={items}
+                        mb={i < arr.length - 1}
+                      />
+                    )
+                )
+              )}
             </div>
-            <div>
+            <div className={s.recomendationWrapper}>
               <p className={s.recomendation}>Рекомендація</p>
               <p className={s.recomendationInfo}>{product.recomendation}</p>
             </div>

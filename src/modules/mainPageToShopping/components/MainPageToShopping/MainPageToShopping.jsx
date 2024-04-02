@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import ProductsList from '../ProductsList/ProductsList';
 import { Container, LinkButton, MainTitle } from 'shared/components';
 import s from './MainPageToShopping.module.scss';
+import { ROUTES } from 'shared/constants';
 
 const MainPageToShopping = () => {
   const products = useSelector((s) => s.products.list);
@@ -51,7 +52,7 @@ const MainPageToShopping = () => {
         <LinkButton
           title={'Більше товарів'}
           className={s.productsBtn}
-          to={'/products'}
+          to={`${ROUTES.PRODUCTS}?page=1`}
         />
       </Container>
     </section>

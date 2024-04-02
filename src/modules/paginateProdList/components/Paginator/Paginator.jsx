@@ -1,17 +1,33 @@
 import { sprite } from 'shared/icons';
 import s from './Paginator.module.scss';
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const Paginator = ({ totalPages, onPageChange, key }) => {
+const Paginator = ({ totalPages, onPageChange, customkey }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [key]);
+    const params = new URLSearchParams(location.search);
+    const page = parseInt(params.get('page'));
+
+    if (!isNaN(page) && page > 0) {
+      setCurrentPage(page);
+    } else {
+      setCurrentPage(1);
+    }
+    // eslint-disable-next-line
+  }, [customkey]);
 
   useEffect(() => {
     onPageChange(currentPage);
-  }, [currentPage, onPageChange, totalPages]);
+  }, [currentPage, onPageChange]);
+
+  useEffect(() => {
+    setSearchParams({ page: currentPage });
+  }, [currentPage, setSearchParams, searchParams]);
 
   const changePage = async (pageNumber) => {
     setCurrentPage(pageNumber);

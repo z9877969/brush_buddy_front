@@ -10,7 +10,7 @@ export const Flavor = ({ productFlavours, value, setFlavor, setQuantity }) => {
     <>
       <p className={s.mlText}>
         Виберіть смак:
-        <span className={s.selectFlavorText}>{value.colorMarker}</span>
+        <span className={s.selectFlavorText}>{value.name}</span>
       </p>
       <ul className={s.mlBlock}>
         {productFlavours.map((item, i) => {
@@ -19,18 +19,23 @@ export const Flavor = ({ productFlavours, value, setFlavor, setQuantity }) => {
               key={i}
               className={clsx(
                 s.item,
-                item.flavor === value.flavor ? s.itemFocus : s.item
+                item.colorMarker === value.colorMarker ? s.itemFocus : s.item
               )}
             >
               <label
                 style={{ backgroundColor: item.colorMarker }}
-                className={s.labels}
+                className={clsx(
+                  s.labels,
+                  productFlavours[i].inStock === true
+                    ? s.labels
+                    : s.disabledLabels
+                )}
               >
                 <input
                   className={s.radioBtn}
                   type="radio"
                   name="flavor"
-                  value={item.color}
+                  value={item.colorMarker}
                   onChange={() => handleFlavorChange(item)}
                 />
               </label>

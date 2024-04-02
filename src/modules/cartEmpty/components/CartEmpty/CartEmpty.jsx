@@ -13,7 +13,7 @@ const CartEmpty = () => {
       <LinkButton
         title={'До покупок'}
         className={s.linkButton}
-        to={ROUTES.PRODUCTS}
+        to={`${ROUTES.PRODUCTS}?page=1`}
       />
     </Container>
   );

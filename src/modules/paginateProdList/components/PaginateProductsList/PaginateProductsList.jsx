@@ -9,6 +9,8 @@ const PaginateProdList = ({ products }) => {
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 12;
+  const [productsChanged, setProductsChanged] = useState(false);
+  const [prevProductsLength, setPrevProductsLength] = useState(0);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -22,6 +24,16 @@ const PaginateProdList = ({ products }) => {
     scrollToTop();
   };
 
+  useEffect(() => {
+    if (products.length !== prevProductsLength) {
+      setProductsChanged(true);
+      setPrevProductsLength(products.length);
+    }
+    if (prevProductsLength === 0) {
+      setProductsChanged(false);
+    }
+  }, [products, prevProductsLength]);
+
   return (
     <div className={s.blockPaginateProductsList}>
       <ProdList products={currentItems} />
@@ -30,6 +42,7 @@ const PaginateProdList = ({ products }) => {
           totalPages={pageCount}
           onPageChange={handlePageClick}
           key={products.length}
+          customkey={productsChanged}
         />
       )}
     </div>

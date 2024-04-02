@@ -10,7 +10,6 @@ import { Navigation } from 'swiper/modules';
 import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
 
 import s from './MainPageHelpers.module.scss';
-import { ROUTES } from 'shared/constants';
 
 const HelpersCardList = ({
   helpersCardData,
@@ -61,7 +60,7 @@ const HelpersCardList = ({
       {helpersCardData.map(
         ({ id, title, price, text, images, quantity, category }) => (
           <SwiperSlide key={id}>
-            <Link className={s.link} to={ROUTES.PRODUCTS}>
+            <Link className={s.link} to={`/products/${id}`}>
               <div className={s.mainHelpersBox}>
                 <div className={s.boxTitleText}>
                   <div className={s.helpersBoxTitle}>

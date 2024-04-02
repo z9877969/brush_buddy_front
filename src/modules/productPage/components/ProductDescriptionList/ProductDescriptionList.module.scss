@@ -1,0 +1,18 @@
+.wrapper {
+  margin-bottom: 24px;
+
+  &.mb {
+    margin-bottom: 12px;
+  }
+}
+
+.title {
+  margin-bottom: 12px;
+}
+.list {
+  list-style: disc;
+  padding-left: 20px;
+}
+.item {
+  text-transform: lowercase;
+}

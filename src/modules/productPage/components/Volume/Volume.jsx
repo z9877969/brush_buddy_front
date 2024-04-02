@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import s from './Volume.module.scss';
 
 export const Volume = ({ productVolume, value, setMls, setQuantity }) => {
+  const { name } = value;
   const handleVolumeChange = (item) => {
     setMls(item);
     setQuantity(1);
@@ -16,15 +17,16 @@ export const Volume = ({ productVolume, value, setMls, setQuantity }) => {
               key={i}
               className={clsx(
                 s.labels,
-                item === value ? s.labelsFocus : s.labels
+                item.name === name ? s.labelsFocus : s.labels
               )}
             >
-              <span className={s.ml}>{item}мл</span>
+              <span className={s.ml}>{item.name}мл</span>
               <input
                 className={s.radioBtn}
                 type="radio"
                 name="ml"
-                value={item}
+                value={item.name}
+                checked={name === item.name}
                 onChange={() => handleVolumeChange(item)}
               />
             </label>

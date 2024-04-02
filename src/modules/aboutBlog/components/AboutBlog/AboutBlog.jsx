@@ -30,7 +30,7 @@ const AboutBlog = () => {
 
   return (
     <section className={css.section}>
-      <Container>
+      <Container className={css.wrapper}>
         <div className={css.blogContent}>
           <div className={css.textBox}>
             <p className={css.text}>
