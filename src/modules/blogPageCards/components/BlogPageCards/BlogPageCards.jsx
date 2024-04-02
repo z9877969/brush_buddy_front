@@ -1,133 +1,77 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import s from './BlogPageCards.module.scss';
-import { ROUTES } from 'shared/constants';
-import list from 'modules/blogPageCards/db/list.json';
-import { useState } from 'react';
 import { Picture } from 'shared/components';
+import { ROUTES } from 'shared/constants';
+import list from '../../db/list.json';
+import * as imageDict from '../../images';
+import s from './BlogPageCards.module.scss';
 
-//images
-import { img1x_1 } from '../../images/index';
-import { img2x_1 } from '../../images/index';
-import { img1x_2 } from '../../images/index';
-import { img2x_2 } from '../../images/index';
-import { img1x_3 } from '../../images/index';
-import { img2x_3 } from '../../images/index';
-import { img1x_4 } from '../../images/index';
-import { img2x_4 } from '../../images/index';
-import { img1x_5 } from '../../images/index';
-import { img2x_5 } from '../../images/index';
+const getBlogListApi = () => {
+  return new Promise((resolve) => {
+    const id = setTimeout(() => {
+      resolve(list);
+    }, 500);
+    clearTimeout(id);
+  });
+};
 
 const BlogPageCards = () => {
-  const [blogList] = useState(list);
+  const [blogList, setBlogList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getBlogListApi()
+      .then((data) => setBlogList(data))
+      // eslint-disable-next-line
+      .catch((err) => console.log(err.message))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
-    <div className={s.div}>
-      <h2 className={s.title}>Статті блогу</h2>
-      <ul className={s.list}>
-        <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(1)}>
-            <Picture
-              className={s.picture}
-              mob1x={img1x_1}
-              mob2x={img2x_1}
-              tab1x={img1x_1}
-              tab2x={img2x_1}
-              desk1x={img1x_1}
-              desk2x={img2x_1}
-              defaultImg={img1x_1}
-              width={302}
-              alt="photo"
-            />
-            <h3 className={s.itemTitle}>{blogList[0].title}</h3>
-          </Link>
-        </li>
-        <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(2)}>
-            <Picture
-              className={s.picture}
-              mob1x={img1x_2}
-              mob2x={img2x_2}
-              tab1x={img1x_2}
-              tab2x={img2x_2}
-              desk1x={img1x_2}
-              desk2x={img2x_2}
-              defaultImg={img1x_2}
-              width={302}
-              alt="photo"
-            />
-            <h3 className={s.itemTitle}>{blogList[1].title}</h3>
-          </Link>
-        </li>
-        <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(3)}>
-            <Picture
-              className={s.picture}
-              mob1x={img1x_3}
-              mob2x={img2x_3}
-              tab1x={img1x_3}
-              tab2x={img2x_3}
-              desk1x={img1x_3}
-              desk2x={img2x_3}
-              defaultImg={img1x_3}
-              width={302}
-              alt="photo"
-            />
-            <h3 className={s.itemTitle}>{blogList[2].title}</h3>
-          </Link>
-        </li>
-        <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[3].id)}>
-            <Picture
-              className={s.picture}
-              mob1x={img1x_4}
-              mob2x={img2x_4}
-              tab1x={img1x_4}
-              tab2x={img2x_4}
-              desk1x={img1x_4}
-              desk2x={img2x_4}
-              defaultImg={img1x_4}
-              width={302}
-              alt="photo"
-            />
-            <h3 className={s.itemTitle}>{blogList[3].title}</h3>
-          </Link>
-        </li>
-        <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[4].id)}>
-            <Picture
-              className={s.picture}
-              mob1x={img1x_5}
-              mob2x={img2x_5}
-              tab1x={img1x_5}
-              tab2x={img2x_5}
-              desk1x={img1x_5}
-              desk2x={img2x_5}
-              defaultImg={img1x_5}
-              width={302}
-              alt="photo"
-            />
-            <h3 className={s.itemTitle}>{blogList[4].title}</h3>
-          </Link>
-        </li>
-        <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[5].id)}>
-            <Picture
-              className={s.picture}
-              mob1x={img1x_5}
-              mob2x={img2x_5}
-              tab1x={img1x_5}
-              tab2x={img2x_5}
-              desk1x={img1x_5}
-              desk2x={img2x_5}
-              defaultImg={img1x_5}
-              width={302}
-              alt="photo"
-            />
-            <h3 className={s.itemTitle}>{blogList[5].title}</h3>
-          </Link>
-        </li>
-      </ul>
-    </div>
+    <>
+      {/* run Loader or not run Loader if used LoaderProvider */}
+      {isLoading && null}
+      <div className={s.div}>
+        <h2 className={s.title}>Статті блогу</h2>
+        <ul className={s.list}>
+          {blogList.length > 0 &&
+            blogList.map(({ title, imgUrl }, idx) => (
+              <li key={idx}>
+                <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(idx + 1)}>
+                  <div className={s.imageWrapper}>
+                    {imgUrl ? (
+                      <img
+                        src={imgUrl}
+                        alt={'Зображення статті ' + title}
+                        width={302}
+                        height={180}
+                        className={s.picture}
+                      />
+                    ) : (
+                      <Picture
+                        className={s.picture}
+                        mob1x={imageDict['img1x_' + (idx + 1)]}
+                        mob2x={imageDict['img2x_' + (idx + 1)]}
+                        tab1x={imageDict['img1x_' + (idx + 1)]}
+                        tab2x={imageDict['img2x_' + (idx + 1)]}
+                        desk1x={imageDict['img1x_' + (idx + 1)]}
+                        desk2x={imageDict['img2x_' + (idx + 1)]}
+                        defaultImg={imageDict['img1x_' + (idx + 1)]}
+                        width={302}
+                        alt="photo"
+                      />
+                    )}
+                  </div>
+                  <h3 className={s.itemTitle}>{title}</h3>
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

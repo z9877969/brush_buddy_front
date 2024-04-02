@@ -8,3 +8,5 @@ export { default as img1x_4 } from './IMG1x-4.jpg';
 export { default as img2x_4 } from './IMG2x-4.jpg';
 export { default as img1x_5 } from './IMG1x-5.jpg';
 export { default as img2x_5 } from './IMG2x-5.jpg';
+export { default as img1x_6 } from './IMG1x-5.jpg';
+export { default as img2x_6 } from './IMG2x-5.jpg';
