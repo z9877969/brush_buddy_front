@@ -1,5 +1,5 @@
 import ProductsPageFilter from 'modules/productsPageFilter/components/ProductsPageFilter/ProductsPageFilter';
-
+import { isEqual } from 'lodash';
 import { useSelector } from 'react-redux';
 import { PaginateProdList } from 'modules/paginateProdList/index.js';
 import { ProductsPageWrapper } from 'modules/productsPageWrapper';
@@ -19,6 +19,7 @@ const ProductsPage = () => {
   );
 
   const productType = search.get('productType');
+  const hasChanged = !isEqual(filter, initialFilterValues);
 
   const filteredProducts = useMemo(() => {
     if (!filter) return products.slice();
@@ -88,9 +89,9 @@ const ProductsPage = () => {
           break;
       }
     }
-    const filteredByAvailability = sortByAvailability(filteredList);
+    const sortProdByAvailability = sortByAvailability(filteredList);
 
-    return filteredByAvailability;
+    return sortProdByAvailability;
   }, [filter, products]);
 
   useEffect(() => {
@@ -132,12 +133,18 @@ const ProductsPage = () => {
         filter={filter}
       />
       <div>
-        {typeof filter === 'object' &&
+        {/* {typeof filter === 'object' &&
           filter !== null &&
           Object.keys(filter).length > 0 && (
             <SelectedFilters filter={filter} setFilter={setFilter} />
-          )}
-        <NumberOfProducts productsLength={filteredProducts.length} />
+          )} */}
+        {hasChanged && (
+          <>
+            <SelectedFilters filter={filter} setFilter={setFilter} />
+            <NumberOfProducts productsLength={filteredProducts.length} />
+          </>
+        )}
+        {/* <NumberOfProducts productsLength={filteredProducts.length} /> */}
         <PaginateProdList products={filteredProducts} />
       </div>
     </ProductsPageWrapper>
