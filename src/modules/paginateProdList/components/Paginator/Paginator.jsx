@@ -42,6 +42,22 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
       showDots = false;
     }
 
+    if (totalPages === showPage + 1) {
+      // якщо к-сть сторінок більша від showPage тільки на 1
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(
+          <button
+            key={i}
+            onClick={() => changePage(i)}
+            className={`${s.pageNum} ${s.paginatFigure} ${currentPage === i ? s.active : ''}`}
+          >
+            {i}
+          </button>
+        );
+      }
+      return <div className={s.blockFigure}>{pages}</div>;
+    }
+
     for (let i = 1; i <= visiblePages; i++) {
       pages.push(
         <button
