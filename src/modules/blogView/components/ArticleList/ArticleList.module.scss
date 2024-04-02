@@ -1,11 +1,32 @@
-.style {
+.list {
   list-style: disc;
   list-style-position: inside;
   padding-left: 10px;
   color: #49494a;
   font-weight: 500;
   @include font(16, 24);
+  &.mbMin {
+    margin-bottom: calc(1em / 2 - 24px);
+  }
+  &.mtMin {
+    margin-top: calc(1em / 2 - 24px);
+  }
+
   @include media(tablet) {
+    &.mbMin {
+      margin-bottom: calc(12px - 24px);
+    }
+    &.mtMin {
+      margin-top: calc(12px - 24px);
+    }
     @include font(18, 28);
+  }
+  @include media(desktop) {
+    &.mbMin {
+      margin-bottom: calc(12px - 32px);
+    }
+    &.mtMin {
+      margin-top: calc(12px - 32px);
+    }
   }
 }

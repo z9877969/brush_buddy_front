@@ -4,6 +4,11 @@
   @include font(16, 24);
 }
 
+.name {
+  display: flex;
+  align-items: center;
+}
+
 .name::after {
   content: '';
   display: inline-block;
