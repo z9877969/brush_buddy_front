@@ -7,15 +7,15 @@
   },
   {
     "id": "2",
-    "img1x": "../images/IMG1x-2.jpg",
-    "img2x": "../images/IMG2x-2.jpg",
-    "title": "Як вибрати зубну щітку для домашнього улюбленця?"
-  },
-  {
-    "id": "3",
     "img1x": "../images/IMG1x-3.jpg",
     "img2x": "../images/IMG2x-3.jpg",
     "title": "Профілактика та гігієна"
+  },
+  {
+    "id": "3",
+    "img1x": "../images/IMG1x-2.jpg",
+    "img2x": "../images/IMG2x-2.jpg",
+    "title": "Як вибрати зубну щітку для домашнього улюбленця?"
   },
   {
     "id": "4",
