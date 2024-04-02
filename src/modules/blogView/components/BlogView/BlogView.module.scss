@@ -1,9 +1,22 @@
-.paragraph {
-  margin-bottom: 1em;
-}
+.wrapper {
+  display: flex;
+  min-height: calc(100vh / 2);
+  flex-direction: column;
+  row-gap: 32px;
+  padding-top: 32px;
+  padding-bottom: 48px;
 
-.blog {
+  @include media(tablet) {
+    row-gap: 48px;
+    padding-top: 48px;
+    padding-bottom: 68px;
+  }
+
   @include media(desktop) {
-    display: flex;
+    flex-direction: row;
+    row-gap: unset;
+    column-gap: 32px;
+    padding-top: 64px;
+    padding-bottom: 100px;
   }
 }

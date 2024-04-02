@@ -1,14 +1,11 @@
-.picture {
-  padding-bottom: 24px;
-  @include media(tablet) {
-    padding-bottom: 24px;
-  }
-  @include media(desktop) {
-    padding-bottom: 32px;
-  }
-}
-.article {
-  @include media(desktop) {
-    padding-left: 40px;
+.block {
+  &:not(:last-child) {
+    margin-bottom: 16px;
+    @include media(tablet) {
+      margin-bottom: 24px;
+    }
+    @include media(desktop) {
+      margin-bottom: 32px;
+    }
   }
 }

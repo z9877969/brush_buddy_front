@@ -42,7 +42,6 @@ const ArticleParagraph = ({ content, accent }) => {
   return (
     <div>
       <p className={css.paragraph}>{replaceJSX(content, accent)}</p>
-      <br />
     </div>
   );
 };

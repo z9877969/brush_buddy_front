@@ -25,7 +25,7 @@ const BlogPageCards = () => {
       <h2 className={s.title}>Статті блогу</h2>
       <ul className={s.list}>
         <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[0].id)}>
+          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(1)}>
             <Picture
               className={s.picture}
               mob1x={img1x_1}
@@ -42,7 +42,7 @@ const BlogPageCards = () => {
           </Link>
         </li>
         <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[1].id)}>
+          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(2)}>
             <Picture
               className={s.picture}
               mob1x={img1x_2}
@@ -59,7 +59,7 @@ const BlogPageCards = () => {
           </Link>
         </li>
         <li>
-          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(blogList[2].id)}>
+          <Link className={s.cardLink} to={ROUTES.GET_BLOG_ID(3)}>
             <Picture
               className={s.picture}
               mob1x={img1x_3}

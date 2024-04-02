@@ -4,10 +4,9 @@ const ArticleAbout = ({ content }) => {
   return (
     <>
       <div className={css.about}>
-        <p className={css.name}>{content[0]}</p>
-        <p>{content[1]}</p>
+        <p className={css.name}>{content.author}</p>
+        <p>{content.date}</p>
       </div>
-      <br />
     </>
   );
 };
