@@ -35,16 +35,19 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
 
   const renderPagination = () => {
     const pages = [];
-    const showPage = 3;
+    let showPage = 3;
     const visiblePages = Math.min(totalPages, showPage);
-    const showDots = totalPages > showPage;
+    let showDots = totalPages > showPage;
+    if (totalPages === showPage) {
+      showDots = false;
+    }
 
     for (let i = 1; i <= visiblePages; i++) {
       pages.push(
         <button
           key={i}
           onClick={() => changePage(i)}
-          className={`${s.pageNum} ${s.paginatFigure} ${currentPage === i ? s.active : ''}`}
+          className={`${s.pageNum} ${s.paginatFigure} ${currentPage === i ? s.active : ''} ${i > 1 && currentPage > showPage ? s.visuallyHidden : ''}`}
         >
           {i}
         </button>
@@ -58,6 +61,7 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
         </button>
       );
     }
+
     if (currentPage > showPage) {
       pages.push(
         <button
@@ -68,7 +72,12 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
           {currentPage}
         </button>
       );
-      if (currentPage > showPage && currentPage !== totalPages) {
+
+      if (
+        currentPage > showPage &&
+        currentPage !== totalPages &&
+        totalPages !== showPage
+      ) {
         pages.push(
           <button key="dots" className={s.pageNum} disabled>
             <span>...</span>
@@ -76,6 +85,7 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
         );
       }
     }
+
     if (showDots && currentPage !== totalPages) {
       pages.push(
         <button
@@ -90,12 +100,13 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
 
     return <div className={s.blockFigure}>{pages}</div>;
   };
+
   if (totalPages < 2) {
     return null;
   }
 
   return (
-    <div className={s.boxpagination}>
+    <div className={`${s.boxpagination} ${totalPages > 3 ? s.fixStyle : ''}`}>
       <button
         className={s.pageNum}
         onClick={() => changePage(currentPage - 1)}
