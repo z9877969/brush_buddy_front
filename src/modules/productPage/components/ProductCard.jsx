@@ -176,7 +176,7 @@ const ProductCard = ({ product }) => {
               />
             ) : null}
             {product.colors?.length > 0 &&
-            product.colors[0].color.length > 0 &&
+            product.colors[0].color !== '' &&
             color ? (
               <Color
                 productColors={product.colors}
@@ -200,11 +200,6 @@ const ProductCard = ({ product }) => {
                 <span className={s.notHaveItem}>Товар закінчився</span>
               )}
             </p>
-            {/* <Counter
-                    value={Number(product.quantit)}
-                    changeCount={Number(product.quantit)}
-                    disabledIncrem={Number(product.quantity)}
-                  /> */}
             <div className={s.cartBlock}>
               <div className={s.buttonBlock}>
                 <button
@@ -269,7 +264,7 @@ const ProductCard = ({ product }) => {
                 </button>
               </div>
             </div>
-            <div>
+            <div className={s.descrWrapper}>
               <p className={s.description}>Опис</p>
               {typeof product?.description === 'string' ? (
                 <p className={s.info}>{product.description}</p>
@@ -294,7 +289,7 @@ const ProductCard = ({ product }) => {
                 )
               )}
             </div>
-            <div>
+            <div className={s.recomendationWrapper}>
               <p className={s.recomendation}>Рекомендація</p>
               <p className={s.recomendationInfo}>{product.recomendation}</p>
             </div>
