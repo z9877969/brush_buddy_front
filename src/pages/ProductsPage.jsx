@@ -133,18 +133,12 @@ const ProductsPage = () => {
         filter={filter}
       />
       <div>
-        {/* {typeof filter === 'object' &&
-          filter !== null &&
-          Object.keys(filter).length > 0 && (
-            <SelectedFilters filter={filter} setFilter={setFilter} />
-          )} */}
         {hasChanged && (
           <>
             <SelectedFilters filter={filter} setFilter={setFilter} />
             <NumberOfProducts productsLength={filteredProducts.length} />
           </>
         )}
-        {/* <NumberOfProducts productsLength={filteredProducts.length} /> */}
         <PaginateProdList products={filteredProducts} />
       </div>
     </ProductsPageWrapper>
