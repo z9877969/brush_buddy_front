@@ -1,17 +1,24 @@
 .boxpagination {
   display: flex;
-  padding: 32px 16px 48px 16px;
+  padding: 32px 0px 48px 0px;
   align-items: center;
+  justify-content: center;
+  gap: 24px;
   color: $primary-text-color;
-  justify-content: space-between;
   @include font(18, 24);
   @include media(tablet) {
     @include font(24, 32);
-    padding: 48px 128px 68px 128px;
+    padding: 48px 0px 68px 0px;
+    gap: 32px;
   }
   @include media(desktop) {
     gap: 32px;
-    padding: 64px 250px 100px 250px;
+    padding: 64px 0px 100px 0px;
+  }
+}
+.fixStyle {
+  @include media(to-tablet) {
+    gap: 14px;
   }
 }
 .blockFigure {
@@ -69,4 +76,16 @@
 }
 .paginatDots {
   cursor: not-allowed;
+}
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
