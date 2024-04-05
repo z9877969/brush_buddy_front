@@ -21,6 +21,7 @@ export const sendOrderData = createAsyncThunk(
   'cart/sendOrder',
   async (data, { rejectWithValue }) => {
     try {
+      // const sentOrder = await
       const order = await tgApi.sendMessageTg(data);
       return order;
     } catch (error) {
