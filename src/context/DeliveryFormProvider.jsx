@@ -2,7 +2,7 @@ import { sendOrderData } from '@redux/cart/operationsCart';
 import {
   selectDiscount,
   selectDiscountPersentage,
-  selectProd,
+  selectOrderedProducts,
   selectPromocode,
   selectTotalPrice,
 } from '@redux/cart/selectorsCart';
@@ -21,7 +21,7 @@ const DeliveryFormProvider = ({ children }) => {
   const discountSum = useSelector(selectDiscount); // sum discount
   const discountPercentage = useSelector(selectDiscountPersentage); //value discount
   const promocode = useSelector(selectPromocode);
-  const products = useSelector(selectProd);
+  const products = useSelector(selectOrderedProducts);
   const totalPrice = useSelector(selectTotalPrice);
   const discountedTotal = totalPrice - discountSum;
   const [deliveryLS] = useState(() =>

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { addProduct } from '@redux/cart/cartSlice';
 //import { selectProd } from '@redux/cart/selectorsCart';
 
-const useAddProduct = () => {
+export const useAddProductToCart = () => {
   //const products = useSelector(selectProd);
   const dispatch = useDispatch();
 
@@ -46,5 +46,3 @@ const useAddProduct = () => {
 
   return onClickAdd;
 };
-
-export default useAddProduct;

@@ -6,7 +6,7 @@ import { clsx } from 'clsx';
 import {
   apiGetCity,
   apiGetDepartment,
-} from '@redux/novaPoshta/novaPoshtaSlice';
+} from '@redux/novaPoshta/novaposhtaOperations';
 import {
   selectCityData,
   selectPostOffice,

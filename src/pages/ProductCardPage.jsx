@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductCard } from 'modules/productPage';
-import { firebaseApi as fbApi } from 'services';
+import { brushbuddyApi as bbApi } from 'services';
 import { ROUTES } from 'shared/constants';
 import { Loader } from 'shared/components';
 
@@ -14,8 +14,8 @@ const ProductCardPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fbApi
-      .getProductById(productId)
+    bbApi
+      .getProductByIdApi(productId)
       .then((product) => {
         product ? setProduct(product) : navigate(ROUTES.NOT_FOUND);
       })
