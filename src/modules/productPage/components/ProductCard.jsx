@@ -1,29 +1,83 @@
-// import { useParams } from 'react-router-dom';
-import { Container } from 'shared/components';
-// import productCard from '../data/products.json';
-import { MyImage } from './MyImage/MyImage';
 import { useEffect, useMemo, useState } from 'react';
-import { Volume } from './Volume/Volume';
-import { Color } from './Color/Color';
-import { Flavor } from './Flavor/Flavor';
-import { sprite } from 'shared/icons';
-import clsx from 'clsx';
-import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
-import s from './ProductCard.module.scss';
-import { ProductsList } from 'modules/mainPageToShopping';
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
+import { ProductsList } from 'modules/mainPageToShopping';
+import { Container } from 'shared/components';
+import { MyImage } from './MyImage/MyImage';
+// import { Volume } from './Volume/Volume';
+// import { Color } from './Color/Color';
+// import { Flavor } from './Flavor/Flavor';
 import ProductDescriptionList from './ProductDescriptionList/ProductDescriptionList';
+import { useAddProductToCart } from 'hooks';
+import { sprite } from 'shared/icons';
+import s from './ProductCard.module.scss';
+import ProductOptions from './ProductOptions/ProductOptions';
 
-const ProductCard = ({ product }) => {
+/* const p = {
+  age: ['0to3', '4to6', '6to12'],
+  category: {
+    _id: '66196c344359dc726e3f8824',
+    label: 'Зубна паста',
+    value: 'toothpastes',
+  },
+  description: [
+    {
+      paragraph:
+        "Ця зубна паста має унікальне поєднання ксилітолу і фтору та призначена для захисту зубів від карієсу. Ця смачна м'ятна паста стимулює дітей до чистки зубів! Допомагає відновити рН в роті до здорового рівня.",
+    },
+    {
+      items: [
+        '10% ксиліту;',
+        '1350 ppmF натрію монофторфосфату;',
+        'не містить лаурилсульфат натрію (SLS) та парабенів;',
+        'не містить також пальмової олії, молочних продуктів та сої;',
+        'має низьке піноутворення.',
+      ],
+      title: 'Основні характеристики:',
+    },
+  ],
+  images: [],
+  maker: {
+    _id: '66196d5e4359dc726e3f8830',
+    label: 'Brush-baby',
+    value: 'brushbaby',
+  },
+  recomendation:
+    'Склад цієї пасти дуже добре видно на фото її зворотньої сторони.',
+  subtitle:
+    'Дитяча зубна паста для щоденного використання (від 3 років з високим ризиком розвитку карієсу або з появою 1 постійного зуба).',
+  title: 'Дитяча зубна паста ПОЛУНИЦЯ Brush baby STRAWBERRY',
+  userType: ['child'],
+  variants: [
+    {
+      color: '',
+      flavor: 'Полуниця',
+      marker: '#2ce18a',
+      price: 230,
+      product: '66281d34e91611845a460948',
+      quantity: 5,
+      salePrice: 0,
+      volume: '50мл',
+      watermark: '',
+      _id: '661ce908673498c3793bb3de',
+    },
+  ],
+}; */
+
+const ProductCard = ({ product: { variants, ...product } }) => {
+  const products = useSelector((s) => s.products.list);
+
   const [mls, setMl] = useState(null);
   const [flavor, setFlavor] = useState(null);
   const [color, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
-  const onClickAdd = useAddProduct();
+  const [curVar, setCurVar] = useState(null);
 
-  const type = product.type?.map((item) => item) || '';
-  const products = useSelector((s) => s.products.list);
+  const addProductToCart = useAddProductToCart();
+
+  const age = product.age?.map((item) => item) || '';
+
   const productsInStock = useMemo(() => {
     const productsWithColorsInStock = products.filter((product) => {
       return (
@@ -48,11 +102,11 @@ const ProductCard = ({ product }) => {
   }, [products]);
 
   const recommendedProducts = useMemo(() => {
-    if (!type || !Array.isArray(type)) return [];
+    if (!age || !Array.isArray(age)) return [];
     return productsInStock.filter((prod) =>
-      prod.type.some((item) => type.includes(item))
+      prod.age.some((item) => age.includes(item))
     );
-  }, [productsInStock, type]);
+  }, [productsInStock, age]);
 
   const switchs = useMemo(() => {
     if (!product.watermark) return null;
@@ -67,11 +121,11 @@ const ProductCard = ({ product }) => {
   }, [product]);
 
   useEffect(() => {
-    if (!Object.keys(product).length) return;
-    setColor(product.colors[0] || null);
-    setFlavor(product.flavors[0] || null);
-    setMl(product.volume[0] || null);
-  }, [product]);
+    if (!variants?.length) return;
+    setColor(variants[0].color || null);
+    setFlavor(variants[0].flavor || null);
+    setMl(variants[0].volume || null);
+  }, [variants]);
 
   const isInStockProduct =
     flavor || color
@@ -105,7 +159,7 @@ const ProductCard = ({ product }) => {
                 </svg>
               </div>
               <div>
-                {type.map((el) => (
+                {age.map((el) => (
                   <svg key={el} className={s[el]} width="48" height="24">
                     <use href={`${sprite}#icon-bage-${el}`}></use>
                   </svg>
@@ -114,7 +168,7 @@ const ProductCard = ({ product }) => {
             </div>
             <h2 className={s.title}>{product?.title}</h2>
             <p className={s.paragraph}>{product?.subtitle}</p>
-            {product.salePrice > 0 ? (
+            {variants[0].salePrice > 0 ? (
               <div className={s.saleBlock}>
                 <p
                   className={clsx(
@@ -122,7 +176,7 @@ const ProductCard = ({ product }) => {
                     !isInStockProduct ? s.notHaveItemPrice : s.salePrice
                   )}
                 >
-                  {product.salePrice}
+                  {variants[0].salePrice}
                   <span
                     className={clsx(
                       s.grn,
@@ -138,7 +192,7 @@ const ProductCard = ({ product }) => {
                     !isInStockProduct ? s.notHaveItemSalePrice : s.notSalePrice
                   )}
                 >
-                  {product.price}
+                  {variants[0].price}
                   <span
                     className={clsx(
                       s.grn,
@@ -156,7 +210,7 @@ const ProductCard = ({ product }) => {
                   !isInStockProduct ? s.notHavePrices : s.price
                 )}
               >
-                {product.price}
+                {variants[0].price}
                 <span
                   className={clsx(
                     s.grn,
@@ -167,32 +221,15 @@ const ProductCard = ({ product }) => {
                 </span>
               </p>
             )}
-            {product.flavors?.length > 0 && flavor ? (
-              <Flavor
-                productFlavours={product.flavors}
-                value={flavor}
-                setFlavor={setFlavor}
-                setQuantity={setQuantity}
+
+            {variants.length > 0 && (
+              <ProductOptions
+                variants={variants}
+                curVar={curVar}
+                setCurVar={setCurVar}
               />
-            ) : null}
-            {product.colors?.length > 0 &&
-            product.colors[0].color !== '' &&
-            color ? (
-              <Color
-                productColors={product.colors}
-                value={color}
-                setColor={setColor}
-                setQuantity={setQuantity}
-              />
-            ) : null}
-            {product.volume?.length > 0 && mls ? (
-              <Volume
-                productVolume={product.volume}
-                value={mls}
-                setMls={setMl}
-                setQuantity={setQuantity}
-              />
-            ) : null}
+            )}
+
             <p className={s.itemHave}>
               {isInStockProduct ? (
                 <span className={s.haveItem}>Є в наявності</span>
@@ -240,7 +277,7 @@ const ProductCard = ({ product }) => {
                   )}
                   type="submit"
                   onClick={() => {
-                    onClickAdd({
+                    addProductToCart({
                       id: product.id,
                       category: product.category,
                       images: product.images[0].url,

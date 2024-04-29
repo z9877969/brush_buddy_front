@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 
 import { Navigation } from 'swiper/modules';
 
-import useAddProduct from 'modules/cart/helpers/cartAddProductHook';
+import { useAddProductToCart } from 'hooks';
 
 import s from './MainPageHelpers.module.scss';
 
@@ -19,7 +19,7 @@ const HelpersCardList = ({
 }) => {
   const lengthCards = helpersCardData.length;
 
-  const onClickAdd = useAddProduct();
+  const onClickAdd = useAddProductToCart();
 
   return (
     <Swiper

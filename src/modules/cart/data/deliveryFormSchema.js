@@ -15,7 +15,7 @@ export const deliveryFormSchema = Yup.object().shape({
     .required('Поле обов`язкове для заповнення'),
   phone: Yup.string()
     .trim()
-    .matches(/^\+?3?8?(0\d{9})$/, 'Введіть коректний номер телефону')
+    .matches(/^\+(380)(\d{9})$/, 'Введіть коректний номер телефону')
     .required('Поле обов`язкове для заповнення'),
   city: Yup.string().required('Поле обов`язкове для заповнення'),
   department: Yup.object().required('Поле обов`язкове для заповнення'),

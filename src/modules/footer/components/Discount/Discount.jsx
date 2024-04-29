@@ -1,24 +1,23 @@
-import { useState, useEffect, useCallback } from 'react';
-import s from './Discount.module.scss';
+import { useState } from 'react';
+import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 import Modal from '../ModalConditions/ModalConditions';
 import { toastify } from 'helpers';
+import s from './Discount.module.scss';
+import { brushbuddyApi as bbApi } from 'services';
+import clsx from 'clsx';
+
+const validationSchema = Yup.object({
+  phone: Yup.string()
+    .matches(/^\+38\s\d{3}\s\d{7}$/, 'Невалідна регулярка')
+    .required("Обов'язково"),
+});
 
 const Discount = () => {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [discountApplied, setDiscountApplied] = useState(false);
-  const [phoneNumbers, setPhoneNumbers] = useState([]);
-  const [formattedPhoneNumber, setFormattedPhoneNumber] = useState('');
-  const [submitClicked, setSubmitClicked] = useState(false);
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const [shortNumberError, setShortNumberError] = useState(false);
+  const [discountApplied] = useState(false);
+  const [promoData, setPromoData] = useState(null);
 
-  useEffect(() => {
-    const storedNumbers = localStorage.getItem('phoneNumbers');
-    if (storedNumbers) {
-      setPhoneNumbers(JSON.parse(storedNumbers));
-    }
-  }, []);
+  const [flipped, setFlipped] = useState(false);
 
   const formatPhoneNumber = (value) => {
     const cleaned = ('' + value).replace(/\D/g, '');
@@ -31,69 +30,28 @@ const Discount = () => {
     return value;
   };
 
-  const handlePhoneNumberChange = (e) => {
-    const { value } = e.target;
-
-    const lastChar = value.charAt(value.length - 1);
-    if (isNaN(lastChar)) {
+  const handleSubmit = async (values, { resetForm, setFieldTouched }) => {
+    if (!values.checkboxField) {
+      setFieldTouched('checkboxField', true);
       return;
     }
 
-    setPhoneNumber(value);
-    setFormattedPhoneNumber(formatPhoneNumber(value));
-    if (value.length < 15) {
-      setShortNumberError(true);
-    } else {
-      setShortNumberError(false);
+    try {
+      const normalizedPhone = values.phone.split(' ').join('');
+      const data = await bbApi.getFirstBuyPromo({ phone: normalizedPhone });
+
+      const { phone, promocode } = data;
+      setPromoData({ phone, promocode });
+      setFlipped((p) => !p);
+
+      toastify.success(
+        'Номер телефону успішно зареєстровано для отрмання знижки!'
+      );
+
+      resetForm();
+    } catch (error) {
+      toastify.error('Виникла помилка, спробуйте ще раз :(');
     }
-  };
-
-  const handlePhoneNumberFocus = () => {
-    if (!formattedPhoneNumber) {
-      setFormattedPhoneNumber('+38 0');
-    }
-  };
-
-  const handleCheckboxChange = (e) => {
-    setCheckboxChecked(e.target.checked);
-  };
-
-  const handleFormSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      setSubmitClicked(true);
-
-      if (!checkboxChecked) {
-        setCheckboxChecked(true);
-        return;
-      }
-
-      if (phoneNumber.length < 15) {
-        setShortNumberError(true);
-        return;
-      }
-
-      if (phoneNumbers.includes(phoneNumber)) {
-        setDiscountApplied(true);
-      } else {
-        const updatedNumbers = [...phoneNumbers, phoneNumber];
-        setPhoneNumbers(updatedNumbers);
-        localStorage.setItem('phoneNumbers', JSON.stringify(updatedNumbers));
-        setPhoneNumber('');
-        setFormattedPhoneNumber('');
-        setDiscountApplied(false);
-        setShortNumberError(false);
-        toastify.success(
-          'Номер телефону успішно зареєстровано для отрмання знижки!'
-        );
-        // console.log('Масив номерів:', updatedNumbers);
-      }
-    },
-    [checkboxChecked, phoneNumber, phoneNumbers]
-  );
-
-  const handleSubmit = (values, { resetForm }) => {
-    resetForm();
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,73 +65,94 @@ const Discount = () => {
     document.body.style.overflow = '';
     setIsModalOpen(false);
   };
+
   return (
     <>
       <div className={s.discountDiv}>
-        <h2 className={s.discountTitle}>
-          Знижка <span className={s.span}>- 10%</span> на перше замовлення
-          сховалася тут
-        </h2>
+        <div className={clsx(s.cardInner, s.front, flipped && s.flipped)}>
+          <h2 className={s.discountTitle}>
+            Знижка <span className={s.span}>- 10%</span> на перше замовлення
+            сховалася тут
+          </h2>
+          <Formik
+            initialValues={{ phone: '+38 0', checkboxField: false }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ setFieldValue, errors, touched, values }) => (
+              <Form className={s.form}>
+                <div className={s.numberFieldDiv}>
+                  <Field
+                    type="tel"
+                    className={s.numberField}
+                    placeholder="Номер телефону"
+                    name="phone"
+                    onChange={(e) => {
+                      const { value } = e.target;
+                      const lastChar = value.charAt(value.length - 1);
+                      if (isNaN(lastChar)) {
+                        return;
+                      }
+                      setFieldValue('phone', formatPhoneNumber(value));
+                    }}
+                    id="numberField"
+                    maxLength="15"
+                    required
+                  />
+                  <label className={s.numberFieldLabel} htmlFor="numberField">
+                    Номер телефону
+                  </label>
 
-        <Formik initialValues={{ number: '' }} onSubmit={handleSubmit}>
-          <Form className={s.form} onSubmit={handleFormSubmit}>
-            <div className={s.numberFieldDiv}>
-              <Field
-                type="tel"
-                className={s.numberField}
-                placeholder="Номер телефону"
-                name="number"
-                value={formattedPhoneNumber}
-                onChange={handlePhoneNumberChange}
-                onFocus={handlePhoneNumberFocus}
-                id="numberField"
-                maxLength="15"
-                required
-              />
-              <label className={s.numberFieldLabel} htmlFor="numberField">
-                Номер телефону
-              </label>
+                  {errors.phone && touched.phone && (
+                    <p className={s.discountAppliedText}>
+                      Номер телефону занадто короткий
+                    </p>
+                  )}
 
-              {shortNumberError && (
-                <p className={s.discountAppliedText}>
-                  Номер телефону занадто короткий
-                </p>
-              )}
-
-              {discountApplied && (
-                <p className={s.discountAppliedText}>
-                  На цей номер знижка вже використана
-                </p>
-              )}
-            </div>
-            <div>
-              <div className={s.checkboxFieldLabel}>
-                <Field
-                  type="checkbox"
-                  className={s.checkboxField}
-                  id="checkboxField"
-                  name="checkboxField"
-                  checked={checkboxChecked}
-                  onChange={handleCheckboxChange}
-                />
-                <p>
-                  Я погоджуюся з умовами обробки{' '}
-                  <span className={s.spanConditions} onClick={openModal}>
-                    персональних даних
-                  </span>
-                </p>
-              </div>
-              {submitClicked && !checkboxChecked && (
-                <p className={s.discountAppliedText}>
-                  Доступ обмежено без згоди
-                </p>
-              )}
-            </div>
-            <button className={s.btn} type="submit">
-              Отримати
-            </button>
-          </Form>
-        </Formik>
+                  {discountApplied && (
+                    <p className={s.discountAppliedText}>
+                      На цей номер знижка вже використана
+                    </p>
+                  )}
+                </div>
+                <div className={s.checkboxWrapper}>
+                  <div className={s.checkboxFieldLabel}>
+                    <Field
+                      type="checkbox"
+                      className={s.checkboxField}
+                      id="checkboxField"
+                      name="checkboxField"
+                    />
+                    <p>
+                      Я погоджуюся з умовами обробки{' '}
+                      <span className={s.spanConditions} onClick={openModal}>
+                        персональних даних
+                      </span>
+                    </p>
+                  </div>
+                  {touched.checkboxField && !values.checkboxField && (
+                    <p className={s.discountAppliedText}>
+                      Доступ обмежено без згоди
+                    </p>
+                  )}
+                </div>
+                <button className={s.btn} type="submit">
+                  Отримати
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
+        {true && (
+          <div className={clsx(s.cardInner, s.back, flipped && s.flipped)}>
+            <h2 className={s.discountTitle}>
+              Ваш промокод{' '}
+              <span className={s.span}>{promoData?.promocode}</span> дійсний при
+              доставці з номером телефону{' '}
+              <span className={s.span}>{promoData?.phone}</span>
+            </h2>
+          </div>
+        )}
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} />
     </>
