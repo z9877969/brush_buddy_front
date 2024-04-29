@@ -43,6 +43,17 @@ $animation-duration: 1s;
 .cardInner.back {
   opacity: 0;
   transform: rotateY(-180deg);
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+
+  & .discountTitle {
+    display: flex;
+    flex-direction: column;
+    align-self: unsafe;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .cardInner.front.flipped {

@@ -12,7 +12,7 @@ export const sendOrder = async (order) => {
 };
 
 export const getFirstBuyPromo = ({ phone }) => {
-  return instance.post('/promo/first', { phone }).then(({ data }) => data);
+  return instance.post('/promos/first', { phone }).then(({ data }) => data);
 };
 
 export const getProductsListApi = async () => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 import Modal from '../ModalConditions/ModalConditions';
@@ -18,6 +18,9 @@ const Discount = () => {
   const [promoData, setPromoData] = useState(null);
 
   const [flipped, setFlipped] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const discountRef = useRef(null);
 
   const formatPhoneNumber = (value) => {
     const cleaned = ('' + value).replace(/\D/g, '');
@@ -45,7 +48,7 @@ const Discount = () => {
       setFlipped((p) => !p);
 
       toastify.success(
-        'Номер телефону успішно зареєстровано для отрмання знижки!'
+        'Номер телефону успішно зареєстровано для отримання знижки!'
       );
 
       resetForm();
@@ -53,8 +56,6 @@ const Discount = () => {
       toastify.error('Виникла помилка, спробуйте ще раз :(');
     }
   };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     document.body.style.overflow = 'hidden';
@@ -66,9 +67,22 @@ const Discount = () => {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    const { current: discountEl } = discountRef;
+    const handleDiscountFlipToFront = (e) => {
+      if (e.target.closest('#discount-block') === discountEl) return;
+      setFlipped((p) => (p ? !p : p));
+    };
+    document.addEventListener('click', handleDiscountFlipToFront);
+
+    return () => {
+      document.removeEventListener('click', handleDiscountFlipToFront);
+    };
+  }, []);
+
   return (
     <>
-      <div className={s.discountDiv}>
+      <div ref={discountRef} className={s.discountDiv} id="discount-block">
         <div className={clsx(s.cardInner, s.front, flipped && s.flipped)}>
           <h2 className={s.discountTitle}>
             Знижка <span className={s.span}>- 10%</span> на перше замовлення
@@ -143,16 +157,15 @@ const Discount = () => {
             )}
           </Formik>
         </div>
-        {true && (
-          <div className={clsx(s.cardInner, s.back, flipped && s.flipped)}>
-            <h2 className={s.discountTitle}>
-              Ваш промокод{' '}
-              <span className={s.span}>{promoData?.promocode}</span> дійсний при
-              доставці з номером телефону{' '}
-              <span className={s.span}>{promoData?.phone}</span>
-            </h2>
-          </div>
-        )}
+
+        <div className={clsx(s.cardInner, s.back, flipped && s.flipped)}>
+          <h2 className={s.discountTitle}>
+            <span>Ваш промокод</span>
+            <span className={s.span}>{promoData?.promocode}</span> дійсний при
+            доставці за номером телефону{' '}
+            <span className={s.span}>{promoData?.phone}</span>
+          </h2>
+        </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} />
     </>
