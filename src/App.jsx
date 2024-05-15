@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { ROUTES } from 'shared/constants';
 import {
   AboutPage,
   BlogPage,
@@ -11,17 +12,16 @@ import {
   ThankPage,
   CartEmptyPage,
 } from './pages';
-import { SharedLayout } from 'shared/components';
-import ScrollToTop from 'shared/components/ScrollToTop/ScrollToTop';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { Toastify, ScrollToTop, SharedLayout } from 'shared/components';
 import { getProducts } from '@redux/products/productsOperations';
-import { Toastify } from 'shared/components';
+import { getBlogs } from '@redux/blogs/blogsOperations';
+import { ROUTES } from 'shared/constants';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getBlogs());
   }, [dispatch]);
   return (
     <>

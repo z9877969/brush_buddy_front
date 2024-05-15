@@ -4,15 +4,17 @@ import blogData from '../../db/blogData.json';
 import { LinkButton } from 'shared/components';
 import BlogItem from '../BlogItem/BlogItem';
 import s from './MainPageBlog.module.scss';
+import { useSelector } from 'react-redux';
+import { selectFirstBlogId } from '@redux/blogs/blogsSelectors';
 
 const MainPaigeBlog = () => {
+  const blogId = useSelector(selectFirstBlogId);
   const [visiblePosts, setVisiblePosts] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [blogId, setBlogId] = useState(null);
+  // const [blogId, setBlogId] = useState(null);
 
   useEffect(() => {
     setPosts(blogData);
-    setBlogId('1');
   }, []);
 
   useEffect(() => {

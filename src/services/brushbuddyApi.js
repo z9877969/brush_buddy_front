@@ -26,3 +26,8 @@ export const getProductByIdApi = async (id) => {
 
   return data;
 };
+
+export const getBlogsApi = async () => {
+  const { data } = await instance.get('/blogs');
+  return data;
+};
