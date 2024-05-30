@@ -4,24 +4,34 @@ import { Navigation } from 'swiper/modules';
 import { ProductCardItem } from 'shared/components';
 
 const ProductsSwipeCards = ({
-  productsCardData,
-  swiperData,
+  products,
+  setRefSwiper,
   reachEndButton,
   reachStartButton,
 }) => {
-  const lengthCards = productsCardData.length;
+  const lengthCards = products.length;
   const elements = useMemo(() => {
-    return productsCardData.map((product, index) => (
-      <SwiperSlide key={index}>
-        <ProductCardItem {...product} />
-      </SwiperSlide>
-    ));
-  }, [productsCardData]);
+    return products.reduce((acc, product, idx, arr) => {
+      if (idx % 2 === 0) {
+        const nextProduct = idx + 1 < arr.length ? arr[idx + 1] : null;
+        acc.push(
+          <SwiperSlide key={product.varId}>
+            <div>
+              <ProductCardItem {...product} />
+              {nextProduct && <ProductCardItem {...arr[idx + 1]} />}
+            </div>
+          </SwiperSlide>
+        );
+      }
+
+      return acc;
+    }, []);
+  }, [products]);
 
   return (
     <Swiper
       onSwiper={(swiper) => {
-        swiperData(swiper);
+        setRefSwiper(swiper);
         const slidesWrapper = swiper?.slidesEl;
         const slidesHost = swiper?.hostEl;
         if (slidesHost) {

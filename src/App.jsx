@@ -34,6 +34,11 @@ function App() {
           <Route path={ROUTES.BLOG} element={<BlogPage />} />
           <Route path={ROUTES.CART} element={<CartPage />} />
           <Route path={ROUTES.PRODUCT_CARD} element={<ProductCardPage />} />
+          <Route
+            path={'/products/:prodId/:varId'}
+            element={<h1>ProductCardPage</h1>}
+          />
+
           <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
           <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
           <Route path={ROUTES.THANK} element={<ThankPage />} />

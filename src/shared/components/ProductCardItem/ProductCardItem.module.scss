@@ -20,7 +20,7 @@
   overflow-x: hidden;
 
   border-radius: 24px;
-  border: 1px solid rgba(31, 31, 31, 0.15);
+  // border: 1px solid rgba(31, 31, 31, 0.15);
   margin-bottom: 24px;
 
   @include media(tablet) {
@@ -52,6 +52,9 @@
 
 .productFooter {
   padding: 0 19px;
+}
+
+.bottomSide {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -73,6 +76,8 @@
 
 .oldPrice {
   color: $disabled-content-color;
+  text-decoration: line-through;
+  transform: translateY(-15%);
 }
 
 .cartBtn {

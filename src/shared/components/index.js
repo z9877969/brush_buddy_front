@@ -12,3 +12,4 @@ export { default as ProductTypeIcon } from './ProductTypeIcon/ProductTypeIcon';
 export { default as ProductWatermark } from './ProductWatermark/ProductWatermark';
 export { default as Toastify } from './Toastify/Toastify';
 export { default as ScrollToTop } from './ScrollToTop/ScrollToTop';
+export { default as ProductMarkersList } from './ProductMarkersList/ProductMarkersList';
