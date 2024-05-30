@@ -8,7 +8,7 @@ import {
   ProductWatermark,
 } from 'shared/components';
 import { addProduct } from '@redux/cart/cartSlice';
-import * as img from 'shared/images/productItem';
+import { noPictureImage } from 'shared/images';
 import { sprite } from 'shared/icons';
 import s from './ProductCardItem.module.scss';
 
@@ -34,9 +34,11 @@ const ProductCardItem = ({
   quantity,
   prodId,
   userType,
-  activeVarId = 'qwe',
+  activeVarId,
 }) => {
   const { url } = images?.[0] || { url: null };
+
+  const activeMarker = markers.find((m) => m.varId === activeVarId);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,7 +65,7 @@ const ProductCardItem = ({
       <Link to={`/products/${prodId}/${activeVarId}`}>
         <div className={s.imageWarpper}>
           <img
-            src={url ?? img['product_1']}
+            src={url ?? noPictureImage}
             alt={title}
             className={s.productImg}
             height={340}
@@ -76,7 +78,7 @@ const ProductCardItem = ({
       {markers.length > 0 && (
         <ProductMarkersList
           markers={markers}
-          active={markers[0]}
+          active={activeMarker || markers[0]}
           changeColor={({ varId }) => {
             navigate(`/products/${prodId}/${varId}`);
           }}
