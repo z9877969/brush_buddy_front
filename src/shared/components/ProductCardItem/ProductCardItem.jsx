@@ -34,11 +34,11 @@ const ProductCardItem = ({
   quantity,
   prodId,
   userType,
-  activeVarId,
+  activeVar = {},
 }) => {
   const { url } = images?.[0] || { url: null };
 
-  const activeMarker = markers.find((m) => m.varId === activeVarId);
+  const activeMarker = markers?.find((m) => m.varId === activeVar.varId) ?? [];
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,9 +60,12 @@ const ProductCardItem = ({
       })
     );
   };
+  const curSalePrice = salePrice || activeVar.salePrice || 0;
+  const curPrice = price || activeVar.price || 0;
+
   return (
     <div className={clsx(s.productItem, quantity === 0 && s.unavailable)}>
-      <Link to={`/products/${prodId}/${activeVarId}`}>
+      <Link to={`/products/${prodId}/${activeVar.varId}`}>
         <div className={s.imageWarpper}>
           <img
             src={url ?? noPictureImage}
@@ -84,18 +87,18 @@ const ProductCardItem = ({
           }}
         />
       )}
-      <Link to={`/products/${prodId}/${activeVarId}`}>
+      <Link to={`/products/${prodId}/${activeVar.varId}`}>
         <p className={s.productName}>{title}</p>
       </Link>
       <div className={s.productFooter}>
         <div className={s.bottomSide}>
-          {salePrice ? (
+          {curSalePrice ? (
             <div className={s.priceWrapper}>
-              <p className={clsx(s.price, s.sale)}>{salePrice} грн</p>
-              <p className={clsx(s.price, s.oldPrice)}>{price} грн</p>
+              <p className={clsx(s.price, s.sale)}>{curSalePrice} грн</p>
+              <p className={clsx(s.price, s.oldPrice)}>{curPrice} грн</p>
             </div>
           ) : (
-            <p className={s.price}>{price} грн</p>
+            <p className={s.price}>{curPrice} грн</p>
           )}
           <RoundButton
             iconId={'icon-cart'}

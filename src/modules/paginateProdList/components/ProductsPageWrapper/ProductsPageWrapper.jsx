@@ -1,5 +1,5 @@
 import { Container, MainTitle } from 'shared/components';
-import s from './productsPageWrapper.module.scss';
+import s from './ProductsPageWrapper.module.scss';
 
 const ProductsPageWrapper = ({ children }) => {
   return (
