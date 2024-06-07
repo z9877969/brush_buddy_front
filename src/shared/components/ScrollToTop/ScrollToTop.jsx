@@ -6,7 +6,9 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     const scrollToTop = () => {
-      window.scrollTo(0, 0);
+      if (!pathname.startsWith('/products')) {
+        window.scrollTo(0, 0);
+      }
     };
 
     const timeout = setTimeout(scrollToTop, 100);

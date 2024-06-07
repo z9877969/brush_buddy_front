@@ -2,8 +2,8 @@ import axios from 'axios';
 import { updateProductTitle } from 'helpers/updateProductTitle';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:4040/api',
-  // baseURL: 'https://api.brushbuddy.com.ua/api',
+  // baseURL: 'http://localhost:4040/api',
+  baseURL: 'https://api.brushbuddy.com.ua/api',
 });
 
 // const SECRET_KEY
