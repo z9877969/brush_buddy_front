@@ -1,16 +1,20 @@
-import ProductsPageFilter from 'modules/productsPageFilter/components/ProductsPageFilter/ProductsPageFilter';
-import { isEqual } from 'lodash';
-import { useSelector } from 'react-redux';
-import { PaginateProdList } from 'modules/paginateProdList/index.js';
-import { ProductsPageWrapper } from 'modules/productsPageWrapper';
-import { NumberOfProducts } from 'modules/paginateProdList/index.js';
-import { SelectedFilters } from 'modules/selectedFilters';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { isEqual } from 'lodash';
+import {
+  initialFilterValues,
+  ProductsPageFilter,
+} from 'modules/productsPageFilter';
+import {
+  PaginateProdList,
+  NumberOfProducts,
+  ProductsPageWrapper,
+} from 'modules/paginateProdList';
+import { SelectedFilters } from 'modules/selectedFilters';
 import { PRODUCT_TYPES } from 'shared/constants';
-import { initialFilterValues } from 'modules/productsPageFilter';
-import { useFilteredProducts } from 'hooks/useFilteredProducts';
 import { selectProductsList } from '@redux/products/productsSelectors';
+// import { useFilteredProducts } from 'hooks/useFilteredProducts';
 
 const ProductsPage = () => {
   const [search, setSearch] = useSearchParams();
@@ -22,7 +26,8 @@ const ProductsPage = () => {
   const productType = search.get('productType');
   const hasChanged = !isEqual(filter, initialFilterValues);
 
-  const filteredProducts = useFilteredProducts(products, filter);
+  // const filteredProducts = useFilteredProducts(products, filter);
+  const filteredProducts = products;
 
   useEffect(() => {
     sessionStorage.setItem('filter', JSON.stringify(filter));

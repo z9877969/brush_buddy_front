@@ -1,0 +1,39 @@
+.colorBlock {
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+  margin-bottom: 24px;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  border: 4px solid rgba(31, 31, 31, 0.1);
+}
+
+.itemFocus {
+  border: 0.5px solid rgba(31, 31, 31, 0.7);
+}
+
+.labels {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.disabledLabels {
+  background-color: gray !important;
+  cursor: auto;
+}
+
+.radioBtn {
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+}

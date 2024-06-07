@@ -60,6 +60,7 @@
 }
 
 .imgContainer {
+  position: relative;
   border: 1px solid rgba(31, 31, 31, 0.15);
   border-radius: 24px;
   width: 275px;
@@ -74,6 +75,25 @@
   @include media(desktop) {
     width: 493px;
     height: 580px;
+  }
+}
+
+.iconsWrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 8px 16px;
+  display: flex;
+  // justify-content: space-between;
+
+  & .userType {
+    margin-left: auto;
+  }
+
+  & .watermark {
+    margin-right: auto;
   }
 }
 

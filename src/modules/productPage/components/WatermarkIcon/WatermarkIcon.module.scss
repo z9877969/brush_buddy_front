@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.none {
+  display: none;
+}
+
+.switch {
+  width: 48px;
+  height: 24px;
+}
+
+.sale {
+  fill: $pet-color;
+}
+
+.wow {
+  fill: $adult-color;
+}

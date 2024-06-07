@@ -1,53 +1,26 @@
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import ProductsList from '../ProductsList/ProductsList';
 import { Container, LinkButton, MainTitle } from 'shared/components';
 import s from './MainPageToShopping.module.scss';
 import { ROUTES } from 'shared/constants';
+import { getPopularProductsApi } from 'services/brushbuddyApi';
 
 const MainPageToShopping = () => {
-  const products = useSelector((s) => s.products.list);
+  const [popularProducts, setPopularProducts] = useState([]);
 
-  const productsInStock = useMemo(() => {
-    const productsWithColorsInStock = products.filter((product) => {
-      return (
-        product.colors?.length &&
-        product.colors.some((color) => color.inStock === true)
-      );
-    });
-
-    const productsWithFlavorsInStock = products.filter((product) => {
-      return (
-        product.flavors?.length &&
-        product.flavors.some((flavor) => flavor.inStock === true)
-      );
-    });
-
-    const allProductsInStock = [
-      ...productsWithColorsInStock,
-      ...productsWithFlavorsInStock,
-    ];
-
-    return allProductsInStock;
-  }, [products]);
-
-  const wowProducts = useMemo(() => {
-    return productsInStock.filter((product) => product.watermark[0] === 'wow');
-  }, [productsInStock]);
-
-  const saleProducts = useMemo(() => {
-    return productsInStock.filter((product) => product.watermark[0] === 'sale');
-  }, [productsInStock]);
+  useEffect(() => {
+    getPopularProductsApi()
+      .then((p) => setPopularProducts(p))
+      // eslint-disable-next-line
+      .catch((err) => console.warn(err));
+  }, []);
 
   return (
     <section className={s.shoppingSection}>
       <Container>
         <MainTitle title={'До покупок'} className={s.shoppingTitle} />
-        {wowProducts.length > 0 && (
-          <ProductsList title={'Новинки'} products={wowProducts} />
-        )}
-        {saleProducts.length > 0 && (
-          <ProductsList title={'Акційні товари'} products={saleProducts} />
+        {popularProducts.length > 0 && (
+          <ProductsList title={'Популярні'} products={popularProducts} />
         )}
         <LinkButton
           title={'Більше товарів'}

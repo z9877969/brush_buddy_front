@@ -12,8 +12,8 @@ const RecomendationProducts = () => {
   const productsList = useSelector(selectProductsList);
 
   const recomendedProducts = useMemo(() => {
-    return productsList.filter(({ type }) =>
-      cartProductsRecomendations.some((el) => type.includes(el))
+    return productsList.filter(({ userType }) =>
+      cartProductsRecomendations.some((el) => userType.includes(el))
     );
   }, [productsList, cartProductsRecomendations]);
   return (

@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  gap: 12px;
+
+  & svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.child {
+  fill: $child-color;
+}
+
+.animal {
+  fill: $pet-color;
+}
+
+.adult {
+  fill: $adult-color;
+}

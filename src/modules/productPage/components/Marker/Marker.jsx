@@ -1,32 +1,38 @@
+import { useMemo } from 'react';
 import clsx from 'clsx';
 import s from './Marker.module.scss';
 
-export const Marker = ({
-  markers,
-  handleChangeCurVar,
-  value,
-  // isSale = false,
-  isAbsent = false,
-}) => {
+export const Marker = ({ curVariant, setMarker, variants }) => {
+  const markersSelectors = useMemo(() => {
+    const markers = variants.map((prodVar) => prodVar.marker);
+    return [...new Set(markers)];
+  }, [variants]);
+
   return (
     <ul className={s.colorBlock}>
-      {markers.map((marker, i) => {
+      {markersSelectors.map((marker) => {
         return (
           <li
-            key={i}
-            className={clsx(s.item, marker === value ? s.itemFocus : null)}
+            key={marker}
+            className={clsx(
+              s.item,
+              marker === curVariant.marker ? s.itemFocus : null
+            )}
           >
             <label
               style={{ backgroundColor: marker }}
-              className={clsx(s.labels, isAbsent ? s.disabledLabels : s.labels)}
+              className={clsx(
+                s.labels,
+                !curVariant.quantity ? s.disabledLabels : s.labels
+              )}
             >
               <input
                 className={s.radioBtn}
                 type="radio"
                 name="color"
                 value={marker}
-                onChange={() => handleChangeCurVar({ marker })}
-                checked={marker === value}
+                onChange={() => setMarker(marker)}
+                checked={marker === curVariant.value}
               />
             </label>
           </li>

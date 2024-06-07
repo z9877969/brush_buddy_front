@@ -22,6 +22,7 @@ export const customStyles = {
     '@media (max-width:1439px)': {
       borderBottom: '1px solid rgba(31, 31, 31, 0.10)',
       maxWidth: 'none',
+      paddingLeft: '4px',
     },
   }),
   valueContainer: (styles) => ({
@@ -44,12 +45,16 @@ export const customStyles = {
     ...styles,
     color: '#000',
     padding: 0,
+    '@media (max-width:1439px)': {
+      transform: 'translateX(-4px)',
+    },
   }),
   menu: (styles) => ({
     ...styles,
     borderRadius: '20px',
     textAlign: 'left',
-    width: '160px',
+    width: '180px',
+    overflow: 'hidden',
     padding: '16px 32px 16px 12px',
     boxShadow: '-2px 0px 15px 0px rgba(0, 0, 0, 0.05);',
     '@media (max-width:1439px)': {
@@ -65,13 +70,15 @@ export const customStyles = {
   }),
   option: (styles) => ({
     ...styles,
-    padding: 'none',
+    width: '100%',
+    padding: '4px 0 4px 12px',
     fontSize: '16px',
     lineHeight: '28px',
     color: '#f1f1f',
     '@media (max-width: 1439px)': {
       fontSize: '18px',
       lineHeight: '24px',
+      width: '100%',
     },
   }),
   menuList: (styles) => ({

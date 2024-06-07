@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Cart, RecomendationProducts } from 'modules/cart';
+import {
+  Cart,
+  // RecomendationProducts
+} from 'modules/cart';
 import { selectProd, selectSubmitForm } from '@redux/cart/selectorsCart';
 import { ROUTES } from 'shared/constants';
 
@@ -23,7 +26,7 @@ const CartPage = () => {
     products.length > 0 && (
       <>
         <Cart />
-        <RecomendationProducts />
+        {/* <RecomendationProducts /> */}
       </>
     )
   );

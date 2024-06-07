@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { RoundButton } from 'shared/components';
 import ProductsSwipeCards from '../ProductsSwipeCards/ProductsSwipeCards';
 import s from './ProductsList.module.scss';
@@ -8,10 +7,6 @@ const ProductsList = ({ title, products }) => {
   const [refSwiper, setRefSwiper] = useState(null);
   const [disablStartButton, setdisablStartButton] = useState(true);
   const [disablEndButton, setdisablEndButton] = useState(false);
-
-  const swiperData = (ref) => {
-    setRefSwiper(ref);
-  };
 
   const reachEndButton = (isEnd) => {
     setdisablEndButton(isEnd);
@@ -51,8 +46,8 @@ const ProductsList = ({ title, products }) => {
         </div>
       </div>
       <ProductsSwipeCards
-        productsCardData={products}
-        swiperData={swiperData}
+        products={products}
+        setRefSwiper={setRefSwiper}
         reachEndButton={reachEndButton}
         reachStartButton={reachStartButton}
       />

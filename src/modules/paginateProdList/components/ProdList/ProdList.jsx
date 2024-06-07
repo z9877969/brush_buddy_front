@@ -1,13 +1,14 @@
-import { ProductCardItem } from 'shared/components';
+import ProductsListItem from '../ProductsListItem/ProductsListItem';
 import s from './ProdList.module.scss';
-const ProdList = ({ products }) => {
+
+const ProductsList = ({ products }) => {
   return (
     <ul className={s.prodList}>
-      {products.map((item, index) => (
-        <ProductCardItem {...item} key={index} id={item._id || item.id} />
+      {products.map((product) => (
+        <ProductsListItem key={product._id} {...product} />
       ))}
     </ul>
   );
 };
 
-export default ProdList;
+export default ProductsList;
