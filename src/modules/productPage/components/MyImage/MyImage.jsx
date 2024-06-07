@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import WatermarkIcon from '../WatermarkIcon/WatermarkIcon';
 import s from './MyImage.module.scss';
 import UserTypesIcons from '../UserTypesIcons/UserTypesIcons';
+import { noPictureImage } from 'shared/images';
 
 export const MyImage = ({ images, userTypes, watermark }) => {
-  const [mainImage, setMainImage] = useState(images[0]);
+  const [mainImage, setMainImage] = useState(images[0] ?? noPictureImage);
+
+  useEffect(() => {
+    setMainImage(images[0] ?? noPictureImage);
+  }, [images]);
+
+  const swipingImages = images.length ? images : [noPictureImage];
 
   return (
     <div className={s.container}>
@@ -43,7 +50,7 @@ export const MyImage = ({ images, userTypes, watermark }) => {
           }}
           modules={[Pagination]}
         >
-          {images.map((img) => {
+          {swipingImages.map((img) => {
             return (
               <SwiperSlide key={img}>
                 <button
@@ -72,7 +79,7 @@ export const MyImage = ({ images, userTypes, watermark }) => {
         </div>
         <img
           className={s.largeImage}
-          src={images.length === 0 ? null : mainImage}
+          src={mainImage}
           alt="Зображення товару"
           height={'350'}
         />

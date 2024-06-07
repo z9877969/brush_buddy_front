@@ -36,7 +36,7 @@ const ProductCardItem = ({
   userType,
   activeVar = {},
 }) => {
-  const { url } = images?.[0] || { url: null };
+  const imageUrl = images?.[0] || noPictureImage;
 
   const activeMarker = markers?.find((m) => m.varId === activeVar.varId) ?? [];
 
@@ -68,7 +68,7 @@ const ProductCardItem = ({
       <Link to={`/products/${prodId}/${activeVar.varId}`}>
         <div className={s.imageWarpper}>
           <img
-            src={url ?? noPictureImage}
+            src={imageUrl}
             alt={title}
             className={s.productImg}
             height={340}
