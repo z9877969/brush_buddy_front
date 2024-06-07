@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import { ProductsList } from 'modules/mainPageToShopping';
@@ -18,6 +18,7 @@ import s from './ProductCard.module.scss';
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { variantId, productId } = useParams();
 
@@ -66,7 +67,9 @@ const ProductCard = ({ product }) => {
         checkedVariant = checkedWithValueVariant;
       }
       const { _id: variantId, product: productId } = checkedVariant;
-      navigate(`/products/${productId}/${variantId}`);
+      navigate(`/products/${productId}/${variantId}`, {
+        state: { top: document.documentElement.scrollTop },
+      });
     },
     // eslint-disable-next-line
     [variants]
@@ -94,7 +97,8 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     setProductCount((p) => (p > 1 ? 1 : p));
-  }, [variantId]);
+    location.state?.top && window.scroll(0, location.state?.top);
+  }, [variantId, location]);
 
   if (!curVariant) return null;
 
