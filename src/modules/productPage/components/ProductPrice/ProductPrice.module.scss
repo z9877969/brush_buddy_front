@@ -1,0 +1,83 @@
+.saleBlock {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-bottom: 24px;
+  @include media(desktop) {
+    margin-bottom: 32px;
+  }
+}
+
+.salePrice {
+  font-family: $main-font-family;
+  color: $pet-color;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 112%;
+}
+
+.notSalePrice {
+  font-family: $main-font-family;
+
+  color: $secondary-text-color;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  opacity: 0.3;
+}
+
+.price {
+  //   width: 137px;
+  font-family: $main-font-family;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 24px;
+  @include media(tablet) {
+    font-size: 28px !important;
+    line-height: 129%;
+  }
+  @include media(desktop) {
+    font-size: 32px !important;
+    line-height: 112%;
+    margin-bottom: 32px;
+  }
+}
+
+.grn {
+  margin-left: 2px;
+}
+
+.lineThrough {
+  text-decoration: line-through;
+}
+
+.notHaveItemPrice {
+  font-family: $main-font-family;
+  color: $disabled-content-color;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 112%;
+  @include media(tablet) {
+    font-size: 28px;
+  }
+  @include media(desktop) {
+    font-size: 32px;
+  }
+}
+
+.notHaveItemSalePrice {
+  font-size: 16px;
+}
+
+.notHavePrices {
+  font-family: $main-font-family;
+  color: $disabled-content-color;
+  font-size: 24px;
+  @include media(tablet) {
+    font-size: 28px;
+  }
+  @include media(desktop) {
+    font-size: 32px !important;
+  }
+}

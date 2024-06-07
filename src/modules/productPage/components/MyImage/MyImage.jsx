@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import clsx from 'clsx';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import WatermarkIcon from '../WatermarkIcon/WatermarkIcon';
 import s from './MyImage.module.scss';
+import UserTypesIcons from '../UserTypesIcons/UserTypesIcons';
 
-export const MyImage = ({ imges = [{ url: ' ' }] }) => {
-  const [mainImage, setMainImage] = useState(imges[0]);
+export const MyImage = ({ images, userTypes, watermark }) => {
+  const [mainImage, setMainImage] = useState(images[0]);
 
   return (
     <div className={s.container}>
@@ -41,19 +43,16 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
           }}
           modules={[Pagination]}
         >
-          {imges.map((img) => {
+          {images.map((img) => {
             return (
-              <SwiperSlide key={img.url}>
+              <SwiperSlide key={img}>
                 <button
                   type="button"
-                  className={clsx(
-                    s.slideBtn,
-                    mainImage.url === img.url && s.focused
-                  )}
+                  className={clsx(s.slideBtn, mainImage === img && s.focused)}
                 >
                   <img
                     className={s.slideImage}
-                    src={img.url}
+                    src={img}
                     onClick={() => setMainImage(img)}
                   />
                 </button>
@@ -63,9 +62,17 @@ export const MyImage = ({ imges = [{ url: ' ' }] }) => {
         </Swiper>
       </div>
       <div className={s.imgContainer}>
+        <div className={s.iconsWrapper}>
+          <div className={s.watermark}>
+            <WatermarkIcon watermark={watermark} />
+          </div>
+          <div className={s.userType}>
+            <UserTypesIcons userTypes={userTypes} />
+          </div>
+        </div>
         <img
           className={s.largeImage}
-          src={imges.length === 0 ? null : mainImage.url}
+          src={images.length === 0 ? null : mainImage}
           alt="Зображення товару"
           height={'350'}
         />

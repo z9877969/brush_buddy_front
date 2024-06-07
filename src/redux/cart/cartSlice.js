@@ -17,117 +17,69 @@ const cartSlice = createSlice({
     submitForm: false,
   },
   reducers: {
-    addProduct(state, action) {
+    addProduct(state, { payload }) {
       state.submitForm = false;
-      const { id, category, flavor, volume, color, amount } = action.payload;
-      //знаходимо індекс товару(перевірка на наявність в корзині)
-      const existingProductIndex = state.products.findIndex((product) => {
-        if (flavor && volume) {
-          return (
-            product.id === id &&
-            product.flavor === flavor &&
-            product.volume === volume
-          );
-        } else if (color) {
-          return product.id === id && product.color === color;
-        } else if (category) {
-          return product.id === id && product.category === category;
-        } else if (volume) {
-          return product.id === id && product.volume === volume;
-        } else {
-          return product.id === id;
-        }
-      });
-
-      if (existingProductIndex !== -1) {
-        // якщо товар вже існує, викликаємо changeProductAmount
-        const existingProduct = state.products[existingProductIndex];
-        let newCount;
-
-        // чи передано нове значення amount
-        if (amount !== undefined) {
-          // сума існуючого amount та переданого amount більше за quantity
-          if (existingProduct.amount + amount > existingProduct.quantity) {
-            newCount = existingProduct.quantity;
-          } else {
-            newCount = existingProduct.amount + amount;
-          }
-        } else {
-          // amount не передано
-          if (existingProduct.amount + 1 > existingProduct.quantity) {
-            newCount = existingProduct.quantity;
-          } else {
-            newCount = existingProduct.amount + 1;
-          }
-        }
-
-        state.products[existingProductIndex].amount = newCount;
-        state.products[existingProductIndex].isDisabledIncrement =
-          newCount === existingProduct.quantity;
+      const { id, price, salePrice, amount } = payload;
+      const productIdx = state.products.findIndex((el) => el.id === id);
+      const curPrice = salePrice > 0 ? salePrice : price;
+      if (productIdx === -1) {
+        state.products.push({ ...payload, amount });
       } else {
-        // якщо товару ще немає, додаємо його
-        state.products.push({
-          ...action.payload,
-          amount: amount !== undefined ? amount : 1,
-          isDisabledIncrement:
-            amount !== undefined ? amount === action.payload.quantity : false,
-        });
+        state.products[productIdx].amount += 1;
       }
-
-      state.totalPrice = totalPrice(state.products);
+      state.totalPrice += curPrice;
+      if (state.discountPercentage) {
+        state.discount = Math.round(
+          state.totalPrice * (1 - state.discountPercentage)
+        );
+      }
     },
+    removeProduct(state, { payload }) {
+      const { id } = payload;
+      const productIdx = state.products.findIndex((el) => el.id === id);
+      const { price, salePrice } = state.products[productIdx];
+      const curPrice = salePrice > 0 ? salePrice : price;
+      const productAmount = state.products[productIdx].amount;
 
-    removeProduct(state, action) {
-      const { id, category, flavor, volume, color } = action.payload;
-      state.products = state.products.filter(
-        (product) =>
-          product.id !== id ||
-          (product.flavor !== flavor && product.volume !== volume) ||
-          product.color !== color ||
-          product.category !== category ||
-          product.flavor !== flavor
+      if (productAmount > 0) {
+        state.products[productIdx].amount -= 1;
+      } else {
+        state.products.splice(productIdx, 1);
+      }
+      state.totalPrice -= curPrice;
+      if (state.discountPercentage) {
+        state.discount = Math.round(
+          state.totalPrice * (1 - state.discountPercentage)
+        );
+      }
+    },
+    changeProductAmount(state, { payload }) {
+      const { id, amount, price, salePrice } = payload;
+      const productIdx = state.products.findIndex(
+        (product) => product.id === id
       );
-      state.totalPrice = totalPrice(state.products);
-      const total = state.totalPrice;
-      const promoCodeDiscount = state.discountPercentage
-        ? state.discountPercentage
-        : 0;
-      state.discount = totalPriceDiscount(total, promoCodeDiscount);
-    },
-    changeProductAmount(state, action) {
-      const { id, category, quantity, flavor, volume, color, newCount } =
-        action.payload;
-      const productIndex = state.products.findIndex((product) => {
-        if (flavor && volume) {
-          // Якщо є flavors
-          return (
-            product.id === id &&
-            product.flavor === flavor &&
-            product.volume === volume
-          );
-        } else if (color) {
-          // Якщо є colors
-          return product.id === id && product.color === color;
-        } else if (category) {
-          //якщо є only flavor
-          return product.id === id && product.category === category;
-        } else if (flavor) {
-          // Якщо є colors
-          return product.id === id && product.flavor === flavor;
+      const curPrice = salePrice > 0 ? salePrice : price;
+
+      if (productIdx === -1) {
+        state.products.push(payload);
+        state.totalPrice += amount * curPrice;
+      } else {
+        const curProduct = state.products[productIdx];
+        if (amount > 0) {
+          const curTotalPrice = curProduct.totalPrice;
+          state.products[productIdx].amount = amount;
+
+          state.totalPrice =
+            state.totalPrice - curTotalPrice + amount * curPrice;
         } else {
-          return product.id === id;
+          state.products.splice(productIdx, 1);
+          state.totalPrice -= curProduct.amount * curPrice;
         }
-      });
-      if (productIndex !== -1) {
-        state.products[productIndex].amount = newCount;
-        state.products[productIndex].isDisabledIncrement =
-          newCount === quantity;
       }
-      state.totalPrice = totalPrice(state.products);
-      if (state.promoCode !== null) {
-        const total = state.totalPrice;
-        const promoCodeDiscount = state.discountPercentage;
-        state.discount = totalPriceDiscount(total, promoCodeDiscount);
+      if (state.discountPercentage) {
+        state.discount = Math.round(
+          state.totalPrice * (1 - state.discountPercentage)
+        );
       }
     },
     addTotalPrice(state, action) {

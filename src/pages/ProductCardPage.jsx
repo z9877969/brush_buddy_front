@@ -17,7 +17,9 @@ const ProductCardPage = () => {
     bbApi
       .getProductByIdApi(productId)
       .then((product) => {
-        product ? setProduct(product) : navigate(ROUTES.NOT_FOUND);
+        product && product.variants.length > 0
+          ? setProduct(product)
+          : navigate(ROUTES.NOT_FOUND);
       })
       .catch(() => navigate(ROUTES.NOT_FOUND))
       .finally(() => setIsLoading(false));

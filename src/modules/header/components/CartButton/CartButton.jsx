@@ -11,7 +11,7 @@ const CartButton = () => {
 
   return (
     <div className={s.btnCartWrap}>
-      {cartProductsCount.length > 0 && (
+      {cartProductsCount > 0 && (
         <span className={s.cartCount}>{cartProductsCount}</span>
       )}
 
