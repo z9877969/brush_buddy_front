@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import {
   ProductMarkersList,
@@ -35,13 +35,11 @@ const ProductCardItem = ({
   prodId,
   userType,
   activeVar = {},
+  openProduct,
 }) => {
-  const imageUrl = images?.[0] || noPictureImage;
-
-  const activeMarker = markers?.find((m) => m.varId === activeVar.varId) ?? [];
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const imageUrl = images?.[0] || noPictureImage;
 
   const hanleClick = () => {
     dispatch(
@@ -81,10 +79,8 @@ const ProductCardItem = ({
       {markers.length > 0 && (
         <ProductMarkersList
           markers={markers}
-          active={activeMarker || markers[0]}
-          changeColor={({ varId }) => {
-            navigate(`/products/${prodId}/${varId}`);
-          }}
+          activeVar={activeVar}
+          changeColor={openProduct}
         />
       )}
       <Link to={`/products/${prodId}/${activeVar.varId}`}>

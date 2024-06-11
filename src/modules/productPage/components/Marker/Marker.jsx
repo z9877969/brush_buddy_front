@@ -1,12 +1,9 @@
-import { useMemo } from 'react';
 import clsx from 'clsx';
 import s from './Marker.module.scss';
+import { useProductMarkers } from 'hooks/useProductMarkers';
 
 export const Marker = ({ curVariant, setMarker, variants }) => {
-  const markersSelectors = useMemo(() => {
-    const markers = variants.map((prodVar) => prodVar.marker);
-    return [...new Set(markers)];
-  }, [variants]);
+  const markersSelectors = useProductMarkers(variants);
 
   return (
     <ul className={s.colorBlock}>

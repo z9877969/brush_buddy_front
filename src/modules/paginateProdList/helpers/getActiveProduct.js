@@ -11,6 +11,7 @@ export const getActiveProduct = (product, activeVarId) => {
     color: activeVar.color,
     flavor: activeVar.flavor,
     volume: activeVar.volume,
+    quantity: activeVar.quantity,
     title: updateProductTitle({
       title: product.title,
       color: activeVar.color,

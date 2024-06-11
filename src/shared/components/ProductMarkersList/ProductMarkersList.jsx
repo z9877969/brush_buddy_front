@@ -1,23 +1,23 @@
 import clsx from 'clsx';
 import s from './ProductMarkersList.module.scss';
 
-const ProductMarkersList = ({ markers, changeColor, active }) => {
+const ProductMarkersList = ({ markers, changeColor, activeVar }) => {
   return (
     <ul className={s.colorBlock}>
-      {markers.map(({ marker, varId }) => {
+      {markers.map((marker) => {
         return (
           <li
-            key={varId}
+            key={marker}
             className={clsx(
               s.item,
-              marker === active.marker ? s.itemFocus : null
+              marker === activeVar.marker ? s.itemFocus : null
             )}
           >
             <label
               style={{ backgroundColor: marker }}
               className={clsx(
-                s.labels
-                // markers[i].inStock === true ? s.labels : s.disabledLabels
+                s.labels,
+                activeVar.quantity > 0 ? s.labels : s.disabledLabels
               )}
             >
               <input
@@ -25,7 +25,7 @@ const ProductMarkersList = ({ markers, changeColor, active }) => {
                 type="radio"
                 name="color"
                 value={marker}
-                onChange={() => changeColor({ varId, marker })}
+                onChange={() => changeColor({ marker })}
               />
             </label>
           </li>
