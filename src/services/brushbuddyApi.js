@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { updateProductTitle } from 'helpers/updateProductTitle';
 
 const instance = axios.create({
-  // baseURL: 'http://localhost:4040/api',
-  baseURL: 'https://api.brushbuddy.com.ua/api',
+  baseURL: 'http://localhost:4040/api',
+  // baseURL: 'https://api.brushbuddy.com.ua/api',
 });
 
 // const SECRET_KEY
@@ -34,34 +33,6 @@ export const getBlogsApi = async () => {
 };
 
 export const getPopularProductsApi = async () => {
-  const { data } = await instance.get('/variants/popular');
-
-  return data.map(
-    ({
-      color,
-      flavor,
-      images,
-      marker,
-      price,
-      salePrice,
-      volume,
-      watermark,
-      quantity,
-      _id: varId,
-      product: { title, userType, _id: prodId },
-    }) => {
-      return {
-        title: updateProductTitle({ title, color, flavor, volume }),
-        images,
-        markers: [{ varId, marker }],
-        price,
-        salePrice,
-        watermark,
-        quantity,
-        varId,
-        prodId,
-        userType,
-      };
-    }
-  );
+  const { data } = await instance.get('/products/popular');
+  return data;
 };

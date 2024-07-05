@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import s from './ProductTypeIcon.module.scss';
 import { PRODUCT_TYPES } from 'shared/constants';
+import { sprite } from 'shared/icons';
 
-const ProductTypeIcon = ({ age, sprite }) => {
+const ProductTypeIcon = ({ userType }) => {
   const typeIcons = {
     [PRODUCT_TYPES.ADULT]: { icon: 'icon-bage-adult', className: 'adult' },
     [PRODUCT_TYPES.CHILD]: { icon: 'icon-bage-child', className: 'child' },
@@ -10,7 +11,7 @@ const ProductTypeIcon = ({ age, sprite }) => {
   };
 
   const renderTypeIcons = () => {
-    return age.map((item, index) => {
+    return userType.map((item, index) => {
       const { icon: typeIcon, className: subTypeClass } = typeIcons[item] || {
         icon: null,
         className: null,
