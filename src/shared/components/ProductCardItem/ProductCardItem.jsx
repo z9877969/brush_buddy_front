@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import {
   ProductMarkersList,
@@ -25,47 +25,67 @@ watermark: "wow"
 */
 
 const ProductCardItem = ({
-  title,
-  images,
-  markers, // [{varId, marker}]
-  price,
-  salePrice,
-  watermark,
-  quantity,
+  markers, // [marker]
   prodId,
   userType,
   activeVar = {},
+  openProduct,
+  title: prodTitle,
+  // age,
+  // ...item
 }) => {
-  const imageUrl = images?.[0] || noPictureImage;
-
-  const activeMarker = markers?.find((m) => m.varId === activeVar.varId) ?? [];
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const {
+    color,
+    flavor,
+    images,
+    price,
+    quantity,
+    salePrice,
+    title: activeVarTitle,
+    varId,
+    _id,
+    volume,
+    watermark,
+  } = activeVar;
+
+  /* 
+    color: ""
+    flavor: ""
+    volume: ""
+    images: ['https://res.cloudinary.com/dmfu2r8kg/image/upload/…E%D1%81%D0%B8/IMG_20240121_170157_633__nkw7eu.jpg']
+    price: 300
+    quantity: 10
+    salePrice: 0
+    title: "Флоси на тримачі (флосери) DenTek упаковка - 150 шт"
+    varId: "666347fe85a182ba72f1b850"
+  */
+
+  const imageUrl = images?.[0] || noPictureImage;
+  const activeVarId = varId || _id;
+  const title = prodTitle || activeVarTitle;
+  const curSalePrice = salePrice || activeVar.salePrice || 0;
+  const curPrice = price || activeVar.price || 0;
 
   const hanleClick = () => {
     dispatch(
       addProduct({
-        // id,
-        // category,
-        // quantity,
-        // title,
-        // images: url,
-        // price,
-        // salePrice,
-        // color: marker,
-        // name: color,
-        // flavor,
-        // volume,
+        id: activeVarId,
+        quantity,
+        title,
+        images: imageUrl,
+        price,
+        salePrice,
+        color,
+        flavor,
+        volume,
       })
     );
   };
-  const curSalePrice = salePrice || activeVar.salePrice || 0;
-  const curPrice = price || activeVar.price || 0;
 
   return (
     <div className={clsx(s.productItem, quantity === 0 && s.unavailable)}>
-      <Link to={`/products/${prodId}/${activeVar.varId}`}>
+      <Link to={`/products/${prodId}/${activeVarId}`}>
         <div className={s.imageWarpper}>
           <img
             src={imageUrl}
@@ -75,16 +95,14 @@ const ProductCardItem = ({
             width={340}
           />
         </div>
-        <ProductTypeIcon age={userType} sprite={sprite} />
+        <ProductTypeIcon userType={userType} />
         <ProductWatermark watermark={watermark} sprite={sprite} />
       </Link>
       {markers.length > 0 && (
         <ProductMarkersList
           markers={markers}
-          active={activeMarker || markers[0]}
-          changeColor={({ varId }) => {
-            navigate(`/products/${prodId}/${varId}`);
-          }}
+          activeVar={activeVar}
+          changeColor={openProduct}
         />
       )}
       <Link to={`/products/${prodId}/${activeVar.varId}`}>

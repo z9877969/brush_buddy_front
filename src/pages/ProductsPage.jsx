@@ -14,7 +14,7 @@ import {
 import { SelectedFilters } from 'modules/selectedFilters';
 import { PRODUCT_TYPES } from 'shared/constants';
 import { selectProductsList } from '@redux/products/productsSelectors';
-// import { useFilteredProducts } from 'hooks/useFilteredProducts';
+import { useFilteredProducts } from 'hooks/useFilteredProducts';
 
 const ProductsPage = () => {
   const [search, setSearch] = useSearchParams();
@@ -26,8 +26,8 @@ const ProductsPage = () => {
   const productType = search.get('productType');
   const hasChanged = !isEqual(filter, initialFilterValues);
 
-  // const filteredProducts = useFilteredProducts(products, filter);
-  const filteredProducts = products;
+  const filteredProducts = useFilteredProducts(products, filter);
+  // const filteredProducts = products;
 
   useEffect(() => {
     sessionStorage.setItem('filter', JSON.stringify(filter));

@@ -16,35 +16,35 @@ export const categoriesOptions = (options) => [
   { value: null, label: 'Усі' },
   {
     value: 'toothbrushes',
-    label: `Зубні щітки (${options.toothbrushes !== undefined ? options.toothbrushes : 0})`,
+    label: `Зубні щітки (${options.toothbrushes || 0})`,
   },
   {
     value: 'toothpastes',
-    label: `Зубна паста (${options.toothpastes !== undefined ? options.toothpastes : 0})`,
+    label: `Зубна паста (${options.toothpastes || 0})`,
   },
   {
     value: 'brushheads',
-    label: `Насадки для щітки (${options.brushheads !== undefined ? options.brushheads : 0})`,
+    label: `Насадки для щітки (${options.brushheads || 0})`,
   },
   {
     value: 'sets',
-    label: `Готові набори (${options.sets !== undefined ? options.sets : 0})`,
+    label: `Готові набори (${options.sets || 0})`,
   },
   {
     value: 'plaqueIndicators',
-    label: `Індикація нальоту (${options.plaqueIndicators !== undefined ? options.plaqueIndicators : 0})`,
+    label: `Індикація нальоту (${options.plaqueIndicators || 0})`,
   },
   {
     value: 'interdentalCleaning',
-    label: `Міжзубне чищення (${options.interdentalCleaning !== undefined ? options.interdentalCleaning : 0})`,
+    label: `Міжзубне чищення (${options.interdentalCleaning || 0})`,
   },
   {
     value: 'goodies',
-    label: `Корисні смаколики (${options.goodies !== undefined ? options.goodies : 0})`,
+    label: `Корисні смаколики (${options.goodies || 0})`,
   },
   {
     value: 'helpers',
-    label: `Допомагайки (${options.helpers !== undefined ? options.helpers : 0})`,
+    label: `Допомагайки (${options.helpers || 0})`,
   },
 ];
 export const brandsOptions = [

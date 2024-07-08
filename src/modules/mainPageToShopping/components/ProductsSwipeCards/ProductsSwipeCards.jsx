@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { ProductCardItem } from 'shared/components';
+import PopularProductsSlide from '../PopularProductsSlide/PopularProductsSlide';
 
 const ProductsSwipeCards = ({
   products,
@@ -10,16 +10,22 @@ const ProductsSwipeCards = ({
   reachStartButton,
 }) => {
   const lengthCards = products.length;
+
   const elements = useMemo(() => {
     return products.reduce((acc, product, idx, arr) => {
       if (idx % 2 === 0) {
         const nextProduct = idx + 1 < arr.length ? arr[idx + 1] : null;
+
         acc.push(
-          <SwiperSlide key={product.varId}>
-            <div>
-              <ProductCardItem {...product} />
-              {nextProduct && <ProductCardItem {...arr[idx + 1]} />}
-            </div>
+          <SwiperSlide>
+            {nextProduct ? (
+              <PopularProductsSlide
+                firstProduct={product}
+                secondProduct={nextProduct}
+              />
+            ) : (
+              <PopularProductsSlide firstProduct={product} />
+            )}
           </SwiperSlide>
         );
       }

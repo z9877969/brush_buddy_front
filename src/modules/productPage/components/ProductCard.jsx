@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import { ProductsList } from 'modules/mainPageToShopping';
@@ -10,6 +10,7 @@ import ProductPrice from './ProductPrice/ProductPrice';
 import ProductCounter from './ProductCounter/ProductCounter';
 import ProductDescription from './ProductDescription/ProductDescription';
 import { useRecommendedProducts } from 'hooks/useRecommendedProducts';
+import { useChangeVariant } from 'hooks/useChangeVariant';
 import { changeProductAmount } from '@redux/cart/cartSlice';
 import { updateProductTitle } from 'helpers';
 import { sprite } from 'shared/icons';
@@ -17,7 +18,6 @@ import s from './ProductCard.module.scss';
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
 
   const { variantId, productId } = useParams();
@@ -50,30 +50,7 @@ const ProductCard = ({ product }) => {
 
   const recommendedProducts = useRecommendedProducts(product);
 
-  const changeCurVariant = useCallback(
-    ({ marker, volume }) => {
-      const checkedWithMarkerVariants = variants.filter(
-        (v) => v.marker === marker
-      );
-
-      const checkedWithValueVariant = checkedWithMarkerVariants.find(
-        (v) => v.volume === volume
-      );
-
-      let checkedVariant = null;
-      if (!checkedWithValueVariant) {
-        checkedVariant = checkedWithMarkerVariants[0];
-      } else {
-        checkedVariant = checkedWithValueVariant;
-      }
-      const { _id: variantId, product: productId } = checkedVariant;
-      navigate(`/products/${productId}/${variantId}`, {
-        state: { top: document.documentElement.scrollTop },
-      });
-    },
-    // eslint-disable-next-line
-    [variants]
-  );
+  const changeCurVariant = useChangeVariant(variants);
 
   const handleAddProductToCart = () => {
     dispatch(

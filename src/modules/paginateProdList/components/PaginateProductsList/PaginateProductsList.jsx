@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ProdList from '../ProdList/ProdList';
+import ProductsList from '../ProductsList/ProductsList';
 import Paginator from '../Paginator/Paginator';
 import s from './PaginateProductsList.module.scss';
 import { scrollToTop } from 'helpers/scrollToTop';
@@ -36,7 +36,7 @@ const PaginateProdList = ({ products }) => {
 
   return (
     <div className={s.blockPaginateProductsList}>
-      <ProdList products={currentItems} />
+      <ProductsList products={currentItems} />
       {currentItems.length > 0 && (
         <Paginator
           totalPages={pageCount}
