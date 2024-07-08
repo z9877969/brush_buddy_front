@@ -30,10 +30,10 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
     const data = {};
 
     products.forEach((product) => {
-      if (data[product.category]) {
-        data[product.category]++;
+      if (data[product.category.value]) {
+        data[product.category.value]++;
       } else {
-        data[product.category] = 1;
+        data[product.category.value] = 1;
       }
     });
     return data;
