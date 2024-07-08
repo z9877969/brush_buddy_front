@@ -3,9 +3,27 @@ import { sortByAvailability } from 'helpers/sortByAvailability';
 
 export const useFilteredProducts = (products, filter) => {
   return useMemo(() => {
-    if (!filter) return products.slice();
+    if (!filter) return products;
 
-    let filteredList = products.slice().filter((product) => {
+    /* 
+      *** filter 
+      age: {value: null, label: 'Усі'} // age
+      brand: {value: null, label: 'Усі'} // maker
+      category: {value: null, label: 'Усі'}
+      recommendedFor: [] // userType 
+      search: "" // title
+      sortBy: {value: null, label: 'Товари'} // price+ | price- | watermark[wow,sale] |
+    */
+    /* 
+    *** product
+    age: ['0to3', '4to6', '6to12']
+    category: {_id: '66196c344359dc726e3f8824', label: 'Зубна паста', value: 'toothpastes'}
+    maker: {_id: '66196d5e4359dc726e3f8830', label: 'Brush-baby', value: 'brushbaby'}
+    title: "Дитяча зубна паста Brush baby"
+    userType: ['child']
+   */
+
+    let filteredList = products.filter((product) => {
       const { search, age, category, recommendedFor, brand } = filter;
       if (
         search &&
@@ -18,23 +36,24 @@ export const useFilteredProducts = (products, filter) => {
       ) {
         return false;
       }
+      if (age?.value && product.age && product.age.includes(age.value)) {
+        return false;
+      }
       if (
-        age &&
-        age.value &&
-        product.ageType &&
-        !product.ageType.includes(age.value)
+        category &&
+        category.value &&
+        product.category.value !== category.value
       ) {
         return false;
       }
-      if (category && category.value && product.category !== category.value) {
-        return false;
-      }
       if (recommendedFor && recommendedFor.length > 0) {
-        if (!recommendedFor.some((target) => product.type.includes(target))) {
+        if (
+          !recommendedFor.some((target) => product.userType.includes(target))
+        ) {
           return false;
         }
       }
-      if (brand && brand.value && product.maker !== brand.value) {
+      if (brand && brand.value && product.maker.value !== brand.value) {
         return false;
       }
       return true;
@@ -44,15 +63,15 @@ export const useFilteredProducts = (products, filter) => {
       switch (filter.sortBy.value) {
         case 'increment':
           filteredList.sort((a, b) => {
-            const aPrice = a.salePrice || a.price;
-            const bPrice = b.salePrice || b.price;
+            const aPrice = a.variants[0].salePrice || a.variants[0].price;
+            const bPrice = b.variants[0].salePrice || b.variants[0].price;
             return aPrice - bPrice;
           });
           break;
         case 'decrement':
           filteredList.sort((a, b) => {
-            const aPrice = a.salePrice || a.price;
-            const bPrice = b.salePrice || b.price;
+            const aPrice = a.variants[0].salePrice || a.variants[0].price;
+            const bPrice = b.variants[0].salePrice || b.variants[0].price;
             return bPrice - aPrice;
           });
           break;
