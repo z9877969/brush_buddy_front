@@ -86,6 +86,10 @@
   width: 100%;
   padding: 8px 16px;
   display: flex;
+
+  @include media(tablet) {
+    padding: 16px 16px;
+  }
   // justify-content: space-between;
 
   & .userType {
@@ -94,6 +98,20 @@
 
   & .watermark {
     margin-right: auto;
+  }
+
+  & .watermarkIcon {
+    @include media(tablet) {
+      width: 96px;
+      height: 46px;
+    }
+  }
+
+  & .userTypeIcon {
+    @include media(tablet) {
+      width: 46px;
+      height: 46px;
+    }
   }
 }
 

@@ -71,10 +71,10 @@ export const MyImage = ({ images, userTypes, watermark }) => {
       <div className={s.imgContainer}>
         <div className={s.iconsWrapper}>
           <div className={s.watermark}>
-            <WatermarkIcon watermark={watermark} />
+            <WatermarkIcon watermark={watermark} iconClass={s.watermarkIcon} />
           </div>
           <div className={s.userType}>
-            <UserTypesIcons userTypes={userTypes} />
+            <UserTypesIcons userTypes={userTypes} iconClass={s.userTypeIcon} />
           </div>
         </div>
         <img
