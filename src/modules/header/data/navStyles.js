@@ -9,7 +9,7 @@ export const customStyles = {
     ...styles,
     border: 'none',
     fontSize: '18px',
-    maxWidth: '123px',
+    maxWidth: '360px',
     overflowX: 'auto',
     '&:hover': {
       border: 'none',
