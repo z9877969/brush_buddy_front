@@ -36,7 +36,7 @@ function App() {
           <Route path={ROUTES.PRODUCT_CARD} element={<ProductCardPage />} />
           <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
           <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
-          <Route path={ROUTES.THANK} element={<ThankPage />} />
+          <Route path={ROUTES.THANK + '/:orderNum'} element={<ThankPage />} />
           <Route path={ROUTES.CART_EMPTY} element={<CartEmptyPage />} />
           <Route path="*" element={<Navigate to={ROUTES.MAIN} />} />
         </Route>

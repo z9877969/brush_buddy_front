@@ -71,14 +71,14 @@ const ProductCardItem = ({
     dispatch(
       addProduct({
         id: activeVarId,
-        quantity,
         title,
-        images: imageUrl,
-        price,
-        salePrice,
         color,
         flavor,
         volume,
+        images: imageUrl,
+        price,
+        salePrice,
+        quantity,
       })
     );
   };

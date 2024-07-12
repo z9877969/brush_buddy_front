@@ -1,6 +1,5 @@
 import { sendOrderData } from '@redux/cart/operationsCart';
 import {
-  selectDiscount,
   selectDiscountPersentage,
   selectOrderedProducts,
   selectPromocode,
@@ -10,6 +9,7 @@ import { useFormik } from 'formik';
 import { deliveryFormSchema } from 'modules/cart';
 import { createContext, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { PAYMENT_METHOD } from 'shared/constants';
 
 const DeliveryFormContext = createContext();
 
@@ -18,12 +18,10 @@ export const useDeliveryForm = () => useContext(DeliveryFormContext);
 const DeliveryFormProvider = ({ children }) => {
   const dispatch = useDispatch();
 
-  const discountSum = useSelector(selectDiscount); // sum discount
   const discountPercentage = useSelector(selectDiscountPersentage); //value discount
   const promocode = useSelector(selectPromocode);
   const products = useSelector(selectOrderedProducts);
   const totalPrice = useSelector(selectTotalPrice);
-  const discountedTotal = totalPrice - discountSum;
   const [deliveryLS] = useState(() =>
     JSON.parse(localStorage.getItem('delivery'))
   );
@@ -37,7 +35,7 @@ const DeliveryFormProvider = ({ children }) => {
           city: deliveryLS.city,
           department: deliveryLS.department,
           comments: '',
-          payment: 'card',
+          payment: PAYMENT_METHOD.CARD,
         }
       : {
           name: '',
@@ -46,7 +44,7 @@ const DeliveryFormProvider = ({ children }) => {
           city: '',
           department: '',
           comments: '',
-          payment: 'card',
+          payment: PAYMENT_METHOD.CARD,
         },
     validationSchema: deliveryFormSchema,
     onSubmit: (values) => {
@@ -64,11 +62,10 @@ const DeliveryFormProvider = ({ children }) => {
       dispatch(
         sendOrderData({
           products,
-          delivery,
+          totalPrice,
           promocode,
           discount: discountPercentage,
-          totalPrice,
-          saleTotal: discountedTotal,
+          delivery,
           payment,
         })
       );

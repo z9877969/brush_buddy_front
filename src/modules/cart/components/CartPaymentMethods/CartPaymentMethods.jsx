@@ -2,6 +2,7 @@ import { useDeliveryForm } from 'context/DeliveryFormProvider';
 import s from './CartPaymentMethods.module.scss';
 import clsx from 'clsx';
 import { sprite } from 'shared/icons';
+import { PAYMENT_METHOD } from 'shared/constants';
 
 const CartPaymentMethods = () => {
   const formik = useDeliveryForm();
@@ -17,9 +18,9 @@ const CartPaymentMethods = () => {
             className={clsx(s.cartPaymentsInput)}
             type="radio"
             name="payment"
-            value="card"
+            value={PAYMENT_METHOD.CARD}
             id="online"
-            checked={values.payment === 'card'}
+            checked={values.payment === PAYMENT_METHOD.CARD}
             onChange={handleChange}
           />
           <label htmlFor="online" className={s.cartPaymentsLabel}>
@@ -39,8 +40,8 @@ const CartPaymentMethods = () => {
             type="radio"
             name="payment"
             id="receipt"
-            value="cash"
-            checked={values.payment === 'cash'}
+            value={PAYMENT_METHOD.CASH}
+            checked={values.payment === PAYMENT_METHOD.CASH}
             onChange={handleChange}
           />
           <label htmlFor="receipt" className={s.cartPaymentsLabel}>

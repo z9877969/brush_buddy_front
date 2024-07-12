@@ -14,19 +14,6 @@ export const selectCartProducts = (state) => state.cart.products;
 export const selectOrderedProducts = createSelector(
   [selectCartProducts],
   (products) => {
-    /* 
-    id:0
-    category:"toothbrushes"
-    quantity:10
-    title:10
-    price:210
-    salePrice:0
-    color:"lightblue"
-    name:"блакитний"
-    flavor:null
-    volume:null
-    amount: 22
-  */
     return products.map(
       ({
         id,

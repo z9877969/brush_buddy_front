@@ -35,3 +35,8 @@ export const SOCIAL_NETWORKS = {
 export const DELIVERY_FORM = {
   COMMENT_MAX_LENGTH: 300,
 };
+
+export const PAYMENT_METHOD = {
+  CARD: 'card',
+  CASH: 'cash',
+};
