@@ -13,13 +13,13 @@ const CartListCurrentItem = ({ data }) => {
   return data.map((product) => {
     const {
       id: productPath, // -> productId/variantId
-      images,
       title,
       color,
-      price,
-      salePrice,
       flavor,
       volume,
+      images,
+      price,
+      salePrice,
       quantity,
       amount,
     } = product;
@@ -62,8 +62,9 @@ const CartListCurrentItem = ({ data }) => {
                 dispatch(
                   changeProductAmount({
                     id: productPath,
-                    quantity,
                     amount: newCount,
+                    price,
+                    salePrice,
                   })
                 )
               }

@@ -3,16 +3,16 @@ import s from './CartListCurrentProducts.module.scss';
 import { MainTitle } from 'shared/components';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProd } from '@redux/cart/selectorsCart';
-import { addTotalPrice } from '@redux/cart/cartSlice';
+import { calcTotalPrice } from '@redux/cart/cartSlice';
 import { useEffect } from 'react';
 
 const CartListCurrentProducts = () => {
-  const products = useSelector(selectProd);
   const dispatch = useDispatch();
+  const products = useSelector(selectProd);
 
   useEffect(() => {
-    dispatch(addTotalPrice(products));
-  }, [dispatch, products]);
+    dispatch(calcTotalPrice());
+  }, [dispatch]);
 
   return (
     <section>

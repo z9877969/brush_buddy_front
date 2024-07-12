@@ -36,3 +36,8 @@ export const getPopularProductsApi = async () => {
   const { data } = await instance.get('/products/popular');
   return data;
 };
+
+export const createOrderApi = async (order) => {
+  const { data } = await instance.post('/orders', order);
+  return data;
+};

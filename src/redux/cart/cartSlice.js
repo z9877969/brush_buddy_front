@@ -15,38 +15,20 @@ const cartSlice = createSlice({
     isLoading: false,
     error: null,
     submitForm: false,
+    orderResult: null,
   },
   reducers: {
     addProduct(state, { payload }) {
       state.submitForm = false;
-      const { id, price, salePrice, amount } = payload;
+      const { id, price, salePrice } = payload;
       const productIdx = state.products.findIndex((el) => el.id === id);
       const curPrice = salePrice > 0 ? salePrice : price;
       if (productIdx === -1) {
-        state.products.push({ ...payload, amount });
+        state.products.push({ ...payload, amount: 1 });
       } else {
         state.products[productIdx].amount += 1;
       }
       state.totalPrice += curPrice;
-      if (state.discountPercentage) {
-        state.discount = Math.round(
-          state.totalPrice * (1 - state.discountPercentage)
-        );
-      }
-    },
-    removeProduct(state, { payload }) {
-      const { id } = payload;
-      const productIdx = state.products.findIndex((el) => el.id === id);
-      const { price, salePrice } = state.products[productIdx];
-      const curPrice = salePrice > 0 ? salePrice : price;
-      const productAmount = state.products[productIdx].amount;
-
-      if (productAmount > 0) {
-        state.products[productIdx].amount -= 1;
-      } else {
-        state.products.splice(productIdx, 1);
-      }
-      state.totalPrice -= curPrice;
       if (state.discountPercentage) {
         state.discount = Math.round(
           state.totalPrice * (1 - state.discountPercentage)
@@ -65,15 +47,15 @@ const cartSlice = createSlice({
         state.totalPrice += amount * curPrice;
       } else {
         const curProduct = state.products[productIdx];
+        const { price, salePrice } = curProduct;
+        const oldPrice = salePrice || price;
         if (amount > 0) {
-          const curTotalPrice = curProduct.totalPrice;
-          state.products[productIdx].amount = amount;
-
           state.totalPrice =
-            state.totalPrice - curTotalPrice + amount * curPrice;
+            state.totalPrice - curProduct.amount * oldPrice + amount * curPrice;
+          state.products[productIdx].amount = amount;
         } else {
           state.products.splice(productIdx, 1);
-          state.totalPrice -= curProduct.amount * curPrice;
+          state.totalPrice -= curProduct.amount * oldPrice;
         }
       }
       if (state.discountPercentage) {
@@ -82,8 +64,11 @@ const cartSlice = createSlice({
         );
       }
     },
-    addTotalPrice(state, action) {
-      state.totalPrice = totalPrice(action.payload);
+    calcTotalPrice(state) {
+      state.totalPrice = totalPrice(state.products);
+    },
+    resetOrderResult(state) {
+      state.orderResult = null;
     },
     notUsedPromoCode(state) {
       state.promoCode = null;
@@ -116,7 +101,7 @@ const cartSlice = createSlice({
       .addCase(sendOrderData.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(sendOrderData.fulfilled, (state) => {
+      .addCase(sendOrderData.fulfilled, (state, { payload }) => {
         state.products = [];
         state.totalPrice = 0;
         state.promoCode = null;
@@ -124,6 +109,7 @@ const cartSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.submitForm = true;
+        state.orderResult = payload;
       })
       .addCase(sendOrderData.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -134,9 +120,9 @@ const cartSlice = createSlice({
 
 export const {
   addProduct,
-  removeProduct,
   changeProductAmount,
-  addTotalPrice,
+  calcTotalPrice,
+  resetOrderResult,
   usedPromoCode,
   notUsedPromoCode,
   submitForm,

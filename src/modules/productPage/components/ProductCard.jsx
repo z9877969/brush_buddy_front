@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { variantId, productId } = useParams();
+  const { variantId } = useParams();
 
   const {
     // age,
@@ -55,19 +55,17 @@ const ProductCard = ({ product }) => {
   const handleAddProductToCart = () => {
     dispatch(
       changeProductAmount({
-        id: `${productId}/${variantId}`,
-        variantId,
-        productId,
-        category: product.category,
-        images: images[0],
-        price: price,
-        salePrice: salePrice,
+        id: variantId,
         title: curTitle,
         volume: curVariant.volume,
         flavor: curVariant.flavor,
         color: curVariant.color,
         amount: productCount,
         quantity: curVariant.quantity,
+        category: product.category.label,
+        images: images[0],
+        price: price,
+        salePrice: salePrice,
       })
     );
   };
