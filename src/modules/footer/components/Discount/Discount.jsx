@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
-import Modal from '../ModalConditions/ModalConditions';
-import { toastify } from 'helpers';
-import s from './Discount.module.scss';
-import { brushbuddyApi as bbApi } from 'services';
 import clsx from 'clsx';
+import * as Yup from 'yup';
+import { toastify } from 'helpers';
+import { brushbuddyApi as bbApi } from 'services';
+import Conditions from '../Conditions/Conditions';
+import s from './Discount.module.scss';
+import Modal from 'shared/components/Modal/Modal';
 
 const validationSchema = Yup.object({
   phone: Yup.string()
@@ -46,10 +47,6 @@ const Discount = () => {
       const { phone, promocode } = data;
       setPromoData({ phone, promocode });
       setFlipped((p) => !p);
-
-      toastify.success(
-        'Номер телефону успішно зареєстровано для отримання знижки!'
-      );
 
       resetForm();
     } catch (error) {
@@ -167,7 +164,11 @@ const Discount = () => {
           </h2>
         </div>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} />
+      {isModalOpen && (
+        <Modal onClose={setIsModalOpen}>
+          <Conditions isOpen={isModalOpen} onClose={closeModal} />
+        </Modal>
+      )}
     </>
   );
 };

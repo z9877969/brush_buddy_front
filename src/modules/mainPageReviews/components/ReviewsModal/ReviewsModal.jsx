@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import s from './Modal.module.scss';
+import s from './ReviewsModal.module.scss';
+import Modal from 'shared/components/Modal/Modal';
 
-const Modal = ({ image, onClose }) => {
+const ReviewsModal = ({ image, onClose }) => {
   const imageRef = useRef(null);
   const [multiplier, setMultiplier] = useState(1);
 
@@ -34,18 +35,18 @@ const Modal = ({ image, onClose }) => {
   };
 
   return (
-    <div className={s.modalOverlay} onClick={onClose}>
+    <Modal onClose={onClose}>
       <div className={s.modalContent}>
         <img
           ref={imageRef}
           src={image}
           alt="Збільшене зображення"
-          className={s.modalImg}
+          className={s.modalImage}
           onLoad={handleImageLoad}
         />
       </div>
-    </div>
+    </Modal>
   );
 };
 
-export default Modal;
+export default ReviewsModal;

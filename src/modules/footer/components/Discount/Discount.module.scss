@@ -2,6 +2,7 @@ $icon-checkmark: url('../shared/icons/sprite.svg#icon-checkmark');
 
 .discountDiv {
   position: relative;
+  width: 100%;
   height: 352px;
 
   @include media(tablet) {
