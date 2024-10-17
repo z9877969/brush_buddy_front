@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import css from './DialogPhrase.module.scss';
 
 const DialogPhrase = ({
@@ -11,7 +12,10 @@ const DialogPhrase = ({
   children,
 }) => {
   return (
-    <div className={`${css.dialogItem} ${phraseClass}`} id="axis">
+    <div
+      className={clsx(css.dialogItem, phraseClass, css.startAnimation)}
+      id="axis"
+    >
       {direction == 'right' && (
         <div
           className={`${css['dialogBalloonRight' + number]} ${css.dialogBalloon}`}
