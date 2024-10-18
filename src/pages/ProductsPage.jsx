@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isEqual } from 'lodash';
 import {
@@ -17,6 +17,8 @@ import { selectProductsList } from '@redux/products/productsSelectors';
 import { useFilteredProducts } from 'hooks/useFilteredProducts';
 
 const ProductsPage = () => {
+  const navigate = useNavigate();
+
   const [search, setSearch] = useSearchParams();
   const products = useSelector(selectProductsList);
   const [filter, setFilter] = useState(
@@ -24,6 +26,7 @@ const ProductsPage = () => {
   );
 
   const productType = search.get('productType');
+  const page = search.get('page');
   const hasChanged = !isEqual(filter, initialFilterValues);
 
   const filteredProducts = useFilteredProducts(products, filter);
@@ -50,15 +53,14 @@ const ProductsPage = () => {
                 : [productType],
         };
       });
-      setSearch({});
     } else {
       setFilter((p) => ({
         ...p,
         category: { value: 'helpers', label: 'Допомагайки' },
       }));
     }
-    setSearch({});
-  }, [search, productType, setSearch]);
+    page && setSearch({ page });
+  }, [productType, navigate, setSearch, page]);
 
   return (
     <ProductsPageWrapper>
