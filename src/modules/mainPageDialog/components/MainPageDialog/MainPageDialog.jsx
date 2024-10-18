@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import DialogPhrase from '../DialogPhrase/DialogPhrase';
 import css from './MainPageDialog.module.scss';
@@ -16,16 +16,37 @@ import poliDeskX2 from '../../images/desktop/Poli-desktop@2x.png';
 import boyDeskX2 from '../../images/desktop/Boy-desktop@2x.png';
 import catDeskX2 from '../../images/desktop/Cat-desktop@2x.png';
 
+const observeDialogSection = (sectionRef, action) => {
+  const observerCb = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.intersectionRatio >= 0.5) {
+        action();
+      }
+    });
+  };
+  const observerOptions = {
+    threshold: [0, 0.5], // Спостерігати перетини при 0 і 50% видимості секції
+  };
+  const observer = new IntersectionObserver(observerCb, observerOptions);
+
+  // Спостерігаємо за нашою секцією
+  observer.observe(sectionRef);
+
+  // Екшен, який запускається при перетині
+};
+
+// Налаштовуємо Intersection Observer
+
 const MainPageDialog = () => {
   const [startAnimation, setStartAnimation] = useState(false);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setStartAnimation(true);
-    }, 1000);
+    observeDialogSection(sectionRef.current, () => setStartAnimation(true));
   }, []);
+
   return (
-    <section className={css.section}>
+    <section className={css.section} ref={sectionRef}>
       <div className={css.sectionContainer}>
         {startAnimation && (
           <>
