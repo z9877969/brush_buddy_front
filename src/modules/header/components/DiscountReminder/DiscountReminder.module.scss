@@ -15,6 +15,7 @@
 .discountText {
   @include font(14, 18);
   color: $secondary-text-color;
+  cursor: pointer;
 
   @include media(tablet) {
     @include font(16, 24);

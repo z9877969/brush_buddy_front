@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import s from './MainPageReviews/MainPageReviews.module.scss';
 import { Navigation } from 'swiper/modules';
-import Modal from './Modal/Modal';
+import ReviewsModal from './ReviewsModal/ReviewsModal';
 
 const ReviewsCardList = ({
   reviewsCardData,
@@ -68,7 +68,7 @@ const ReviewsCardList = ({
         ))}
       </Swiper>
       {selectedImage && (
-        <Modal image={selectedImage} onClose={handleCloseModal} />
+        <ReviewsModal image={selectedImage} onClose={handleCloseModal} />
       )}
     </>
   );
