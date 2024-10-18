@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 import DialogPhrase from '../DialogPhrase/DialogPhrase';
 import css from './MainPageDialog.module.scss';
 import { sprite } from '../../images/icons';
@@ -13,7 +15,6 @@ import catDeskX1 from '../../images/desktop/Cat-desktop.png';
 import poliDeskX2 from '../../images/desktop/Poli-desktop@2x.png';
 import boyDeskX2 from '../../images/desktop/Boy-desktop@2x.png';
 import catDeskX2 from '../../images/desktop/Cat-desktop@2x.png';
-import { useEffect, useState } from 'react';
 
 const MainPageDialog = () => {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -35,7 +36,7 @@ const MainPageDialog = () => {
               imgSourceDeskX2={poliDeskX2}
               direction="left"
               number="1"
-              phraseClass={css.slide1}
+              phraseClass={clsx(css['slide-1'], css.slideLeft)}
             >
               Гайда <span className={css.brushAccent}>брашити</span>
               <br /> зубки разом!
@@ -50,7 +51,7 @@ const MainPageDialog = () => {
               imgSourceDeskX2={boyDeskX2}
               direction="right"
               number="1"
-              phraseClass={css.slide2}
+              phraseClass={clsx(css['slide-2'], css.slideRight)}
             >
               А як же кішка <br />
               <span className={css.boyAccent}>Пломба</span>?
@@ -62,7 +63,7 @@ const MainPageDialog = () => {
               imgSourcedeskX2={poliDeskX2}
               direction="left"
               number="2"
-              phraseClass={css.slide3}
+              phraseClass={clsx(css['slide-3'], css.slideLeft)}
             >
               Обов&apos;язково і їй!
             </DialogPhrase>
@@ -76,7 +77,7 @@ const MainPageDialog = () => {
               imgSourceDeskX2={catDeskX2}
               direction="right"
               number="2"
-              phraseClass={css.slide4}
+              phraseClass={clsx(css['slide-4'], css.slideRight)}
             >
               мУУ<span className={css.catAccent}>УРРРА</span>АА...
             </DialogPhrase>

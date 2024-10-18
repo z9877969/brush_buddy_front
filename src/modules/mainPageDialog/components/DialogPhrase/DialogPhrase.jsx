@@ -12,10 +12,7 @@ const DialogPhrase = ({
   children,
 }) => {
   return (
-    <div
-      className={clsx(css.dialogItem, phraseClass, css.startAnimation)}
-      id="axis"
-    >
+    <div className={clsx(css.dialogItem, phraseClass)} id="axis">
       {direction == 'right' && (
         <div
           className={`${css['dialogBalloonRight' + number]} ${css.dialogBalloon}`}

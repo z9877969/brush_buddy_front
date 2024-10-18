@@ -1,3 +1,5 @@
+$dialog-item-animation-duration: 1.5s;
+
 .section {
   background-color: $pet-color;
 }
@@ -33,45 +35,57 @@
   color: $child-color;
 }
 
-@keyframes slide1mobile {
+@keyframes slideLeft {
   0% {
     transform: translateX(0);
     right: 100%;
   }
   100% {
     transform: translateX(100%);
+    right: 100%;
   }
 }
 
-.slide1 {
-  animation-name: slide1mobile;
+@keyframes slideRight {
+  0% {
+    transform: translateX(0%);
+    left: 100%;
+  }
+  100% {
+    transform: translateX(-100%);
+    left: 100%;
+  }
+}
+
+.slideLeft {
+  animation-name: slideLeft;
   animation-duration: $dialog-item-animation-duration;
+  animation-fill-mode: forwards;
   position: absolute;
   z-index: 1;
+  right: 100%;
+}
+
+.slideRight {
+  animation-name: slideRight;
+  animation-duration: $dialog-item-animation-duration;
+  animation-fill-mode: forwards;
+  position: absolute;
+  z-index: 1;
+  left: 100%;
+}
+
+.slide-1 {
+  animation-delay: calc($dialog-item-animation-duration * 0);
   top: 48px;
-  left: 0;
   @include media(tablet) {
     top: 64px;
   }
 }
 
-@keyframes slide2mobile {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.slide2 {
-  animation-name: slide2mobile;
-  animation-duration: $dialog-item-animation-duration;
+.slide-2 {
   animation-delay: calc($dialog-item-animation-duration * 1);
-  position: absolute;
-  z-index: 1;
   top: 216px;
-  right: 0;
   @include media(tablet) {
     top: 216px;
   }
@@ -80,23 +94,9 @@
   }
 }
 
-@keyframes slide3mobile {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.slide3 {
-  animation-name: slide3mobile;
-  animation-duration: calc($dialog-item-animation-duration);
+.slide-3 {
   animation-delay: calc($dialog-item-animation-duration * 2);
-  position: absolute;
-  z-index: 1;
   top: 320px;
-
   @include media(tablet) {
     top: 368px;
   }
@@ -104,23 +104,10 @@
     top: 292px;
   }
 }
-@keyframes slide4mobile {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
 
-.slide4 {
-  animation-name: slide4mobile;
-  animation-duration: calc($dialog-item-animation-duration);
+.slide-4 {
   animation-delay: calc($dialog-item-animation-duration * 3);
-  position: absolute;
-  z-index: 1;
   top: 515px;
-  right: 0;
   @include media(tablet) {
     top: 512px;
   }
@@ -129,14 +116,23 @@
   }
 }
 
-@mixin icon($_dialog-order-num) {
-  $delay: calc($dialog-item-animation-duration * $_dialog-order-num);
-  transform: scale(1);
-  transition: transform $dialog-item-animation-duration linear 2.5;
-}
+@mixin animate-icon($_dialog-order-num) {
+  @keyframes animate-icon {
+    0% {
+      transform: scale(20%);
+    }
+    100% {
+      transform: scale(100%);
+    }
+  }
 
-.iconAnimation {
-  transform: scale(1);
+  animation: animate-icon;
+  animation-duration: $dialog-item-animation-duration;
+  animation-delay: calc(
+    $dialog-item-animation-duration * ($_dialog-order-num - 1)
+  );
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 .iconWow {
@@ -145,9 +141,8 @@
   position: absolute;
   right: 64px;
   top: 139px;
-
   transform: scale(0);
-  @include icon(1);
+  @include animate-icon(1);
 
   @include media(tablet) {
     width: 132px;
@@ -167,9 +162,8 @@
   height: 77px;
   right: 235px;
   top: 415px;
-
   transform: scale(0);
-  @include icon(3);
+  @include animate-icon(3);
 
   @include media(tablet) {
     width: 132px;
@@ -181,6 +175,6 @@
     width: 132px;
     height: 83px;
     left: 80%;
-    top: 363px;
+    top: 308px;
   }
 }
