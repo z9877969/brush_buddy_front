@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import DialogPhrase from '../DialogPhrase/DialogPhrase';
+import { observeDialogSection } from '../../helpers';
 import css from './MainPageDialog.module.scss';
 import { sprite } from '../../images/icons';
 import poliMobX1 from '../../images/mobile/Poli-mobile.png';
@@ -15,27 +16,6 @@ import catDeskX1 from '../../images/desktop/Cat-desktop.png';
 import poliDeskX2 from '../../images/desktop/Poli-desktop@2x.png';
 import boyDeskX2 from '../../images/desktop/Boy-desktop@2x.png';
 import catDeskX2 from '../../images/desktop/Cat-desktop@2x.png';
-
-const observeDialogSection = (sectionRef, action) => {
-  const observerCb = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.intersectionRatio >= 0.5) {
-        action();
-      }
-    });
-  };
-  const observerOptions = {
-    threshold: [0, 0.5], // Спостерігати перетини при 0 і 50% видимості секції
-  };
-  const observer = new IntersectionObserver(observerCb, observerOptions);
-
-  // Спостерігаємо за нашою секцією
-  observer.observe(sectionRef);
-
-  // Екшен, який запускається при перетині
-};
-
-// Налаштовуємо Intersection Observer
 
 const MainPageDialog = () => {
   const [startAnimation, setStartAnimation] = useState(false);
