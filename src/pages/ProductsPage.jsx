@@ -17,7 +17,7 @@ import { selectProductsList } from '@redux/products/productsSelectors';
 import { useFilteredProducts } from 'hooks/useFilteredProducts';
 
 const ProductsPage = () => {
-  const [search, setSearch] = useSearchParams();
+  const [search] = useSearchParams();
   const products = useSelector(selectProductsList);
   const [filter, setFilter] = useState(
     () => JSON.parse(sessionStorage.getItem('filter')) || initialFilterValues
@@ -40,25 +40,17 @@ const ProductsPage = () => {
         const filter = p ? p : {};
         return {
           ...filter,
-          recommendedFor:
-            filter.recommendedFor &&
-            !filter.recommendedFor.includes(productType)
-              ? [...filter.recommendedFor, productType]
-              : filter.recommendedFor &&
-                  filter.recommendedFor.includes(productType)
-                ? filter.recommendedFor
-                : [productType],
+          recommendedFor: [productType],
         };
       });
-      setSearch({});
     } else {
       setFilter((p) => ({
         ...p,
+        recommendedFor: [],
         category: { value: 'helpers', label: 'Допомагайки' },
       }));
     }
-    setSearch({});
-  }, [search, productType, setSearch]);
+  }, [productType]);
 
   return (
     <ProductsPageWrapper>

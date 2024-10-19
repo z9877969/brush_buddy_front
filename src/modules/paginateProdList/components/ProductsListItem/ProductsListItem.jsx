@@ -4,12 +4,13 @@ import { ProductCardItem } from 'shared/components';
 import { useProductMarkers } from 'hooks/useProductMarkers';
 import { useChangeVariant } from 'hooks/useChangeVariant';
 
-const ProductsListItem = (productProps) => {
+const ProductsListItem = (productProps = {}) => {
   const { _id, variants } = productProps;
 
   const markers = useProductMarkers(variants);
 
   const activeProduct = useMemo(() => {
+    if (!variants[0]) return {};
     return getActiveProduct(productProps, variants[0]._id);
   }, [productProps, variants]);
 
