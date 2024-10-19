@@ -26,6 +26,7 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
   }, [currentPage, onPageChange]);
 
   useEffect(() => {
+    if (!productType) return;
     setSearchParams({ page: currentPage, productType }, { replace: true });
   }, [currentPage, setSearchParams, productType]);
 

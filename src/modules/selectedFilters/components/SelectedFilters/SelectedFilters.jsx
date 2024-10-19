@@ -1,10 +1,11 @@
-import { Button } from 'shared/components';
+import { useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FilterItem from '../FilterItem/FilterItem';
+import { Button } from 'shared/components';
 import s from './SelectedFilters.module.scss';
 
 import { PRODUCT_TYPES } from 'shared/constants';
 import { initialFilterValues } from 'modules/productsPageFilter';
-import { useCallback, useMemo } from 'react';
 
 const recommended = {
   [PRODUCT_TYPES.ADULT]: 'Для дорослих',
@@ -13,7 +14,12 @@ const recommended = {
 };
 
 const SelectedFilters = ({ filter, setFilter }) => {
-  const resetFilters = () => setFilter(initialFilterValues);
+  const navigate = useNavigate();
+
+  const resetFilters = () => {
+    setFilter(initialFilterValues);
+    navigate({ page: 1 });
+  };
 
   const handleRemove = useCallback(
     ({ category, value, type }) => {
