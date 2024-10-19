@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isEqual } from 'lodash';
 import {
@@ -17,16 +17,13 @@ import { selectProductsList } from '@redux/products/productsSelectors';
 import { useFilteredProducts } from 'hooks/useFilteredProducts';
 
 const ProductsPage = () => {
-  const navigate = useNavigate();
-
-  const [search, setSearch] = useSearchParams();
+  const [search] = useSearchParams();
   const products = useSelector(selectProductsList);
   const [filter, setFilter] = useState(
     () => JSON.parse(sessionStorage.getItem('filter')) || initialFilterValues
   );
 
   const productType = search.get('productType');
-  const page = search.get('page');
   const hasChanged = !isEqual(filter, initialFilterValues);
 
   const filteredProducts = useFilteredProducts(products, filter);
@@ -43,24 +40,17 @@ const ProductsPage = () => {
         const filter = p ? p : {};
         return {
           ...filter,
-          recommendedFor:
-            filter.recommendedFor &&
-            !filter.recommendedFor.includes(productType)
-              ? [...filter.recommendedFor, productType]
-              : filter.recommendedFor &&
-                  filter.recommendedFor.includes(productType)
-                ? filter.recommendedFor
-                : [productType],
+          recommendedFor: [productType],
         };
       });
     } else {
       setFilter((p) => ({
         ...p,
+        recommendedFor: [],
         category: { value: 'helpers', label: 'Допомагайки' },
       }));
     }
-    page && setSearch({ page });
-  }, [productType, navigate, setSearch, page]);
+  }, [productType]);
 
   return (
     <ProductsPageWrapper>

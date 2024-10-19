@@ -1,13 +1,13 @@
+import { useState, useEffect } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { sprite } from 'shared/icons';
 import s from './Paginator.module.scss';
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 
 const Paginator = ({ totalPages, onPageChange, customkey }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+  const productType = searchParams.get('productType');
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -26,8 +26,8 @@ const Paginator = ({ totalPages, onPageChange, customkey }) => {
   }, [currentPage, onPageChange]);
 
   useEffect(() => {
-    setSearchParams({ page: currentPage }, { replace: true });
-  }, [currentPage, setSearchParams, searchParams]);
+    setSearchParams({ page: currentPage, productType }, { replace: true });
+  }, [currentPage, setSearchParams, productType]);
 
   const changePage = async (pageNumber) => {
     setCurrentPage(pageNumber);
