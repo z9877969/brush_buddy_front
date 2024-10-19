@@ -68,7 +68,11 @@ const ReviewsCardList = ({
         ))}
       </Swiper>
       {selectedImage && (
-        <ReviewsModal image={selectedImage} onClose={handleCloseModal} />
+        <ReviewsModal
+          image={selectedImage}
+          onClose={handleCloseModal}
+          reviewsList={reviewsCardData}
+        />
       )}
     </>
   );
