@@ -1,4 +1,4 @@
-export const customStyles = ({ value }) => ({
+export const customStyles = ({ selectedOption, isProductPage }) => ({
   container: (styles) => ({
     ...styles,
     '@media (max-width: 1439px)': {
@@ -35,7 +35,7 @@ export const customStyles = ({ value }) => ({
   }),
   placeholder: (styles) => ({
     ...styles,
-    color: '#000',
+    color: isProductPage ? '#f5516f' : '#000',
     transition: 'color 0.3s ease-in-out',
     '@media (max-width: 1439px)': {
       textAlign: 'left',
@@ -78,7 +78,7 @@ export const customStyles = ({ value }) => ({
       color: '#f1f1f',
       backgroundColor: state.isHover
         ? 'red'
-        : state.data.value === value
+        : state.data.value === selectedOption.value
           ? 'rgba(0,0,0,0.05)'
           : 'transparent', // option bg styles
       '@media (max-width: 1439px)': {
