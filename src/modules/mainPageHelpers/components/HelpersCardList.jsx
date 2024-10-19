@@ -1,14 +1,10 @@
-import { sprite } from 'shared/icons';
 import { Link } from 'react-router-dom';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-import { Navigation } from 'swiper/modules';
-
 import { useAddProductToCart } from 'hooks';
-
+import { sprite } from 'shared/icons';
 import s from './MainPageHelpers.module.scss';
 
 const HelpersCardList = ({
@@ -88,7 +84,9 @@ const HelpersCardList = ({
                   <p className={s.helpersBoxPrice}>{`${price} грн`}</p>
                   <p className={s.helpersBoxText}>{text}</p>
                 </div>
-                <img className={s.helpersBoxIMG} src={images} alt="photo" />
+                <div className={s.imgWrapper}>
+                  <img className={s.helpersBoxIMG} src={images} alt="photo" />
+                </div>
               </div>
             </Link>
           </SwiperSlide>
