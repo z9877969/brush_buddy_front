@@ -68,21 +68,29 @@ export const customStyles = ({ value }) => ({
       color: '#1f1f1f',
     },
   }),
-  option: (styles, state) => ({
-    ...styles,
-    width: '100%',
-    padding: '4px 0 4px 12px',
-    fontSize: '16px',
-    lineHeight: '28px',
-    color: '#f1f1f',
-    backgroundColor:
-      state.data.value === value ? 'rgba(0,0,0,0.05)' : 'transparent', // option bg styles
-    '@media (max-width: 1439px)': {
-      fontSize: '18px',
-      lineHeight: '24px',
+  option: (styles, state) => {
+    return {
+      ...styles,
       width: '100%',
-    },
-  }),
+      padding: '4px 0 4px 12px',
+      fontSize: '16px',
+      lineHeight: '28px',
+      color: '#f1f1f',
+      backgroundColor: state.isHover
+        ? 'red'
+        : state.data.value === value
+          ? 'rgba(0,0,0,0.05)'
+          : 'transparent', // option bg styles
+      '@media (max-width: 1439px)': {
+        fontSize: '18px',
+        lineHeight: '24px',
+        width: '100%',
+      },
+      '&:hover': {
+        color: '#f5516f',
+      },
+    };
+  },
   menuList: (styles) => ({
     ...styles,
     display: 'flex',
