@@ -14,7 +14,7 @@ const MainPageAbout = () => {
             light
           />
           <LinkButton
-            title={'За покупками'}
+            title={'До покупок'}
             className={s.mainHeroBtn}
             to={`${ROUTES.PRODUCTS}?page=1`}
           />
