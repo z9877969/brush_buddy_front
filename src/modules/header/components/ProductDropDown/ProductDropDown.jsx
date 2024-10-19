@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import { options } from '../../data/optionsProductNav';
 import { customStyles } from '../../data/navStyles';
-import { PRODUCT_TYPES } from 'shared/constants';
 
 const ProductDropDown = () => {
   const navigate = useNavigate();
@@ -25,22 +24,7 @@ const ProductDropDown = () => {
     if (!selectedOption) {
       return;
     }
-    switch (selectedOption.value) {
-      case PRODUCT_TYPES.ADULT:
-        navigate('/products?productType=adult' + `&page=1`);
-        break;
-      case PRODUCT_TYPES.CHILD:
-        navigate('/products?productType=child' + `&page=1`);
-        break;
-      case PRODUCT_TYPES.ANIMAL:
-        navigate('/products?productType=animal' + `&page=1`);
-        break;
-      case PRODUCT_TYPES.HELPER:
-        navigate('/products?productType=helper' + `&page=1`);
-        break;
-      default:
-        break;
-    }
+    navigate(`/products?productType=${selectedOption.value}&page=1`);
     // eslint-disable-next-line
   }, [selectedOption]);
 

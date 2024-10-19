@@ -40,7 +40,9 @@ const ProductsPage = () => {
         const filter = p ? p : {};
         return {
           ...filter,
-          recommendedFor: [productType],
+          recommendedFor:
+            productType === PRODUCT_TYPES.ALL_PRODUCTS ? [] : [productType],
+          category: { label: 'Усі', value: null },
         };
       });
     } else {
