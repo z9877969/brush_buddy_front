@@ -8,7 +8,7 @@ import { customStyles } from '../../data/navStyles';
 const ProductDropDown = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(options[0]);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -49,12 +49,12 @@ const ProductDropDown = () => {
       <Select
         ref={ref}
         options={options}
-        value={selectedOption}
+        value={null}
         onChange={(option) => {
           setSelectedOption(option);
         }}
         placeholder="Товари"
-        styles={customStyles}
+        styles={customStyles(selectedOption)}
       />
     </>
   );

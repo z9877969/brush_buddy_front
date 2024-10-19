@@ -1,4 +1,4 @@
-export const customStyles = {
+export const customStyles = ({ value }) => ({
   container: (styles) => ({
     ...styles,
     '@media (max-width: 1439px)': {
@@ -68,13 +68,15 @@ export const customStyles = {
       color: '#1f1f1f',
     },
   }),
-  option: (styles) => ({
+  option: (styles, state) => ({
     ...styles,
     width: '100%',
     padding: '4px 0 4px 12px',
     fontSize: '16px',
     lineHeight: '28px',
     color: '#f1f1f',
+    backgroundColor:
+      state.data.value === value ? 'rgba(0,0,0,0.05)' : 'transparent', // option bg styles
     '@media (max-width: 1439px)': {
       fontSize: '18px',
       lineHeight: '24px',
@@ -87,4 +89,4 @@ export const customStyles = {
     flexDirection: 'column',
     gap: '8px',
   }),
-};
+});
