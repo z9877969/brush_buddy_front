@@ -17,6 +17,7 @@ export const PRODUCT_TYPES = {
   ADULT: 'adult',
   ANIMAL: 'animal',
   HELPER: 'helper',
+  ALL_PRODUCTS: 'allProducts',
 };
 
 export const WATERMARK_TYPES = {
