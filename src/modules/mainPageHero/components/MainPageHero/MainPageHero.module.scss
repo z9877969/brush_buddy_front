@@ -107,16 +107,19 @@
   // display: flex;
   width: 343px;
   height: 344px;
+  transform: translateY(15px);
 
   @include media(tablet) {
     margin-top: -210px;
 
     width: 653px;
     height: 653px;
+    transform: translateY(22px);
   }
   @include media(desktop) {
     margin-top: 0;
     width: 653px;
     height: 653px;
+    transform: translateY(30px);
   }
 }
