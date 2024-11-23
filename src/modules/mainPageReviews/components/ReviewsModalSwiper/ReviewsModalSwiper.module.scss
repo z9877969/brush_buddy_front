@@ -1,8 +1,11 @@
 .imageWrapper {
   padding: 16px;
+  margin: 0 auto;
 
   @include media(tablet) {
-    margin: 0 auto;
-    width: $tablet;
+    width: 88%;
+  }
+  @include media(desktop) {
+    width: $tablet * 1.5;
   }
 }

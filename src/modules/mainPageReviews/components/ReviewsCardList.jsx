@@ -59,9 +59,12 @@ const ReviewsCardList = ({
         }}
         modules={[Navigation]}
       >
-        {reviewsCardData.map(({ id, image }) => (
+        {reviewsCardData.map(({ id, image }, idx) => (
           <SwiperSlide key={id}>
-            <div className={s.imageDiv} onClick={() => handleOpenModal(image)}>
+            <div
+              className={s.imageDiv}
+              onClick={() => handleOpenModal({ url: image, idx })}
+            >
               <img src={image} alt="photo" />
             </div>
           </SwiperSlide>
