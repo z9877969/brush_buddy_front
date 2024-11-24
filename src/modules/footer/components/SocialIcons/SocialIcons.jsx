@@ -1,8 +1,9 @@
-import s from './SocialIcons.module.scss';
-import { sprite } from 'shared/icons';
-import { SOCIAL_NETWORKS } from 'shared/constants';
 import { useEffect, useState } from 'react';
+import { SOCIAL_NETWORKS } from 'shared/constants';
+import { sprite } from 'shared/icons';
 import { getSocialLinksApi } from 'services/brushbuddyApi';
+import s from './SocialIcons.module.scss';
+
 const SocialIcons = () => {
   const [socialLinks, setSocialLinks] = useState(null);
 
