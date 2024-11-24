@@ -1,5 +1,9 @@
 .roundButton {
-  padding: 8px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid #1f1f1f1a;
   border-radius: 100px;
 
@@ -14,10 +18,14 @@
   }
 
   @include media(tablet) {
+    width: 50px;
+    height: 50px;
     padding: 12px;
   }
 
   @include media(desktop) {
+    width: 58px;
+    height: 58px;
     & svg {
       width: 32px;
       height: 32px;

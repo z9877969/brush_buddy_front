@@ -13,6 +13,7 @@ import productsReducer from './products/productsSlice';
 import blogsReducer from './blogs/blogsSlice';
 import { novaPoshtaReducer } from './novaPoshta/novaPoshtaSlice';
 import { orderReducer } from './order/orderSlice';
+import loaderReducer from './loader/loaderSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     novaPoshta: novaPoshtaReducer,
     order: orderReducer,
     blogs: blogsReducer,
+    isLoading: loaderReducer,
   },
   middleware: (gdm) =>
     gdm({

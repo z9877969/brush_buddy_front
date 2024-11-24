@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import { options } from '../../data/optionsProductNav';
 import { customStyles } from '../../data/navStyles';
+import { ROUTES } from 'shared/constants';
 
 const ProductDropDown = () => {
   const navigate = useNavigate();
@@ -38,7 +39,10 @@ const ProductDropDown = () => {
           setSelectedOption(option);
         }}
         placeholder="Товари"
-        styles={customStyles(selectedOption ?? {})}
+        styles={customStyles({
+          selectedOption: selectedOption ?? {},
+          isProductPage: location.pathname === ROUTES.PRODUCTS,
+        })}
       />
     </>
   );

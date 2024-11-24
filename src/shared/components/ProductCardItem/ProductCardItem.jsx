@@ -86,7 +86,7 @@ const ProductCardItem = ({
   return (
     <div className={clsx(s.productItem, quantity === 0 && s.unavailable)}>
       <Link to={`/products/${prodId}/${activeVarId}`}>
-        <div className={s.imageWarpper}>
+        <div className={clsx(s.imageWrapper, !images?.[0] && s.defaultImage)}>
           <img
             src={imageUrl}
             alt={title}

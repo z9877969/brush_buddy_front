@@ -1,15 +1,19 @@
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Container, MainTitle, RoundButton } from 'shared/components';
 
-import { reviewsCardData } from '../../data/reviewsCardData';
-import { ReviewsCardList } from '../..';
+import ReviewsCardList from '../ReviewsCardList';
+import { brushbuddyApi as bbApi } from 'services';
 
 import s from './MainPageReviews.module.scss';
-import { useState } from 'react';
+import { setLoadingAction } from '@redux/loader/loaderSlice';
 
 const MainPageReviews = () => {
+  const dispatch = useDispatch();
   const [refSwiper, setRefSwiper] = useState(null);
   const [disablStartButton, setdisablStartButton] = useState(true);
   const [disablEndButton, setdisablEndButton] = useState(false);
+  const [reviews, setReviews] = useState([]);
 
   const swiperData = (ref) => {
     setRefSwiper(ref);
@@ -33,6 +37,16 @@ const MainPageReviews = () => {
     setdisablStartButton(false);
   };
 
+  useEffect(() => {
+    dispatch(setLoadingAction(true));
+    bbApi
+      .getReviewsApi()
+      .then((reviewsList) => setReviews(reviewsList))
+      // eslint-disable-next-line
+      .catch((err) => console.log(err.message))
+      .finally(() => dispatch(setLoadingAction(false)));
+  }, [dispatch]);
+
   return (
     <section className={s.section} id="reviews">
       <Container>
@@ -42,7 +56,7 @@ const MainPageReviews = () => {
             swiperData={swiperData}
             reachEndButton={reachEndButton}
             reachStartButton={reachStartButton}
-            reviewsCardData={reviewsCardData}
+            reviewsCardData={reviews}
           />
           <div className={s.mainReviewsSlider}>
             <RoundButton

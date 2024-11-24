@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { reviewsCardData } from 'modules/mainPageReviews/data/reviewsCardData';
 
 const instance = axios.create({
   baseURL: 'http://localhost:4040/api',
@@ -40,4 +41,10 @@ export const getPopularProductsApi = async () => {
 export const createOrderApi = async (order) => {
   const { data } = await instance.post('/orders', order);
   return data;
+};
+
+export const getReviewsApi = async () => {
+  // const { data } = await instance.get('/reviews');
+  // return data;
+  return reviewsCardData;
 };
