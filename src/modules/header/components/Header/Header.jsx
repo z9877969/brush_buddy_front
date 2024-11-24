@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 // import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import CartButton from '../CartButton/CartButton';
 import DiscountReminder from '../DiscountReminder/DiscountReminder';
@@ -8,11 +9,15 @@ import { Container, Logo } from 'shared/components';
 import BurgerButton from '../BurgerButton/BurgerButton';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import { useMedia } from 'hooks/useMedia';
+import { setHeightAction } from '@redux/header/headerSlice';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [isDiscountReminderOpen, setDiscountReminderOpen] = useState(true);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const media = useMedia();
+
+  const headerRef = useRef(null);
 
   const handleCloseDiscountReminder = () => {
     setDiscountReminderOpen(false);
@@ -26,8 +31,12 @@ const Header = () => {
     setMenuOpen(false);
   }, []);
 
+  useEffect(() => {
+    dispatch(setHeightAction(headerRef.current.clientHeight));
+  }, [isDiscountReminderOpen, dispatch]);
+
   return (
-    <header className={s.header}>
+    <header className={s.header} ref={headerRef}>
       {isDiscountReminderOpen && (
         <DiscountReminder handleClose={handleCloseDiscountReminder} />
       )}

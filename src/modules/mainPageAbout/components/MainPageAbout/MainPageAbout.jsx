@@ -56,7 +56,7 @@ const MainPageAbout = () => {
                   <use href={sprite + '#icon-bage-child'}></use>
                 </svg>
               </div>
-              <p className={s.benefitsText}>Кідс&петс френдлі</p>
+              <p className={s.benefitsText}>Кідс & петс френдлі</p>
             </div>
           </div>
           <picture>
