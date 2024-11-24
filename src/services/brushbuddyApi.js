@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { reviewsCardData } from 'modules/mainPageReviews/data/reviewsCardData';
+import { SOCIAL_NETWORKS } from 'shared/constants';
 
 const instance = axios.create({
   baseURL: 'http://localhost:4040/api',
@@ -47,4 +48,10 @@ export const getReviewsApi = async () => {
   // const { data } = await instance.get('/reviews');
   // return data;
   return reviewsCardData;
+};
+
+export const getSocialLinksApi = async () => {
+  // const { data } = await instance.get('/social');
+  // return data
+  return SOCIAL_NETWORKS;
 };
