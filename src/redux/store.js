@@ -14,6 +14,7 @@ import blogsReducer from './blogs/blogsSlice';
 import { novaPoshtaReducer } from './novaPoshta/novaPoshtaSlice';
 import { orderReducer } from './order/orderSlice';
 import loaderReducer from './loader/loaderSlice';
+import headerReducer from './header/headerSlice';
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     order: orderReducer,
     blogs: blogsReducer,
     isLoading: loaderReducer,
+    header: headerReducer,
   },
   middleware: (gdm) =>
     gdm({

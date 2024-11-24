@@ -1,32 +1,15 @@
-import { Container, LinkButton } from 'shared/components';
-import css from './AboutBlog.module.scss';
-//import { BlogPage } from 'pages/index';
-import { ROUTES } from 'shared/constants';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-//import pictures
-import img1x1 from '../../images/img1-1x.jpg';
-import img2x1 from '../../images/img1-2x.jpg';
-import img1x2 from '../../images/img2-1x.jpg';
-import img2x2 from '../../images/img2-2x.jpg';
+import { selectBlogs } from '@redux/blogs/blogsSelectors';
+import { Container, LinkButton } from 'shared/components';
+import { activeEyes } from 'shared/images/animations';
+import { ROUTES } from 'shared/constants';
+import css from './AboutBlog.module.scss';
+import clsx from 'clsx';
 
 const AboutBlog = () => {
-  const [blogList] = useState([
-    { id: '1', title: '' },
-    {
-      id: '2',
-      title: 'Зубна паста без фтора або з фтором: яку краще обрати',
-      img1x: img1x1,
-      img2x: img2x1,
-    },
-    {
-      id: '3',
-      title: 'Як вибрати зубну щітку для домашнього улюбленця',
-      img1x: img1x2,
-      img2x: img2x2,
-    },
-  ]);
+  const blogsList = useSelector(selectBlogs);
+  const filteredBlogsList = blogsList.filter((_, idx) => idx < 2);
 
   return (
     <section className={css.section}>
@@ -39,53 +22,48 @@ const AboutBlog = () => {
             </p>
           </div>
 
-          <ul className={css.list}>
-            <li className={css.listItem}>
-              <Link
-                className={css.cardLink}
-                to={ROUTES.GET_BLOG_ID(blogList[1].id)}
-              >
-                <picture>
-                  <source
-                    srcSet={`${blogList[1].img1x} 1x, ${blogList[1].img2x} 2x`}
-                  ></source>
-                  <img
-                    className={css.image}
-                    src={blogList[1].img1x}
-                    width={340}
-                    alt="photo Polina"
-                  ></img>
-                </picture>
+          {filteredBlogsList.length > 0 && (
+            <ul className={css.list}>
+              {filteredBlogsList.map(({ _id, items }) => {
+                const blogeImage = items.find(
+                  ({ block }) => block === 'image'
+                )?.content;
+                return (
+                  <li className={css.listItem} key={_id}>
+                    <Link className={css.cardLink} to={ROUTES.GET_BLOG_ID(_id)}>
+                      <div
+                        className={clsx(
+                          css.imageWrapper,
+                          !blogeImage && css.imageBorder
+                        )}
+                      >
+                        <picture>
+                          <img
+                            className={css.image}
+                            src={blogeImage || activeEyes}
+                            width={340}
+                            alt="photo"
+                          ></img>
+                        </picture>
+                      </div>
 
-                <h3 className={css.cardTitle}>{blogList[1].title}</h3>
-              </Link>
-            </li>
-
-            <li className={css.listItem}>
-              <Link
-                className={css.cardLink}
-                to={ROUTES.GET_BLOG_ID(blogList[2].id)}
-              >
-                <picture>
-                  <source
-                    srcSet={`${blogList[2].img1x} 1x, ${blogList[2].img2x} 2x`}
-                  ></source>
-                  <img
-                    className={css.image}
-                    src={blogList[2].img1x}
-                    alt="photo cat Plomba"
-                  ></img>
-                </picture>
-
-                <h3 className={css.cardTitle}>{blogList[2].title}</h3>
-              </Link>
-            </li>
-          </ul>
+                      <h3 className={css.cardTitle}>
+                        {
+                          items.find(({ block }) => block === 'primaryTitle')
+                            ?.content
+                        }
+                      </h3>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
         <LinkButton
           title={'Статті корисного блогу'}
           className={css.buttonLink}
-          to={ROUTES.GET_BLOG_ID(blogList[0].id)}
+          to={ROUTES.GET_BLOG_ID(filteredBlogsList[0]._id)}
         />
       </Container>
     </section>

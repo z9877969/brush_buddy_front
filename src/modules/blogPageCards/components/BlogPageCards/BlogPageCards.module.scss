@@ -1,12 +1,20 @@
-.div {
+.sidebar {
+  position: sticky;
+  position: -webkit-sticky;
+  background-color: $light-color;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+
   @include media(desktop) {
     padding-top: 80px;
+    width: 324px;
+    height: 70vh; // experiment with this value, try changing to 110vh
+    min-height: calc(300px * 4);
   }
 }
 .list {
   display: flex;
   gap: 24px;
-  margin-bottom: 28px;
 
   @include media(desktop) {
     flex-direction: column;
