@@ -85,6 +85,7 @@
   & svg {
     display: none;
   }
+  @include colored-button-effects-styles($pet-color);
 
   @include media(tablet) {
     width: auto;

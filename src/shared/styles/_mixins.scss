@@ -35,3 +35,19 @@ screen types:
   font-size: #{$_fsz}px;
   line-height: calc($_lnh / $_fsz);
 }
+
+@mixin colored-button-effects-styles(
+  $_original_bg_color,
+  $_text_color: $light_color
+) {
+  &:hover,
+  &:focus {
+    background: linear-gradient(
+        0deg,
+        rgba(31, 31, 31, 0.1) 0%,
+        rgba(31, 31, 31, 0.1) 100%
+      ),
+      $_original_bg_color;
+    color: $_text_color;
+  }
+}

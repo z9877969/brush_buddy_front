@@ -67,6 +67,7 @@
   border-radius: 200px;
   color: $light-color;
   @include font(18, 24);
+  @include colored-button-effects-styles($pet-color);
 }
 .accept {
   color: $secondary-text-color;

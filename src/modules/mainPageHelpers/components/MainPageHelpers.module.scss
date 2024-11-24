@@ -100,6 +100,10 @@
     height: 40px;
     border-radius: 200px;
     background-color: $child-color;
+
+    &:hover {
+      @include colored-button-effects-styles($child-color);
+    }
   }
   .helpersBoxSVG {
     width: 20px;

@@ -40,6 +40,7 @@
   font-weight: 500;
   color: $light-color;
   @include font(16, 24);
+  @include colored-button-effects-styles($pet-color, $primary-text-color);
   @include media(tablet) {
     padding: 16px 40px;
   }

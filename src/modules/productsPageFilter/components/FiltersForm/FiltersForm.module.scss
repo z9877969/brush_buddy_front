@@ -229,11 +229,8 @@
   background-color: $pet-color;
   color: $light-color;
   @include font(16, 24);
-
+  @include colored-button-effects-styles($pet-color);
   @include media(desktop) {
     width: auto;
   }
-}
-
-.bottom {
 }
