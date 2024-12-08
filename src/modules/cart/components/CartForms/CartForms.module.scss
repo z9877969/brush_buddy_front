@@ -98,7 +98,6 @@
 
   textarea {
     width: 100%;
-    height: 242px;
     color: $primary-text-color;
     font-weight: 500;
     @include font(16, 24);
@@ -106,17 +105,11 @@
     padding: 12px;
     border: 1px solid $disabled-bg-color;
     resize: none;
+    overflow-y: hidden;
+
     &:focus {
       outline: none;
       border-color: $form-field-focus-border;
-    }
-
-    @include media(tablet) {
-      height: 242px;
-    }
-
-    @include media(desktop) {
-      height: 176px;
     }
   }
 
