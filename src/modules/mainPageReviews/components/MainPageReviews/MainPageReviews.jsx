@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, MainTitle, RoundButton } from 'shared/components';
-
-import ReviewsCardList from '../ReviewsCardList';
+import ReviewsCardList from '../ReviewsCardList/ReviewsCardList';
 import { brushbuddyApi as bbApi } from 'services';
-
-import s from './MainPageReviews.module.scss';
 import { setLoadingAction } from '@redux/loader/loaderSlice';
+import s from './MainPageReviews.module.scss';
 
 const MainPageReviews = () => {
   const dispatch = useDispatch();

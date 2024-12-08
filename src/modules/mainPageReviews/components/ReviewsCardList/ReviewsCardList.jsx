@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import s from './MainPageReviews/MainPageReviews.module.scss';
 import { Navigation } from 'swiper/modules';
-import ReviewsModal from './ReviewsModal/ReviewsModal';
+import 'swiper/css/navigation';
+import 'swiper/css';
+import ReviewsModal from '../ReviewsModal/ReviewsModal';
+import s from './ReviewsCardList.module.scss';
 
 const ReviewsCardList = ({
   reviewsCardData,
