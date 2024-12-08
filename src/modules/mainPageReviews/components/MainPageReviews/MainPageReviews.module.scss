@@ -76,21 +76,6 @@
   }
 }
 
-.imageDiv {
-  border: 1px solid $card-border-color;
-  border-radius: 24px;
-  padding-left: 15px;
-  padding-right: 15px;
-  height: 340px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.imageDiv > img {
-  width: 310px;
-  height: 190px;
-}
 .mainReviewsSlider {
   display: flex;
   justify-content: center;

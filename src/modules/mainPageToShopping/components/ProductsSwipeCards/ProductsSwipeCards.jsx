@@ -17,7 +17,7 @@ const ProductsSwipeCards = ({
         const nextProduct = idx + 1 < arr.length ? arr[idx + 1] : null;
 
         acc.push(
-          <SwiperSlide>
+          <SwiperSlide key={idx}>
             {nextProduct ? (
               <PopularProductsSlide
                 firstProduct={product}
