@@ -1,6 +1,10 @@
 .blockRight {
   @include media(desktop) {
     max-width: 460px;
-    margin-top: 130px;
+    padding-top: 130px;
+    position: sticky;
+    top: 0;
+    position: -webkit-sticky;
+    height: fit-content;
   }
 }

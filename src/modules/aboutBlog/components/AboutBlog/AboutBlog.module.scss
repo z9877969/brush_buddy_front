@@ -94,7 +94,8 @@
   @include media(desktop) {
     position: absolute;
     right: calc(64px + 644px + 64px);
-    top: 370px;
+    // top: 370px;
+    bottom: 0;
   }
 }
 .buttonLink:hover,

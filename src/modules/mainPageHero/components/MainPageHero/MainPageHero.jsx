@@ -19,7 +19,9 @@ const MainPageAbout = () => {
             to={`${ROUTES.PRODUCTS}?page=1`}
           />
         </div>
-        <img src={animation} alt="animation" className={s.animation} />
+        <div className={s.animationWrapper}>
+          <img src={animation} alt="animation" className={s.animation} />
+        </div>
       </Container>
     </section>
   );
