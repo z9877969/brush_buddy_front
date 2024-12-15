@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { reviewsCardData } from 'modules/mainPageReviews/data/reviewsCardData';
-import { SOCIAL_NETWORKS } from 'shared/constants';
 
 const instance = axios.create({
   baseURL: 'http://localhost:4040/api',
@@ -51,7 +50,24 @@ export const getReviewsApi = async () => {
 };
 
 export const getSocialLinksApi = async () => {
-  // const { data } = await instance.get('/social');
-  // return data
-  return SOCIAL_NETWORKS;
+  const { data = {} } = await instance.get('/content/main-page', {
+    params: {
+      socialLinks: true,
+    },
+  });
+  return (
+    data.socialLinks?.reduce((acc, { url, type }) => {
+      acc[type.toUpperCase()] = url;
+      return acc;
+    }, {}) || null
+  );
+};
+
+export const getMainPageAboutImageApi = async () => {
+  const { data = {} } = await instance.get('/content/main-page', {
+    params: {
+      aboutUrl: true,
+    },
+  });
+  return data.aboutUrl || '';
 };

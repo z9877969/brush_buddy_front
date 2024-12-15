@@ -1,12 +1,23 @@
+import { useEffect, useState } from 'react';
 import { Container, MainTitle } from 'shared/components';
-import s from './MainPageAbout.module.scss';
 import LinkButton from 'shared/components/LinkButton/LinkButton';
-import PolinaImg from '../../images/PeopleImg/PolinaImg.png';
-import PolinaImg2x from '../../images/PeopleImg/PolinaImg2x.png';
+import { getMainPageAboutImageApi } from 'services/brushbuddyApi';
+import { useLocalRequest } from 'hooks/useLocalRequest';
 import { sprite } from 'shared/icons';
-// import toothbrushImg2x from '../../images/toothbrushImg/toothbrushImg2x.png';
+import s from './MainPageAbout.module.scss';
 
 const MainPageAbout = () => {
+  const [sectionImage, setSectionImage] = useState('');
+
+  const localRequestWrapper = useLocalRequest();
+
+  useEffect(() => {
+    const requestFn = () =>
+      getMainPageAboutImageApi().then((data) => setSectionImage(data));
+
+    localRequestWrapper(requestFn);
+  }, [localRequestWrapper]);
+
   return (
     <section className={s.section}>
       <Container className={s.containerAbout}>
@@ -60,8 +71,8 @@ const MainPageAbout = () => {
             </div>
           </div>
           <picture>
-            <source srcSet={`${PolinaImg} 1x, ${PolinaImg2x} 2x`} />
-            <img className={s.image} src={PolinaImg} alt="Polina" />
+            {/* <source srcSet={`${PolinaImg} 1x, ${PolinaImg2x} 2x`} /> */}
+            <img className={s.image} src={sectionImage} alt="Polina" />
           </picture>
           <div className={s.buttonBlock}>
             <LinkButton className={s.button} title={'Читати ще'} to={'about'} />
