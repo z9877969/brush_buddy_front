@@ -71,7 +71,7 @@ const HelpersCardList = ({
                             id: _id,
                             title,
                             price,
-                            images,
+                            images: images[0],
                             quantity,
                             category,
                           });
