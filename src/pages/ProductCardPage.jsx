@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductCard } from 'modules/productPage';
+import { Loader } from 'shared/components';
+import { scrollToTop } from 'helpers/scrollToTop';
 import { brushbuddyApi as bbApi } from 'services';
 import { ROUTES } from 'shared/constants';
-import { Loader } from 'shared/components';
 
 const ProductCardPage = () => {
   const navigate = useNavigate();
@@ -25,6 +26,10 @@ const ProductCardPage = () => {
       .finally(() => setIsLoading(false));
     // eslint-disable-next-line
   }, [productId]);
+
+  useEffect(() => {
+    product && scrollToTop();
+  }, [product]);
 
   return isLoading ? <Loader /> : <ProductCard product={product} />;
 };

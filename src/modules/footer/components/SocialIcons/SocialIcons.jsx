@@ -10,9 +10,8 @@ const SocialIcons = () => {
   const localRequestWrapper = useLocalRequest();
 
   useEffect(() => {
-    const requestFn = getSocialLinksApi().then((links) =>
-      setSocialLinks(links)
-    );
+    const requestFn = () =>
+      getSocialLinksApi().then((links) => setSocialLinks(links));
 
     localRequestWrapper(requestFn);
   }, [localRequestWrapper]);

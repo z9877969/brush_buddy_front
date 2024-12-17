@@ -72,7 +72,7 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     setProductCount((p) => (p > 1 ? 1 : p));
-    location.state?.top && window.scroll(0, location.state?.top);
+    // location.state?.top && window.scroll(0, location.state?.top);
   }, [variantId, location]);
 
   if (!curVariant) return null;
