@@ -13,3 +13,4 @@ export { default as ProductWatermark } from './ProductWatermark/ProductWatermark
 export { default as Toastify } from './Toastify/Toastify';
 export { default as ScrollToTop } from './ScrollToTop/ScrollToTop';
 export { default as ProductMarkersList } from './ProductMarkersList/ProductMarkersList';
+export { default as ProductPrice } from './ProductPrice/ProductPrice';

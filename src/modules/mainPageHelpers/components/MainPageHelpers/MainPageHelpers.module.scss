@@ -1,0 +1,92 @@
+.section {
+  background-color: $child-color;
+}
+
+.helpersBoxAll {
+  padding-top: 48px;
+  position: relative;
+
+  @include media(tablet) {
+    padding-top: 68px;
+  }
+  @include media(desktop) {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
+.aboutHelpersBox {
+  box-sizing: border-box;
+  padding: 24px;
+  margin-bottom: 16px;
+  border-radius: 24px;
+  background-color: $light-color;
+
+  @include media(tablet) {
+    padding: 44px;
+    margin-bottom: 32px;
+  }
+}
+
+.aboutHelpersText {
+  @include font(20, 28);
+  font-weight: 500;
+  color: $primary-text-color;
+
+  @include media(tablet) {
+    @include font(24, 32);
+  }
+}
+
+.boxForButton {
+  position: relative;
+}
+
+.mainHelpersTitle {
+  color: $light-color;
+  padding-bottom: 32px;
+
+  @include media(tablet) {
+    @include font(48, 56);
+    padding-bottom: 64px;
+  }
+
+  @include media(desktop) {
+    @include font(56, 64);
+  }
+}
+
+.mainHelpersSlider {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding-bottom: 48px;
+
+  @include media(tablet) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-bottom: 0;
+    gap: 16px;
+    order: 1;
+  }
+}
+
+.helpersSliderButtonDisabled {
+  border: 1px solid #ffffff33;
+
+  & svg {
+    fill: #ffffff33;
+  }
+}
+
+.helpersSliderButton {
+  border: 1px solid #ffffff80;
+
+  &:hover {
+    @include media(desktop) {
+      background: #ffffff1a;
+      border: 1px solid #ffffff80;
+    }
+  }
+}

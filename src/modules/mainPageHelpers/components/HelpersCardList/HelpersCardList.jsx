@@ -3,9 +3,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { ProductPrice } from 'shared/components';
 import { useAddProductToCart } from 'hooks';
 import { sprite } from 'shared/icons';
-import s from './MainPageHelpers.module.scss';
+import { noPictureImage } from 'shared/images';
+import s from './HelpersCardList.module.scss';
 
 const HelpersCardList = ({
   helpersCardData,
@@ -13,8 +15,6 @@ const HelpersCardList = ({
   reachEndButton,
   reachStartButton,
 }) => {
-  const lengthCards = helpersCardData.length;
-
   const onClickAdd = useAddProductToCart();
 
   return (
@@ -22,20 +22,15 @@ const HelpersCardList = ({
       onSwiper={(swiper) => {
         swiperData(swiper);
       }}
-      onSlideChange={(swiper) => {
-        if (
-          swiper.activeIndex === 1 ||
-          swiper.activeIndex === lengthCards - 2
-        ) {
-          reachEndButton(false);
-          reachStartButton(false);
-        }
+      onSlideChange={({ isBeginning, isEnd }) => {
+        !isEnd && reachEndButton(isEnd);
+        !isBeginning && reachStartButton(isBeginning);
       }}
-      onReachEnd={() => {
-        reachEndButton(true);
+      onReachEnd={({ isEnd }) => {
+        reachEndButton(isEnd);
       }}
-      onReachBeginning={() => {
-        reachStartButton(true);
+      onReachBeginning={({ isBeginning }) => {
+        reachStartButton(isBeginning);
       }}
       breakpoints={{
         375: {
@@ -54,9 +49,15 @@ const HelpersCardList = ({
       modules={[Navigation]}
     >
       {helpersCardData.map(
-        ({ id, title, price, text, images, quantity, category }) => (
-          <SwiperSlide key={id}>
-            <Link className={s.link} to={`/products/${id}`}>
+        ({
+          _id,
+          title,
+          description,
+          category /* { _id: categoryId, label, value } */,
+          variants: [{ images, quantity, salePrice, price, _id: varId } = {}],
+        }) => (
+          <SwiperSlide key={_id}>
+            <Link className={s.link} to={`/products/${_id}/${varId}`}>
               <div className={s.mainHelpersBox}>
                 <div className={s.boxTitleText}>
                   <div className={s.helpersBoxTitle}>
@@ -67,7 +68,7 @@ const HelpersCardList = ({
                       onClick={(event) => {
                         event.preventDefault(),
                           onClickAdd({
-                            id,
+                            id: _id,
                             title,
                             price,
                             images,
@@ -81,11 +82,18 @@ const HelpersCardList = ({
                       </svg>
                     </button>
                   </div>
-                  <p className={s.helpersBoxPrice}>{`${price} грн`}</p>
-                  <p className={s.helpersBoxText}>{text}</p>
+                  <ProductPrice price={price} salePrice={salePrice} />
+                  <p className={s.helpersBoxText}>
+                    {description[0] &&
+                      (description[0].paragraph || description[0].title)}
+                  </p>
                 </div>
                 <div className={s.imgWrapper}>
-                  <img className={s.helpersBoxIMG} src={images} alt="photo" />
+                  <img
+                    className={s.helpersBoxIMG}
+                    src={images ? images[0] : noPictureImage}
+                    alt="photo"
+                  />
                 </div>
               </div>
             </Link>

@@ -67,26 +67,6 @@
   justify-content: space-between;
 }
 
-.priceWrapper {
-  display: flex;
-  column-gap: 12px;
-}
-
-.price {
-  color: #49494a;
-  @include font(16, 24);
-}
-
-.sale {
-  color: $pet-color;
-}
-
-.oldPrice {
-  color: $disabled-content-color;
-  text-decoration: line-through;
-  transform: translateY(-15%);
-}
-
 .cartBtn {
   width: 40px;
   height: 40px;

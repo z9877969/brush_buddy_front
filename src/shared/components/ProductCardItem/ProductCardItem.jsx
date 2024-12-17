@@ -7,6 +7,7 @@ import {
   ProductTypeIcon,
   ProductWatermark,
 } from 'shared/components';
+import ProductPrice from '../ProductPrice/ProductPrice';
 import { addProduct } from '@redux/cart/cartSlice';
 import { noPictureImage } from 'shared/images';
 import { sprite } from 'shared/icons';
@@ -110,14 +111,7 @@ const ProductCardItem = ({
       </Link>
       <div className={s.productFooter}>
         <div className={s.bottomSide}>
-          {curSalePrice ? (
-            <div className={s.priceWrapper}>
-              <p className={clsx(s.price, s.sale)}>{curSalePrice} грн</p>
-              <p className={clsx(s.price, s.oldPrice)}>{curPrice} грн</p>
-            </div>
-          ) : (
-            <p className={s.price}>{curPrice} грн</p>
-          )}
+          <ProductPrice price={curPrice} salePrice={curSalePrice} />
           <RoundButton
             iconId={'icon-cart'}
             className={s.cartBtn}

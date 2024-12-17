@@ -1,18 +1,21 @@
+import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 import { Container, MainTitle, RoundButton } from 'shared/components';
-
-import { helpersCardData } from '../data/helpersCardData';
-import { HelpersCardList } from '..';
-
+import HelpersCardList from '../HelpersCardList/HelpersCardList';
+import { selectHelpersProduct } from '@redux/products/productsSelectors';
 import s from './MainPageHelpers.module.scss';
-import { useState } from 'react';
 
 const MainPageHelpers = ({ isDescrShow }) => {
-  const [refSwiper, setRefSwiper] = useState(null);
+  const helpersProducts = useSelector(selectHelpersProduct);
+
   const [disablStartButton, setdisablStartButton] = useState(true);
   const [disablEndButton, setdisablEndButton] = useState(false);
 
+  const swiperRef = useRef(null);
+
   const swiperData = (ref) => {
-    setRefSwiper(ref);
+    swiperRef.current = ref;
   };
 
   const reachEndButton = (isEnd) => {
@@ -24,14 +27,16 @@ const MainPageHelpers = ({ isDescrShow }) => {
   };
 
   const handleClickPrev = () => {
-    refSwiper.slidePrev();
-    setdisablEndButton(false);
+    swiperRef.current.slidePrev();
   };
 
   const handleClickNext = () => {
-    refSwiper.slideNext();
-    setdisablStartButton(false);
+    swiperRef.current.slideNext();
   };
+
+  useEffect(() => {
+    swiperRef;
+  }, []);
 
   return (
     <section className={s.section}>
@@ -53,16 +58,16 @@ const MainPageHelpers = ({ isDescrShow }) => {
               swiperData={swiperData}
               reachEndButton={reachEndButton}
               reachStartButton={reachStartButton}
-              helpersCardData={helpersCardData}
+              helpersCardData={helpersProducts}
             />
             <div className={s.mainHelpersSlider}>
               <RoundButton
                 iconId={'icon-chevron-left'}
-                className={
+                className={clsx(
                   disablStartButton
                     ? s.helpersSliderButtonDisabled
                     : s.helpersSliderButton
-                }
+                )}
                 onClick={handleClickPrev}
               />
               <RoundButton

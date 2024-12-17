@@ -1,0 +1,100 @@
+.link {
+  color: $primary-text-color;
+}
+
+.mainHelpersBox {
+  box-sizing: border-box;
+  padding: 24px;
+  margin-bottom: 32px;
+  border-radius: 24px;
+  background-color: $light-color;
+
+  @include media(tablet) {
+    padding: 32px;
+    margin-bottom: 68px;
+    order: 2;
+  }
+  @include media(desktop) {
+    margin-bottom: 0;
+  }
+}
+
+.boxTitleText {
+  margin-bottom: 24px;
+}
+
+.helpersBoxTitle {
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.helpersBoxTitleText {
+  height: 64px;
+  @include font(24, 32);
+  @include cut-text;
+  overflow-y: hidden;
+
+  @include media(tablet) {
+    height: 72px;
+    @include font(32, 36);
+    font-weight: 500;
+  }
+}
+
+.helpersBoxButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 200px;
+  background-color: $child-color;
+
+  &:hover {
+    @include colored-button-effects-styles($child-color);
+  }
+}
+
+.helpersBoxSVG {
+  width: 20px;
+  height: 20px;
+  fill: $light-color;
+}
+
+.helpersBoxPrice {
+  @include font(16, 24);
+  margin-bottom: 16px;
+}
+
+.helpersBoxText {
+  height: 56px;
+  @include font(18, 28);
+  @include cut-text;
+  margin-top: 12px;
+}
+
+.imgWrapper {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  overflow-y: hidden;
+
+  @include media(tablet) {
+    height: 372px;
+    border-radius: 40px;
+  }
+}
+
+.helpersBoxIMG {
+  width: 100%;
+  height: auto;
+  background-size: cover;
+}
+
+@include media(tablet) {
+}
