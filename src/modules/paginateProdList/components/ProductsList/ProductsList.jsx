@@ -1,4 +1,4 @@
-import ProductsListItem from '../ProductsListItem/ProductsListItem';
+import { ProductsListItem } from 'shared/components';
 import s from './ProductsList.module.scss';
 
 /* product -> 

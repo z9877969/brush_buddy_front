@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import { ProductsList } from 'modules/mainPageToShopping';
@@ -13,13 +13,13 @@ import { useRecommendedProducts } from 'hooks/useRecommendedProducts';
 import { useChangeVariant } from 'hooks/useChangeVariant';
 import { changeProductAmount } from '@redux/cart/cartSlice';
 import { updateProductTitle } from 'helpers';
+import { ROUTES } from 'shared/constants';
 import { sprite } from 'shared/icons';
 import s from './ProductCard.module.scss';
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-
   const { variantId } = useParams();
 
   const {
@@ -28,7 +28,6 @@ const ProductCard = ({ product }) => {
     description,
     // maker,
     // recomendation,
-    subtitle,
     title,
     // userType,
     variants,
@@ -72,9 +71,10 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     setProductCount((p) => (p > 1 ? 1 : p));
-    // location.state?.top && window.scroll(0, location.state?.top);
   }, [variantId, location]);
 
+  if (product.variants && !curVariant)
+    return <Navigate to={ROUTES.NOT_FOUND} />;
   if (!curVariant) return null;
 
   const {
@@ -96,7 +96,6 @@ const ProductCard = ({ product }) => {
           />
           <div className={s.informationBlock}>
             <h2 className={s.title}>{curTitle}</h2>
-            <p className={s.paragraph}>{subtitle}</p>
             <ProductPrice
               price={price}
               salePrice={salePrice}
@@ -147,10 +146,6 @@ const ProductCard = ({ product }) => {
               </div>
             </div>
             <ProductDescription description={description} />
-            <div className={s.recomendationWrapper}>
-              <p className={s.recomendation}>Рекомендація</p>
-              <p className={s.recomendationInfo}>{product.recomendation}</p>
-            </div>
           </div>
         </div>
       )}

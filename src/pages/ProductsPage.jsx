@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isEqual } from 'lodash';
@@ -11,6 +11,7 @@ import {
   NumberOfProducts,
   ProductsPageWrapper,
 } from 'modules/paginateProdList';
+import { ProductsListSwiper } from 'modules/productsListSwiper';
 import { SelectedFilters } from 'modules/selectedFilters';
 import { PRODUCT_TYPES } from 'shared/constants';
 import { selectProductsList } from '@redux/products/productsSelectors';
@@ -27,7 +28,10 @@ const ProductsPage = () => {
   const hasChanged = !isEqual(filter, initialFilterValues);
 
   const filteredProducts = useFilteredProducts(products, filter);
-  // const filteredProducts = products;
+  const helpersProductsList = useMemo(
+    () => products.filter((el) => el.category.value === 'helpers'),
+    [products]
+  );
 
   useEffect(() => {
     sessionStorage.setItem('filter', JSON.stringify(filter));
@@ -70,6 +74,12 @@ const ProductsPage = () => {
         )}
         <PaginateProdList products={filteredProducts} />
       </div>
+      {filter.category.value !== 'helpers' && (
+        <ProductsListSwiper
+          products={helpersProductsList}
+          title={'Допомагайки'}
+        />
+      )}
     </ProductsPageWrapper>
   );
 };

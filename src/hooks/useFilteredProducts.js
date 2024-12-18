@@ -46,6 +46,13 @@ export const useFilteredProducts = (products, filter) => {
       ) {
         return false;
       }
+      if (
+        category &&
+        category.value === null &&
+        product.category.value === 'helpers'
+      ) {
+        return false;
+      }
       if (recommendedFor && recommendedFor.length > 0) {
         if (
           !recommendedFor.some((target) => product.userType.includes(target))
