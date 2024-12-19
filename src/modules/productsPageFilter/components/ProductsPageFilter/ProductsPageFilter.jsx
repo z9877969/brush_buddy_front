@@ -4,7 +4,7 @@ import { sprite } from 'shared/icons';
 import { FilterModal } from '../FilterModal/FilterModal';
 import s from './ProductsPageFilter.module.scss';
 
-const ProductsPageFilter = ({ onFormSubmit, filter, setFilter }) => {
+const ProductsPageFilter = ({ filter, setFilter }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -29,7 +29,6 @@ const ProductsPageFilter = ({ onFormSubmit, filter, setFilter }) => {
       <FilterModal
         isOpen={isModalOpen}
         onClose={toggleModal}
-        onFormSubmit={onFormSubmit}
         filter={filter}
         setFilter={setFilter}
       />
