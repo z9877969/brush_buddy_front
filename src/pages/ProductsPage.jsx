@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { isEqual } from 'lodash';
 import {
   initialFilterValues,
   ProductsPageFilter,
@@ -10,6 +9,7 @@ import {
   PaginateProdList,
   NumberOfProducts,
   ProductsPageWrapper,
+  Wrappers,
 } from 'modules/paginateProdList';
 import { ProductsListSwiper } from 'modules/productsListSwiper';
 import { SelectedFilters } from 'modules/selectedFilters';
@@ -25,12 +25,17 @@ const ProductsPage = () => {
   );
 
   const productType = search.get('productType');
-  const hasChanged = !isEqual(filter, initialFilterValues);
 
   const filteredProducts = useFilteredProducts(products, filter);
   const helpersProductsList = useMemo(
     () => products.filter((el) => el.category.value === 'helpers'),
     [products]
+  );
+  const isSelectedFilters = useMemo(
+    () =>
+      Object.values(filter).filter((el) => Array.isArray(el) && el.length > 0)
+        .length > 0,
+    [filter]
   );
 
   useEffect(() => {
@@ -60,21 +65,25 @@ const ProductsPage = () => {
 
   return (
     <ProductsPageWrapper>
-      <ProductsPageFilter
-        setFilter={setFilter}
-        onFormSubmit={setFilter}
-        filter={filter}
-      />
-      <div>
-        {hasChanged && (
-          <>
-            <SelectedFilters filter={filter} setFilter={setFilter} />
-            <NumberOfProducts productsLength={filteredProducts.length} />
-          </>
-        )}
-        <PaginateProdList products={filteredProducts} />
-      </div>
-      {filter.category.value !== 'helpers' && (
+      <Wrappers.MainContent>
+        <ProductsPageFilter setFilter={setFilter} filter={filter} />
+        <div>
+          {isSelectedFilters && (
+            <Wrappers.SelectedFilters>
+              <SelectedFilters
+                filter={filter}
+                findedProductsLength={filteredProducts.length}
+                setFilter={setFilter}
+                isSelectedFilters={isSelectedFilters}
+              />
+
+              <NumberOfProducts productsLength={filteredProducts.length} />
+            </Wrappers.SelectedFilters>
+          )}
+          <PaginateProdList products={filteredProducts} />
+        </div>
+      </Wrappers.MainContent>
+      {filter.category.every(({ value }) => value !== 'helpers') && (
         <ProductsListSwiper
           products={helpersProductsList}
           title={'Допомагайки'}

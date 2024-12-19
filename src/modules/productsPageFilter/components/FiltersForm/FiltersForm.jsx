@@ -1,6 +1,6 @@
 import Select from 'react-select';
 import { useFormik } from 'formik';
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 
@@ -63,7 +63,6 @@ const FiltersForm = ({ setFilter, onClose, filter }) => {
 
   useEffect(() => {
     setFilter(values);
-    // eslint-disable-next-line
   }, [setFilter, values]);
 
   useEffect(() => {
