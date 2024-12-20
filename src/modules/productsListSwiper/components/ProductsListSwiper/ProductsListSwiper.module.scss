@@ -1,0 +1,69 @@
+.swipperWrapper {
+  width: 100%;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+
+  @include media(tablet) {
+    margin-bottom: 32px;
+  }
+}
+
+.prodSubtitle {
+  @include font(28, 36);
+  font-weight: 500;
+
+  @include media(tablet) {
+    @include font(32, 36);
+  }
+}
+
+.buttonsWrapper {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+
+  @include media(tablet) {
+    column-gap: 16px;
+  }
+}
+
+.scrollBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(31, 31, 31, 0.2);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    width: 24px;
+    height: 24px;
+    fill: $primary-text-color;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: rgba(31, 31, 31, 0.1);
+  }
+
+  &[disabled] {
+    border: 1px solid rgba(31, 31, 31, 0.1);
+
+    cursor: default;
+    & svg {
+      fill: #a5a5a5;
+    }
+  }
+
+  &[disabled]:hover,
+  &[disabled]:focus {
+    background-color: transparent;
+  }
+}

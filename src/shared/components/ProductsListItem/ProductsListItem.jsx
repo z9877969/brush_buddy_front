@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { getActiveProduct } from '../../helpers/getActiveProduct';
+import { getActiveProduct } from 'helpers';
 import { ProductCardItem } from 'shared/components';
 import { useProductMarkers } from 'hooks/useProductMarkers';
 import { useChangeVariant } from 'hooks/useChangeVariant';

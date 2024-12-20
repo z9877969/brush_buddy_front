@@ -13,7 +13,7 @@ const recommended = {
   [PRODUCT_TYPES.CHILD]: 'Для дітей',
 };
 
-const SelectedFilters = ({ filter, setFilter }) => {
+const SelectedFilters = ({ filter, setFilter, isSelectedFilters }) => {
   const navigate = useNavigate();
 
   const resetFilters = () => {
@@ -28,6 +28,11 @@ const SelectedFilters = ({ filter, setFilter }) => {
           ...p,
           [category]: p[category].filter((el) => el !== value),
         }));
+      } else if (type === 'option') {
+        setFilter((p) => ({
+          ...p,
+          [category]: p[category].filter((el) => el.value !== value),
+        }));
       } else {
         setFilter((p) => ({
           ...p,
@@ -38,40 +43,47 @@ const SelectedFilters = ({ filter, setFilter }) => {
     [setFilter]
   );
 
-  const elements = useMemo(
-    () =>
-      Object.entries(filter)
-        .flatMap(([key, data]) => {
-          if (Array.isArray(data)) {
-            return data.map((el) => ({
-              category: key,
-              value: el,
-              label: recommended[el],
-              type: 'check',
-            }));
-          }
-          if (typeof data === 'string') {
-            return data
-              ? { category: key, value: key, label: data, type: 'search' }
-              : [];
-          }
-          return data.value ? { ...data, category: key, type: 'option' } : [];
-        })
-        .map(({ category, value, label, type }) => (
-          <FilterItem
-            filterName={label}
-            subClass={value}
-            removeFilter={() => handleRemove({ category, type, value })}
-            key={category + value}
-          />
-        )),
-    [filter, handleRemove]
-  );
+  const elements = useMemo(() => {
+    const els = Object.entries(filter)
+      .flatMap(([key, data]) => {
+        if (key === 'recommendedFor' && Array.isArray(data)) {
+          return data.map((el) => ({
+            category: key,
+            value: el,
+            label: recommended[el],
+            type: 'check',
+          }));
+        }
+        if (typeof data === 'string') {
+          return data
+            ? { category: key, value: key, label: data, type: 'search' }
+            : [];
+        }
+        if (Array.isArray(data)) {
+          return data.map((el) => ({
+            category: key,
+            value: el.value,
+            label: el.label,
+            type: 'option',
+          }));
+        }
+        return data.value ? { ...data, category: key, type: 'option' } : [];
+      })
+      .map(({ category, value, label, type }) => (
+        <FilterItem
+          filterName={label}
+          subClass={value}
+          removeFilter={() => handleRemove({ category, type, value })}
+          key={category + value}
+        />
+      ));
+    return els;
+  }, [filter, handleRemove]);
 
   return (
     <div className={s.filtersWrapper}>
       <ul className={s.filtersBlock}>{elements}</ul>
-      {elements.length > 0 && (
+      {isSelectedFilters && (
         <Button
           title={'Скинути усі фільтри'}
           className={s.resetBtn}

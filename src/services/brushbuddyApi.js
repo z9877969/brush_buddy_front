@@ -48,3 +48,26 @@ export const getReviewsApi = async () => {
   // return data;
   return reviewsCardData;
 };
+
+export const getSocialLinksApi = async () => {
+  const { data = {} } = await instance.get('/content/main-page', {
+    params: {
+      socialLinks: true,
+    },
+  });
+  return (
+    data.socialLinks?.reduce((acc, { url, type }) => {
+      acc[type.toUpperCase()] = url;
+      return acc;
+    }, {}) || null
+  );
+};
+
+export const getMainPageAboutImageApi = async () => {
+  const { data = {} } = await instance.get('/content/main-page', {
+    params: {
+      aboutUrl: true,
+    },
+  });
+  return data.aboutUrl || '';
+};

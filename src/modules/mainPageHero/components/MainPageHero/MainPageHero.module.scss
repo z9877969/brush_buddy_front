@@ -85,6 +85,7 @@
   & svg {
     display: none;
   }
+  @include colored-button-effects-styles($pet-color);
 
   @include media(tablet) {
     width: auto;
@@ -102,6 +103,19 @@
     #f5516f;
   color: $light-color;
 }
+
+.animationWrapper {
+  @include media(tablet) {
+    height: calc(650px - 165px);
+    overflow-y: hidden;
+  }
+
+  @include media(desktop) {
+    height: auto;
+    overflow-y: unset;
+  }
+}
+
 .animation {
   margin-top: -16px;
   // display: flex;

@@ -30,20 +30,28 @@
   }
 }
 
-.listItem {
-  .image {
-    @include media(tablet) {
-      max-width: 340px;
-    }
-    @include media(desktop) {
-      min-width: 310px;
-    }
-  }
-}
 .listItem:nth-child(2) {
   display: none;
   @include media(tablet) {
     display: block;
+  }
+}
+.imageWrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+
+  &.imageBorder {
+    border: 1px solid $main-border-color;
+  }
+  @include media(tablet) {
+    width: 340px;
+    height: 196px;
+  }
+  @include media(desktop) {
+    width: 310px;
   }
 }
 
@@ -86,7 +94,8 @@
   @include media(desktop) {
     position: absolute;
     right: calc(64px + 644px + 64px);
-    top: 370px;
+    // top: 370px;
+    bottom: 0;
   }
 }
 .buttonLink:hover,

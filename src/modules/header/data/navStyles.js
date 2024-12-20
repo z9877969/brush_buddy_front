@@ -11,9 +11,12 @@ export const customStyles = ({ selectedOption, isProductPage }) => ({
     fontSize: '18px',
     maxWidth: '360px',
     overflowX: 'auto',
+    boxShadow: 'none', // Видалити "ефект" фокусу
+    borderColor: 'transparent', // Забрати рамку фокусу
     '&:hover': {
       border: 'none',
       color: '#1f1f1f',
+      cursor: 'pointer',
     },
     '&:focus': {
       border: 'none',

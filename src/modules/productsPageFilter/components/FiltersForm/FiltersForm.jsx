@@ -1,24 +1,24 @@
 import Select from 'react-select';
 import { useFormik } from 'formik';
-import { useEffect, useMemo, useRef } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 
-import { PRODUCT_TYPES } from 'shared/constants/index.js';
+import { Button } from 'shared/components';
+import { PRODUCT_TYPES } from 'shared/constants';
+import CustomOption from '../CustomOption/CustomOption';
 import {
   ageOptions,
   categoriesOptions,
   brandsOptions,
   sortByOptions,
 } from '../../data/options';
-import { Button } from 'shared/components';
-import { customStyles } from './customStyles.js';
-import { sprite } from 'shared/icons';
-
-import s from './FiltersForm.module.scss';
 import { initialFilterValues } from 'modules/productsPageFilter/data/initialFilterValues';
+import { sprite } from 'shared/icons';
+import { setCustomStyles } from './customStyles';
+import s from './FiltersForm.module.scss';
 
-const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
+const FiltersForm = ({ setFilter, onClose, filter }) => {
   const ageRef = useRef(null);
   const categoryRef = useRef(null);
   const brandRef = useRef(null);
@@ -39,21 +39,10 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
     return data;
   }, [products]);
 
-  const initialValues = filter
-    ? {
-        search: filter.search,
-        recommendedFor: filter.recommendedFor,
-        age: filter.age,
-        category: filter.category,
-        brand: filter.brand,
-        sortBy: filter.sortBy,
-      }
-    : initialFilterValues;
-
   const formik = useFormik({
-    initialValues,
+    initialValues: filter,
     onSubmit: (values) => {
-      filterProductsCb(values);
+      setFilter(values);
     },
   });
   const {
@@ -73,13 +62,43 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
   }, []);
 
   useEffect(() => {
-    filterProductsCb(values);
-    // eslint-disable-next-line
-  }, [filterProductsCb]);
+    setFilter(values);
+  }, [setFilter, values]);
 
   useEffect(() => {
-    setValues(filter);
+    if (
+      !Object.entries(filter)
+        .filter(([key]) => {
+          key !== 'sortBy';
+        })
+        // eslint-disable-next-line no-unused-vars
+        .some(([_, data]) => data.length > 0)
+    ) {
+      setValues(filter);
+    }
   }, [filter, setValues]);
+
+  const selectOptionDecorator = useCallback(
+    (filterType) => (selectedOption) => {
+      const alreadySelected = values[filterType].find(
+        (opt) => opt.value === selectedOption.value
+      );
+      if (alreadySelected) {
+        setValues((prev) => ({
+          ...prev,
+          [filterType]: prev[filterType].filter(
+            (opt) => opt.value !== selectedOption.value
+          ),
+        }));
+      } else {
+        setValues((prev) => ({
+          ...prev,
+          [filterType]: [...prev[filterType], selectedOption],
+        }));
+      }
+    },
+    [setValues, values]
+  );
 
   return (
     <form onSubmit={handleSubmit} className={s.form}>
@@ -178,9 +197,22 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
               setFieldValue('age', option);
               ageRef.current.blur();
             }}
-            styles={customStyles}
+            styles={setCustomStyles({ open: true })}
             ref={ageRef}
             isDisabled={!values.recommendedFor.includes(PRODUCT_TYPES.CHILD)}
+            menuIsOpen
+            components={{
+              Option: (pros) => (
+                <CustomOption
+                  {...pros}
+                  selectOptionDecorator={selectOptionDecorator}
+                  filterType="age"
+                  disabled={
+                    !values.recommendedFor.includes(PRODUCT_TYPES.CHILD)
+                  }
+                />
+              ),
+            }}
           />
         </div>
 
@@ -193,12 +225,18 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
             options={categoriesOptions(productsByCategory)}
             placeholder={'Усі'}
             value={values.category}
-            onChange={(option) => {
-              setFieldValue('category', option);
-              categoryRef.current.blur();
-            }}
-            styles={customStyles}
+            styles={setCustomStyles({ open: true })}
             ref={categoryRef}
+            menuIsOpen={true}
+            components={{
+              Option: (pros) => (
+                <CustomOption
+                  {...pros}
+                  selectOptionDecorator={selectOptionDecorator}
+                  filterType="category"
+                />
+              ),
+            }}
           />
         </div>
 
@@ -211,12 +249,18 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
             options={brandsOptions}
             value={values.brand}
             placeholder={'Усі'}
-            onChange={(option) => {
-              setFieldValue('brand', option);
-              brandRef.current.blur();
-            }}
-            styles={customStyles}
+            styles={setCustomStyles({ open: true })}
             ref={brandRef}
+            menuIsOpen={true}
+            components={{
+              Option: (pros) => (
+                <CustomOption
+                  {...pros}
+                  selectOptionDecorator={selectOptionDecorator}
+                  filterType="brand"
+                />
+              ),
+            }}
           />
         </div>
 
@@ -233,7 +277,7 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
               setFieldValue('sortBy', option);
               sortByRef.current.blur();
             }}
-            styles={customStyles}
+            styles={setCustomStyles()}
             ref={sortByRef}
           />
         </div>
@@ -257,4 +301,5 @@ const FiltersForm = ({ setFilter, filterProductsCb, onClose, filter }) => {
   );
 };
 
-export default FiltersForm;
+const MemoizedFiltersForm = memo(FiltersForm);
+export default MemoizedFiltersForm;

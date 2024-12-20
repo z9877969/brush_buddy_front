@@ -12,9 +12,9 @@ const NotFoundPages = () => {
         <img className={s.image} src={Anima} alt="not-found-pages" />
         <h2 className={s.title}> Цієї сторінkи більше немає, але є інші</h2>
         <div className={s.navigation}>
-          <Link to="/" className={s.link}>
+          {/* <Link to="/" className={s.link}>
             На головну
-          </Link>
+          </Link> */}
           {/* <LinkButton className={s.productLink} title={'До покупок'} /> */}
           <Link to={`${ROUTES.PRODUCTS}?page=1`} className={s.productLink}>
             До поkупоk

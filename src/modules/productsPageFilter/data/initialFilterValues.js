@@ -1,15 +1,10 @@
-import {
-  ageOptions,
-  brandsOptions,
-  categoriesOptions,
-  sortByOptions,
-} from './options';
+import { sortByOptions } from './options';
 
 export const initialFilterValues = {
   search: '',
   recommendedFor: [],
-  age: ageOptions[0],
-  category: categoriesOptions({})[0],
-  brand: brandsOptions[0],
+  age: [],
+  category: [],
+  brand: [],
   sortBy: sortByOptions[0],
 };

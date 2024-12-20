@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Select from 'react-select';
 import { useDebounceValue } from 'usehooks-ts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,12 +31,29 @@ const CartForms = () => {
   const [isSave, setIsSave] = useState(
     () => JSON.parse(localStorage.getItem('isSaveDeliveryInfo')) ?? false
   );
+  const [rows, setRows] = useState(1);
 
+  const textareaRef = useRef(null);
   const listRef = useRef(null);
 
   const formik = useDeliveryForm();
 
-  const { values, errors, touched } = formik;
+  const { values, errors, touched, handleChange } = formik;
+
+  const handleInput = useCallback(
+    (event) => {
+      handleChange(event);
+      const textarea = textareaRef.current;
+      if (textarea) {
+        textarea.style.height = '0px';
+        const scrollHeight = textarea.scrollHeight;
+        textarea.style.height = `${scrollHeight}px`;
+        const newRows = Math.floor(scrollHeight / 24); // 24px - висота рядка, змінити за потреби
+        setRows(newRows);
+      }
+    },
+    [handleChange]
+  );
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -190,11 +207,12 @@ const CartForms = () => {
           <span className={s.cartFormSpan}>Коментар</span>
           <div className={s.cartFormTextarea}>
             <textarea
+              ref={textareaRef}
               maxLength={DELIVERY_FORM.COMMENT_MAX_LENGTH}
               name="comments"
-              rows="5"
-              onChange={formik.handleChange}
+              rows={rows}
               value={values.comments}
+              onChange={handleInput}
             />
           </div>
           <div className={s.cartFormTextareaSum}>

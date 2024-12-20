@@ -16,7 +16,7 @@ export const PRODUCT_TYPES = {
   CHILD: 'child',
   ADULT: 'adult',
   ANIMAL: 'animal',
-  HELPER: 'helper',
+  HELPER: 'helpers',
   ALL_PRODUCTS: 'allProducts',
 };
 

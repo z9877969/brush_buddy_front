@@ -1,27 +1,29 @@
-export const customStyles = {
+export const setCustomStyles = ({ open } = {}) => ({
   container: (styles) => ({
     ...styles,
+    width: '100%',
 
     '@media (min-width: 1440px)': {
       border: 'none',
     },
   }),
-  control: (styles, { isFocused }) => ({
+  control: (styles) => ({
     ...styles,
     backgroundColor: '#fff',
     border: '1px solid rgba(31, 31, 31, 0.2)',
     outline: 'none',
     width: '343px',
     display: 'flex',
+    ...(open && {
+      display: 'none',
+    }),
     justifyContent: 'flex-start',
     height: '48px',
     padding: '12px',
     alignItems: 'center',
     borderRadius: '16px',
     boxShadow: 'none',
-
-    // borderColor: isSelected ? 'red' : 'none',
-    ...(isFocused && {
+    ...(open && {
       boxShadow: 'none',
       borderBottom: '1px solid rgba(31, 31, 31, 0.2)',
       borderRadius: '16px 16px 0 0',
@@ -34,9 +36,10 @@ export const customStyles = {
       width: '704px',
     },
     '@media (min-width: 1440px)': {
-      width: '268px',
+      // width: '268px',
+      width: '100%',
       border: 0,
-      ...(isFocused && {
+      ...(open && {
         border: 'none',
         boxShadow: 'none',
         borderBottom: '1px solid rgba(31, 31, 31, 0.2)',
@@ -44,10 +47,6 @@ export const customStyles = {
       }),
     },
   }),
-  // : (styles { isFocused }) => ({
-  //   ...styles,
-  //   borderColor: isFocused ?"red":"green"
-  // }),
   valueContainer: (styles) => ({
     ...styles,
     padding: 0,
@@ -75,7 +74,9 @@ export const customStyles = {
     ...styles,
     margin: 0,
     boxShadow: 'none',
-    borderRadius: '0 0 16px 16px',
+    // borderRadius: '0 0 16px 16px',
+    borderRadius: '16px',
+
     position: 'static',
     zIndex: -111,
     border: '1px solid rgba(31, 31, 31, 0.2)',
@@ -107,11 +108,13 @@ export const customStyles = {
     padding: '12px',
     backgroundColor: '#fff',
     gap: '8px',
-    borderRadius: '0 0 16px 16px',
+    // borderRadius: '0 0 16px 16px',
+    borderRadius: '16px',
     '@media (min-width: 1440px)': {
       backgroundColor: '#fff',
       border: 'none',
-      borderRadius: '0 0 16px 16px',
+      // borderRadius: '0 0 16px 16px',
+      borderRadius: '16px',
     },
   }),
-};
+});

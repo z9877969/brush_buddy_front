@@ -5,9 +5,9 @@ import PopularProductsSlide from '../PopularProductsSlide/PopularProductsSlide';
 
 const ProductsSwipeCards = ({
   products,
-  setRefSwiper,
-  reachEndButton,
-  reachStartButton,
+  // setRefSwiper,
+  // reachEndButton,
+  // reachStartButton,
 }) => {
   const lengthCards = products.length;
 
@@ -17,7 +17,7 @@ const ProductsSwipeCards = ({
         const nextProduct = idx + 1 < arr.length ? arr[idx + 1] : null;
 
         acc.push(
-          <SwiperSlide>
+          <SwiperSlide key={idx}>
             {nextProduct ? (
               <PopularProductsSlide
                 firstProduct={product}
@@ -36,14 +36,13 @@ const ProductsSwipeCards = ({
 
   return (
     <Swiper
+      allowTouchMove={false}
       onSwiper={(swiper) => {
-        setRefSwiper(swiper);
+        // setRefSwiper(swiper);
         const slidesWrapper = swiper?.slidesEl;
         const slidesHost = swiper?.hostEl;
         if (slidesHost) {
           slidesHost.style.overflow = 'hidden';
-          // slidesHost.style.marginLeft = '-1px';
-          // slidesHost.style.marginRight = '-1px';
         }
         if (slidesWrapper) {
           slidesWrapper.style.display = 'flex';
@@ -54,15 +53,15 @@ const ProductsSwipeCards = ({
           swiper.activeIndex === 1 ||
           swiper.activeIndex === lengthCards - 2
         ) {
-          reachEndButton(false);
-          reachStartButton(false);
+          // reachEndButton(false);
+          // reachStartButton(false);
         }
       }}
       onReachEnd={() => {
-        reachEndButton(true);
+        // reachEndButton(true);
       }}
       onReachBeginning={() => {
-        reachStartButton(true);
+        // reachStartButton(true);
       }}
       breakpoints={{
         0: {

@@ -53,7 +53,7 @@ const OrderPromoCode = ({ priceDisc }) => {
             dispatch(checkPromoCode({ values: formik.values, total }));
           }}
           disabled={!formik.isValid || formik.values.promoCode.trim() === ''}
-        ></Button>
+        />
       </div>
       {isPromoUsed && (
         <OrderPromoCodeUsed

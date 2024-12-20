@@ -16,7 +16,7 @@ const CartListCurrentProducts = () => {
 
   return (
     <section>
-      <MainTitle title={'Мій кошик'} />
+      <MainTitle title={'Кошик'} />
       <ul className={s.listOrederdProducts}>
         <CartListCurrentItem data={products} />
       </ul>

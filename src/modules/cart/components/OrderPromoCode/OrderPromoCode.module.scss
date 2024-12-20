@@ -25,6 +25,8 @@
   padding: 12px 24px;
   border-radius: 200px;
   color: $light-color;
+  @include colored-button-effects-styles($pet-color);
+
   @include media(tablet) {
     position: absolute;
     top: 0;
