@@ -72,7 +72,6 @@ const ProductsPage = () => {
             <Wrappers.SelectedFilters>
               <SelectedFilters
                 filter={filter}
-                findedProductsLength={filteredProducts.length}
                 setFilter={setFilter}
                 isSelectedFilters={isSelectedFilters}
               />
