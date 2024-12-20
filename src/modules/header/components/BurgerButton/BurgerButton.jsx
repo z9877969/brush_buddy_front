@@ -18,7 +18,7 @@ const BurgerButton = ({ onClick, isOpen }) => {
           {isOpen ? (
             <use href={`${sprite}#icon-close-cross`}></use>
           ) : (
-            <use href={`${sprite}#icon-burger`}></use>
+            <use href={`${sprite}#icon-burger-btn-new`}></use>
           )}
         </svg>
       </button>
