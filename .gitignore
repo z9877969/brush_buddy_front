@@ -28,6 +28,7 @@ dist-ssr
 
 # notes
 _productsList/
+_tasks
 
 # Local Netlify folder
 .netlify
