@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
-// import { SOCIAL_NETWORKS } from 'shared/constants';
 import { sprite } from 'shared/icons';
 import { getSocialLinksApi } from 'services/brushbuddyApi';
+import { useLocalRequest } from 'hooks/useLocalRequest';
 import s from './SocialIcons.module.scss';
 
 const SocialIcons = () => {
   const [socialLinks, setSocialLinks] = useState(null);
 
+  const localRequestWrapper = useLocalRequest();
+
   useEffect(() => {
-    getSocialLinksApi()
-      .then((links) => setSocialLinks(links))
-      // eslint-disable-next-line
-      .catch((err) => console.log(err.message));
-  }, []);
+    const requestFn = () =>
+      getSocialLinksApi().then((links) => setSocialLinks(links));
+
+    localRequestWrapper(requestFn);
+  }, [localRequestWrapper]);
 
   if (!socialLinks) return null;
 

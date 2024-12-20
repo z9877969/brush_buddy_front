@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { sortByAvailability } from 'helpers/sortByAvailability';
+import { sortingTypesDict } from 'modules/productsPageFilter/data/options';
 
 export const useFilteredProducts = (products, filter) => {
   return useMemo(() => {
@@ -36,14 +37,19 @@ export const useFilteredProducts = (products, filter) => {
       ) {
         return false;
       }
-      if (age?.value && product.age && product.age.includes(age.value)) {
+      if (
+        age.length &&
+        age.every(({ value }) => !product.age.includes(value))
+      ) {
         return false;
       }
       if (
-        category &&
-        category.value &&
-        product.category.value !== category.value
+        category.length &&
+        category.every(({ value }) => value !== product.category.value)
       ) {
+        return false;
+      }
+      if (!category.length && product.category.value === 'helpers') {
         return false;
       }
       if (recommendedFor && recommendedFor.length > 0) {
@@ -53,7 +59,10 @@ export const useFilteredProducts = (products, filter) => {
           return false;
         }
       }
-      if (brand && brand.value && product.maker.value !== brand.value) {
+      if (
+        brand.length &&
+        brand.every(({ value }) => value !== product.maker.value)
+      ) {
         return false;
       }
       return true;
@@ -61,29 +70,25 @@ export const useFilteredProducts = (products, filter) => {
 
     if (filter.sortBy) {
       switch (filter.sortBy.value) {
-        case 'increment':
+        case sortingTypesDict.PRICE_ASC.value:
           filteredList.sort((a, b) => {
             const aPrice = a.variants[0].salePrice || a.variants[0].price;
             const bPrice = b.variants[0].salePrice || b.variants[0].price;
             return aPrice - bPrice;
           });
           break;
-        case 'decrement':
+        case sortingTypesDict.PRICE_DESC.value:
           filteredList.sort((a, b) => {
             const aPrice = a.variants[0].salePrice || a.variants[0].price;
             const bPrice = b.variants[0].salePrice || b.variants[0].price;
             return bPrice - aPrice;
           });
           break;
-        case 'new':
-          filteredList = filteredList.filter((product) =>
-            product.watermark.includes('wow')
-          );
+        case sortingTypesDict.ALPH_ASC.value:
+          filteredList.sort((a, b) => a.title.localeCompare(b.title));
           break;
-        case 'actions':
-          filteredList = filteredList.filter(
-            (product) => product.salePrice && product.salePrice < product.price
-          );
+        case sortingTypesDict.ALPH_DESC.value:
+          filteredList.sort((a, b) => b.title.localeCompare(a.title));
           break;
         default:
           break;

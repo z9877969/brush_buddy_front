@@ -51,3 +51,11 @@ screen types:
     color: $_text_color;
   }
 }
+
+@mixin cut-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Кількість видимих рядків */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
