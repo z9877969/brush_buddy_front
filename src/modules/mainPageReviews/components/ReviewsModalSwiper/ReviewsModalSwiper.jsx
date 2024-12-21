@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -20,14 +20,17 @@ const ReviewsModalSwiper = ({ reviewsCardData, slideIdx, closeModal }) => {
     swiperRef.current.slideNext();
   };
 
+  useEffect(() => {
+    swiperRef.isBeginning && setIsDisabledStartBtn(swiperRef.isBeginning);
+    swiperRef.isEnd && setIsDisabledStartBtn(swiperRef.isEnd);
+  }, []);
+
   return (
     <>
       <Swiper
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
           swiper.slideTo(slideIdx, 0);
-          swiper.isBeginning && setIsDisabledStartBtn(swiper.isBeginning);
-          swiper.isEnd && setIsDisabledStartBtn(swiper.isEnd);
         }}
         onSlideChange={({ isBeginning, isEnd }) => {
           !isEnd && setIsDisabledEndBtn(isEnd);
