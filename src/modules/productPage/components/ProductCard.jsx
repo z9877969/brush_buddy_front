@@ -111,9 +111,7 @@ const ProductCard = ({ product }) => {
             )}
 
             <p className={s.itemHave}>
-              {curVariantQuantity > 0 ? (
-                <span className={s.haveItem}>Є в наявності</span>
-              ) : (
+              {curVariantQuantity > 0 ? null : (
                 <span className={s.notHaveItem}>Товар закінчився</span>
               )}
             </p>

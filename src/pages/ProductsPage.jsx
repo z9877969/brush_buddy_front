@@ -95,12 +95,13 @@ const ProductsPage = () => {
           <PaginateProdList products={filteredProducts} />
         </div>
       </Wrappers.MainContent>
-      {filter.category.every(({ value }) => value !== 'helpers') && (
-        <ProductsListSwiper
-          products={helpersProductsList}
-          title={'Допомагайки'}
-        />
-      )}
+      {filter.category.length > 0 &&
+        filter.category.every(({ value }) => value !== 'helpers') && (
+          <ProductsListSwiper
+            products={helpersProductsList}
+            title={'Допомагайки'}
+          />
+        )}
     </ProductsPageWrapper>
   );
 };
