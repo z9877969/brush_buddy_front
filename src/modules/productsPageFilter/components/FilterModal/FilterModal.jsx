@@ -1,5 +1,7 @@
-import { sprite } from 'shared/icons';
+import { useEffect } from 'react';
+import { useMedia } from 'hooks/useMedia';
 import FiltersForm from '../FiltersForm/FiltersForm';
+import { sprite } from 'shared/icons';
 import s from './FilterModal.module.scss';
 
 export const FilterModal = ({
@@ -9,6 +11,16 @@ export const FilterModal = ({
   isOpen,
   filter,
 }) => {
+  const { isDesktop } = useMedia();
+
+  useEffect(() => {
+    if (!isDesktop) {
+      isOpen
+        ? (document.body.style.overflow = 'hidden')
+        : document.body.removeAttribute('style');
+    }
+  }, [isDesktop, isOpen]);
+
   return (
     <div className={`${s.filterModal} ${isOpen ? s.visible : ''}`}>
       <div className={s.modalContent}>
