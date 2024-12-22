@@ -4,7 +4,7 @@ import { sprite } from 'shared/icons';
 import { FilterModal } from '../FilterModal/FilterModal';
 import s from './ProductsPageFilter.module.scss';
 
-const ProductsPageFilter = ({ filter, setFilter }) => {
+const ProductsPageFilter = ({ filter, setFilter, resetFilters }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -31,6 +31,7 @@ const ProductsPageFilter = ({ filter, setFilter }) => {
         onClose={toggleModal}
         filter={filter}
         setFilter={setFilter}
+        resetFilters={resetFilters}
       />
     </aside>
   );

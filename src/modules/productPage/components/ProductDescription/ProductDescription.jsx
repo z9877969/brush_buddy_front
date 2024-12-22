@@ -5,7 +5,6 @@ import s from './ProductDescription.module.scss';
 const ProductDescription = ({ description }) => {
   return (
     <div className={s.descrWrapper}>
-      <p className={s.description}>Опис</p>
       {typeof description === 'string' ? (
         <p className={s.info}>{description}</p>
       ) : (

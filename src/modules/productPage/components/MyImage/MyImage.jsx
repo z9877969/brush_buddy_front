@@ -74,7 +74,7 @@ export const MyImage = ({ images, userTypes, watermark }) => {
             <WatermarkIcon watermark={watermark} iconClass={s.watermarkIcon} />
           </div>
           <div className={s.userType}>
-            <UserTypesIcons userTypes={userTypes} iconClass={s.userTypeIcon} />
+            <UserTypesIcons userTypes={userTypes} />
           </div>
         </div>
         <img

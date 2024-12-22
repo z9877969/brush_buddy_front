@@ -13,7 +13,7 @@
   width: $mobile;
 
   @include media(tablet) {
-    padding: 60px 64px 24px 64px;
+    padding: 60px 64px 4px 64px;
     width: $tablet;
     height: 871px;
   }

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
-import { ProductsList } from 'modules/mainPageToShopping';
+import { ProductsListSwiper } from 'modules/productsListSwiper';
 import { Container } from 'shared/components';
 import { MyImage } from './MyImage/MyImage';
 import ProductOptions from './ProductOptions/ProductOptions';
@@ -111,9 +111,7 @@ const ProductCard = ({ product }) => {
             )}
 
             <p className={s.itemHave}>
-              {curVariantQuantity > 0 ? (
-                <span className={s.haveItem}>Є в наявності</span>
-              ) : (
+              {curVariantQuantity > 0 ? null : (
                 <span className={s.notHaveItem}>Товар закінчився</span>
               )}
             </p>
@@ -150,7 +148,10 @@ const ProductCard = ({ product }) => {
         </div>
       )}
       {recommendedProducts.length > 0 && (
-        <ProductsList title={'Супутні товари'} products={recommendedProducts} />
+        <ProductsListSwiper
+          title={'Супутні товари'}
+          products={recommendedProducts}
+        />
       )}
     </Container>
   );

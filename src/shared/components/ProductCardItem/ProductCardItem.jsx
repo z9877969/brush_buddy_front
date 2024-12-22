@@ -106,7 +106,7 @@ const ProductCardItem = ({
           changeColor={openProduct}
         />
       )}
-      <Link to={`/products/${prodId}/${activeVar.varId}`}>
+      <Link to={`/products/${prodId}/${activeVarId}`}>
         <p className={s.productName}>{title}</p>
       </Link>
       <div className={s.productFooter}>
