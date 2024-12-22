@@ -2,7 +2,13 @@ import { sprite } from 'shared/icons';
 import FiltersForm from '../FiltersForm/FiltersForm';
 import s from './FilterModal.module.scss';
 
-export const FilterModal = ({ setFilter, onClose, isOpen, filter }) => {
+export const FilterModal = ({
+  setFilter,
+  resetFilters,
+  onClose,
+  isOpen,
+  filter,
+}) => {
   return (
     <div className={`${s.filterModal} ${isOpen ? s.visible : ''}`}>
       <div className={s.modalContent}>
@@ -14,7 +20,12 @@ export const FilterModal = ({ setFilter, onClose, isOpen, filter }) => {
             </svg>
           </button>
         </div>
-        <FiltersForm filter={filter} onClose={onClose} setFilter={setFilter} />
+        <FiltersForm
+          filter={filter}
+          onClose={onClose}
+          setFilter={setFilter}
+          resetFilters={resetFilters}
+        />
       </div>
     </div>
   );

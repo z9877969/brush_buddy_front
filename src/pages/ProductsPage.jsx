@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   initialFilterValues,
@@ -18,6 +18,7 @@ import { selectProductsList } from '@redux/products/productsSelectors';
 import { useFilteredProducts } from 'hooks/useFilteredProducts';
 
 const ProductsPage = () => {
+  const navigate = useNavigate();
   const [search] = useSearchParams();
   const products = useSelector(selectProductsList);
   const [filter, setFilter] = useState(
@@ -38,12 +39,19 @@ const ProductsPage = () => {
     [filter]
   );
 
+  const resetFilters = useCallback(() => {
+    setFilter(initialFilterValues);
+    navigate({ page: 1 });
+    // eslint-disable-next-line
+  }, []);
+
   useEffect(() => {
     sessionStorage.setItem('filter', JSON.stringify(filter));
   }, [filter]);
 
   useEffect(() => {
     if (!productType) return;
+
     if (productType !== PRODUCT_TYPES.HELPER) {
       setFilter((p) => {
         const filter = p ? p : {};
@@ -51,14 +59,14 @@ const ProductsPage = () => {
           ...filter,
           recommendedFor:
             productType === PRODUCT_TYPES.ALL_PRODUCTS ? [] : [productType],
-          category: { label: 'Усі', value: null },
+          category: [],
         };
       });
     } else {
       setFilter((p) => ({
         ...p,
         recommendedFor: [],
-        category: { value: 'helpers', label: 'Допомагайки' },
+        category: [{ value: 'helpers', label: 'Допомагайки' }],
       }));
     }
   }, [productType]);
@@ -66,13 +74,18 @@ const ProductsPage = () => {
   return (
     <ProductsPageWrapper>
       <Wrappers.MainContent>
-        <ProductsPageFilter setFilter={setFilter} filter={filter} />
+        <ProductsPageFilter
+          setFilter={setFilter}
+          resetFilters={resetFilters}
+          filter={filter}
+        />
         <div>
           {isSelectedFilters && (
             <Wrappers.SelectedFilters>
               <SelectedFilters
                 filter={filter}
                 setFilter={setFilter}
+                resetFilters={resetFilters}
                 isSelectedFilters={isSelectedFilters}
               />
 

@@ -13,12 +13,11 @@ import {
   brandsOptions,
   sortByOptions,
 } from '../../data/options';
-import { initialFilterValues } from 'modules/productsPageFilter/data/initialFilterValues';
 import { sprite } from 'shared/icons';
 import { setCustomStyles } from './customStyles';
 import s from './FiltersForm.module.scss';
 
-const FiltersForm = ({ setFilter, onClose, filter }) => {
+const FiltersForm = ({ setFilter, resetFilters, onClose, filter }) => {
   const ageRef = useRef(null);
   const categoryRef = useRef(null);
   const brandRef = useRef(null);
@@ -287,7 +286,7 @@ const FiltersForm = ({ setFilter, onClose, filter }) => {
           className={s.resetBtn}
           title={'Скинути усі фільтри'}
           border
-          onClick={() => setFilter(initialFilterValues)}
+          onClick={resetFilters}
         />
         <Button
           type="submit"

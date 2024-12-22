@@ -29,6 +29,10 @@ const ProductDropDown = () => {
     // eslint-disable-next-line
   }, [selectedOption]);
 
+  useEffect(() => {
+    !location.search && setSelectedOption(null);
+  }, [location.search]);
+
   return (
     <>
       <Select

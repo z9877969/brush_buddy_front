@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import FilterItem from '../FilterItem/FilterItem';
 import { Button } from 'shared/components';
 import s from './SelectedFilters.module.scss';
@@ -13,14 +12,12 @@ const recommended = {
   [PRODUCT_TYPES.CHILD]: 'Для дітей',
 };
 
-const SelectedFilters = ({ filter, setFilter, isSelectedFilters }) => {
-  const navigate = useNavigate();
-
-  const resetFilters = () => {
-    setFilter(initialFilterValues);
-    navigate({ page: 1 });
-  };
-
+const SelectedFilters = ({
+  filter,
+  setFilter,
+  resetFilters,
+  isSelectedFilters,
+}) => {
   const handleRemove = useCallback(
     ({ category, value, type }) => {
       if (type === 'check') {
