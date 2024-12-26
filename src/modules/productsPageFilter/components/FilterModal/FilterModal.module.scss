@@ -12,8 +12,6 @@
   z-index: 1000;
   &.visible {
     display: flex;
-    // padding-top: 24px;
-    // padding-bottom: 24px;
   }
   @include media(desktop) {
     display: flex;
@@ -29,7 +27,7 @@
   display: flex;
   width: 375px;
   // height: 100%;
-  height: calc(100dvh - 24px * 2);
+  height: calc(100dvh - env(safe-area-inset-bottom) - 24px * 2);
   max-height: 812px;
   flex-direction: column;
   align-items: flex-start;
