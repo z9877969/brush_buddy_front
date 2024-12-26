@@ -7,7 +7,7 @@ export const recommendedForOptions = [
 ];
 
 export const sortingTypesDict = {
-  DEFAULT: { value: null, label: 'Товари' },
+  DEFAULT: { value: null, label: 'Популярні' },
   PRICE_ASC: { value: 'increment', label: 'Ціна за зростанням' },
   PRICE_DESC: { value: 'decrement', label: 'Ціна за спаданням' },
   ALPH_ASC: { value: 'alph-asc', label: 'Від А до Я' },
