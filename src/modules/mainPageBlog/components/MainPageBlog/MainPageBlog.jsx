@@ -20,7 +20,7 @@ const MainPaigeBlog = () => {
         <LinkButton
           title={'Всі статті'}
           className={s.blogBtn}
-          to={blogsList[0].navLink}
+          to={blogsList[0]?.navLink}
         />
       </Container>
     </section>
