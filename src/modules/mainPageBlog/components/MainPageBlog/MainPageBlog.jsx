@@ -1,29 +1,16 @@
-import { useState, useEffect, useMemo } from 'react';
-import { Container, MainTitle } from 'shared/components';
-import blogData from '../../db/blogData.json';
-import { LinkButton } from 'shared/components';
+import { useMemo } from 'react';
+import { Container, MainTitle, LinkButton } from 'shared/components';
 import BlogItem from '../BlogItem/BlogItem';
+import { useBlogsWithNavLink } from 'hooks';
 import s from './MainPageBlog.module.scss';
-import { useSelector } from 'react-redux';
-import { selectFirstBlogId } from '@redux/blogs/blogsSelectors';
 
 const MainPaigeBlog = () => {
-  const blogId = useSelector(selectFirstBlogId);
-  const [visiblePosts, setVisiblePosts] = useState([]);
-  const [posts, setPosts] = useState([]);
-  // const [blogId, setBlogId] = useState(null);
-
-  useEffect(() => {
-    setPosts(blogData);
-  }, []);
-
-  useEffect(() => {
-    setVisiblePosts(posts.slice(0, 3));
-  }, [posts]);
+  const blogsList = useBlogsWithNavLink(3);
 
   const elements = useMemo(() => {
-    return visiblePosts.map((item) => <BlogItem item={item} key={item.id} />);
-  }, [visiblePosts]);
+    if (!blogsList || blogsList.length === 0) return null;
+    return blogsList.map((item) => <BlogItem item={item} key={item._id} />);
+  }, [blogsList]);
 
   return (
     <section className={s.blogSection}>
@@ -33,7 +20,7 @@ const MainPaigeBlog = () => {
         <LinkButton
           title={'Всі статті'}
           className={s.blogBtn}
-          to={`/blog/${blogId}`}
+          to={blogsList[0].navLink}
         />
       </Container>
     </section>

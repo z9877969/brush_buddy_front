@@ -2,17 +2,34 @@
   padding-bottom: 24px;
 }
 
-.blogImg {
+.blogImgWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   width: 310px;
+  height: 178px;
   margin-bottom: 24px;
+  border-radius: 14px;
 
   @include media(tablet) {
     width: 340px;
+    height: 196px;
   }
 
   @include media(desktop) {
     width: 421px;
+    height: 242px;
   }
+}
+
+.noImage {
+  border: 1px solid rgba(31, 31, 31, 0.2);
+}
+
+.blogImg {
+  height: 100%;
+  width: auto;
 }
 
 .blogDescr {

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useMedia } from 'hooks/useMedia';
+import clsx from 'clsx';
 import FiltersForm from '../FiltersForm/FiltersForm';
 import { sprite } from 'shared/icons';
 import s from './FilterModal.module.scss';
@@ -13,6 +14,13 @@ export const FilterModal = ({
 }) => {
   const { isDesktop } = useMedia();
 
+  const handleModalClose = (e) => {
+    if (isDesktop) return;
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   useEffect(() => {
     if (!isDesktop) {
       isOpen
@@ -22,7 +30,10 @@ export const FilterModal = ({
   }, [isDesktop, isOpen]);
 
   return (
-    <div className={`${s.filterModal} ${isOpen ? s.visible : ''}`}>
+    <div
+      className={clsx(s.filterModal, isOpen && s.visible)}
+      onClick={handleModalClose}
+    >
       <div className={s.modalContent}>
         <div className={s.modalHeader}>
           <h5 className={s.headerText}>Фільтри</h5>

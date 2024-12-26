@@ -200,6 +200,7 @@ const FiltersForm = ({ setFilter, resetFilters, onClose, filter }) => {
             ref={ageRef}
             isDisabled={!values.recommendedFor.includes(PRODUCT_TYPES.CHILD)}
             menuIsOpen
+            menuShouldBlockScroll={false}
             components={{
               Option: (pros) => (
                 <CustomOption
@@ -251,6 +252,7 @@ const FiltersForm = ({ setFilter, resetFilters, onClose, filter }) => {
             styles={setCustomStyles({ open: true })}
             ref={brandRef}
             menuIsOpen={true}
+            menuShouldBlockScroll={false}
             components={{
               Option: (pros) => (
                 <CustomOption
@@ -271,7 +273,7 @@ const FiltersForm = ({ setFilter, resetFilters, onClose, filter }) => {
             id="sortBy"
             options={sortByOptions}
             value={values.sortBy}
-            placeholder={'Товари'}
+            menuPosition="absolute"
             onChange={(option) => {
               setFieldValue('sortBy', option);
               sortByRef.current.blur();
