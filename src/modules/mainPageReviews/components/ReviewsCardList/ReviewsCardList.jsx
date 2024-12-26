@@ -65,7 +65,9 @@ const ReviewsCardList = ({
               className={s.imageDiv}
               onClick={() => handleOpenModal({ url: image, idx })}
             >
-              <img src={image} alt="photo" />
+              <div className={s.imgWrapper}>
+                <img src={image} alt="photo" />
+              </div>
             </div>
           </SwiperSlide>
         ))}
