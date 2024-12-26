@@ -1,15 +1,12 @@
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { selectBlogs } from '@redux/blogs/blogsSelectors';
-import { Container, LinkButton } from 'shared/components';
-import { activeEyes } from 'shared/images/animations';
-import { ROUTES } from 'shared/constants';
-import css from './AboutBlog.module.scss';
 import clsx from 'clsx';
+import { Container, LinkButton } from 'shared/components';
+import { useBlogsWithNavLink } from 'hooks';
+import { activeEyes } from 'shared/images/animations';
+import css from './AboutBlog.module.scss';
 
 const AboutBlog = () => {
-  const blogsList = useSelector(selectBlogs);
-  const filteredBlogsList = blogsList.filter((_, idx) => idx < 2);
+  const blogsList = useBlogsWithNavLink(2);
 
   return (
     <section className={css.section}>
@@ -22,15 +19,15 @@ const AboutBlog = () => {
             </p>
           </div>
 
-          {filteredBlogsList.length > 0 && (
+          {blogsList.length > 0 && (
             <ul className={css.list}>
-              {filteredBlogsList.map(({ _id, items }) => {
+              {blogsList.map(({ _id, items, navLink }) => {
                 const blogeImage = items.find(
                   ({ block }) => block === 'image'
                 )?.content;
                 return (
                   <li className={css.listItem} key={_id}>
-                    <Link className={css.cardLink} to={ROUTES.GET_BLOG_ID(_id)}>
+                    <Link className={css.cardLink} to={navLink}>
                       <div
                         className={clsx(
                           css.imageWrapper,
@@ -63,7 +60,7 @@ const AboutBlog = () => {
         <LinkButton
           title={'Статті корисного блогу'}
           className={css.buttonLink}
-          to={ROUTES.GET_BLOG_ID(filteredBlogsList[0]._id)}
+          to={blogsList[0]?.navLink}
         />
       </Container>
     </section>
