@@ -1,23 +1,28 @@
 .imageDiv {
   border: 1px solid $card-border-color;
   border-radius: 24px;
-  padding: 15px;
+  padding: 0 15px;
   height: 340px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+
+  @include media(desktop) {
+    padding: 15px;
+  }
 }
 
 .imgWrapper {
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include media(desktop) {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .imageDiv > img {
-  width: 100%;
-  height: auto;
+  // width: 100%;
+  // height: auto;
 }
