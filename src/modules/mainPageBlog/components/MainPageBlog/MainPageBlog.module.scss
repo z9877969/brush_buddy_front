@@ -34,7 +34,7 @@
   flex-wrap: nowrap;
   column-gap: 24px;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
 
   @include media(to-tablet) {
     margin-bottom: 32px;
